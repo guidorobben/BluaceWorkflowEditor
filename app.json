@@ -1,0 +1,32 @@
+{
+  "id": "5c83d613-42be-4be9-8aa0-1aff7da68c46",
+  "name": "Workflow Editor",
+  "publisher": "Bluace",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "24.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 83800,
+      "to": 83850
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.1",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
