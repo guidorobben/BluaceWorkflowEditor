@@ -2,8 +2,8 @@ table 83801 "Workflow Editor Setup WPTE"
 {
     Caption = 'Workflow Editor Setup';
     DataClassification = CustomerContent;
-    LookupPageId = "Workflow Editor Setup WPTE";
     DrillDownPageId = "Workflow Editor Setup WPTE";
+    LookupPageId = "Workflow Editor Setup WPTE";
 
     fields
     {
@@ -32,7 +32,7 @@ table 83801 "Workflow Editor Setup WPTE"
     begin
         Rec.Reset();
         if not Rec.Get() then begin
-            rec.Init();
+            Rec.Init();
             Rec.Insert(true);
         end;
     end;

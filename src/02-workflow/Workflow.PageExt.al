@@ -7,6 +7,7 @@ pageextension 83802 "Workflow WPTE" extends Workflow
             group(WorkFlowEditorWPTE)
             {
                 Caption = 'WorkFlow Editor';
+                Image = Workflow;
 
                 action(SetToWorkflowTemplateWPTE)
                 {
@@ -47,6 +48,29 @@ pageextension 83802 "Workflow WPTE" extends Workflow
                         end;
                     end;
                 }
+                action(ShowWorkflowStepsWPTE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Edit Workflow Steps';
+
+                    trigger OnAction()
+                    var
+                        WorkflowEditor: Codeunit "Workflow Editor WPTE";
+                    begin
+                        WorkflowEditor.EditWorkflowSteps(Rec.Code);
+                    end;
+                }
+            }
+        }
+
+        addlast(Promoted)
+        {
+            group(WorkFlowEditorWPTE_Promoted)
+            {
+                Caption = 'WorkFlow Editor';
+                Image = Workflow;
+
+                actionref(ShowWorkflowStepsWPTE_Promoted; ShowWorkflowStepsWPTE) { }
             }
         }
     }

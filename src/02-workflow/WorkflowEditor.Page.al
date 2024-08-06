@@ -2,10 +2,10 @@ page 83805 "Workflow Editor WPTE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Editor';
+    CardPageId = Workflow;
     PageType = List;
     SourceTable = Workflow;
     UsageCategory = Administration;
-    CardPageId = Workflow;
 
     layout
     {
@@ -41,69 +41,96 @@ page 83805 "Workflow Editor WPTE"
     {
         area(Processing)
         {
-            group(WorkFlowsGroupWPTE)
+            group(WorkFlowsGroup)
             {
                 Caption = 'Workflow';
 
-                action(WorkflowsWPTE)
+                action(OpenWorkflows)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflows';
                     RunObject = page Workflows;
                 }
-                action(WorkflowListWPTE)
+                action(WorkflowList)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow List';
                     RunObject = page "Workflow List WPTE";
                 }
-                action(WorkflowEventsWPTE)
+                action(WorkflowEvents)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow Events';
                     RunObject = page "Workflow Events WPTE";
                 }
-                action(WorkflowTableRelationsWPTE)
+                action(WorkflowTableRelations)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow Table Relations';
                     RunObject = page "Workflow - Table Relations";
                 }
-                action(WFEventResponseCombiWPTE)
+                action(WFEventResponseCombi)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow Event/Response Combinations Matrix';
                     RunObject = page "WF Event/Response Combinations";
                 }
-                action(WFEventResponseCombiListWPTE)
+                action(WFEventResponseCombiList)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow Event/Response Combinations List';
                     RunObject = page "WF Event/Response Combi. WPTE";
                 }
-                action(WorkflowDefinitionsWPTE)
+                action(WorkflowDefinitions)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow Definitions';
                     RunObject = query "Workflow Definition";
                 }
-                action(WorkflowStepInstancesWPTE)
+                action(WorkflowStepInstances)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow Step Instances';
                     RunObject = page "Workflow Step Instances";
                 }
-                action(WorkflowWebhookEntriesWPTE)
+                action(WorkflowWebhookEntries)
                 {
                     ApplicationArea = All;
                     Caption = 'Workflow Webhook Entries';
                     RunObject = page "Workflow Webhook Entries";
                 }
-                action(ApprovalEntriesWPTE)
+                action(ApprovalEntries)
                 {
                     ApplicationArea = All;
                     Caption = 'Approval Entries';
                     RunObject = page "Approval Entries";
+                }
+            }
+        }
+
+        area(Navigation)
+        {
+            group(Purchase)
+            {
+                Caption = 'Purchase';
+
+                action(PostedPurchaseInvoices)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Posted Purchase Invoices';
+                    RunObject = page "Posted Purchase Invoices";
+                }
+                action(PurchaseInvoices)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                }
+                action(PurchaseCreditMemos)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Purchase Credit Memos';
+                    RunObject = page "Purchase Credit Memos";
                 }
             }
         }
@@ -115,16 +142,25 @@ page 83805 "Workflow Editor WPTE"
                 Caption = 'Workflow';
                 Image = Workflow;
 
-                actionref(WorkflowsWPTE_Promoted; WorkflowsWPTE) { }
-                actionref(WorkflowListWPTE_Promoted; WorkflowListWPTE) { }
-                actionref(ApprovalEntriesWPTE_Promoted; ApprovalEntriesWPTE) { }
-                actionref(WorkflowEventsWPTE_Promoted; WorkflowEventsWPTE) { }
-                actionref(WorkflowTableRelationsWPTE_Promoted; WorkflowTableRelationsWPTE) { }
-                actionref(WFEventResponseCombiWPTE_Promoted; WFEventResponseCombiWPTE) { }
-                actionref(WFEventResponseCombiListWPTE_Promoted; WFEventResponseCombiListWPTE) { }
-                actionref(WorkflowDefinitionsRefEPTE_Promted; WorkflowDefinitionsWPTE) { }
-                actionref(WorkflowStepInstancesWPTE_Promoted; WorkflowStepInstancesWPTE) { }
-                actionref(WorkflowWebhookEntriesTPE_Promoted; WorkflowWebhookEntriesWPTE) { }
+                actionref(OpenWorkflows_Promoted; OpenWorkflows) { }
+                actionref(WorkflowList_Promoted; WorkflowList) { }
+                actionref(ApprovalEntries_Promoted; ApprovalEntries) { }
+                actionref(WorkflowEvents_Promoted; WorkflowEvents) { }
+                actionref(WorkflowTableRelations_Promoted; WorkflowTableRelations) { }
+                actionref(WFEventResponseCombi_Promoted; WFEventResponseCombi) { }
+                actionref(WFEventResponseCombiList_Promoted; WFEventResponseCombiList) { }
+                actionref(WorkflowDefinitionsRef_Promted; WorkflowDefinitions) { }
+                actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
+                actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
+            }
+
+            group(PurchasePromoted)
+            {
+                Caption = 'Purchase';
+
+                actionref(PostedPurchaseInvoicesTPTE_Promoted; PostedPurchaseInvoices) { }
+                actionref(PurchaseInvoicesTPTE_Promoted; PurchaseInvoices) { }
+                actionref(PurchaseCreditMemosTPTE_Promoted; PurchaseCreditMemos) { }
             }
         }
     }

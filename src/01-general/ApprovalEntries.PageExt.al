@@ -1,6 +1,6 @@
 pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
 {
-    
+
     actions
     {
         addlast(processing)
