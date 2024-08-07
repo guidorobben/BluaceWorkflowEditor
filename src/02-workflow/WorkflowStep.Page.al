@@ -52,6 +52,14 @@ page 83808 "Workflow Step WPTE"
                     ToolTip = 'Specifies the value of the Argument field.', Comment = '%';
                 }
             }
+            part(WorkflowEvent; "Workflow Event Part WPTE")
+            {
+                SubPageLink = "Function Name" = field("Function Name");
+            }
+            part(workflowstepargument; "Workflow Step Arg. Part WPTE")
+            {
+                SubPageLink = ID = field(Argument);
+            }
         }
     }
 }
