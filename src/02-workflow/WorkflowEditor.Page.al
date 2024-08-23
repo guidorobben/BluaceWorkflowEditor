@@ -39,7 +39,7 @@ page 83805 "Workflow Editor WPTE"
 
     actions
     {
-        area(Processing)
+        area(Navigation)
         {
             group(WorkFlowsGroup)
             {
@@ -106,10 +106,6 @@ page 83805 "Workflow Editor WPTE"
                     RunObject = page "Approval Entries";
                 }
             }
-        }
-
-        area(Navigation)
-        {
             group(Purchase)
             {
                 Caption = 'Purchase';
@@ -131,6 +127,26 @@ page 83805 "Workflow Editor WPTE"
                     ApplicationArea = All;
                     Caption = 'Purchase Credit Memos';
                     RunObject = page "Purchase Credit Memos";
+                }
+            }
+
+            group(Setup)
+            {
+                Caption = 'Setup';
+                Image = Setup;
+
+                action("Workflow Editor Setup")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Workflow Editor Setup';
+                    Image = Setup;
+                    RunObject = page "Workflow Editor Setup WPTE";
+                }
+                action(ApprovalUserSetup)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Approval User Setup';
+                    RunObject = page "Approval User Setup";
                 }
             }
         }
@@ -157,10 +173,20 @@ page 83805 "Workflow Editor WPTE"
             group(PurchasePromoted)
             {
                 Caption = 'Purchase';
+                Image = Purchase;
 
                 actionref(PostedPurchaseInvoicesTPTE_Promoted; PostedPurchaseInvoices) { }
                 actionref(PurchaseInvoicesTPTE_Promoted; PurchaseInvoices) { }
                 actionref(PurchaseCreditMemosTPTE_Promoted; PurchaseCreditMemos) { }
+            }
+
+            group(SetupPromoted)
+            {
+                Caption = 'Setup';
+                Image = Setup;
+
+                actionref("Workflow Editor Setup_Promoted"; "Workflow Editor Setup") { }
+                actionref(ApprovalUserSetup_Promoted; ApprovalUserSetup) { }
             }
         }
     }
