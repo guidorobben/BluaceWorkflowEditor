@@ -1,25 +1,27 @@
-// pageextension 83801 "Workflow Subpage WPTE" extends "Workflow Subpage"
-// {
-//     actions
-//     {
-//         addlast(processing)
-//         {
-//             group(TestExt)
-//             {
-//                 Caption = 'Test Ext.';
-//                 Image = TestDatabase;
+pageextension 83803 "Workflow Subpage WPTE" extends "Workflow Subpage"
+{
+    actions
+    {
+        addlast(processing)
+        {
+            group(WorkflowEditorWPTE)
+            {
+                Caption = 'Workflow Editor';
+                Image = Workflow;
 
-//                 action(ShowBuffer)
-//                 {
-//                     ApplicationArea = All;
-//                     Caption = 'Show Buffer';
+                action(ShowBuffer)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Show Function Name';
 
-//                     trigger OnAction()
-//                     begin
-//                         Page.Run(Page::"Workflow Step Buffer WPTE", Rec);
-//                     end;
-//                 }
-//             }
-//         }
-//     }
-// }
+                    trigger OnAction()
+                    var
+                        WorkflowHelper: Codeunit "Workflow Helper WPTE";
+                    begin
+                        Message(WorkflowHelper.GetFunctionName(rec."Workflow Code", rec."Event Step ID"));
+                    end;
+                }
+            }
+        }
+    }
+}

@@ -1,11 +1,9 @@
 pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invoice"
 {
-
     actions
     {
         addlast(navigation)
         {
-
             group(WorkFlowEditorWPTE)
             {
                 Caption = 'Workflow Editor';

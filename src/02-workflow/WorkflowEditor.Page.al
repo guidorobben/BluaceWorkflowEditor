@@ -25,13 +25,13 @@ page 83805 "Workflow Editor WPTE"
                 {
                     ToolTip = 'Specifies the category that the workflow belongs to.';
                 }
-                field(Template; Rec.Template)
-                {
-                    ToolTip = 'Specifies if the workflow is a template.';
-                }
                 field(Enabled; Rec.Enabled)
                 {
                     ToolTip = 'Specifies that the workflow will start when the event in the first entry-point workflow step occurs.';
+                }
+                field(Template; Rec.Template)
+                {
+                    ToolTip = 'Specifies if the workflow is a template.';
                 }
             }
         }
@@ -39,6 +39,19 @@ page 83805 "Workflow Editor WPTE"
 
     actions
     {
+        area(Processing)
+        {
+            action(ToggleEnabled)
+            {
+                Caption = 'Toggel Enable';
+                image = ToggleBreakpoint;
+
+                trigger OnAction()
+                begin
+                    Rec.ToggleEnableWorkflow();
+                end;
+            }
+        }
         area(Navigation)
         {
             group(WorkFlowsGroup)
@@ -47,61 +60,57 @@ page 83805 "Workflow Editor WPTE"
 
                 action(OpenWorkflows)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflows';
                     RunObject = page Workflows;
                 }
                 action(WorkflowList)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow List';
                     RunObject = page "Workflow List WPTE";
                 }
+                action(WorkflowStepEditor)
+                {
+                    Caption = 'Workflow Step Editor';
+                    RunObject = page "Workflow Step Editor WPTE";
+                    RunPageLink = "Workflow Code" = field(Code);
+                }
                 action(WorkflowEvents)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Events';
                     RunObject = page "Workflow Events WPTE";
                 }
                 action(WorkflowTableRelations)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Table Relations';
                     RunObject = page "Workflow - Table Relations";
                 }
                 action(WFEventResponseCombi)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Event/Response Combinations Matrix';
                     RunObject = page "WF Event/Response Combinations";
                 }
                 action(WFEventResponseCombiList)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Event/Response Combinations List';
                     RunObject = page "WF Event/Response Combi. WPTE";
                 }
                 action(WorkflowDefinitions)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Definitions';
                     RunObject = query "Workflow Definition";
                 }
                 action(WorkflowStepInstances)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Step Instances';
                     RunObject = page "Workflow Step Instances";
                 }
                 action(WorkflowWebhookEntries)
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Webhook Entries';
                     RunObject = page "Workflow Webhook Entries";
                 }
                 action(ApprovalEntries)
                 {
-                    ApplicationArea = All;
                     Caption = 'Approval Entries';
                     RunObject = page "Approval Entries";
                 }
@@ -112,19 +121,16 @@ page 83805 "Workflow Editor WPTE"
 
                 action(PostedPurchaseInvoices)
                 {
-                    ApplicationArea = All;
                     Caption = 'Posted Purchase Invoices';
                     RunObject = page "Posted Purchase Invoices";
                 }
                 action(PurchaseInvoices)
                 {
-                    ApplicationArea = All;
                     Caption = 'Purchase Invoices';
                     RunObject = page "Purchase Invoices";
                 }
                 action(PurchaseCreditMemos)
                 {
-                    ApplicationArea = All;
                     Caption = 'Purchase Credit Memos';
                     RunObject = page "Purchase Credit Memos";
                 }
@@ -137,14 +143,12 @@ page 83805 "Workflow Editor WPTE"
 
                 action("Workflow Editor Setup")
                 {
-                    ApplicationArea = All;
                     Caption = 'Workflow Editor Setup';
                     Image = Setup;
                     RunObject = page "Workflow Editor Setup WPTE";
                 }
                 action(ApprovalUserSetup)
                 {
-                    ApplicationArea = All;
                     Caption = 'Approval User Setup';
                     RunObject = page "Approval User Setup";
                 }
@@ -153,6 +157,9 @@ page 83805 "Workflow Editor WPTE"
 
         area(Promoted)
         {
+            actionref(WorkflowStep_Promoted; WorkflowStepEditor) { }
+            actionref(ToggleEnabled_Promoted; ToggleEnabled) { }
+
             group(WorkFlowGroupWPTE_Promoted)
             {
                 Caption = 'Workflow';

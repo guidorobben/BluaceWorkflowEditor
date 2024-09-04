@@ -1,9 +1,10 @@
-page 83808 "Workflow Step WPTE"
+page 83808 "Workflow Step Editor WPTE"
 {
     ApplicationArea = All;
-    Caption = 'Workflow Step';
+    Caption = 'Workflow Step Editor';
     PageType = List;
     SourceTable = "Workflow Step";
+    UsageCategory = Administration;
 
     layout
     {
@@ -14,8 +15,9 @@ page 83808 "Workflow Step WPTE"
                 field("Workflow Code"; Rec."Workflow Code")
                 {
                     ToolTip = 'Specifies the value of the Workflow Code field.', Comment = '%';
+                    Editable = false;
                 }
-                field("Type"; Rec."Type")
+                field(Type; Rec."Type")
                 {
                     ToolTip = 'Specifies the value of the Type field.', Comment = '%';
                 }

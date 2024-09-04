@@ -25,6 +25,6 @@ codeunit 83801 "Workflow Editor WPTE"
         WorkflowStep.FilterGroup(10);
         WorkflowStep.SetRange("Workflow Code", WorkFlowCode);
         WorkflowStep.FilterGroup(0);
-        Page.Run(Page::"Workflow Step WPTE", WorkflowStep);
+        Page.Run(Page::"Workflow Step Editor WPTE", WorkflowStep);
     end;
 }
