@@ -44,7 +44,7 @@ page 83805 "Workflow Editor WPTE"
             action(ToggleEnabled)
             {
                 Caption = 'Toggel Enable';
-                image = ToggleBreakpoint;
+                Image = ToggleBreakpoint;
 
                 trigger OnAction()
                 begin
@@ -114,6 +114,12 @@ page 83805 "Workflow Editor WPTE"
                     Caption = 'Approval Entries';
                     RunObject = page "Approval Entries";
                 }
+                action(WorkflowEventLog)
+                {
+                    Caption = 'Workflow Event Log';
+                    Image = Log;
+                    RunObject = page "WF Event Log WPTE";
+                }
             }
             group(Purchase)
             {
@@ -159,6 +165,7 @@ page 83805 "Workflow Editor WPTE"
         {
             actionref(WorkflowStep_Promoted; WorkflowStepEditor) { }
             actionref(ToggleEnabled_Promoted; ToggleEnabled) { }
+            actionref(WorkflowEventLog_Promoted; WorkflowEventLog) { }
 
             group(WorkFlowGroupWPTE_Promoted)
             {
@@ -175,6 +182,7 @@ page 83805 "Workflow Editor WPTE"
                 actionref(WorkflowDefinitionsRef_Promted; WorkflowDefinitions) { }
                 actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
                 actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
+
             }
 
             group(PurchasePromoted)

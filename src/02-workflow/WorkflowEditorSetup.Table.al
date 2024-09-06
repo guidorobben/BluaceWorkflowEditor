@@ -18,6 +18,11 @@ table 83801 "Workflow Editor Setup WPTE"
             Caption = 'Disable Mail Notifications';
             ToolTip = 'Specifies the value of the "Disable Mail Notifications field.';
         }
+        field(20; "Log Workflow Events"; Boolean)
+        {
+            Caption = 'Log Workflow Events';
+            ToolTip = 'Specifies the value of the Log Workflow Events field.', Comment = '%';
+        }
     }
 
     keys

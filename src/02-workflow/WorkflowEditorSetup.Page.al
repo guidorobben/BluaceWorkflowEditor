@@ -15,6 +15,7 @@ page 83807 "Workflow Editor Setup WPTE"
                 Caption = 'General';
 
                 field("Disable Mail Notifications"; Rec."Disable Mail Notifications") { }
+                field("Log Workflow Events"; Rec."Log Workflow Events") { }
             }
         }
     }
