@@ -12,7 +12,10 @@ page 83811 "WF Event Log WPTE"
         {
             repeater(General)
             {
-                field("Entry No."; Rec."Entry No.") { }
+                field("Entry No."; Rec."Entry No.")
+                {
+                    Editable = false;
+                }
                 field(ID; Rec.ID) { }
                 field("Workflow Code"; Rec."Workflow Code") { }
                 field("Workflow Step ID"; Rec."Workflow Step ID") { }

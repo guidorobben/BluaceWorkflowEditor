@@ -85,12 +85,9 @@ table 83802 "WF Event Log WPTE"
 
     local procedure GetNextEntryNo() EntryNo: Integer
     var
-        WFEventLog: Record "WF Event Log WPTE";
+        SequenceNoMgt: Codeunit "Sequence No. Mgt.";
     begin
-        WFEventLog.SetLoadFields("Entry No.");
-        if WFEventLog.FindLast() then
-            EntryNo := WFEventLog."Entry No.";
-        EntryNo += 1;
+        EntryNo := SequenceNoMgt.GetNextSeqNo(Database::"WF Event Log WPTE");
     end;
 
     local procedure IsLoggingEnabled(): Boolean
