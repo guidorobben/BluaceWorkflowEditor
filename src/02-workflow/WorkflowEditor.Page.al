@@ -130,6 +130,11 @@ page 83805 "Workflow Editor WPTE"
                     Caption = 'Posted Purchase Invoices';
                     RunObject = page "Posted Purchase Invoices";
                 }
+                action(PurchaseOrders)
+                {
+                    Caption = 'Purchase Orders';
+                    RunObject = page "Purchase Order List";
+                }
                 action(PurchaseInvoices)
                 {
                     Caption = 'Purchase Invoices';
@@ -167,7 +172,7 @@ page 83805 "Workflow Editor WPTE"
             actionref(ToggleEnabled_Promoted; ToggleEnabled) { }
             actionref(WorkflowEventLog_Promoted; WorkflowEventLog) { }
 
-            group(WorkFlowGroupWPTE_Promoted)
+            group(WorkFlowGroup_Promoted)
             {
                 Caption = 'Workflow';
                 Image = Workflow;
@@ -191,6 +196,7 @@ page 83805 "Workflow Editor WPTE"
                 Image = Purchase;
 
                 actionref(PostedPurchaseInvoicesTPTE_Promoted; PostedPurchaseInvoices) { }
+                actionref(PurchaseOrders_Promoted; PurchaseOrders) { }
                 actionref(PurchaseInvoicesTPTE_Promoted; PurchaseInvoices) { }
                 actionref(PurchaseCreditMemosTPTE_Promoted; PurchaseCreditMemos) { }
             }
