@@ -1,4 +1,4 @@
-pageextension 83806 "Purchase Invoice WPTE" extends "Purchase Invoice"
+pageextension 83808 "Purchase Invoices WPTE" extends "Purchase Invoices"
 {
     actions
     {

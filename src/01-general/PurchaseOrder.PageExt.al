@@ -64,6 +64,41 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
                         PurchaseHeaderHelperWPTE.AllowRecordUsage(xRec);
                     end;
                 }
+                action(ApprovalInfoWPTE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Approval Info';
+                    Image = Info;
+
+                    trigger OnAction()
+                    begin
+                        Rec.ShowApprovalInfo();
+                    end;
+                }
+            }
+        }
+
+        addlast(Promoted)
+        {
+            group(WorkflowEditorWPTE_Promoted)
+            {
+                Caption = 'Workflow Editor';
+                Image = Workflow;
+
+                actionref(ApprovalInfoWPTE_Promoted; ApprovalInfoWPTE) { }
+
+                group(StatusWPTE_Promoted)
+                {
+                    Caption = 'Status';
+                    Image = Status;
+
+                    actionref(StatusToOpenWPTE_Promoted; StatusToOpenWPTE) { }
+                    actionref(StatusToReleasedWPTE_Promoted; StatusToReleasedWPTE) { }
+                    actionref(StatusToPendingApprovalWPTE_Promoted; StatusToPendingApprovalWPTE) { }
+                    actionref(StatusToPendingPrepaymentWPTE_Promoted; StatusToPendingPrepaymentWPTE) { }
+                }
+
+                actionref(AllowRecordUsageWPTE_Promoted; RemoveRecordRestrictionWPTE) { }
             }
         }
     }

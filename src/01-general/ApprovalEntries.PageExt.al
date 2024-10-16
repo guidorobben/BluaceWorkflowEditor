@@ -17,7 +17,7 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
                     action(DeleteEntryWPTE)
                     {
                         ApplicationArea = All;
-                        Caption = 'Delete Entry';
+                        Caption = 'Delete Current Entry';
 
                         trigger OnAction()
                         begin

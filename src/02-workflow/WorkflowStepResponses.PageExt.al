@@ -21,7 +21,7 @@ pageextension 83804 "Workflow Step Responses WPTE" extends "Workflow Step Respon
                     ApplicationArea = All;
                     Caption = 'Function Name';
                     Editable = false;
-                    ToolTip = 'Specifies the value of the Function Name field.', Comment = '%';
+                    ToolTip = 'Specifies the Function Name of the response.';
                 }
             }
         }

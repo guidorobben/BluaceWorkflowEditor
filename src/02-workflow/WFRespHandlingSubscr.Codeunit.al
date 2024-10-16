@@ -1,6 +1,5 @@
 codeunit 83805 "WF Resp. Handling Subscr. WPTE"
 {
-
     Access = Internal;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", OnBeforeExecuteResponse, '', false, false)]

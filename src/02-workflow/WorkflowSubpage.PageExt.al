@@ -9,7 +9,7 @@ pageextension 83803 "Workflow Subpage WPTE" extends "Workflow Subpage"
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
-                action(ShowBuffer)
+                action(ShowBufferWPTE)
                 {
                     ApplicationArea = All;
                     Caption = 'Show Function Name';

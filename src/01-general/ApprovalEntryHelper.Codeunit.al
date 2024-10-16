@@ -1,12 +1,11 @@
 codeunit 83806 "Approval Entry Helper WPTE"
 {
-    Permissions =
-        tabledata "Approval Entry" = RMD;
+    Permissions = tabledata "Approval Entry" = RMD;
 
     internal procedure DeleteEntry(var ApprovalEntry: Record "Approval Entry")
     var
         ConfirmManagement: Codeunit "Confirm Management";
-        DeleteEntryQst: Label 'Delete Enty?';
+        DeleteEntryQst: Label 'Delete current Enty?';
     begin
         if ConfirmManagement.GetResponseOrDefault(DeleteEntryQst, true) then begin
             TestIsApprovalAdministrator();
@@ -14,7 +13,7 @@ codeunit 83806 "Approval Entry Helper WPTE"
         end;
     end;
 
-    internal procedure DeleteAllentries(var ApprovalEntry: Record "Approval Entry")
+    internal procedure DeleteAllEntries(var ApprovalEntry: Record "Approval Entry")
     begin
 
     end;

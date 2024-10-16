@@ -44,4 +44,24 @@ codeunit 83807 "Purchase Header Helper WPTE"
     begin
         UserManagement.TestIsApprovalAdministrator();
     end;
+
+    internal procedure ShowApprovalInfo(var PurchaseHeader: Record "Purchase Header")
+    var
+        UserSetup: Record "User Setup";
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        InfoDialog: Codeunit "Info Dialog WPTE";
+    begin
+        InfoDialog.Initialize();
+        InfoDialog.SetCaption('Approval');
+        InfoDialog.AddHeader('User Info');
+        InfoDialog.Add('User ID', UserID);
+        InfoDialog.Add('User Setup', UserSetup.Get(UserId));
+        InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
+        InfoDialog.Add('Approver ID', UserSetup."Approver ID");
+        InfoDialog.AddHeader('Purchase Info');
+        InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchaseHeader.RecordId()));
+        InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchaseHeader.RecordId()));
+        InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchaseHeader.RecordId()));
+        InfoDialog.OpenInfoDialog();
+    end;
 }
