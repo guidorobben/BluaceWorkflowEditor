@@ -55,6 +55,17 @@ table 83802 "Workflow Event Log WPTE"
             if (Type = const(Response)) "Workflow Response";
             ToolTip = 'Specifies the value of the Function Name field.', Comment = '%';
         }
+        field(83800; "Notification Req. Curr. User"; Boolean)
+        {
+            Caption = 'Notification Required Current User';
+            ToolTip = 'Specifies the value of the Notification Required Current User field.', Comment = '%';
+        }
+        field(83810; "Notify Sender Required"; Boolean)
+        {
+            Caption = 'Notify Sender Required';
+            ToolTip = 'Specifies the value of the Notify Sender Required field.', Comment = '%';
+        }
+
     }
     keys
     {
@@ -63,4 +74,17 @@ table 83802 "Workflow Event Log WPTE"
             Clustered = true;
         }
     }
+
+    var
+        WorkflowEventLogHlp: Codeunit "Workflow Event Log Hlp. WPTE";
+
+    procedure ClearLog()
+    begin
+        WorkflowEventLogHlp.ClearLog();
+    end;
+
+    procedure ShowRecord()
+    begin
+        WorkflowEventLogHlp.ShowRecord(Rec);
+    end;
 }

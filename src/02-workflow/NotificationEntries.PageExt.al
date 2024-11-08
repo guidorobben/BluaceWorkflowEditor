@@ -16,13 +16,8 @@ pageextension 83809 "Notification Entries WPTE" extends "Notification Entries"
                     Image = Delete;
 
                     trigger OnAction()
-                    var
-                        UserManagement: Codeunit "User Management WPTE";
                     begin
-                        if not UserManagement.IsApprovalAdministrator() then
-                            exit;
-
-                        Rec.Delete(true);
+                        Rec.DeleteNotificationWPTE();
                     end;
                 }
             }

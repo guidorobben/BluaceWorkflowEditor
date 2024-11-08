@@ -10,7 +10,20 @@ codeunit 83800 "Approvals Mgmt Subscr. WPTE"
         if not WorkflowEditorSetup.Get() then
             exit;
 
+        LogEvent(ApprovalEntry, WorkflowStepInstance);
+        DisableMail(WorkflowEditorSetup, IsHandled);
+    end;
+
+    local procedure DisableMail(var WorkflowEditorSetup: Record "Workflow Editor Setup WPTE"; var IsHandled: Boolean)
+    begin
         if WorkflowEditorSetup."Disable Mail Notifications" then
             IsHandled := true;
+    end;
+
+    local procedure LogEvent(ApprovalEntry: Record "Approval Entry"; WorkflowStepInstance: Record "Workflow Step Instance")
+    var
+        WorkflowEventLog: Codeunit "Workflow Event Log WPTE";
+    begin
+        WorkflowEventLog.AddEvent(ApprovalEntry, WorkflowStepInstance);
     end;
 }
