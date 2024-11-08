@@ -1,9 +1,10 @@
-page 83811 "WF Event Log WPTE"
+page 83811 "Workflow Event Log WPTE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Event Log';
+    Editable = false;
     PageType = List;
-    SourceTable = "WF Event Log WPTE";
+    SourceTable = "Workflow Event Log WPTE";
     UsageCategory = History;
 
     layout
@@ -19,11 +20,11 @@ page 83811 "WF Event Log WPTE"
                 field(ID; Rec.ID) { }
                 field("Workflow Code"; Rec."Workflow Code") { }
                 field("Workflow Step ID"; Rec."Workflow Step ID") { }
-                field("Record ID"; format(Rec."Record ID"))
+                field("Record ID"; Format(Rec."Record ID"))
                 {
                     Caption = 'Record ID';
                 }
-                field("Type"; Rec."Type") { }
+                field(Type; Rec."Type") { }
                 field("Function Name"; Rec."Function Name") { }
                 field(Status; Rec.Status) { }
                 field(SystemCreatedAt; Rec.SystemCreatedAt)

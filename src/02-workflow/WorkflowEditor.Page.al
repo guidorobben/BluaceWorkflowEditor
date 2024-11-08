@@ -118,7 +118,13 @@ page 83805 "Workflow Editor WPTE"
                 {
                     Caption = 'Workflow Event Log';
                     Image = Log;
-                    RunObject = page "WF Event Log WPTE";
+                    RunObject = page "Workflow Event Log WPTE";
+                }
+                action(NotificationEntries)
+                {
+                    Caption = 'Notification Entries';
+                    Image = OverdueMail;
+                    RunObject = page "Notification Entries";
                 }
             }
             group(Purchase)
@@ -187,7 +193,7 @@ page 83805 "Workflow Editor WPTE"
                 actionref(WorkflowDefinitionsRef_Promted; WorkflowDefinitions) { }
                 actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
                 actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
-
+                actionref(NotificationEntries_Promoted; NotificationEntries) { }
             }
 
             group(PurchasePromoted)
@@ -224,6 +230,12 @@ page 83805 "Workflow Editor WPTE"
         {
             Caption = 'Templates';
             Filters = where(Template = const(true));
+            SharedLayout = true;
+        }
+        view(Activated)
+        {
+            Caption = 'Activated';
+            Filters = where(Enabled = const(true));
             SharedLayout = true;
         }
     }
