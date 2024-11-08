@@ -2,9 +2,9 @@ table 83803 "Info Dialog WPTE"
 {
     Caption = 'Info Buffer';
     DataClassification = SystemMetadata;
-    TableType = Temporary;
     DrillDownPageId = "Info Dialog WPTE";
     LookupPageId = "Info Dialog WPTE";
+    TableType = Temporary;
 
     fields
     {
@@ -23,6 +23,11 @@ table 83803 "Info Dialog WPTE"
             Caption = 'Value';
             ToolTip = 'Specifies the value of the Variable Value field.', Comment = '%';
         }
+        field(30; "Event Code"; Code[128])
+        {
+            Caption = 'Event Code';
+            ToolTip = 'Event Code.'; //FIXME
+        }
         field(100; Header; Boolean)
         {
             Caption = 'Header';
@@ -37,4 +42,11 @@ table 83803 "Info Dialog WPTE"
             Clustered = true;
         }
     }
+
+    procedure ActivateEventCode()
+    var
+        InfoDialogHelper: Codeunit "Info Dialog Helper WPTE";
+    begin
+        InfoDialogHelper.ActivateEventCode(Rec);
+    end;
 }

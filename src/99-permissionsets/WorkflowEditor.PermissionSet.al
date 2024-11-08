@@ -10,6 +10,8 @@ permissionset 83800 "Workflow Editor WPTE"
         tabledata "Workflow Event Log WPTE" = RIMD,
         codeunit "Approval Entry Helper WPTE" = X,
         codeunit "Approvals Mgmt Subscr. WPTE" = X,
+        codeunit "Info Dialog Helper WPTE" = X,
+        codeunit "Info Dialog Subscr. WPTE" = X,
         codeunit "Info Dialog WPTE" = X,
         codeunit "Notification Entry Hlp. WPTE" = X,
         codeunit "Purch. Inv. Header Subscr WPTE" = X,

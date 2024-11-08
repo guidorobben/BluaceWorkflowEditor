@@ -83,8 +83,8 @@ codeunit 83807 "Purchase Header Helper WPTE"
                 WorkflowDescription := Workflow.Description;
         end;
 
-        InfoDialog.Add('ID', InstanceID);
-        InfoDialog.Add('Code', WorkFlowCode);
+        InfoDialog.Add('ID', InstanceID, 'INSTANCEID');
+        InfoDialog.Add('Code', WorkFlowCode, 'WORKFLOWCODE');
         InfoDialog.Add('Description', WorkflowDescription);
     end;
 }

@@ -24,6 +24,14 @@ page 83812 "Info Dialog WPTE"
                     StyleExpr = Rec.Header;
                 }
                 field(Value; Rec."Value") { }
+                field("Event Code"; Rec."Event Code")
+                {
+                    trigger OnDrillDown()
+                    begin
+                        Rec.ActivateEventCode();
+                    end;
+
+                }
                 field(Header; Rec.Header)
                 {
                     Visible = false;

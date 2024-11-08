@@ -13,28 +13,32 @@ codeunit 83809 "Info Dialog WPTE"
 
     procedure Add(Name: Text[100])
     begin
-        Add(Name, '', false);
+        Add(Name, '', false, '');
     end;
 
     procedure Add(Name: Text[100]; Value: Text[100])
     begin
-        Add(Name, Value, false);
+        Add(Name, Value, false, '');
     end;
-
 
     procedure Add(Name: Text[100]; Value: Boolean)
     begin
-        Add(Name, format(Value), false);
+        Add(Name, format(Value), false, '');
     end;
 
     procedure AddHeader(Name: Text[100])
     begin
-        Add(Name, '', true);
+        Add(Name, '', true, '');
     end;
 
-    procedure Add(Name: Text[100]; Value: Text[100]; Header: Boolean)
+    procedure Add(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Code[128])
     begin
-        CreateInfoBufferLine(Name, Value, Header);
+        CreateInfoBufferLine(Name, Value, Header, EventCode);
+    end;
+
+    procedure Add(Name: Text[100]; Value: Text[100]; EventCode: Code[128])
+    begin
+        Add(Name, Value, false, EventCode);
     end;
 
     procedure OpenInfoDialog()
@@ -50,7 +54,7 @@ codeunit 83809 "Info Dialog WPTE"
         // InfoBufferWPTE.Run();
     end;
 
-    local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean)
+    local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Code[128])
     var
         EntryNo: Integer;
     begin
@@ -61,6 +65,7 @@ codeunit 83809 "Info Dialog WPTE"
         InfoBuffer.Validate("Name", Name);
         InfoBuffer.Validate("Value", Value);
         InfoBuffer.Validate(Header, Header);
+        InfoBuffer.Validate("Event Code", EventCode);
         InfoBuffer.Insert(true);
     end;
 
