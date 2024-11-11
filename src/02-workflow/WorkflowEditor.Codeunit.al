@@ -1,5 +1,9 @@
 codeunit 83801 "Workflow Editor WPTE"
 {
+    Permissions =
+        tabledata "Workflow Step" = R,
+        tabledata "Workflow Step Instance" = R;
+
     procedure OpenActiveWorkflow(WorkflowStepRecordID: RecordId)
     var
         WorkflowStepInstance: Record "Workflow Step Instance";

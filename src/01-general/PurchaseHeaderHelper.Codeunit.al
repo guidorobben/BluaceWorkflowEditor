@@ -1,7 +1,10 @@
 codeunit 83807 "Purchase Header Helper WPTE"
 {
     Permissions =
-        tabledata "Purchase Header" = RM;
+        tabledata "Purchase Header" = RM,
+        tabledata "User Setup" = R,
+        tabledata Workflow = R,
+        tabledata "Workflow Step Instance" = R;
 
     internal procedure SetStatusToOpen(var PurchaseHeader: Record "Purchase Header")
     begin

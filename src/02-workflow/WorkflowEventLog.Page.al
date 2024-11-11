@@ -29,6 +29,9 @@ page 83811 "Workflow Event Log WPTE"
                 field(Status; Rec.Status) { }
                 field("Notification Req. Curr. User"; Rec."Notification Req. Curr. User") { }
                 field("Notify Sender Required"; Rec."Notify Sender Required") { }
+                field("Notification Type"; Rec."Notification Type") { }
+                field("Approver ID"; Rec."Approver ID") { }
+                field("Sender ID"; Rec."Sender ID") { }
 
                 field(SystemCreatedAt; Rec.SystemCreatedAt)
                 {
@@ -46,7 +49,7 @@ page 83811 "Workflow Event Log WPTE"
             {
                 Caption = 'Clear Log';
                 Image = ClearLog;
-                ToolTip = 'Empties the log';
+                ToolTip = 'Empties the log.';
 
                 trigger OnAction()
                 begin
@@ -59,8 +62,8 @@ page 83811 "Workflow Event Log WPTE"
         {
             action(ShowRecord)
             {
-                Caption = 'Record';
                 ApplicationArea = Suite;
+                Caption = 'Record';
                 Image = Document;
                 ToolTip = 'Open the document, journal line, or card that the event log is for.';
 

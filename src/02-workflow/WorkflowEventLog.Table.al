@@ -2,6 +2,8 @@ table 83802 "Workflow Event Log WPTE"
 {
     Caption = 'Workflow Event Log';
     DataClassification = CustomerContent;
+    LookupPageId = "Workflow Event Log WPTE";
+    DrillDownPageId = "Workflow Event Log WPTE";
 
     fields
     {
@@ -27,10 +29,9 @@ table 83802 "Workflow Event Log WPTE"
             TableRelation = "Workflow Step".ID where("Workflow Code" = field("Workflow Code"));
             ToolTip = 'Specifies the value of the Workflow Step ID field.', Comment = '%';
         }
-        field(11; "Record ID"; RecordID)
+        field(11; "Record ID"; RecordId)
         {
             Caption = 'Record ID';
-            DataClassification = CustomerContent;
             ToolTip = 'Specifies the value of the Record ID field.', Comment = '%';
         }
         field(17; Status; Option)
@@ -65,7 +66,25 @@ table 83802 "Workflow Event Log WPTE"
             Caption = 'Notify Sender Required';
             ToolTip = 'Specifies the value of the Notify Sender Required field.', Comment = '%';
         }
-
+        field(83820; "Approver ID"; Code[50])
+        {
+            Caption = 'Approver ID';
+            DataClassification = EndUserIdentifiableInformation;
+            TableRelation = User."User Name";
+            ToolTip = 'Specifies the value of the Approver ID field.', Comment = '%';
+        }
+        field(83830; "Sender ID"; Code[50])
+        {
+            Caption = 'Sender ID';
+            DataClassification = EndUserIdentifiableInformation;
+            TableRelation = User."User Name";
+            ToolTip = 'Specifies the value of the Sender ID field.', Comment = '%';
+        }
+        field(83840; "Notification Type"; Enum "Notification Entry Type")
+        {
+            Caption = 'Type';
+            ToolTip = 'Specifies the value of the Type field.', Comment = '%';
+        }
     }
     keys
     {

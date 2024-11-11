@@ -11,8 +11,8 @@ pageextension 83804 "Workflow Step Responses WPTE" extends "Workflow Step Respon
                 field("Response Step ID WPTE"; Rec."Response Step ID")
                 {
                     ApplicationArea = All;
-                    Editable = false;
                     DrillDown = false;
+                    Editable = false;
                     Lookup = false;
                     ToolTip = 'Specifies the value of the Response Step ID field.';
                 }

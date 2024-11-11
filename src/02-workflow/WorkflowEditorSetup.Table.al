@@ -4,7 +4,8 @@ table 83801 "Workflow Editor Setup WPTE"
     DataClassification = CustomerContent;
     DrillDownPageId = "Workflow Editor Setup WPTE";
     LookupPageId = "Workflow Editor Setup WPTE";
-
+    Permissions =
+        tabledata "Workflow Editor Setup WPTE" = RI;
     fields
     {
         field(1; "Primary Key"; Code[10])

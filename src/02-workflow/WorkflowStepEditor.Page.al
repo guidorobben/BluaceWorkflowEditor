@@ -14,8 +14,8 @@ page 83808 "Workflow Step Editor WPTE"
             {
                 field("Workflow Code"; Rec."Workflow Code")
                 {
-                    ToolTip = 'Specifies the value of the Workflow Code field.', Comment = '%';
                     Editable = false;
+                    ToolTip = 'Specifies the value of the Workflow Code field.', Comment = '%';
                 }
                 field(Type; Rec."Type")
                 {

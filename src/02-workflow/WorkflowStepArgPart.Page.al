@@ -22,7 +22,6 @@ page 83809 "Workflow Step Arg. Part WPTE"
                 }
                 field("Function Name Description WPTE"; Rec."Function Name Description WPTE")
                 {
-                    ToolTip = 'Specifies the value of the hh field.', Comment = '%';
                 }
                 field("Table No."; Rec."Table No.")
                 {
@@ -52,10 +51,10 @@ page 83809 "Workflow Step Arg. Part WPTE"
                 {
                     ToolTip = 'Specifies in how many days the approval request must be resolved from the date when it was sent.';
                 }
-                field("Event Conditions"; Rec."Event Conditions")
-                {
-                    ToolTip = 'Specifies the value of the Event Conditions field.', Comment = '%';
-                }
+                // field("Event Conditions"; Rec."Event Conditions")
+                // {
+                //     ToolTip = 'Specifies the value of the Event Conditions field.', Comment = '%';
+                // }
                 field("Field Caption"; Rec."Field Caption")
                 {
                     ToolTip = 'Specifies the value of the Field Caption field.', Comment = '%';
@@ -76,7 +75,7 @@ page 83809 "Workflow Step Arg. Part WPTE"
                 {
                     ToolTip = 'Specifies a specific page that opens when a user chooses the link in a notification. If you do not fill this field, the page showing the involved record will open. The page must have the same source table as the record involved.';
                 }
-                field("Message"; Rec.Message)
+                field(Message; Rec.Message)
                 {
                     ToolTip = 'Specifies the message that will be shown as a response.';
                 }

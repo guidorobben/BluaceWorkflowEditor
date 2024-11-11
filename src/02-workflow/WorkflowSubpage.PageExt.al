@@ -13,12 +13,13 @@ pageextension 83803 "Workflow Subpage WPTE" extends "Workflow Subpage"
                 {
                     ApplicationArea = All;
                     Caption = 'Show Function Name';
+                    Image = ShowList;
 
                     trigger OnAction()
                     var
                         WorkflowHelper: Codeunit "Workflow Helper WPTE";
                     begin
-                        Message(WorkflowHelper.GetFunctionName(rec."Workflow Code", rec."Event Step ID"));
+                        Message(WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Event Step ID"));
                     end;
                 }
             }

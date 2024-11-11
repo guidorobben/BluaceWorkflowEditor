@@ -1,5 +1,11 @@
 codeunit 83811 "Workflow Event Log WPTE"
 {
+    Permissions =
+        tabledata "Approval Entry" = R,
+        tabledata "Workflow Editor Setup WPTE" = R,
+        tabledata "Workflow Event Log WPTE" = RI,
+        tabledata "Workflow Step Instance" = R;
+
     procedure AddEvent(var Variant: Variant; ResponseWorkflowStepInstance: Record "Workflow Step Instance")
     var
         WorkflowEventLog: Record "Workflow Event Log WPTE";
@@ -37,6 +43,8 @@ codeunit 83811 "Workflow Event Log WPTE"
         WorkflowEventLog."Function Name" := WorkflowStepInstance."Function Name";
         WorkflowEventLog."Notification Req. Curr. User" := (ApprovalEntry."Approver ID" <> UserId) or IsBackground();
         WorkflowEventLog."Notify Sender Required" := ((ApprovalEntry."Sender ID" <> UserId) or IsBackground()) and (ApprovalEntry."Sender ID" <> ApprovalEntry."Approver ID");
+        WorkflowEventLog."Approver ID" := ApprovalEntry."Approver ID";
+        WorkflowEventLog."Sender ID" := ApprovalEntry."Sender ID";
         WorkflowEventLog.Insert(true);
     end;
 

@@ -18,6 +18,7 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
                     {
                         ApplicationArea = All;
                         Caption = 'Delete Current Entry';
+                        Image = Delete;
 
                         trigger OnAction()
                         begin
@@ -43,6 +44,7 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
                     {
                         ApplicationArea = All;
                         Caption = 'Open';
+                        Image = Open;
 
                         trigger OnAction()
                         begin
@@ -53,6 +55,7 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
                     {
                         ApplicationArea = All;
                         Caption = 'Approved';
+                        Image = Approve;
 
                         trigger OnAction()
                         begin
@@ -63,6 +66,7 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
                     {
                         ApplicationArea = All;
                         Caption = 'Canceled';
+                        Image = Cancel;
 
                         trigger OnAction()
                         begin
@@ -73,6 +77,7 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
                     {
                         ApplicationArea = All;
                         Caption = 'Created';
+                        Image = Create;
 
                         trigger OnAction()
                         begin
@@ -83,10 +88,11 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
                     {
                         ApplicationArea = All;
                         Caption = 'Rejected';
+                        Image = Reject;
 
                         trigger OnAction()
                         begin
-                            ApprovalEntryHelperWPTE.SetApprovalEntryToStatusApproved(Rec);
+                            ApprovalEntryHelperWPTE.SetApprovalEntryToStatusRejected(Rec);
                         end;
                     }
                 }

@@ -1,6 +1,7 @@
 permissionset 83800 "Workflow Editor WPTE"
 {
     Assignable = true;
+    Caption = 'WORKFLOWEDITOR', MaxLength = 30;
     Permissions =
         table "Info Dialog WPTE" = X,
         tabledata "Info Dialog WPTE" = RIMD,

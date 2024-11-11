@@ -4,6 +4,7 @@ tableextension 83801 "Workflow Step Buffer WPTE" extends "Workflow Step Buffer"
     {
         field(83800; "Function Name"; Text[100])
         {
+            AllowInCustomizations = Always;
             Caption = 'Function Name';
             DataClassification = CustomerContent;
         }

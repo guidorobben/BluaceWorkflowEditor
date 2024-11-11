@@ -11,6 +11,8 @@ pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invo
                 action(OpenActiveWorkflowWPTE)
                 {
                     ApplicationArea = All;
+                    Caption = 'Open active workflow';
+                    Image = Open;
 
                     trigger OnAction()
                     var

@@ -7,6 +7,6 @@ codeunit 83805 "WF Resp. Handling Subscr. WPTE"
     var
         WorkflowEventLog: Codeunit "Workflow Event Log WPTE";
     begin
-        WorkflowEventLog.AddEvent(variant, ResponseWorkflowStepInstance);
+        WorkflowEventLog.AddEvent(Variant, ResponseWorkflowStepInstance);
     end;
 }

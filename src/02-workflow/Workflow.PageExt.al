@@ -18,14 +18,8 @@ pageextension 83802 "Workflow WPTE" extends Workflow
                     Visible = not Rec.Template;
 
                     trigger OnAction()
-                    var
-                        ConfirmManagement: Codeunit "Confirm Management";
-                        ConvertToWorkflowTemplateQst: Label 'Do you want to convert the workflow to a workflow template?';
                     begin
-                        if ConfirmManagement.GetResponse(ConvertToWorkflowTemplateQst, false) then begin
-                            Rec.TestField(Enabled, false);
-                            Rec.Validate(Template, true);
-                        end;
+                        SetToWorkflowTemplate();
                     end;
                 }
                 action(SetToWorkflowWPTE)
@@ -37,21 +31,15 @@ pageextension 83802 "Workflow WPTE" extends Workflow
                     Visible = Rec.Template;
 
                     trigger OnAction()
-                    var
-                        ConfirmManagement: Codeunit "Confirm Management";
-                        ConvertToWorkflowQst: Label 'Do you want to convert the workflow template to a workflow?';
                     begin
-                        if ConfirmManagement.GetResponse(ConvertToWorkflowQst, false) then begin
-                            Rec.TestField(Enabled, false);
-                            Rec.Validate(Template, false);
-                            Rec.Modify(true);
-                        end;
+                        SetToWorkflow();
                     end;
                 }
                 action(ShowWorkflowStepsWPTE)
                 {
                     ApplicationArea = All;
                     Caption = 'Edit Workflow Steps';
+                    Image = StepInto;
 
                     trigger OnAction()
                     var
@@ -74,4 +62,17 @@ pageextension 83802 "Workflow WPTE" extends Workflow
             }
         }
     }
+
+    var
+        WorkflowHelperWPTE: Codeunit "Workflow Helper WPTE";
+
+    procedure SetToWorkflow()
+    begin
+        WorkflowHelperWPTE.SetToWorkflow(Rec);
+    end;
+
+    procedure SetToWorkflowTemplate()
+    begin
+        WorkflowHelperWPTE.SetToWorkflowTemplate(Rec);
+    end;
 }

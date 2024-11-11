@@ -13,37 +13,37 @@ codeunit 83806 "Approval Entry Helper WPTE"
         end;
     end;
 
-    internal procedure DeleteAllEntries(var ApprovalEntry: Record "Approval Entry")
-    begin
+    // internal procedure DeleteAllEntries(var ApprovalEntry: Record "Approval Entry")
+    // begin
 
+    // end;
+
+    internal procedure SetApprovalEntryToStatusApproved(var ApprovalEntry: Record "Approval Entry")
+    begin
+        SetApprovalEntryToStatus(ApprovalEntry, "Approval Status"::Approved);
     end;
 
-    internal procedure SetApprovalEntryToStatusApproved(var ApprovalEntry: Record "Approval Entry");
+    internal procedure SetApprovalEntryToStatusCanceled(var ApprovalEntry: Record "Approval Entry")
     begin
-        SetApprovalEntryToStatus(ApprovalEntry, "approval status"::Approved);
+        SetApprovalEntryToStatus(ApprovalEntry, "Approval Status"::Canceled);
     end;
 
-    internal procedure SetApprovalEntryToStatusCanceled(var ApprovalEntry: Record "Approval Entry");
+    internal procedure SetApprovalEntryToStatusCreated(var ApprovalEntry: Record "Approval Entry")
     begin
-        SetApprovalEntryToStatus(ApprovalEntry, "approval status"::Canceled);
+        SetApprovalEntryToStatus(ApprovalEntry, "Approval Status"::Created);
     end;
 
-    internal procedure SetApprovalEntryToStatusCreated(var ApprovalEntry: Record "Approval Entry");
+    internal procedure SetApprovalEntryToStatusOpen(var ApprovalEntry: Record "Approval Entry")
     begin
-        SetApprovalEntryToStatus(ApprovalEntry, "approval status"::Created);
+        SetApprovalEntryToStatus(ApprovalEntry, "Approval Status"::Open);
     end;
 
-    internal procedure SetApprovalEntryToStatusOpen(var ApprovalEntry: Record "Approval Entry");
+    internal procedure SetApprovalEntryToStatusRejected(var ApprovalEntry: Record "Approval Entry")
     begin
-        SetApprovalEntryToStatus(ApprovalEntry, "approval status"::Open);
+        SetApprovalEntryToStatus(ApprovalEntry, "Approval Status"::Rejected);
     end;
 
-    internal procedure SetApprovalEntryToStatusRejected(var ApprovalEntry: Record "Approval Entry");
-    begin
-        SetApprovalEntryToStatus(ApprovalEntry, "approval status"::Rejected);
-    end;
-
-    internal procedure SetApprovalEntryToStatus(var ApprovalEntry: Record "Approval Entry"; ApprovalStatus: enum "Approval Status")
+    internal procedure SetApprovalEntryToStatus(var ApprovalEntry: Record "Approval Entry"; ApprovalStatus: Enum "Approval Status")
     begin
         TestIsApprovalAdministrator();
 

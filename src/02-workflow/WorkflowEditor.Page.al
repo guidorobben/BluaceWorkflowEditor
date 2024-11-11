@@ -134,21 +134,25 @@ page 83805 "Workflow Editor WPTE"
                 action(PostedPurchaseInvoices)
                 {
                     Caption = 'Posted Purchase Invoices';
+                    Image = Invoice;
                     RunObject = page "Posted Purchase Invoices";
                 }
                 action(PurchaseOrders)
                 {
                     Caption = 'Purchase Orders';
+                    Image = Order;
                     RunObject = page "Purchase Order List";
                 }
                 action(PurchaseInvoices)
                 {
                     Caption = 'Purchase Invoices';
+                    Image = Invoice;
                     RunObject = page "Purchase Invoices";
                 }
                 action(PurchaseCreditMemos)
                 {
                     Caption = 'Purchase Credit Memos';
+                    Image = CreditMemo;
                     RunObject = page "Purchase Credit Memos";
                 }
             }
@@ -167,6 +171,7 @@ page 83805 "Workflow Editor WPTE"
                 action(ApprovalUserSetup)
                 {
                     Caption = 'Approval User Setup';
+                    Image = UserSetup;
                     RunObject = page "Approval User Setup";
                 }
             }

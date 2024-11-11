@@ -23,7 +23,7 @@ codeunit 83809 "Info Dialog WPTE"
 
     procedure Add(Name: Text[100]; Value: Boolean)
     begin
-        Add(Name, format(Value), false, '');
+        Add(Name, Format(Value), false, '');
     end;
 
     procedure AddHeader(Name: Text[100])
@@ -46,7 +46,7 @@ codeunit 83809 "Info Dialog WPTE"
     //     InfoBufferWPTE: Page "Info Buffer WPTE";
     begin
         InfoBuffer.Reset();
-        if InfoBuffer.FindFirst() then;
+        if InfoBuffer.FindFirst() then; //Set pointer to first
         Page.Run(0, InfoBuffer);
         // InfoBufferWPTE.GetRecord(InfoBuffer); //FIXME
         // InfoBufferWPTE.SetRecord(InfoBuffer);
@@ -62,7 +62,7 @@ codeunit 83809 "Info Dialog WPTE"
 
         InfoBuffer.Init();
         InfoBuffer.Validate("Entry No.", EntryNo);
-        InfoBuffer.Validate("Name", Name);
+        InfoBuffer.Validate(Name, Name);
         InfoBuffer.Validate("Value", Value);
         InfoBuffer.Validate(Header, Header);
         InfoBuffer.Validate("Event Code", EventCode);
