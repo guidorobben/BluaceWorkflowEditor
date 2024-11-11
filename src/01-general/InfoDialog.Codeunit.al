@@ -1,14 +1,14 @@
 codeunit 83809 "Info Dialog WPTE"
 {
     var
-        InfoBuffer: Record "Info Dialog WPTE";
+        InfoDialog: Record "Info Dialog WPTE";
         LastEntryNo: Integer;
         PageCaption: Text;
 
     procedure Initialize()
     begin
         LastEntryNo := 0;
-        InfoBuffer.DeleteAll(false);
+        InfoDialog.DeleteAll(false);
     end;
 
     procedure Add(Name: Text[100])
@@ -19,6 +19,11 @@ codeunit 83809 "Info Dialog WPTE"
     procedure Add(Name: Text[100]; Value: Text[100])
     begin
         Add(Name, Value, false, '');
+    end;
+
+    procedure Add(Name: Text[100]; Value: Integer)
+    begin
+        Add(Name, Format(Value), false, '');
     end;
 
     procedure Add(Name: Text[100]; Value: Boolean)
@@ -41,13 +46,18 @@ codeunit 83809 "Info Dialog WPTE"
         Add(Name, Value, false, EventCode);
     end;
 
+    procedure AddEmptyLine()
+    begin
+        Add('', '', false, '');
+    end;
+
     procedure OpenInfoDialog()
     // var
     //     InfoBufferWPTE: Page "Info Buffer WPTE";
     begin
-        InfoBuffer.Reset();
-        if InfoBuffer.FindFirst() then; //Set pointer to first
-        Page.Run(0, InfoBuffer);
+        InfoDialog.Reset();
+        if InfoDialog.FindFirst() then; //Set pointer to first
+        Page.Run(0, InfoDialog);
         // InfoBufferWPTE.GetRecord(InfoBuffer); //FIXME
         // InfoBufferWPTE.SetRecord(InfoBuffer);
         // InfoBufferWPTE.SetTableView(InfoBuffer);
@@ -60,13 +70,13 @@ codeunit 83809 "Info Dialog WPTE"
     begin
         EntryNo := GetNewEntryNo();
 
-        InfoBuffer.Init();
-        InfoBuffer.Validate("Entry No.", EntryNo);
-        InfoBuffer.Validate(Name, Name);
-        InfoBuffer.Validate("Value", Value);
-        InfoBuffer.Validate(Header, Header);
-        InfoBuffer.Validate("Event Code", EventCode);
-        InfoBuffer.Insert(true);
+        InfoDialog.Init();
+        InfoDialog.Validate("Entry No.", EntryNo);
+        InfoDialog.Validate(Name, Name);
+        InfoDialog.Validate("Value", Value);
+        InfoDialog.Validate(Header, Header);
+        InfoDialog.Validate("Event Code", EventCode);
+        InfoDialog.Insert(true);
     end;
 
     procedure SetCaption(CaptionText: Text)
@@ -78,5 +88,15 @@ codeunit 83809 "Info Dialog WPTE"
     begin
         LastEntryNo += 1;
         exit(LastEntryNo);
+    end;
+
+    procedure TransferInfoDialog(var ToInfoDialog: Record "Info Dialog WPTE")
+    begin
+        if InfoDialog.FindSet() then
+            repeat
+                ToInfoDialog.Init();
+                ToInfoDialog := InfoDialog;
+                ToInfoDialog.Insert(false);
+            until InfoDialog.Next() = 0;
     end;
 }
