@@ -30,7 +30,6 @@ report 83800 "Resend Purch. Appr. Req. WPTE"
         }
     }
 
-
     trigger OnPreReport()
     var
         FilterErr: Label 'Enter filter for Amount including VAT.';
@@ -57,13 +56,13 @@ report 83800 "Resend Purch. Appr. Req. WPTE"
         SendApprovalRequest(PurchaseHeader);
     end;
 
-    procedure ReopenPurchaseDocument(var PurchInvHeader: Record "Purchase Header")
+    procedure ReopenPurchaseDocument(var PurchaseHeader: Record "Purchase Header")
     begin
-        if PurchInvHeader.Status <> PurchInvHeader.Status::Released then
+        if PurchaseHeader.Status <> PurchaseHeader.Status::Released then
             exit;
 
-        PurchInvHeader.Validate(Status, PurchInvHeader.Status::Open);
-        PurchInvHeader.Modify(true);
+        PurchaseHeader.Validate(Status, PurchaseHeader.Status::Open);
+        PurchaseHeader.Modify(true);
     end;
 
     // local procedure SetOnHold(var PurchInvHeader: Record "Purchase Header")
@@ -92,7 +91,6 @@ report 83800 "Resend Purch. Appr. Req. WPTE"
     begin
         if ApprovalsMgmt.CheckPurchaseApprovalPossible(PurchaseHeader) then
             ApprovalsMgmt.OnSendPurchaseDocForApproval(PurchaseHeader);
-
     end;
 
     // local procedure SetOnHoldVendorLedgerEntry(DocumentType: Enum "Gen. Journal Document Type"; DocumentNo: Code[20])

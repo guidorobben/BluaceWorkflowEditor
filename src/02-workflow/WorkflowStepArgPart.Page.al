@@ -20,16 +20,16 @@ page 83809 "Workflow Step Arg. Part WPTE"
                 {
                     ToolTip = 'Specifies the value of the Response Function Name field.', Comment = '%';
                 }
-                field("Function Name Description WPTE"; Rec."Function Name Description WPTE")
-                {
-                }
+                field("Function Name Description WPTE"; Rec."Function Name Description WPTE") { }
                 field("Table No."; Rec."Table No.")
                 {
                     ToolTip = 'Specifies the value of the Table No. field.', Comment = '%';
                 }
                 field("Approver Limit Type"; Rec."Approver Limit Type")
                 {
+#pragma warning disable LC0038
                     ToolTip = 'Specifies how approvers'' approval limits affect when approval request entries are created for them. A qualified approver is an approver whose approval limit is above the value on the approval request.';
+#pragma warning restore LC0038
                 }
                 field("Approver Type"; Rec."Approver Type")
                 {
@@ -45,7 +45,9 @@ page 83809 "Workflow Step Arg. Part WPTE"
                 }
                 field("Delegate After"; Rec."Delegate After")
                 {
+#pragma warning disable LC0038
                     ToolTip = 'Specifies if and when an approval request will automatically be delegated to the relevant substitute. You can select to automatically delegate one, two, or five days after the date when the approval was requested.';
+#pragma warning restore LC0038
                 }
                 field("Due Date Formula"; Rec."Due Date Formula")
                 {
@@ -73,7 +75,9 @@ page 83809 "Workflow Step Arg. Part WPTE"
                 }
                 field("Link Target Page"; Rec."Link Target Page")
                 {
+#pragma warning disable LC0038
                     ToolTip = 'Specifies a specific page that opens when a user chooses the link in a notification. If you do not fill this field, the page showing the involved record will open. The page must have the same source table as the record involved.';
+#pragma warning restore LC0038
                 }
                 field(Message; Rec.Message)
                 {

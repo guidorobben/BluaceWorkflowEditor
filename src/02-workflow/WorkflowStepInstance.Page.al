@@ -34,7 +34,9 @@ page 83804 "Workflow Step Instance WPTE"
                 }
                 field(Status; Rec.Status)
                 {
+#pragma warning disable LC0038
                     ToolTip = 'Specifies the status of the workflow step instance. Active means that the step instance in ongoing. Completed means that the workflow step instance is done. Ignored means that the workflow step instance was skipped in favor of another path.';
+#pragma warning restore LC0038
                 }
                 field("Workflow Step ID"; Rec."Workflow Step ID")
                 {
@@ -50,7 +52,9 @@ page 83804 "Workflow Step Instance WPTE"
                 }
                 field("Previous Workflow Step ID"; Rec."Previous Workflow Step ID")
                 {
+#pragma warning disable LC0038
                     ToolTip = 'Specifies the step that you want to precede the step that you are specifying on the line. You use this field to specify branching of steps when one of multiple possible events does not occur and you want the following step to specify another possible event as a branch of the previous step. In this case, both steps have the same value in the Previous Workflow Step ID field.';
+#pragma warning restore LC0038
                 }
                 field(Argument; Rec.Argument)
                 {

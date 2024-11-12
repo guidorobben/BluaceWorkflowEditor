@@ -61,57 +61,68 @@ page 83805 "Workflow Editor WPTE"
                 action(OpenWorkflows)
                 {
                     Caption = 'Workflows';
+                    Image = Workflow;
                     RunObject = page Workflows;
                 }
                 action(WorkflowList)
                 {
                     Caption = 'Workflow List';
+                    Image = Workflow;
                     RunObject = page "Workflow List WPTE";
                 }
                 action(WorkflowStepEditor)
                 {
                     Caption = 'Workflow Step Editor';
+                    Image = Edit;
                     RunObject = page "Workflow Step Editor WPTE";
                     RunPageLink = "Workflow Code" = field(Code);
                 }
                 action(WorkflowEvents)
                 {
                     Caption = 'Workflow Events';
+                    Image = List;
                     RunObject = page "Workflow Events WPTE";
                 }
                 action(WorkflowTableRelations)
                 {
                     Caption = 'Workflow Table Relations';
+                    Image = List;
                     RunObject = page "Workflow - Table Relations";
                 }
                 action(WFEventResponseCombi)
                 {
                     Caption = 'Workflow Event/Response Combinations Matrix';
+                    Image = List;
                     RunObject = page "WF Event/Response Combinations";
                 }
                 action(WFEventResponseCombiList)
                 {
                     Caption = 'Workflow Event/Response Combinations List';
+                    Image = List;
                     RunObject = page "WF Event/Response Combi. WPTE";
                 }
                 action(WorkflowDefinitions)
                 {
                     Caption = 'Workflow Definitions';
+                    Image = List;
                     RunObject = query "Workflow Definition";
                 }
                 action(WorkflowStepInstances)
                 {
                     Caption = 'Workflow Step Instances';
+                    Image = List;
                     RunObject = page "Workflow Step Instances";
                 }
                 action(WorkflowWebhookEntries)
                 {
                     Caption = 'Workflow Webhook Entries';
+                    Image = List;
                     RunObject = page "Workflow Webhook Entries";
                 }
                 action(ApprovalEntries)
                 {
                     Caption = 'Approval Entries';
+                    Image = List;
                     RunObject = page "Approval Entries";
                 }
                 action(WorkflowEventLog)

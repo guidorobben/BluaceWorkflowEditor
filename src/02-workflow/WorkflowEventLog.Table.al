@@ -2,8 +2,8 @@ table 83802 "Workflow Event Log WPTE"
 {
     Caption = 'Workflow Event Log';
     DataClassification = CustomerContent;
-    LookupPageId = "Workflow Event Log WPTE";
     DrillDownPageId = "Workflow Event Log WPTE";
+    LookupPageId = "Workflow Event Log WPTE";
 
     fields
     {

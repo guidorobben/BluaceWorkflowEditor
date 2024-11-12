@@ -17,6 +17,7 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
                     {
                         ApplicationArea = All;
                         Caption = 'Open';
+                        Image = Open;
 
                         trigger OnAction()
                         begin
@@ -27,6 +28,7 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
                     {
                         ApplicationArea = All;
                         Caption = 'Released';
+                        Image = ReleaseDoc;
 
                         trigger OnAction()
                         begin
@@ -37,6 +39,7 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
                     {
                         ApplicationArea = All;
                         Caption = 'Pending Approval';
+                        Image = Status;
 
                         trigger OnAction()
                         begin
@@ -47,6 +50,7 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
                     {
                         ApplicationArea = All;
                         Caption = 'Pending Prepayment';
+                        Image = Status;
 
                         trigger OnAction()
                         begin
@@ -58,6 +62,7 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
                 {
                     ApplicationArea = All;
                     Caption = 'Remove Record Restriction';
+                    Image = Lock;
 
                     trigger OnAction()
                     begin
