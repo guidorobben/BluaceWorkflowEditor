@@ -48,7 +48,7 @@ page 83805 "Workflow Editor WPTE"
 
                 trigger OnAction()
                 begin
-                    Rec.ToggleEnableWorkflow();
+                    Rec.ToggleEnableWorkflowWPTE();
                 end;
             }
         }
