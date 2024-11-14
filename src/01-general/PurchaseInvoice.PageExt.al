@@ -77,7 +77,7 @@ pageextension 83806 "Purchase Invoice WPTE" extends "Purchase Invoice"
 
                     trigger OnAction()
                     begin
-                        Rec.ShowApprovalInfo();
+                        Rec.ShowApprovalInfoWPTE();
                     end;
                 }
             }

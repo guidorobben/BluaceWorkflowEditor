@@ -1,10 +1,10 @@
 tableextension 83803 "Purchase Header WPTE" extends "Purchase Header"
 {
     var
-        PurchaseHeaderHelper: Codeunit "Purchase Header Helper WPTE";
+        PurchaseHeaderHelperWPTE: Codeunit "Purchase Header Helper WPTE";
 
-    procedure ShowApprovalInfo()
+    procedure ShowApprovalInfoWPTE()
     begin
-        PurchaseHeaderHelper.ShowApprovalInfo(Rec);
+        PurchaseHeaderHelperWPTE.ShowApprovalInfo(Rec);
     end;
 }

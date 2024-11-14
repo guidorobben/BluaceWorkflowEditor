@@ -77,7 +77,7 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
                     trigger OnAction()
                     begin
-                        Rec.ShowApprovalInfo();
+                        Rec.ShowApprovalInfoWPTE();
                     end;
                 }
             }

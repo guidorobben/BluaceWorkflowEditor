@@ -2,8 +2,7 @@ permissionset 83800 "Workflow Editor WPTE"
 {
     Assignable = true;
     Caption = 'WORKFLOWEDITOR', MaxLength = 30;
-    Permissions =
-        table "Info Dialog WPTE" = X,
+    Permissions = table "Info Dialog WPTE" = X,
         tabledata "Info Dialog WPTE" = RIMD,
         table "Workflow Editor Setup WPTE" = X,
         tabledata "Workflow Editor Setup WPTE" = RIMD,
@@ -15,6 +14,7 @@ permissionset 83800 "Workflow Editor WPTE"
         codeunit "Info Dialog Subscr. WPTE" = X,
         codeunit "Info Dialog WPTE" = X,
         codeunit "Notification Entry Hlp. WPTE" = X,
+        codeunit "Purch. Inv. Header Helper WPTE" = X,
         codeunit "Purch. Inv. Header Subscr WPTE" = X,
         codeunit "Purchase Header Helper WPTE" = X,
         codeunit "User Management WPTE" = X,

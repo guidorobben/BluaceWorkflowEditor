@@ -1,4 +1,4 @@
-pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invoice"
+pageextension 83810 "Posted Purchase Invoices WPTE" extends "Posted Purchase Invoices"
 {
     actions
     {
@@ -48,7 +48,7 @@ pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invo
 
         addlast(Promoted)
         {
-            group(WorkFlowEditorWPTE_Promoted)
+            group(WorkFlowEditorWPTE_PromotedWPTE)
             {
                 Caption = 'Workflow Editor';
 
