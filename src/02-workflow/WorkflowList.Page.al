@@ -1,4 +1,4 @@
-page 83802 "Workflow List WPTE"
+page 83802 "Workflow List WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow List';

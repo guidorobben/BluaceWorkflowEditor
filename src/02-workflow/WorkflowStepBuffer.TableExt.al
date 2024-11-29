@@ -1,4 +1,4 @@
-tableextension 83801 "Workflow Step Buffer WPTE" extends "Workflow Step Buffer"
+tableextension 83801 "Workflow Step Buffer WFE" extends "Workflow Step Buffer"
 {
     fields
     {

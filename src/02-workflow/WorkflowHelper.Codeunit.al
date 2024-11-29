@@ -1,4 +1,4 @@
-codeunit 83803 "Workflow Helper WPTE"
+codeunit 83803 "Workflow Helper WFE"
 {
     Permissions =
         tabledata Workflow = RM,

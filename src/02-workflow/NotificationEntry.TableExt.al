@@ -1,10 +1,20 @@
-tableextension 83804 "Notification Entry WPTE" extends "Notification Entry"
+tableextension 83804 "Notification Entry WFE" extends "Notification Entry"
 {
     var
-        NotificationEntryHlpWPTE: Codeunit "Notification Entry Hlp. WPTE";
+        NotificationEntryHlpWFE: Codeunit "Notification Entry Hlp. WFE";
 
-    procedure DeleteNotificationWPTE()
+    trigger OnAfterInsert()
     begin
-        NotificationEntryHlpWPTE.DeleteNotificationWPTE(Rec);
+        NotificationEntryHlpWFE.OnAfterInsert(Rec);
+    end;
+
+    trigger OnAfterDelete()
+    begin
+        NotificationEntryHlpWFE.OnAfterDelete(Rec);
+    end;
+
+    procedure DeleteNotificationWFE()
+    begin
+        NotificationEntryHlpWFE.DeleteNotification(Rec);
     end;
 }

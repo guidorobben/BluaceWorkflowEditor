@@ -1,4 +1,4 @@
-codeunit 83801 "Workflow Editor WPTE"
+codeunit 83801 "Workflow Editor WFE"
 {
     Permissions =
         tabledata "Workflow Step" = R,
@@ -19,7 +19,15 @@ codeunit 83801 "Workflow Editor WPTE"
         end;
         // WorkflowStepInstance.FilterGroup(0);
 
-        Page.Run(Page::"Workflow Step Instance WPTE", WorkflowStepInstance);
+        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
+    end;
+
+    procedure OpenActiveWorkflow(WorkflowInstanceId: Guid)
+    var
+        WorkflowStepInstance: Record "Workflow Step Instance";
+    begin
+        WorkflowStepInstance.SetRange(ID, WorkflowInstanceId);
+        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
     end;
 
     procedure EditWorkflowSteps(WorkFlowCode: Code[20])
@@ -29,6 +37,6 @@ codeunit 83801 "Workflow Editor WPTE"
         WorkflowStep.FilterGroup(10);
         WorkflowStep.SetRange("Workflow Code", WorkFlowCode);
         WorkflowStep.FilterGroup(0);
-        Page.Run(Page::"Workflow Step Editor WPTE", WorkflowStep);
+        Page.Run(Page::"Workflow Step Editor WFE", WorkflowStep);
     end;
 }

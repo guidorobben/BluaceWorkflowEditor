@@ -1,4 +1,4 @@
-page 83805 "Workflow Editor WPTE"
+page 83805 "Workflow Editor WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Editor';
@@ -48,7 +48,7 @@ page 83805 "Workflow Editor WPTE"
 
                 trigger OnAction()
                 begin
-                    Rec.ToggleEnableWorkflowWPTE();
+                    Rec.ToggleEnableWorkflowWFE();
                 end;
             }
         }
@@ -68,20 +68,20 @@ page 83805 "Workflow Editor WPTE"
                 {
                     Caption = 'Workflow List';
                     Image = Workflow;
-                    RunObject = page "Workflow List WPTE";
+                    RunObject = page "Workflow List WFE";
                 }
                 action(WorkflowStepEditor)
                 {
                     Caption = 'Workflow Step Editor';
                     Image = Edit;
-                    RunObject = page "Workflow Step Editor WPTE";
+                    RunObject = page "Workflow Step Editor WFE";
                     RunPageLink = "Workflow Code" = field(Code);
                 }
                 action(WorkflowEvents)
                 {
                     Caption = 'Workflow Events';
                     Image = List;
-                    RunObject = page "Workflow Events WPTE";
+                    RunObject = page "Workflow Events WFE";
                 }
                 action(WorkflowTableRelations)
                 {
@@ -99,7 +99,7 @@ page 83805 "Workflow Editor WPTE"
                 {
                     Caption = 'Workflow Event/Response Combinations List';
                     Image = List;
-                    RunObject = page "WF Event/Response Combi. WPTE";
+                    RunObject = page "WF Event/Response Combi. WFE";
                 }
                 action(WorkflowDefinitions)
                 {
@@ -129,7 +129,7 @@ page 83805 "Workflow Editor WPTE"
                 {
                     Caption = 'Workflow Event Log';
                     Image = Log;
-                    RunObject = page "Workflow Event Log WPTE";
+                    RunObject = page "Workflow Event Log WFE";
                 }
                 action(NotificationEntries)
                 {
@@ -177,7 +177,7 @@ page 83805 "Workflow Editor WPTE"
                 {
                     Caption = 'Workflow Editor Setup';
                     Image = Setup;
-                    RunObject = page "Workflow Editor Setup WPTE";
+                    RunObject = page "Workflow Editor Setup WFE";
                 }
                 action(ApprovalUserSetup)
                 {

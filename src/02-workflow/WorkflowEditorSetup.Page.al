@@ -1,9 +1,9 @@
-page 83807 "Workflow Editor Setup WPTE"
+page 83807 "Workflow Editor Setup WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Editor Setup';
     PageType = Card;
-    SourceTable = "Workflow Editor Setup WPTE";
+    SourceTable = "Workflow Editor Setup WFE";
     UsageCategory = Administration;
 
     layout

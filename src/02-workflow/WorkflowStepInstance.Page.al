@@ -1,4 +1,4 @@
-page 83804 "Workflow Step Instance WPTE"
+page 83804 "Workflow Step Instance WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Step Instance';

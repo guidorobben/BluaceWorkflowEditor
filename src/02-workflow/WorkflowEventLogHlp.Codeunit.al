@@ -1,16 +1,16 @@
-codeunit 83810 "Workflow Event Log Hlp. WPTE"
+codeunit 83810 "Workflow Event Log Hlp. WFE"
 {
     Permissions =
-        tabledata "Workflow Event Log WPTE" = RD;
+        tabledata "Workflow Event Log WFE" = RD;
 
     internal procedure ClearLog()
     var
-        WorkflowEventLog: Record "Workflow Event Log WPTE";
+        WorkflowEventLog: Record "Workflow Event Log WFE";
     begin
         WorkflowEventLog.DeleteAll(true);
     end;
 
-    internal procedure ShowRecord(WorkflowEventLog: Record "Workflow Event Log WPTE")
+    internal procedure ShowRecord(WorkflowEventLog: Record "Workflow Event Log WFE")
     var
         PageManagement: Codeunit "Page Management";
         RecRef: RecordRef;

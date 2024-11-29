@@ -1,10 +1,10 @@
-page 83811 "Workflow Event Log WPTE"
+page 83811 "Workflow Event Log WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Event Log';
     Editable = false;
     PageType = List;
-    SourceTable = "Workflow Event Log WPTE";
+    SourceTable = "Workflow Event Log WFE";
     UsageCategory = History;
 
     layout

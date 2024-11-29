@@ -1,4 +1,4 @@
-page 83800 "WF Event/Response Combi. WPTE"
+page 83800 "WF Event/Response Combi. WFE"
 {
     ApplicationArea = All;
     Caption = 'WF Event/Response Combinations';

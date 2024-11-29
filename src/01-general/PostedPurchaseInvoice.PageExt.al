@@ -1,14 +1,14 @@
-pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invoice"
+pageextension 83801 "Posted Purchase Invoice WFE" extends "Posted Purchase Invoice"
 {
     actions
     {
         addlast(navigation)
         {
-            group(WorkFlowEditorWPTE)
+            group(WorkFlowEditorWFE)
             {
                 Caption = 'Workflow Editor';
 
-                action(OpenActiveWorkflowWPTE)
+                action(OpenActiveWorkflowWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Open active workflow';
@@ -16,12 +16,12 @@ pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invo
 
                     trigger OnAction()
                     var
-                        WorkflowEditor: Codeunit "Workflow Editor WPTE";
+                        WorkflowEditor: Codeunit "Workflow Editor WFE";
                     begin
                         WorkflowEditor.OpenActiveWorkflow(Rec.RecordId);
                     end;
                 }
-                action(RemoveRecordRestrictionWPTE)
+                action(RemoveRecordRestrictionWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Remove Record Restriction';
@@ -29,10 +29,10 @@ pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invo
 
                     trigger OnAction()
                     begin
-                        PurchInvHeaderHelperWPTE.AllowRecordUsage(xRec);
+                        PurchInvHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
                 }
-                action(ApprovalInfoWPTE)
+                action(ApprovalInfoWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Approval Info';
@@ -40,7 +40,7 @@ pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invo
 
                     trigger OnAction()
                     begin
-                        Rec.ShowApprovalInfoWPTE();
+                        Rec.ShowApprovalInfoWFE();
                     end;
                 }
             }
@@ -48,16 +48,16 @@ pageextension 83801 "Posted Purchase Invoice WPTE" extends "Posted Purchase Invo
 
         addlast(Promoted)
         {
-            group(WorkFlowEditorWPTE_Promoted)
+            group(WorkFlowEditorWFE_Promoted)
             {
                 Caption = 'Workflow Editor';
 
-                actionref(ApprovalInfoWPTE_Promoted; ApprovalInfoWPTE) { }
-                actionref(OpenActiveWorkflowWPTE_Promoted; OpenActiveWorkflowWPTE) { }
-                actionref(AllowRecordUsageWPTE_Promoted; RemoveRecordRestrictionWPTE) { }
+                actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
+                actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
+                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
             }
         }
     }
     var
-        PurchInvHeaderHelperWPTE: Codeunit "Purch. Inv. Header Helper WPTE";
+        PurchInvHeaderHelperWFE: Codeunit "Purch. Inv. Header Helper WFE";
 }

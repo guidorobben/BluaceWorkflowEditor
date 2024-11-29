@@ -1,15 +1,15 @@
-pageextension 83802 "Workflow WPTE" extends Workflow
+pageextension 83802 "Workflow WFE" extends Workflow
 {
     actions
     {
         addlast(processing)
         {
-            group(WorkFlowEditorWPTE)
+            group(WorkFlowEditorWFE)
             {
                 Caption = 'WorkFlow Editor';
                 Image = Workflow;
 
-                action(SetToWorkflowTemplateWPTE)
+                action(SetToWorkflowTemplateWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Convert to Workflow Template';
@@ -22,7 +22,7 @@ pageextension 83802 "Workflow WPTE" extends Workflow
                         SetToWorkflowTemplate();
                     end;
                 }
-                action(SetToWorkflowWPTE)
+                action(SetToWorkflowWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Convert to Workflow';
@@ -35,7 +35,7 @@ pageextension 83802 "Workflow WPTE" extends Workflow
                         SetToWorkflow();
                     end;
                 }
-                action(ShowWorkflowStepsWPTE)
+                action(ShowWorkflowStepsWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Edit Workflow Steps';
@@ -43,7 +43,7 @@ pageextension 83802 "Workflow WPTE" extends Workflow
 
                     trigger OnAction()
                     var
-                        WorkflowEditor: Codeunit "Workflow Editor WPTE";
+                        WorkflowEditor: Codeunit "Workflow Editor WFE";
                     begin
                         WorkflowEditor.EditWorkflowSteps(Rec.Code);
                     end;
@@ -53,26 +53,26 @@ pageextension 83802 "Workflow WPTE" extends Workflow
 
         addlast(Promoted)
         {
-            group(WorkFlowEditorWPTE_Promoted)
+            group(WorkFlowEditorWFE_Promoted)
             {
                 Caption = 'WorkFlow Editor';
                 Image = Workflow;
 
-                actionref(ShowWorkflowStepsWPTE_Promoted; ShowWorkflowStepsWPTE) { }
+                actionref(ShowWorkflowStepsWFE_Promoted; ShowWorkflowStepsWFE) { }
             }
         }
     }
 
     var
-        WorkflowHelperWPTE: Codeunit "Workflow Helper WPTE";
+        WorkflowHelperWFE: Codeunit "Workflow Helper WFE";
 
     procedure SetToWorkflow()
     begin
-        WorkflowHelperWPTE.SetToWorkflow(Rec);
+        WorkflowHelperWFE.SetToWorkflow(Rec);
     end;
 
     procedure SetToWorkflowTemplate()
     begin
-        WorkflowHelperWPTE.SetToWorkflowTemplate(Rec);
+        WorkflowHelperWFE.SetToWorkflowTemplate(Rec);
     end;
 }

@@ -1,4 +1,4 @@
-page 83809 "Workflow Step Arg. Part WPTE"
+page 83809 "Workflow Step Arg. Part WFE"
 {
     ApplicationArea = All;
     Caption = 'Response';
@@ -20,7 +20,7 @@ page 83809 "Workflow Step Arg. Part WPTE"
                 {
                     ToolTip = 'Specifies the value of the Response Function Name field.', Comment = '%';
                 }
-                field("Function Name Description WPTE"; Rec."Function Name Description WPTE") { }
+                field("Function Name Description WFE"; Rec."Function Name Description WFE") { }
                 field("Table No."; Rec."Table No.")
                 {
                     ToolTip = 'Specifies the value of the Table No. field.', Comment = '%';

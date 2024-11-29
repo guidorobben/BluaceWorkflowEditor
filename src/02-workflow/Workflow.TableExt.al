@@ -1,15 +1,15 @@
-tableextension 83802 "Workflow WPTE" extends Workflow
+tableextension 83802 "Workflow WFE" extends Workflow
 {
     var
-        WorkflowHelperWPTE: Codeunit "Workflow Helper WPTE";
+        WorkflowHelperWFE: Codeunit "Workflow Helper WFE";
 
-    // internal procedure EnableWorkflowWPTE()
+    // internal procedure EnableWorkflowWFE()
     // begin
-    //     WorkflowHelperWPTE.EnableWorkflow(Rec);
+    //     WorkflowHelperWFE.EnableWorkflow(Rec);
     // end;
 
-    internal procedure ToggleEnableWorkflowWPTE()
+    internal procedure ToggleEnableWorkflowWFE()
     begin
-        WorkflowHelperWPTE.ToggleEnableWorkflow(Rec);
+        WorkflowHelperWFE.ToggleEnableWorkflow(Rec);
     end;
 }

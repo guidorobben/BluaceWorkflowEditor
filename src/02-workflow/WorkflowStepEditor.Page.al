@@ -1,4 +1,4 @@
-page 83808 "Workflow Step Editor WPTE"
+page 83808 "Workflow Step Editor WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Step Editor';
@@ -54,11 +54,11 @@ page 83808 "Workflow Step Editor WPTE"
                     ToolTip = 'Specifies the value of the Argument field.', Comment = '%';
                 }
             }
-            part(WorkflowEvent; "Workflow Event Part WPTE")
+            part(WorkflowEvent; "Workflow Event Part WFE")
             {
                 SubPageLink = "Function Name" = field("Function Name");
             }
-            part(workflowstepargument; "Workflow Step Arg. Part WPTE")
+            part(workflowstepargument; "Workflow Step Arg. Part WFE")
             {
                 SubPageLink = ID = field(Argument);
             }

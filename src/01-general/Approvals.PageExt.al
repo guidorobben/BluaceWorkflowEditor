@@ -1,13 +1,13 @@
-// pageextension 83805 "Approvals WPTE" extends Approvals
+// pageextension 83805 "Approvals WFE" extends Approvals
 // {
 //     actions
 //     {
 //         addlast(Processing)
 //         {
 
-//             group(WorkflowEditorWPTE)
+//             group(WorkflowEditorWFE)
 //             {
-//                 action(DeleteApprovalWPTE)
+//                 action(DeleteApprovalWFE)
 //                 {
 //                     ApplicationArea = All;
 //                     Caption = 'DeleteApproval';

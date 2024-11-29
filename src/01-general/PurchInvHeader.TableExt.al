@@ -1,10 +1,10 @@
-tableextension 83805 "Purch. Inv. Header WPTE" extends "Purch. Inv. Header"
+tableextension 83805 "Purch. Inv. Header WFE" extends "Purch. Inv. Header"
 {
     var
-        PurchInvHeaderHelperWPTE: Codeunit "Purch. Inv. Header Helper WPTE";
+        PurchInvHeaderHelperWFE: Codeunit "Purch. Inv. Header Helper WFE";
 
-    procedure ShowApprovalInfoWPTE()
+    procedure ShowApprovalInfoWFE()
     begin
-        PurchInvHeaderHelperWPTE.ShowApprovalInfo(Rec);
+        PurchInvHeaderHelperWFE.ShowApprovalInfo(Rec);
     end;
 }

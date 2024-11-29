@@ -1,7 +1,7 @@
-codeunit 83809 "Info Dialog WPTE"
+codeunit 83809 "Info Dialog WFE"
 {
     var
-        InfoDialog: Record "Info Dialog WPTE";
+        InfoDialog: Record "Info Dialog WFE";
         LastEntryNo: Integer;
         PageCaption: Text;
 
@@ -53,15 +53,15 @@ codeunit 83809 "Info Dialog WPTE"
 
     procedure OpenInfoDialog()
     // var
-    //     InfoBufferWPTE: Page "Info Buffer WPTE";
+    //     InfoBufferWFE: Page "Info Buffer WFE";
     begin
         InfoDialog.Reset();
         if InfoDialog.FindFirst() then; //Set pointer to first
         Page.Run(0, InfoDialog);
-        // InfoBufferWPTE.GetRecord(InfoBuffer); //FIXME
-        // InfoBufferWPTE.SetRecord(InfoBuffer);
-        // InfoBufferWPTE.SetTableView(InfoBuffer);
-        // InfoBufferWPTE.Run();
+        // InfoBufferWFE.GetRecord(InfoBuffer); //FIXME
+        // InfoBufferWFE.SetRecord(InfoBuffer);
+        // InfoBufferWFE.SetTableView(InfoBuffer);
+        // InfoBufferWFE.Run();
     end;
 
     local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Code[128])
@@ -90,7 +90,7 @@ codeunit 83809 "Info Dialog WPTE"
         exit(LastEntryNo);
     end;
 
-    procedure TransferInfoDialog(var ToInfoDialog: Record "Info Dialog WPTE")
+    procedure TransferInfoDialog(var ToInfoDialog: Record "Info Dialog WFE")
     begin
         if InfoDialog.FindSet() then
             repeat

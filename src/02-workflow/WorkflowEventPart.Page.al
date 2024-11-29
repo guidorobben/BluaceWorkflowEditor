@@ -1,4 +1,4 @@
-page 83810 "Workflow Event Part WPTE"
+page 83810 "Workflow Event Part WFE"
 {
     ApplicationArea = All;
     Caption = 'Event';

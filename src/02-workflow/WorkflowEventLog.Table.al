@@ -1,9 +1,9 @@
-table 83802 "Workflow Event Log WPTE"
+table 83802 "Workflow Event Log WFE"
 {
     Caption = 'Workflow Event Log';
     DataClassification = CustomerContent;
-    DrillDownPageId = "Workflow Event Log WPTE";
-    LookupPageId = "Workflow Event Log WPTE";
+    DrillDownPageId = "Workflow Event Log WFE";
+    LookupPageId = "Workflow Event Log WFE";
 
     fields
     {
@@ -82,8 +82,13 @@ table 83802 "Workflow Event Log WPTE"
         }
         field(83840; "Notification Type"; Enum "Notification Entry Type")
         {
-            Caption = 'Type';
+            Caption = 'Notification Type';
             ToolTip = 'Specifies the value of the Type field.', Comment = '%';
+        }
+        field(83850; "Record Trigger Type"; Enum "Record Trigger Type WFE")
+        {
+            AllowInCustomizations = Always;
+            Caption = 'Record Trigger Type';
         }
     }
     keys
@@ -95,7 +100,7 @@ table 83802 "Workflow Event Log WPTE"
     }
 
     var
-        WorkflowEventLogHlp: Codeunit "Workflow Event Log Hlp. WPTE";
+        WorkflowEventLogHlp: Codeunit "Workflow Event Log Hlp. WFE";
 
     procedure ClearLog()
     begin

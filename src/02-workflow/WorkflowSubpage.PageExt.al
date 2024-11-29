@@ -1,15 +1,15 @@
-pageextension 83803 "Workflow Subpage WPTE" extends "Workflow Subpage"
+pageextension 83803 "Workflow Subpage WFE" extends "Workflow Subpage"
 {
     actions
     {
         addlast(processing)
         {
-            group(WorkflowEditorWPTE)
+            group(WorkflowEditorWFE)
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
-                action(ShowBufferWPTE)
+                action(ShowBufferWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Show Function Name';
@@ -17,7 +17,7 @@ pageextension 83803 "Workflow Subpage WPTE" extends "Workflow Subpage"
 
                     trigger OnAction()
                     var
-                        WorkflowHelper: Codeunit "Workflow Helper WPTE";
+                        WorkflowHelper: Codeunit "Workflow Helper WFE";
                     begin
                         Message(WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Event Step ID"));
                     end;

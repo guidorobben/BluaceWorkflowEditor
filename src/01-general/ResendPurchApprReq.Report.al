@@ -1,4 +1,4 @@
-report 83800 "Resend Purch. Appr. Req. WPTE"
+report 83800 "Resend Purch. Appr. Req. WFE"
 {
     ApplicationArea = All;
     Caption = 'Resend Purchase Header Approval Request';
@@ -74,14 +74,23 @@ report 83800 "Resend Purch. Appr. Req. WPTE"
     //     // PurchInvHeader.Modify(true);
     // end;
 
-    local procedure RemoveOnHold(var PurchInvHeader: Record "Purchase Header")
+    local procedure RemoveOnHold(var PurchaseHeader: Record "Purchase Header")
     begin
-        if PurchInvHeader."On Hold" = '' then
+        if PurchaseHeader."On Hold" = '' then
             exit;
 
-        PurchInvHeader.Validate("On Hold", '');
-        PurchInvHeader.Modify(true);
+        PurchaseHeader.Validate("On Hold", '');
+        PurchaseHeader.Modify(true);
     end;
+
+    // local procedure RemoveOnHold(var PurchInvHeader: Record "Purch. InvHeader")
+    // begin
+    //     if PurchInvHeader."On Hold" = '' then
+    //         exit;
+
+    //     PurchInvHeader.Validate("On Hold", '');
+    //     PurchInvHeader.Modify(true);
+    // end;
 
     local procedure SendApprovalRequest(var PurchaseHeader: Record "Purchase Header")
     // begin
@@ -146,6 +155,9 @@ report 83800 "Resend Purch. Appr. Req. WPTE"
 
     local procedure SetToStatusPendingApproval(var PurchaseHeader: Record "Purchase Header")
     begin
+        if PurchaseHeader.Status = PurchaseHeader.Status::"Pending Approval" then
+            exit;
+
         PurchaseHeader.Validate(Status, PurchaseHeader.Status::"Pending Approval");
         PurchaseHeader.Modify(true);
     end;
@@ -173,7 +185,7 @@ report 83800 "Resend Purch. Appr. Req. WPTE"
 
     local procedure TestIsApprovalAdministrator(): Boolean
     var
-        UserManagement: Codeunit "User Management WPTE";
+        UserManagement: Codeunit "User Management WFE";
     begin
         UserManagement.TestIsApprovalAdministrator();
     end;

@@ -1,4 +1,4 @@
-page 83803 "Workflow Step Buffer WPTE"
+page 83803 "Workflow Step Buffer WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Step Buffer';

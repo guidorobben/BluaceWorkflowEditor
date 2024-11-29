@@ -1,15 +1,15 @@
-pageextension 83809 "Notification Entries WPTE" extends "Notification Entries"
+pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
 {
     actions
     {
         addlast(processing)
         {
-            group(WorkflowEditorWPTE)
+            group(WorkflowEditorWFE)
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
-                action(DeleteWPTE)
+                action(DeleteWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Delete Notification';
@@ -17,7 +17,7 @@ pageextension 83809 "Notification Entries WPTE" extends "Notification Entries"
 
                     trigger OnAction()
                     begin
-                        Rec.DeleteNotificationWPTE();
+                        Rec.DeleteNotificationWFE();
                     end;
                 }
             }

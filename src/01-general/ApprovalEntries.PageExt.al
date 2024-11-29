@@ -1,20 +1,20 @@
-pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
+pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
 {
 
     actions
     {
         addlast(processing)
         {
-            group(WorkflowEditorWPTE)
+            group(WorkflowEditorWFE)
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
-                group(DeleteEntryGroupWPTE)
+                group(DeleteEntryGroupWFE)
                 {
                     Caption = 'Delete';
 
-                    action(DeleteEntryWPTE)
+                    action(DeleteEntryWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Delete Current Entry';
@@ -22,25 +22,25 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
 
                         trigger OnAction()
                         begin
-                            ApprovalEntryHelperWPTE.DeleteEntry(Rec);
+                            ApprovalEntryHelperWFE.DeleteEntry(Rec);
                         end;
                     }
-                    // action(DeleteAllEntriesWPTE)
+                    // action(DeleteAllEntriesWFE)
                     // {
                     //     ApplicationArea = All;
                     //     Caption = 'Delete All Entries';
 
                     //     trigger OnAction()
                     //     begin
-                    //         ApprovalEntryHelperWPTE.DeleteAllentries(Rec);
+                    //         ApprovalEntryHelperWFE.DeleteAllentries(Rec);
                     //     end;
                     // }
                 }
-                group(EntryStatusWPTE)
+                group(EntryStatusWFE)
                 {
                     Caption = 'Status';
 
-                    action(EntryStatusOpenWPTE)
+                    action(EntryStatusOpenWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Open';
@@ -48,10 +48,10 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
 
                         trigger OnAction()
                         begin
-                            ApprovalEntryHelperWPTE.SetApprovalEntryToStatusOpen(Rec);
+                            ApprovalEntryHelperWFE.SetApprovalEntryToStatusOpen(Rec);
                         end;
                     }
-                    action(EntryStatusApprovedWPTE)
+                    action(EntryStatusApprovedWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Approved';
@@ -59,10 +59,10 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
 
                         trigger OnAction()
                         begin
-                            ApprovalEntryHelperWPTE.SetApprovalEntryToStatusApproved(Rec);
+                            ApprovalEntryHelperWFE.SetApprovalEntryToStatusApproved(Rec);
                         end;
                     }
-                    action(EntryStatusCanceledWPTE)
+                    action(EntryStatusCanceledWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Canceled';
@@ -70,10 +70,10 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
 
                         trigger OnAction()
                         begin
-                            ApprovalEntryHelperWPTE.SetApprovalEntryToStatusCanceled(Rec);
+                            ApprovalEntryHelperWFE.SetApprovalEntryToStatusCanceled(Rec);
                         end;
                     }
-                    action(EntryStatusCreatedWPTE)
+                    action(EntryStatusCreatedWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Created';
@@ -81,10 +81,10 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
 
                         trigger OnAction()
                         begin
-                            ApprovalEntryHelperWPTE.SetApprovalEntryToStatusCreated(Rec);
+                            ApprovalEntryHelperWFE.SetApprovalEntryToStatusCreated(Rec);
                         end;
                     }
-                    action(EntryStatusRejectedWPTE)
+                    action(EntryStatusRejectedWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Rejected';
@@ -92,7 +92,7 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
 
                         trigger OnAction()
                         begin
-                            ApprovalEntryHelperWPTE.SetApprovalEntryToStatusRejected(Rec);
+                            ApprovalEntryHelperWFE.SetApprovalEntryToStatusRejected(Rec);
                         end;
                     }
                 }
@@ -101,5 +101,5 @@ pageextension 83800 "Approval Entries WPTE" extends "Approval Entries"
     }
 
     var
-        ApprovalEntryHelperWPTE: Codeunit "Approval Entry Helper WPTE";
+        ApprovalEntryHelperWFE: Codeunit "Approval Entry Helper WFE";
 }

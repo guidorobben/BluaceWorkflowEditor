@@ -1,14 +1,14 @@
-pageextension 83804 "Workflow Step Responses WPTE" extends "Workflow Step Responses"
+pageextension 83804 "Workflow Step Responses WFE" extends "Workflow Step Responses"
 {
     layout
     {
         addlast(content)
         {
-            group(WorkflowEditorWPTE)
+            group(WorkflowEditorWFE)
             {
                 Caption = 'Workflow Editor';
 
-                field("Response Step ID WPTE"; Rec."Response Step ID")
+                field("Response Step ID WFE"; Rec."Response Step ID")
                 {
                     ApplicationArea = All;
                     DrillDown = false;
@@ -16,7 +16,7 @@ pageextension 83804 "Workflow Step Responses WPTE" extends "Workflow Step Respon
                     Lookup = false;
                     ToolTip = 'Specifies the value of the Response Step ID field.';
                 }
-                field(FunctionNameWPTE; FunctionNameWPTE)
+                field(FunctionNameWFE; FunctionNameWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Function Name';
@@ -28,12 +28,12 @@ pageextension 83804 "Workflow Step Responses WPTE" extends "Workflow Step Respon
     }
 
     var
-        FunctionNameWPTE: Text[100];
+        FunctionNameWFE: Text[100];
 
     trigger OnAfterGetRecord()
     var
-        WorkflowHelper: Codeunit "Workflow Helper WPTE";
+        WorkflowHelper: Codeunit "Workflow Helper WFE";
     begin
-        FunctionNameWPTE := WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Response Step ID");
+        FunctionNameWFE := WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Response Step ID");
     end;
 }

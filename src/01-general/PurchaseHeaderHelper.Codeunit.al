@@ -1,4 +1,4 @@
-codeunit 83807 "Purchase Header Helper WPTE"
+codeunit 83807 "Purchase Header Helper WFE"
 {
     Permissions =
         tabledata "Purchase Header" = RM,
@@ -43,7 +43,7 @@ codeunit 83807 "Purchase Header Helper WPTE"
 
     local procedure TestIsApprovalAdministrator(): Boolean
     var
-        UserManagement: Codeunit "User Management WPTE";
+        UserManagement: Codeunit "User Management WFE";
     begin
         UserManagement.TestIsApprovalAdministrator();
     end;
@@ -52,7 +52,7 @@ codeunit 83807 "Purchase Header Helper WPTE"
     var
         UserSetup: Record "User Setup";
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-        InfoDialog: Codeunit "Info Dialog WPTE";
+        InfoDialog: Codeunit "Info Dialog WFE";
     begin
         InfoDialog.Initialize();
         InfoDialog.SetCaption('Approval');
@@ -70,7 +70,7 @@ codeunit 83807 "Purchase Header Helper WPTE"
         InfoDialog.OpenInfoDialog();
     end;
 
-    local procedure GetWorkflowInfo(var PurchaseHeader: Record "Purchase Header"; var InfoDialog: Codeunit "Info Dialog WPTE")
+    local procedure GetWorkflowInfo(var PurchaseHeader: Record "Purchase Header"; var InfoDialog: Codeunit "Info Dialog WFE")
     var
         Workflow: Record Workflow;
         WorkflowStepInstance: Record "Workflow Step Instance";

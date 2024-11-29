@@ -1,8 +1,8 @@
-tableextension 83800 "Workflow Step Argument WPTE" extends "Workflow Step Argument"
+tableextension 83800 "Workflow Step Argument WFE" extends "Workflow Step Argument"
 {
     fields
     {
-        field(83800; "Function Name Description WPTE"; Text[250])
+        field(83800; "Function Name Description WFE"; Text[250])
         {
             CalcFormula = lookup("Workflow Response".Description where("Function Name" = field("Response Function Name")));
             Caption = 'Function Name Description';

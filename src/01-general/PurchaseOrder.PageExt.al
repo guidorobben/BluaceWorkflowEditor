@@ -1,19 +1,19 @@
-pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
+pageextension 83805 "Purchase Order WFE" extends "Purchase Order"
 {
     actions
     {
         addlast(processing)
         {
-            group(WorkflowEditorWPTE)
+            group(WorkflowEditorWFE)
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
-                group(StatusWPTE)
+                group(StatusWFE)
                 {
                     Caption = 'Status';
 
-                    action(StatusToOpenWPTE)
+                    action(StatusToOpenWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Open';
@@ -21,10 +21,10 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
                         trigger OnAction()
                         begin
-                            PurchaseHeaderHelperWPTE.SetStatusToOpen(Rec);
+                            PurchaseHeaderHelperWFE.SetStatusToOpen(Rec);
                         end;
                     }
-                    action(StatusToReleasedWPTE)
+                    action(StatusToReleasedWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Released';
@@ -32,10 +32,10 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
                         trigger OnAction()
                         begin
-                            PurchaseHeaderHelperWPTE.SetStatusToReleased(Rec);
+                            PurchaseHeaderHelperWFE.SetStatusToReleased(Rec);
                         end;
                     }
-                    action(StatusToPendingApprovalWPTE)
+                    action(StatusToPendingApprovalWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Pending Approval';
@@ -43,10 +43,10 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
                         trigger OnAction()
                         begin
-                            PurchaseHeaderHelperWPTE.SetStatusToPendingApproval(Rec);
+                            PurchaseHeaderHelperWFE.SetStatusToPendingApproval(Rec);
                         end;
                     }
-                    action(StatusToPendingPrepaymentWPTE)
+                    action(StatusToPendingPrepaymentWFE)
                     {
                         ApplicationArea = All;
                         Caption = 'Pending Prepayment';
@@ -54,11 +54,11 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
                         trigger OnAction()
                         begin
-                            PurchaseHeaderHelperWPTE.SetStatusToPendingPrepayment(Rec);
+                            PurchaseHeaderHelperWFE.SetStatusToPendingPrepayment(Rec);
                         end;
                     }
                 }
-                action(RemoveRecordRestrictionWPTE)
+                action(RemoveRecordRestrictionWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Remove Record Restriction';
@@ -66,10 +66,10 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
                     trigger OnAction()
                     begin
-                        PurchaseHeaderHelperWPTE.AllowRecordUsage(xRec);
+                        PurchaseHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
                 }
-                action(ApprovalInfoWPTE)
+                action(ApprovalInfoWFE)
                 {
                     ApplicationArea = All;
                     Caption = 'Approval Info';
@@ -77,7 +77,7 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
                     trigger OnAction()
                     begin
-                        Rec.ShowApprovalInfoWPTE();
+                        Rec.ShowApprovalInfoWFE();
                     end;
                 }
             }
@@ -85,29 +85,29 @@ pageextension 83805 "Purchase Order WPTE" extends "Purchase Order"
 
         addlast(Promoted)
         {
-            group(WorkflowEditorWPTE_Promoted)
+            group(WorkflowEditorWFE_Promoted)
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
-                actionref(ApprovalInfoWPTE_Promoted; ApprovalInfoWPTE) { }
+                actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
 
-                group(StatusWPTE_Promoted)
+                group(StatusWFE_Promoted)
                 {
                     Caption = 'Status';
                     Image = Status;
 
-                    actionref(StatusToOpenWPTE_Promoted; StatusToOpenWPTE) { }
-                    actionref(StatusToReleasedWPTE_Promoted; StatusToReleasedWPTE) { }
-                    actionref(StatusToPendingApprovalWPTE_Promoted; StatusToPendingApprovalWPTE) { }
-                    actionref(StatusToPendingPrepaymentWPTE_Promoted; StatusToPendingPrepaymentWPTE) { }
+                    actionref(StatusToOpenWFE_Promoted; StatusToOpenWFE) { }
+                    actionref(StatusToReleasedWFE_Promoted; StatusToReleasedWFE) { }
+                    actionref(StatusToPendingApprovalWFE_Promoted; StatusToPendingApprovalWFE) { }
+                    actionref(StatusToPendingPrepaymentWFE_Promoted; StatusToPendingPrepaymentWFE) { }
                 }
 
-                actionref(AllowRecordUsageWPTE_Promoted; RemoveRecordRestrictionWPTE) { }
+                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
             }
         }
     }
 
     var
-        PurchaseHeaderHelperWPTE: Codeunit "Purchase Header Helper WPTE";
+        PurchaseHeaderHelperWFE: Codeunit "Purchase Header Helper WFE";
 }

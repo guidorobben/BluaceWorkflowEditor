@@ -1,4 +1,4 @@
-codeunit 83806 "Approval Entry Helper WPTE"
+codeunit 83806 "Approval Entry Helper WFE"
 {
     Permissions = tabledata "Approval Entry" = RMD;
 
@@ -53,7 +53,7 @@ codeunit 83806 "Approval Entry Helper WPTE"
 
     local procedure TestIsApprovalAdministrator(): Boolean
     var
-        UserManagement: Codeunit "User Management WPTE";
+        UserManagement: Codeunit "User Management WFE";
     begin
         UserManagement.TestIsApprovalAdministrator();
     end;

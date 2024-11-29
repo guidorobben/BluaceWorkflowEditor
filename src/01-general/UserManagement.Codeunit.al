@@ -1,4 +1,4 @@
-codeunit 83808 "User Management WPTE"
+codeunit 83808 "User Management WFE"
 {
     Permissions = tabledata "User Setup" = R;
 
@@ -14,7 +14,7 @@ codeunit 83808 "User Management WPTE"
 
     internal procedure TestIsApprovalAdministrator(): Boolean
     var
-        UserManagement: Codeunit "User Management WPTE";
+        UserManagement: Codeunit "User Management WFE";
         OnlyApproverAdminErr: Label 'Only a Approval Administrator can run this.';
     begin
         if not UserManagement.IsApprovalAdministrator() then

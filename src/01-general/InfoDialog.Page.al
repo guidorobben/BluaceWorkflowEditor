@@ -1,11 +1,11 @@
-page 83812 "Info Dialog WPTE"
+page 83812 "Info Dialog WFE"
 {
     AnalysisModeEnabled = false;
     ApplicationArea = All;
     Caption = 'Info';
     Editable = false;
     PageType = List;
-    SourceTable = "Info Dialog WPTE";
+    SourceTable = "Info Dialog WFE";
     UsageCategory = None;
 
     layout

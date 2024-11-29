@@ -1,9 +1,9 @@
-table 83803 "Info Dialog WPTE"
+table 83803 "Info Dialog WFE"
 {
     Caption = 'Info Buffer';
     DataClassification = SystemMetadata;
-    DrillDownPageId = "Info Dialog WPTE";
-    LookupPageId = "Info Dialog WPTE";
+    DrillDownPageId = "Info Dialog WFE";
+    LookupPageId = "Info Dialog WFE";
     TableType = Temporary;
 
     fields
@@ -45,8 +45,13 @@ table 83803 "Info Dialog WPTE"
 
     procedure ActivateEventCode()
     var
-        InfoDialogHelper: Codeunit "Info Dialog Helper WPTE";
+        InfoDialogHelper: Codeunit "Info Dialog Helper WFE";
     begin
         InfoDialogHelper.ActivateEventCode(Rec);
+    end;
+
+    procedure GetValueAsGuid() Result: Guid
+    begin
+        if Evaluate(Result, Value) then; //No Error
     end;
 }

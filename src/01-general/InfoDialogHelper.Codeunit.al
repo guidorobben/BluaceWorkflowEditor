@@ -1,12 +1,12 @@
-codeunit 83813 "Info Dialog Helper WPTE"
+codeunit 83813 "Info Dialog Helper WFE"
 {
-    internal procedure ActivateEventCode(InfoDialog: Record "Info Dialog WPTE")
+    internal procedure ActivateEventCode(InfoDialog: Record "Info Dialog WFE")
     begin
         OnActivateEventCode(InfoDialog, InfoDialog."Event Code");
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WPTE"; EventCode: Code[128])
+    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Code[128])
     begin
     end;
 }
