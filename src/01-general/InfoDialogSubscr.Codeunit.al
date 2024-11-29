@@ -3,7 +3,7 @@ codeunit 83814 "Info Dialog Subscr. WFE"
     Access = Internal;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Info Dialog Helper WFE", OnActivateEventCode, '', false, false)]
-    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WPE")
+    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE")
     begin
         case EventCode of
             EventCode::INSTANCEID:

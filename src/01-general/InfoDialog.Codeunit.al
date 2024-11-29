@@ -13,42 +13,42 @@ codeunit 83809 "Info Dialog WFE"
 
     procedure Add(Name: Text[100])
     begin
-        Add(Name, '', false, "Info Dialog Event Code WPE"::" ");
+        Add(Name, '', false, "Info Dialog Event Code WFE"::" ");
     end;
 
     procedure Add(Name: Text[100]; Value: Text[100])
     begin
-        Add(Name, Value, false, "Info Dialog Event Code WPE"::" ");
+        Add(Name, Value, false, "Info Dialog Event Code WFE"::" ");
     end;
 
     procedure Add(Name: Text[100]; Value: Integer)
     begin
-        Add(Name, Format(Value), false, "Info Dialog Event Code WPE"::" ");
+        Add(Name, Format(Value), false, "Info Dialog Event Code WFE"::" ");
     end;
 
     procedure Add(Name: Text[100]; Value: Boolean)
     begin
-        Add(Name, Format(Value), false, "Info Dialog Event Code WPE"::" ");
+        Add(Name, Format(Value), false, "Info Dialog Event Code WFE"::" ");
     end;
 
     procedure AddHeader(Name: Text[100])
     begin
-        Add(Name, '', true, "Info Dialog Event Code WPE"::" ");
+        Add(Name, '', true, "Info Dialog Event Code WFE"::" ");
     end;
 
-    procedure Add(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Enum "Info Dialog Event Code WPE")
+    procedure Add(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Enum "Info Dialog Event Code WFE")
     begin
         CreateInfoBufferLine(Name, Value, Header, EventCode);
     end;
 
-    procedure Add(Name: Text[100]; Value: Text[100]; EventCode: Enum "Info Dialog Event Code WPE")
+    procedure Add(Name: Text[100]; Value: Text[100]; EventCode: Enum "Info Dialog Event Code WFE")
     begin
         Add(Name, Value, false, EventCode);
     end;
 
     procedure AddEmptyLine()
     begin
-        Add('', '', false, "Info Dialog Event Code WPE"::" ");
+        Add('', '', false, "Info Dialog Event Code WFE"::" ");
     end;
 
     procedure OpenInfoDialog()
@@ -57,14 +57,14 @@ codeunit 83809 "Info Dialog WFE"
     begin
         InfoDialog.Reset();
         if InfoDialog.FindFirst() then; //Set pointer to first
-        Page.Run(0, InfoDialog);
+        Page.Run(Page::"Info Dialog WFE", InfoDialog);
         // InfoBufferWFE.GetRecord(InfoBuffer); //FIXME
         // InfoBufferWFE.SetRecord(InfoBuffer);
         // InfoBufferWFE.SetTableView(InfoBuffer);
         // InfoBufferWFE.Run();
     end;
 
-    local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Enum "Info Dialog Event Code WPE")
+    local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Enum "Info Dialog Event Code WFE")
     var
         EntryNo: Integer;
     begin

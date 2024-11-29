@@ -6,7 +6,7 @@ codeunit 83813 "Info Dialog Helper WFE"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WPE")
+    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE")
     begin
     end;
 }

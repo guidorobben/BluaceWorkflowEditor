@@ -1,4 +1,4 @@
-enum 83801 "Info Dialog Event Code WPE"
+enum 83801 "Info Dialog Event Code WFE"
 {
     Extensible = true;
 
