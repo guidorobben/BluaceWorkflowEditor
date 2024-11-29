@@ -48,6 +48,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         Workflow: Record Workflow;
         WorkflowStepInstance: Record "Workflow Step Instance";
         WorkFlowCode: Code[20];
+        InfoDialogEventCode: Enum "Info Dialog Event Code WPE";
         InstanceID: Guid;
         WorkflowDescription: Text[100];
     begin
@@ -59,8 +60,8 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
                 WorkflowDescription := Workflow.Description;
         end;
 
-        InfoDialog.Add('ID', InstanceID, 'INSTANCEID');
-        InfoDialog.Add('Code', WorkFlowCode, 'WORKFLOWCODE');
+        InfoDialog.Add('ID', InstanceID, InfoDialogEventCode::INSTANCEID);
+        InfoDialog.Add('Code', WorkFlowCode, InfoDialogEventCode::WORKFLOWCODE);
         InfoDialog.Add('Description', WorkflowDescription);
     end;
 }

@@ -13,42 +13,42 @@ codeunit 83809 "Info Dialog WFE"
 
     procedure Add(Name: Text[100])
     begin
-        Add(Name, '', false, '');
+        Add(Name, '', false, "Info Dialog Event Code WPE"::" ");
     end;
 
     procedure Add(Name: Text[100]; Value: Text[100])
     begin
-        Add(Name, Value, false, '');
+        Add(Name, Value, false, "Info Dialog Event Code WPE"::" ");
     end;
 
     procedure Add(Name: Text[100]; Value: Integer)
     begin
-        Add(Name, Format(Value), false, '');
+        Add(Name, Format(Value), false, "Info Dialog Event Code WPE"::" ");
     end;
 
     procedure Add(Name: Text[100]; Value: Boolean)
     begin
-        Add(Name, Format(Value), false, '');
+        Add(Name, Format(Value), false, "Info Dialog Event Code WPE"::" ");
     end;
 
     procedure AddHeader(Name: Text[100])
     begin
-        Add(Name, '', true, '');
+        Add(Name, '', true, "Info Dialog Event Code WPE"::" ");
     end;
 
-    procedure Add(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Code[128])
+    procedure Add(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Enum "Info Dialog Event Code WPE")
     begin
         CreateInfoBufferLine(Name, Value, Header, EventCode);
     end;
 
-    procedure Add(Name: Text[100]; Value: Text[100]; EventCode: Code[128])
+    procedure Add(Name: Text[100]; Value: Text[100]; EventCode: Enum "Info Dialog Event Code WPE")
     begin
         Add(Name, Value, false, EventCode);
     end;
 
     procedure AddEmptyLine()
     begin
-        Add('', '', false, '');
+        Add('', '', false, "Info Dialog Event Code WPE"::" ");
     end;
 
     procedure OpenInfoDialog()
@@ -64,7 +64,7 @@ codeunit 83809 "Info Dialog WFE"
         // InfoBufferWFE.Run();
     end;
 
-    local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Code[128])
+    local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Enum "Info Dialog Event Code WPE")
     var
         EntryNo: Integer;
     begin

@@ -23,7 +23,7 @@ table 83803 "Info Dialog WFE"
             Caption = 'Value';
             ToolTip = 'Specifies the value of the Variable Value field.', Comment = '%';
         }
-        field(30; "Event Code"; Code[128])
+        field(30; "Event Code"; Enum "Info Dialog Event Code WPE")
         {
             Caption = 'Event Code';
             ToolTip = 'Event Code.'; //FIXME
