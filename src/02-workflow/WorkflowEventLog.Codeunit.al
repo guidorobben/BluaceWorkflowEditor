@@ -29,7 +29,6 @@ codeunit 83811 "Workflow Event Log WFE"
     var
         WorkflowEventLog: Record "Workflow Event Log WFE";
     begin
-        // 0: Insert, 1: Modify, 2: Delete
         if not IsLoggingEnabled() then
             exit;
 
@@ -40,6 +39,7 @@ codeunit 83811 "Workflow Event Log WFE"
         // WorkflowEventLog."Workflow Step ID" := WorkflowStepInstance."Workflow Step ID";
         WorkflowEventLog."Record ID" := NotificationEntry."Triggered By Record";
         // WorkflowEventLog.Status := WorkflowStepInstance.Status;
+        WorkflowEventLog."Notification ID" := NotificationEntry.ID;
         WorkflowEventLog."Notification Type" := NotificationEntry.Type;
         // WorkflowEventLog."Function Name" := WorkflowStepInstance."Function Name";
         // WorkflowEventLog."Notification Req. Curr. User" := (ApprovalEntry."Approver ID" <> UserId) or IsBackground();

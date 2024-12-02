@@ -2,7 +2,8 @@ permissionset 83800 "Workflow Editor WFE"
 {
     Assignable = true;
     Caption = 'WORKFLOWEDITOR', MaxLength = 30;
-    Permissions = table "Info Dialog WFE" = X,
+    Permissions =
+        table "Info Dialog WFE" = X,
         tabledata "Info Dialog WFE" = RIMD,
         table "Workflow Editor Setup WFE" = X,
         tabledata "Workflow Editor Setup WFE" = RIMD,
@@ -24,6 +25,7 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Workflow Event Log Hlp. WFE" = X,
         codeunit "Workflow Event Log WFE" = X,
         codeunit "Workflow Helper WFE" = X,
+        page "Approval Entry Part WPE" = X,
         page "Info Dialog WFE" = X,
         page "WF Event/Response Combi. WFE" = X,
         page "Workflow Editor Setup WFE" = X,

@@ -27,7 +27,9 @@ page 83811 "Workflow Event Log WFE"
                 field(Type; Rec."Type") { }
                 field("Function Name"; Rec."Function Name") { }
                 field(Status; Rec.Status) { }
+
                 field("Notification Req. Curr. User"; Rec."Notification Req. Curr. User") { }
+                field("Notification ID"; Rec."Notification ID") { }
                 field("Notify Sender Required"; Rec."Notify Sender Required") { }
                 field("Notification Type"; Rec."Notification Type") { }
                 field("Approver ID"; Rec."Approver ID") { }

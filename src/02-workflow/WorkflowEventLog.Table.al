@@ -90,6 +90,12 @@ table 83802 "Workflow Event Log WFE"
             AllowInCustomizations = Always;
             Caption = 'Record Trigger Type';
         }
+        field(83860; "Notification ID"; Integer)
+        {
+            AutoIncrement = true;
+            Caption = 'Notification ID';
+            ToolTip = 'Specifies the value of the Notification ID field.', Comment = '%';
+        }
     }
     keys
     {

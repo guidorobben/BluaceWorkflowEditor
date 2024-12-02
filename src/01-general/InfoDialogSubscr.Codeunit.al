@@ -9,7 +9,7 @@ codeunit 83814 "Info Dialog Subscr. WFE"
             EventCode::INSTANCEID:
                 OpenActiveWorkflow(InfoDialog);
             EventCode::WORKFLOWCODE:
-                ;
+                OpenWorkFlow();
         end;
     end;
 
@@ -18,5 +18,10 @@ codeunit 83814 "Info Dialog Subscr. WFE"
         WorkflowEditor: Codeunit "Workflow Editor WFE";
     begin
         WorkflowEditor.OpenActiveWorkflow(InfoDialog.GetValueAsGuid());
+    end;
+
+    local procedure OpenWorkFlow()
+    begin
+        //FIXME
     end;
 }
