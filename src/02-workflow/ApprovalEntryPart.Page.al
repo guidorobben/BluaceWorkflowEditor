@@ -1,7 +1,7 @@
-page 83806 "Approval Entry Part WPE"
+page 83806 "Approval Entry Part WFE"
 {
     ApplicationArea = All;
-    Caption = 'Approval Entry Part WPE';
+    Caption = 'Approval Entry Part';
     PageType = CardPart;
     Permissions =
         tabledata "Approval Entry" = RIMD,
@@ -35,19 +35,25 @@ page 83806 "Approval Entry Part WPE"
                 {
                     Caption = 'Job Queue Entries';
                 }
+                field(PostedNotificationEntries; SendNotificationEntries)
+                {
+                    Caption = 'Posted Notification Entries';
+                }
             }
         }
     }
 
     var
         CurrNotificationEntry: Record "Notification Entry";
-        RecipientEmailAddress: Text;
         JobQueueEntryNotificationCount: Integer;
+        SendNotificationEntries: Integer;
+        RecipientEmailAddress: Text;
 
     trigger OnAfterGetCurrRecord()
     begin
         GetRecipientEmailAddress();
         JobQueueEntryNotificationCount := NotificationJobQueueEntriesCount();
+        SendNotificationEntries := SendNotificationCount();
     end;
 
 
@@ -61,7 +67,7 @@ page 83806 "Approval Entry Part WPE"
         RecipientEmailAddress := UserSetup."E-Mail";
     end;
 
-    procedure SetNotification(NotificationEntry: Record "Notification Entry")
+    procedure SetNotificationEntry(NotificationEntry: Record "Notification Entry")
     begin
         CurrNotificationEntry := NotificationEntry;
     end;
@@ -74,5 +80,13 @@ page 83806 "Approval Entry Part WPE"
         JobQueueEntry.SetRange("Object ID to Run", Codeunit::"Notification Entry Dispatcher");
         JobQueueEntry.SetRange("User ID", CurrNotificationEntry."Created By");
         exit(JobQueueEntry.Count());
+    end;
+
+    local procedure SendNotificationCount(): Integer
+    var
+        SentNotificationEntry: Record "Sent Notification Entry";
+    begin
+        SentNotificationEntry.SetRange("Recipient User ID", CurrNotificationEntry."Recipient User ID");
+        exit(SentNotificationEntry.Count());
     end;
 }

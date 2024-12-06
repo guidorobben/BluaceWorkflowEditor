@@ -4,7 +4,7 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
     {
         addlast(FactBoxes)
         {
-            part("Approval Entry Part"; "Approval Entry Part WPE")
+            part("Approval Entry Part"; "Approval Entry Part WFE")
             {
                 ApplicationArea = All;
                 SubPageLink = "Record ID to Approve" = field("Triggered By Record");
@@ -21,16 +21,27 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
+                action(SendNotificationsWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Send Notifications';
+                    Image = SendApprovalRequest;
+                    RunObject = page "Sent Notification Entries";
+                    ToolTip = 'Opens the send notification entries page.';
+                }
                 action(DeleteWFE)
                 {
                     ApplicationArea = All;
-                    Caption = 'Delete Notification';
+                    Caption = 'Delete selected Notifications';
                     Image = Delete;
-                    ToolTip = 'Deletes the selected record. YOu need to be approval administrator for this.';
+                    ToolTip = 'Deletes the selected records. You need to be approval administrator for this.';
 
                     trigger OnAction()
+                    var
+                        NotificationEntry: Record "Notification Entry";
                     begin
-                        Rec.DeleteNotificationWFE();
+                        CurrPage.SetSelectionFilter(NotificationEntry);
+                        NotificationEntry.DeleteNotificationsWFE();
                     end;
                 }
             }
@@ -39,6 +50,6 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
 
     trigger OnAfterGetCurrRecord()
     begin
-        CurrPage."Approval Entry Part".Page.SetNotification(Rec);
+        CurrPage."Approval Entry Part".Page.SetNotificationEntry(Rec);
     end;
 }

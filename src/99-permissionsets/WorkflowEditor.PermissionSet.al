@@ -25,7 +25,7 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Workflow Event Log Hlp. WFE" = X,
         codeunit "Workflow Event Log WFE" = X,
         codeunit "Workflow Helper WFE" = X,
-        page "Approval Entry Part WPE" = X,
+        page "Approval Entry Part WFE" = X,
         page "Info Dialog WFE" = X,
         page "WF Event/Response Combi. WFE" = X,
         page "Workflow Editor Setup WFE" = X,

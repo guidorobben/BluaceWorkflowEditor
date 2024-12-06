@@ -4,12 +4,12 @@ codeunit 83812 "Notification Entry Hlp. WFE"
         tabledata "Approval Entry" = R,
         tabledata "Notification Entry" = RD;
 
-    internal procedure DeleteNotification(var NotificationEntry: Record "Notification Entry")
+    internal procedure DeleteNotifications(var NotificationEntry: Record "Notification Entry")
     var
         UserManagement: Codeunit "User Management WFE";
     begin
         UserManagement.TestIsApprovalAdministrator();
-        NotificationEntry.Delete(true);
+        NotificationEntry.DeleteAll(true);
     end;
 
     internal procedure OnAfterInsert(var NotificationEntry: Record "Notification Entry")
