@@ -2,7 +2,8 @@ codeunit 83803 "Workflow Helper WFE"
 {
     Permissions =
         tabledata Workflow = RM,
-        tabledata "Workflow Step" = R;
+        tabledata "Workflow Step" = R,
+        tabledata "Workflow Step Instance" = R;
 
     internal procedure GetFunctionName(WorkflowCode: Code[20]; StepId: Integer): Text[100]
     var
@@ -47,5 +48,27 @@ codeunit 83803 "Workflow Helper WFE"
             Workflow.TestField(Enabled, false);
             Workflow.Validate(Template, true);
         end;
+    end;
+
+    internal procedure GetWorkflowInfo(SourceRecordId: RecordId; var InfoDialog: Codeunit "Info Dialog WFE")
+    var
+        Workflow: Record Workflow;
+        WorkflowStepInstance: Record "Workflow Step Instance";
+        WorkFlowCode: Code[20];
+        InstanceID: Guid;
+        WorkflowDescription: Text[100];
+    begin
+        WorkflowStepInstance.SetRange("Record ID", SourceRecordId);
+        if WorkflowStepInstance.FindFirst() then begin
+            InstanceID := WorkflowStepInstance.ID;
+            WorkFlowCode := WorkflowStepInstance."Workflow Code";
+            if Workflow.Get(WorkFlowCode) then
+                WorkflowDescription := Workflow.Description;
+        end;
+
+        InfoDialog.AddHeader('Workflow');
+        InfoDialog.Add('ID', InstanceID, "Info Dialog Event Code WFE"::INSTANCEID);
+        InfoDialog.Add('Code', WorkFlowCode, "Info Dialog Event Code WFE"::WORKFLOWCODE);
+        InfoDialog.Add('Description', WorkflowDescription);
     end;
 }

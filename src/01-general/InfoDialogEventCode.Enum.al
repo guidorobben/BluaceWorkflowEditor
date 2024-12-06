@@ -14,4 +14,8 @@ enum 83801 "Info Dialog Event Code WFE"
     {
         Caption = 'WORKFLOWCODE';
     }
+    value(3; USERSETUP)
+    {
+        Caption = 'USERSETUP';
+    }
 }

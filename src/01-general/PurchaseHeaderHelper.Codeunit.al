@@ -50,45 +50,42 @@ codeunit 83807 "Purchase Header Helper WFE"
 
     internal procedure ShowApprovalInfo(var PurchaseHeader: Record "Purchase Header")
     var
-        UserSetup: Record "User Setup";
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
+        UserManagement: Codeunit "User Management WFE";
+        WorkflowHelper: Codeunit "Workflow Helper WFE";
     begin
         InfoDialog.Initialize();
         InfoDialog.SetCaption('Approval');
-        InfoDialog.AddHeader('User Info');
-        InfoDialog.Add('User ID', UserId);
-        InfoDialog.Add('User Setup', UserSetup.Get(UserId));
-        InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
-        InfoDialog.Add('Approver ID', UserSetup."Approver ID");
+        UserManagement.GetUserInfo(InfoDialog);
         InfoDialog.AddHeader('Purchase Info');
         InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchaseHeader.RecordId()));
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchaseHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchaseHeader.RecordId()));
-        InfoDialog.AddHeader('Workflow');
-        GetWorkflowInfo(PurchaseHeader, InfoDialog);
+        WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId, InfoDialog);
         InfoDialog.OpenInfoDialog();
     end;
 
-    local procedure GetWorkflowInfo(var PurchaseHeader: Record "Purchase Header"; var InfoDialog: Codeunit "Info Dialog WFE")
-    var
-        Workflow: Record Workflow;
-        WorkflowStepInstance: Record "Workflow Step Instance";
-        WorkFlowCode: Code[20];
-        InfoDialogEventCode: Enum "Info Dialog Event Code WFE";
-        InstanceID: Guid;
-        WorkflowDescription: Text[100];
-    begin
-        WorkflowStepInstance.SetRange("Record ID", PurchaseHeader.RecordId);
-        if WorkflowStepInstance.FindFirst() then begin
-            InstanceID := WorkflowStepInstance.ID;
-            WorkFlowCode := WorkflowStepInstance."Workflow Code";
-            if Workflow.Get(WorkFlowCode) then
-                WorkflowDescription := Workflow.Description;
-        end;
+    // local procedure GetWorkflowInfo(var PurchaseHeader: Record "Purchase Header"; var InfoDialog: Codeunit "Info Dialog WFE")
+    // var
+    //     Workflow: Record Workflow;
+    //     WorkflowStepInstance: Record "Workflow Step Instance";
+    //     WorkFlowCode: Code[20];
+    //     InfoDialogEventCode: Enum "Info Dialog Event Code WFE";
+    //     InstanceID: Guid;
+    //     WorkflowDescription: Text[100];
+    // begin
+    //     WorkflowStepInstance.SetRange("Record ID", PurchaseHeader.RecordId);
+    //     if WorkflowStepInstance.FindFirst() then begin
+    //         InstanceID := WorkflowStepInstance.ID;
+    //         WorkFlowCode := WorkflowStepInstance."Workflow Code";
+    //         if Workflow.Get(WorkFlowCode) then
+    //             WorkflowDescription := Workflow.Description;
+    //     end;
 
-        InfoDialog.Add('ID', InstanceID, InfoDialogEventCode::INSTANCEID);
-        InfoDialog.Add('Code', WorkFlowCode, InfoDialogEventCode::WORKFLOWCODE);
-        InfoDialog.Add('Description', WorkflowDescription);
-    end;
+    //     InfoDialog.AddHeader('Workflow');
+    //     InfoDialog.Add('ID', InstanceID, InfoDialogEventCode::INSTANCEID);
+    //     InfoDialog.Add('Code', WorkFlowCode, InfoDialogEventCode::WORKFLOWCODE);
+    //     InfoDialog.Add('Description', WorkflowDescription);
+    // end;
 }

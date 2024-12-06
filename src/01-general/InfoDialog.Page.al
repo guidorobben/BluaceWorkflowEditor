@@ -23,14 +23,19 @@ page 83812 "Info Dialog WFE"
                     Style = Strong;
                     StyleExpr = Rec.Header;
                 }
-                field(Value; Rec."Value") { }
+                field(Value; Rec."Value")
+                {
+                    trigger OnAssistEdit()
+                    begin
+                        Rec.ActivateEventCode();
+                    end;
+                }
                 field("Event Code"; Rec."Event Code")
                 {
                     trigger OnDrillDown()
                     begin
                         Rec.ActivateEventCode();
                     end;
-
                 }
                 field(Header; Rec.Header)
                 {

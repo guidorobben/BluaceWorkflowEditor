@@ -1,6 +1,10 @@
 codeunit 83814 "Info Dialog Subscr. WFE"
 {
     Access = Internal;
+    Permissions =
+        tabledata "Info Dialog WFE" = R,
+        tabledata "User Setup" = R,
+        tabledata Workflow = R;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Info Dialog Helper WFE", OnActivateEventCode, '', false, false)]
     local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE")
@@ -9,7 +13,9 @@ codeunit 83814 "Info Dialog Subscr. WFE"
             EventCode::INSTANCEID:
                 OpenActiveWorkflow(InfoDialog);
             EventCode::WORKFLOWCODE:
-                OpenWorkFlow();
+                OpenWorkFlow(InfoDialog);
+            EventCode::USERSETUP:
+                OpenUserSetup(InfoDialog);
         end;
     end;
 
@@ -20,8 +26,21 @@ codeunit 83814 "Info Dialog Subscr. WFE"
         WorkflowEditor.OpenActiveWorkflow(InfoDialog.GetValueAsGuid());
     end;
 
-    local procedure OpenWorkFlow()
+    local procedure OpenWorkFlow(InfoDialog: Record "Info Dialog WFE")
+    var
+        Workflow: Record Workflow;
+        PageManagement: Codeunit "Page Management";
     begin
-        //FIXME
+        if Workflow.Get(InfoDialog.Value) then
+            PageManagement.PageRun(Workflow);
+    end;
+
+    local procedure OpenUserSetup(InfoDialog: Record "Info Dialog WFE")
+    var
+        UserSetup: Record "User Setup";
+        PageManagement: Codeunit "Page Management";
+    begin
+        if UserSetup.Get(InfoDialog.Value) then
+            PageManagement.PageRun(UserSetup);
     end;
 }

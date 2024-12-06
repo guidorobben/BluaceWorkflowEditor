@@ -20,4 +20,15 @@ codeunit 83808 "User Management WFE"
         if not UserManagement.IsApprovalAdministrator() then
             Error(OnlyApproverAdminErr);
     end;
+
+    internal procedure GetUserInfo(var InfoDialog: Codeunit "Info Dialog WFE")
+    var
+        UserSetup: Record "User Setup";
+    begin
+        InfoDialog.AddHeader('User Info');
+        InfoDialog.Add('User ID', UserId, "Info Dialog Event Code WFE"::USERSETUP);
+        InfoDialog.Add('User Setup', UserSetup.Get(UserId));
+        InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
+        InfoDialog.Add('Approver ID', UserSetup."Approver ID");
+    end;
 }
