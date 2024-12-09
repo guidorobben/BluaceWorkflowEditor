@@ -1,6 +1,7 @@
 codeunit 83808 "User Management WFE"
 {
-    Permissions = tabledata "User Setup" = R;
+    Permissions =
+        tabledata "User Setup" = RIM;
 
     internal procedure IsApprovalAdministrator(): Boolean
     var
@@ -30,5 +31,31 @@ codeunit 83808 "User Management WFE"
         InfoDialog.Add('User Setup', UserSetup.Get(UserId));
         InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
         InfoDialog.Add('Approver ID', UserSetup."Approver ID");
+        InfoDialog.Add('Unlimited Purchase', UserSetup."Unlimited Purchase Approval");
+        InfoDialog.Add('Unlimited Sales', UserSetup."Unlimited Sales Approval");
+    end;
+
+    internal procedure AddCurrentUserAsApprovalAdmin()
+    var
+        UserSetup: Record "User Setup";
+    begin
+        if not UserSetup.Get(UserId) then begin
+            UserSetup.Init();
+            UserSetup.Validate("User ID", UserId);
+            UserSetup.Insert(true);
+        end;
+
+        MakeUserApprovalAdmin(UserSetup."User ID");
+    end;
+
+    internal procedure MakeUserApprovalAdmin(CurrUserID: Code[50])
+    var
+        UserSetup: Record "User Setup";
+    begin
+        UserSetup.Get(CurrUserID);
+        UserSetup.Validate("Unlimited Purchase Approval", true);
+        UserSetup.Validate("Unlimited Sales Approval", true);
+        UserSetup.Validate("Approval Administrator", true);
+        UserSetup.Modify(true);
     end;
 }
