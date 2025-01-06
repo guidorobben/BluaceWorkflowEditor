@@ -54,6 +54,7 @@ codeunit 83807 "Purchase Header Helper WFE"
         InfoDialog: Codeunit "Info Dialog WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
+        RestrictionMgt: Codeunit "Restriction Mgt. WFE";
     begin
         InfoDialog.Initialize();
         InfoDialog.SetCaption('Approval');
@@ -63,6 +64,7 @@ codeunit 83807 "Purchase Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchaseHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchaseHeader.RecordId()));
         WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId, InfoDialog);
+        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchaseHeader));
         InfoDialog.OpenInfoDialog();
     end;
 

@@ -137,53 +137,59 @@ page 83805 "Workflow Editor WFE"
                     Image = OverdueMail;
                     RunObject = page "Notification Entries";
                 }
-            }
-            group(Purchase)
-            {
-                Caption = 'Purchase';
+                action(RestrictedRecords)
+                {
+                    Caption = 'Restricted Records';
+                    Image = AboutNav;
+                    RunObject = page "Restricted Records";
+                }
+                group(Purchase)
+                {
+                    Caption = 'Purchase';
 
-                action(PostedPurchaseInvoices)
-                {
-                    Caption = 'Posted Purchase Invoices';
-                    Image = Invoice;
-                    RunObject = page "Posted Purchase Invoices";
+                    action(PostedPurchaseInvoices)
+                    {
+                        Caption = 'Posted Purchase Invoices';
+                        Image = Invoice;
+                        RunObject = page "Posted Purchase Invoices";
+                    }
+                    action(PurchaseOrders)
+                    {
+                        Caption = 'Purchase Orders';
+                        Image = Order;
+                        RunObject = page "Purchase Order List";
+                    }
+                    action(PurchaseInvoices)
+                    {
+                        Caption = 'Purchase Invoices';
+                        Image = Invoice;
+                        RunObject = page "Purchase Invoices";
+                    }
+                    action(PurchaseCreditMemos)
+                    {
+                        Caption = 'Purchase Credit Memos';
+                        Image = CreditMemo;
+                        RunObject = page "Purchase Credit Memos";
+                    }
                 }
-                action(PurchaseOrders)
-                {
-                    Caption = 'Purchase Orders';
-                    Image = Order;
-                    RunObject = page "Purchase Order List";
-                }
-                action(PurchaseInvoices)
-                {
-                    Caption = 'Purchase Invoices';
-                    Image = Invoice;
-                    RunObject = page "Purchase Invoices";
-                }
-                action(PurchaseCreditMemos)
-                {
-                    Caption = 'Purchase Credit Memos';
-                    Image = CreditMemo;
-                    RunObject = page "Purchase Credit Memos";
-                }
-            }
 
-            group(Setup)
-            {
-                Caption = 'Setup';
-                Image = Setup;
-
-                action("Workflow Editor Setup")
+                group(Setup)
                 {
-                    Caption = 'Workflow Editor Setup';
+                    Caption = 'Setup';
                     Image = Setup;
-                    RunObject = page "Workflow Editor Setup WFE";
-                }
-                action(ApprovalUserSetup)
-                {
-                    Caption = 'Approval User Setup';
-                    Image = UserSetup;
-                    RunObject = page "Approval User Setup";
+
+                    action("Workflow Editor Setup")
+                    {
+                        Caption = 'Workflow Editor Setup';
+                        Image = Setup;
+                        RunObject = page "Workflow Editor Setup WFE";
+                    }
+                    action(ApprovalUserSetup)
+                    {
+                        Caption = 'Approval User Setup';
+                        Image = UserSetup;
+                        RunObject = page "Approval User Setup";
+                    }
                 }
             }
         }
@@ -210,6 +216,7 @@ page 83805 "Workflow Editor WFE"
                 actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
                 actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
                 actionref(NotificationEntries_Promoted; NotificationEntries) { }
+                actionref(RestrictedRecords_Promoted; RestrictedRecords) { }
             }
 
             group(PurchasePromoted)

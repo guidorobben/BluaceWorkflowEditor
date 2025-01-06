@@ -27,6 +27,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         InfoDialog: Codeunit "Info Dialog WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
+        RestrictionMgt: Codeunit "Restriction Mgt. WFE";
     begin
         InfoDialog.Initialize();
         InfoDialog.SetCaption('Approval');
@@ -36,6 +37,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchInvHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchInvHeader.RecordId()));
         WorkflowHelper.GetWorkflowInfo(PurchInvHeader.RecordId, InfoDialog);
+        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchInvHeader));
         InfoDialog.OpenInfoDialog();
     end;
 }
