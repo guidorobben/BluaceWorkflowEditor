@@ -7,7 +7,7 @@ codeunit 83808 "User Management WFE"
     var
         UserSetup: Record "User Setup";
     begin
-        if not UserSetup.Get(UserId) then
+        if not UserSetup.Get(UserId()) then
             exit(false);
 
         exit(UserSetup."Approval Administrator");
@@ -27,8 +27,8 @@ codeunit 83808 "User Management WFE"
         UserSetup: Record "User Setup";
     begin
         InfoDialog.AddHeader('User Info');
-        InfoDialog.Add('User ID', UserId, "Info Dialog Event Code WFE"::USERSETUP);
-        InfoDialog.Add('User Setup', UserSetup.Get(UserId));
+        InfoDialog.Add('User ID', UserId(), "Info Dialog Event Code WFE"::USERSETUP);
+        InfoDialog.Add('User Setup', UserSetup.Get(UserId()));
         InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
         InfoDialog.Add('Approver ID', UserSetup."Approver ID");
         InfoDialog.Add('Unlimited Purchase', UserSetup."Unlimited Purchase Approval");
@@ -39,9 +39,9 @@ codeunit 83808 "User Management WFE"
     var
         UserSetup: Record "User Setup";
     begin
-        if not UserSetup.Get(UserId) then begin
+        if not UserSetup.Get(UserId()) then begin
             UserSetup.Init();
-            UserSetup.Validate("User ID", UserId);
+            UserSetup.Validate("User ID", UserId());
             UserSetup.Insert(true);
         end;
 

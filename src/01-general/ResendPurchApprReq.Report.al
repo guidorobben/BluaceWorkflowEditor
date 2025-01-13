@@ -180,7 +180,7 @@ report 83800 "Resend Purch. Appr. Req. WFE"
         ApprovalEntry.SetRange("Document Type", ApprovalEntry."Document Type"::Invoice);
         ApprovalEntry.SetRange("Document No.", PurchaseHeader."No.");
         ApprovalEntry.SetRange(Status, ApprovalEntry.Status::Open);
-        exit(not ApprovalEntry.IsEmpty);
+        exit(not ApprovalEntry.IsEmpty());
     end;
 
     local procedure TestIsApprovalAdministrator(): Boolean

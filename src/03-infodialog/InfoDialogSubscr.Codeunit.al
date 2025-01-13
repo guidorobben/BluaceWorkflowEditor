@@ -39,8 +39,10 @@ codeunit 83814 "Info Dialog Subscr. WFE"
     var
         UserSetup: Record "User Setup";
         PageManagement: Codeunit "Page Management";
+        IDUser: Code[50];
     begin
-        if UserSetup.Get(InfoDialog.Value) then
+        IDUser := CopyStr(InfoDialog.Value, 1, 50);
+        if UserSetup.Get(IDUser) then
             PageManagement.PageRun(UserSetup);
     end;
 }
