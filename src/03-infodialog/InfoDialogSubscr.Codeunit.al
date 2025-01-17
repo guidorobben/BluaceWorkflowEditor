@@ -31,7 +31,7 @@ codeunit 83814 "Info Dialog Subscr. WFE"
         Workflow: Record Workflow;
         PageManagement: Codeunit "Page Management";
     begin
-        if Workflow.Get(InfoDialog.Value) then
+        if Workflow.Get(CopyStr(InfoDialog.Value, 1, 20)) then
             PageManagement.PageRun(Workflow);
     end;
 
