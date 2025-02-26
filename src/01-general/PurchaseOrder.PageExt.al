@@ -80,6 +80,20 @@ pageextension 83805 "Purchase Order WFE" extends "Purchase Order"
                         Rec.ShowApprovalInfoWFE();
                     end;
                 }
+                action(ApprovalsWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Approvals';
+                    Image = Approvals;
+                    ToolTip = 'View a list of the records that are waiting to be approved. For example, you can see who requested the record to be approved, when it was sent, and when it is due to be approved.';
+
+                    trigger OnAction()
+                    var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    begin
+                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                    end;
+                }
             }
         }
 
@@ -91,6 +105,7 @@ pageextension 83805 "Purchase Order WFE" extends "Purchase Order"
                 Image = Workflow;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
+                actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
 
                 group(StatusWFE_Promoted)
                 {

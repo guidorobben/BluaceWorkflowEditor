@@ -39,6 +39,7 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
                 group(EntryStatusWFE)
                 {
                     Caption = 'Status';
+                    Image = Status;
 
                     action(EntryStatusOpenWFE)
                     {
@@ -77,7 +78,7 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
                     {
                         ApplicationArea = All;
                         Caption = 'Created';
-                        Image = Create;
+                        Image = New;
 
                         trigger OnAction()
                         begin
@@ -95,6 +96,29 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
                             ApprovalEntryHelperWFE.SetApprovalEntryToStatusRejected(Rec);
                         end;
                     }
+                }
+            }
+        }
+
+        addlast(Promoted)
+        {
+            group(WorkflowEditorWFE_Promoted)
+            {
+                Caption = 'Workflow Editor';
+                Image = Workflow;
+
+                actionref(DeleteEntryWFE_Promoted; DeleteEntryWFE) { }
+
+                group(EntryStatus_Promoted)
+                {
+                    Caption = 'Status';
+                    Image = Status;
+
+                    actionref(EntryStatusOpenWFE_Promoted; EntryStatusOpenWFE) { }
+                    actionref(EntryStatusApprovedWFE_Promoted; EntryStatusApprovedWFE) { }
+                    actionref(EntryStatusCanceledWFE_Promoted; EntryStatusCanceledWFE) { }
+                    actionref(EntryStatusCreatedWFE_Promoted; EntryStatusCreatedWFE) { }
+                    actionref(EntryStatusRejectedWFE_Promoted; EntryStatusRejectedWFE) { }
                 }
             }
         }

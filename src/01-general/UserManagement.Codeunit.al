@@ -52,7 +52,7 @@ codeunit 83808 "User Management WFE"
     var
         UserSetup: Record "User Setup";
     begin
-        if UserSetup.Get(CurrUserID) then
+        if not UserSetup.Get(CurrUserID) then
             exit;
 
         UserSetup.Validate("Unlimited Purchase Approval", true);
