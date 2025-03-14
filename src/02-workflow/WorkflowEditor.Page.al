@@ -140,7 +140,7 @@ page 83805 "Workflow Editor WFE"
                 action(RestrictedRecords)
                 {
                     Caption = 'Restricted Records';
-                    Image = AboutNav;
+                    Image = Lock;
                     RunObject = page "Restricted Records";
                 }
                 group(Purchase)
@@ -172,7 +172,6 @@ page 83805 "Workflow Editor WFE"
                         RunObject = page "Purchase Credit Memos";
                     }
                 }
-
                 group(Setup)
                 {
                     Caption = 'Setup';
