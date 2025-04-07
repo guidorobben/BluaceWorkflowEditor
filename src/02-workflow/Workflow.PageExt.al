@@ -9,6 +9,17 @@ pageextension 83802 "Workflow WFE" extends Workflow
                 Caption = 'WorkFlow Editor';
                 Image = Workflow;
 
+                action(ApprovalInfoWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Approval Info';
+                    Image = Info;
+
+                    trigger OnAction()
+                    begin
+                        Rec.ShowApprovalInfoWFE();
+                    end;
+                }
                 action(SetToWorkflowTemplateWFE)
                 {
                     ApplicationArea = All;
@@ -58,7 +69,9 @@ pageextension 83802 "Workflow WFE" extends Workflow
                 Caption = 'WorkFlow Editor';
                 Image = Workflow;
 
+                actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(ShowWorkflowStepsWFE_Promoted; ShowWorkflowStepsWFE) { }
+
             }
         }
     }

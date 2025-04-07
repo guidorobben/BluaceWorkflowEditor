@@ -29,20 +29,22 @@ codeunit 83814 "Info Dialog Subscr. WFE"
     local procedure OpenWorkFlow(InfoDialog: Record "Info Dialog WFE")
     var
         Workflow: Record Workflow;
-        PageManagement: Codeunit "Page Management";
+        // PageManagement: Codeunit "Page Management";
+        WorkFlowCode: Code[20];
     begin
-        if Workflow.Get(CopyStr(InfoDialog.Value, 1, 20)) then
-            PageManagement.PageRun(Workflow);
+        WorkFlowCode := CopyStr(InfoDialog.Value, 1, 20);
+        if Workflow.Get(WorkFlowCode) then
+            page.Run(Page::"Workflow", Workflow);
+        // PageManagement.PageRun(Workflow);
     end;
 
     local procedure OpenUserSetup(InfoDialog: Record "Info Dialog WFE")
     var
         UserSetup: Record "User Setup";
-        PageManagement: Codeunit "Page Management";
         IDUser: Code[50];
     begin
         IDUser := CopyStr(InfoDialog.Value, 1, 50);
         if UserSetup.Get(IDUser) then
-            PageManagement.PageRun(UserSetup);
+            page.Run(page::"Approval User Setup", UserSetup);
     end;
 }

@@ -113,6 +113,12 @@ page 83805 "Workflow Editor WFE"
                     Image = List;
                     RunObject = page "Workflow Step Instances";
                 }
+                action(WorkflowStepInstancesArchives)
+                {
+                    Caption = 'Workflow Step Instances Archives';
+                    Image = List;
+                    RunObject = page "WF Step Instance Archive WFE";
+                }
                 action(WorkflowWebhookEntries)
                 {
                     Caption = 'Workflow Webhook Entries';
@@ -213,6 +219,7 @@ page 83805 "Workflow Editor WFE"
                 actionref(WFEventResponseCombiList_Promoted; WFEventResponseCombiList) { }
                 actionref(WorkflowDefinitionsRef_Promted; WorkflowDefinitions) { }
                 actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
+                actionref(WorkflowStepInstancesArchive_Promoted; WorkflowStepInstancesArchives) { }
                 actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
                 actionref(NotificationEntries_Promoted; NotificationEntries) { }
                 actionref(RestrictedRecords_Promoted; RestrictedRecords) { }

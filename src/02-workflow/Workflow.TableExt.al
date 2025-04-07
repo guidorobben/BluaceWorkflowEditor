@@ -12,4 +12,9 @@ tableextension 83802 "Workflow WFE" extends Workflow
     begin
         WorkflowHelperWFE.ToggleEnableWorkflow(Rec);
     end;
+
+    internal procedure ShowApprovalInfoWFE()
+    begin
+        WorkflowHelperWFE.ShowApprovalInfo(Rec);
+    end;
 }
