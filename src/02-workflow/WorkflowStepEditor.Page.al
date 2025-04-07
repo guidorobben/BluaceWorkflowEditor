@@ -64,4 +64,14 @@ page 83808 "Workflow Step Editor WFE"
             }
         }
     }
+
+    views
+    {
+        view(Events)
+        {
+            Caption = 'Events';
+            Filters = where(Type = const(Event));
+            SharedLayout = true;
+        }
+    }
 }

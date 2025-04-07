@@ -84,6 +84,7 @@ codeunit 83803 "Workflow Helper WFE"
         InfoDialog.AddHeader('Workflow');
         InfoDialog.Add('Code', Workflow.Code, "Info Dialog Event Code WFE"::WORKFLOWCODE);
         InfoDialog.AddHeader('Validation');
+        InfoDialog.Add('Next Work flow Step Count', GetNextWorkflowStepIDCount(Workflow));
         // UserManagement.GetUserInfo(InfoDialog);
         // InfoDialog.AddHeader('Purchase Info');
         // InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchaseHeader.RecordId()));
@@ -94,4 +95,15 @@ codeunit 83803 "Workflow Helper WFE"
         InfoDialog.OpenInfoDialog();
     end;
 
+    local procedure GetNextWorkflowStepIDCount(Workflow: Record Workflow): Integer
+    var
+        WorkflowStep: Record "Workflow Step";
+    begin
+        if Workflow.Code = '' then
+            exit;
+
+        WorkflowStep.SetRange("Workflow Code", Workflow.Code);
+        WorkflowStep.SetFilter("Next Workflow Step ID", '<>0');
+        exit(WorkflowStep.Count());
+    end;
 }
