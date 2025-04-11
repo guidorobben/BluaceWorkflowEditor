@@ -1,7 +1,7 @@
 codeunit 83808 "User Management WFE"
 {
     Permissions =
-        tabledata "User Setup" = RIM;
+        tabledata "User Setup" = RIMD;
 
     internal procedure IsApprovalAdministrator(): Boolean
     var
@@ -59,5 +59,13 @@ codeunit 83808 "User Management WFE"
         UserSetup.Validate("Unlimited Sales Approval", true);
         UserSetup.Validate("Approval Administrator", true);
         UserSetup.Modify(true);
+    end;
+
+    internal procedure DeleteCurrentUserAsApprovalAdmin()
+    var
+        UserSetup: Record "User Setup";
+    begin
+        if UserSetup.Get(UserId()) then
+            UserSetup.Delete(true);
     end;
 }
