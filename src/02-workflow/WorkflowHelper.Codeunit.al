@@ -83,6 +83,7 @@ codeunit 83803 "Workflow Helper WFE"
         InfoDialog.Initialize();
         InfoDialog.AddHeader('Workflow');
         InfoDialog.Add('Code', Workflow.Code, "Info Dialog Event Code WFE"::WORKFLOWCODE);
+        InfoDialog.Add('Description', Workflow.Description);
         InfoDialog.AddHeader('Validation');
         InfoDialog.Add('Next Work flow Step Count', GetNextWorkflowStepIDCount(Workflow));
         // UserManagement.GetUserInfo(InfoDialog);
