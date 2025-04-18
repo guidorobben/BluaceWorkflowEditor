@@ -1,28 +1,36 @@
 pageextension 83803 "Workflow Subpage WFE" extends "Workflow Subpage"
 {
-    actions
+    layout
     {
-        addlast(processing)
+        addafter(Group)
         {
-            group(WorkflowEditorWFE)
+            group(WorkFlowEditorWFE)
             {
                 Caption = 'Workflow Editor';
-                Image = Workflow;
 
-                action(ShowBufferWFE)
+                field(FunctionNameWFE; FuntionNameWFE)
                 {
                     ApplicationArea = All;
-                    Caption = 'Show Function Name';
-                    Image = ShowList;
-
-                    trigger OnAction()
-                    var
-                        WorkflowHelper: Codeunit "Workflow Helper WFE";
-                    begin
-                        Message(WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Event Step ID"));
-                    end;
+                    Caption = 'Function Name';
+                    Editable = false;
+                    ToolTip = 'Specifies the workflow event that triggers the related workflow response.';
                 }
             }
         }
     }
+
+    var
+        FuntionNameWFE: Text;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        GetFunctionNameWFE();
+    end;
+
+    local procedure GetFunctionNameWFE()
+    var
+        WorkflowHelper: Codeunit "Workflow Helper WFE";
+    begin
+        FuntionNameWFE := WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Event Step ID");
+    end;
 }
