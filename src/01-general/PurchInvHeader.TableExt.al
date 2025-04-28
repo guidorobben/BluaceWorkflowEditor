@@ -7,4 +7,9 @@ tableextension 83805 "Purch. Inv. Header WFE" extends "Purch. Inv. Header"
     begin
         PurchInvHeaderHelperWFE.ShowApprovalInfo(Rec);
     end;
+
+    procedure OpenApprovalsWFE()
+    begin
+        PurchInvHeaderHelperWFE.OpenApprovals(Rec)
+    end;
 }

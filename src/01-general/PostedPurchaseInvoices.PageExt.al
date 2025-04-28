@@ -7,6 +7,7 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
             group(WorkFlowEditorWFE)
             {
                 Caption = 'Workflow Editor';
+                Image = Workflow;
 
                 action(OpenActiveWorkflowWFE)
                 {
@@ -43,6 +44,20 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
                         Rec.ShowApprovalInfoWFE();
                     end;
                 }
+                action(ApprovalsWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Approvals';
+                    Image = Approvals;
+                    ToolTip = 'View a list of the records that are waiting to be approved. For example, you can see who requested the record to be approved, when it was sent, and when it is due to be approved.';
+
+                    trigger OnAction()
+                    var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    begin
+                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                    end;
+                }
             }
         }
 
@@ -51,10 +66,12 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
             group(WorkFlowEditorWFE_PromotedWFE)
             {
                 Caption = 'Workflow Editor';
+                Image = Workflow;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
                 actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
             }
         }
     }

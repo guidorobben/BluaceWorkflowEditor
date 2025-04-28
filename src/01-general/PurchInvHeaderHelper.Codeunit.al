@@ -40,4 +40,11 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchInvHeader));
         InfoDialog.OpenInfoDialog();
     end;
+
+    internal procedure OpenApprovals(var PurchInvHeader: Record "Purch. Inv. Header")
+    var
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+    begin
+        ApprovalsMgmt.RunWorkflowEntriesPage(PurchInvHeader.RecordId(), Database::"Purch. Inv. Header", Enum::"Approval Document Type"::Invoice, PurchInvHeader."No.");
+    end;
 }
