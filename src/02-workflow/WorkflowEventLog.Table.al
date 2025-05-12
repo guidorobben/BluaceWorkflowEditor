@@ -34,14 +34,18 @@ table 83802 "Workflow Event Log WFE"
             Caption = 'Record ID';
             ToolTip = 'Specifies the value of the Record ID field.', Comment = '%';
         }
+#pragma warning disable LC0088
         field(17; Status; Option)
+#pragma warning restore LC0088
         {
             Caption = 'Status';
             OptionCaption = 'Inactive,Active,Completed,Ignored,Processing';
             OptionMembers = Inactive,Active,Completed,Ignored,Processing;
             ToolTip = 'Specifies the value of the Status field.', Comment = '%';
         }
+#pragma warning disable LC0088
         field(21; Type; Option)
+#pragma warning restore LC0088
         {
             Caption = 'Type';
             OptionCaption = 'Event,Response';

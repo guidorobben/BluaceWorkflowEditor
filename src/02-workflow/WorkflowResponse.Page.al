@@ -1,10 +1,10 @@
-page 83801 "Workflow Events WFE"
+page 83817 "Workflow Response WFE"
 {
     ApplicationArea = All;
-    Caption = 'Workflow Events';
+    Caption = 'Workflow Response';
     Editable = false;
     PageType = List;
-    SourceTable = "Workflow Event";
+    SourceTable = "Workflow Response";
     UsageCategory = Lists;
 
     layout
@@ -13,8 +13,6 @@ page 83801 "Workflow Events WFE"
         {
             repeater(General)
             {
-                Caption = 'General';
-
                 field("Function Name"; Rec."Function Name")
                 {
                     ToolTip = 'Specifies the value of the Function Name field.', Comment = '%';
@@ -25,23 +23,15 @@ page 83801 "Workflow Events WFE"
                 }
                 field(Description; Rec.Description)
                 {
-                    ToolTip = 'Specifies the workflow event that comes before the workflow event in the workflow sequence.';
-                }
-                field("Dynamic Req. Page Entity Name"; Rec."Dynamic Req. Page Entity Name")
-                {
-                    ToolTip = 'Specifies the value of the Dynamic Req. Page Entity Name field.', Comment = '%';
+                    ToolTip = 'Specifies the workflow response.';
                 }
                 field(Independent; Rec.Independent)
                 {
                     ToolTip = 'Specifies the value of the Independent field.', Comment = '%';
                 }
-                field("Request Page ID"; Rec."Request Page ID")
+                field("Response Option Group"; Rec."Response Option Group")
                 {
-                    ToolTip = 'Specifies the value of the Request Page ID field.', Comment = '%';
-                }
-                field("Used for Record Change"; Rec."Used for Record Change")
-                {
-                    ToolTip = 'Specifies the value of the Used for Record Change field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Response Option Group field.', Comment = '%';
                 }
             }
         }
