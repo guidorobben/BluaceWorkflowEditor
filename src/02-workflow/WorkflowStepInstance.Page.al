@@ -2,7 +2,16 @@ page 83804 "Workflow Step Instance WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Step Instance';
+    DeleteAllowed = false;
+    // Editable = false;
     PageType = List;
+    Permissions =
+        tabledata "Table Metadata" = R,
+        tabledata "Workflow - Table Relation" = R,
+        tabledata "Workflow Event" = R,
+        tabledata "Workflow Response" = R,
+        tabledata "Workflow Step Argument" = R,
+        tabledata "Workflow Step Instance" = RIMD;
     SourceTable = "Workflow Step Instance";
     UsageCategory = Lists;
 
@@ -19,6 +28,16 @@ page 83804 "Workflow Step Instance WFE"
                 field("Function Name"; Rec."Function Name")
                 {
                     ToolTip = 'Specifies the name of the function that is used by the workflow step instance.';
+
+                    trigger OnDrillDown()
+                    begin
+                        FunctionNameOnDrillDown();
+                    end;
+                }
+                field(Description; Rec.Description)
+                {
+                    ToolTip = 'Specifies the workflow step instance.';
+                    Visible = false;
                 }
                 field(Type; Rec."Type")
                 {
@@ -59,44 +78,240 @@ page 83804 "Workflow Step Instance WFE"
                 field(Argument; Rec.Argument)
                 {
                     ToolTip = 'Specifies the values of the parameters that are required by the workflow step instance.';
+
+                    trigger OnDrillDown()
+                    begin
+                        ArgumentOnDrillDown();
+                    end;
                 }
                 field("Created By User ID"; Rec."Created By User ID")
                 {
                     ToolTip = 'Specifies the user who created the workflow step instance.';
+                    Visible = false;
                 }
                 field("Created Date-Time"; Rec."Created Date-Time")
                 {
                     ToolTip = 'Specifies the date and time when the workflow step instance was created.';
-                }
-                field(Description; Rec.Description)
-                {
-                    ToolTip = 'Specifies the workflow step instance.';
+                    Visible = false;
                 }
                 field("Last Modified By User ID"; Rec."Last Modified By User ID")
                 {
                     ToolTip = 'Specifies the user who last participated in the workflow step instance.';
+                    Visible = false;
                 }
                 field("Last Modified Date-Time"; Rec."Last Modified Date-Time")
                 {
                     ToolTip = 'Specifies the date and time when a user last participated in the workflow step instance.';
+                    Visible = false;
                 }
                 field("Original Workflow Code"; Rec."Original Workflow Code")
                 {
                     ToolTip = 'Specifies the value of the Original Workflow Code field.', Comment = '%';
+                    Visible = false;
                 }
-                field("Record ID"; Rec."Record ID")
+                field("Record ID"; Format(Rec."Record ID"))
                 {
+                    Caption = 'Record Id';
                     ToolTip = 'Specifies the value of the Record ID field.', Comment = '%';
                 }
                 field(SystemCreatedAt; Rec.SystemCreatedAt)
                 {
                     ToolTip = 'Specifies the value of the SystemCreatedAt field.', Comment = '%';
+                    Visible = false;
                 }
                 field("Workflow Code"; Rec."Workflow Code")
                 {
                     ToolTip = 'Specifies the workflow that the workflow step instance belongs to.';
+                    Visible = false;
                 }
+            }
+            // part("Workflow Step Argument Part"; "Workflow Step Argument WFE")
+            // {
+            //     Editable = false;
+            //     SubPageLink = ID = field(Argument);
+            // }
+            // part("Workflow Rule Part"; "Workflow Rule Part WFE")
+            // {
+            //     Editable = false;
+            //     SubPageLink = "Workflow Code" = field("Workflow Code"), "Workflow Step ID" = field("Workflow Step ID"), "Workflow Step Instance ID" = field(ID);
+            // }
+        }
+    }
+
+    actions
+    {
+        area(Navigation)
+        {
+            action(WorkflowTableRelation)
+            {
+                Caption = 'Workflow Table Relations';
+                // Enabled = Rec.Type = Rec.Type::"Event";
+                Image = Relationship;
+
+
+                trigger OnAction()
+                var
+                    WorkflowTableRelation: Record "Workflow - Table Relation";
+                    RecRef: RecordRef;
+                begin
+                    if not RecRef.Get(Rec."Record ID") then
+                        exit;
+
+                    WorkflowTableRelation.SetRange("Table ID", RecRef.Number);
+                    Page.Run(Page::"Workflow - Table Relations", WorkflowTableRelation);
+                end;
+            }
+        }
+        area(Promoted)
+        {
+            group(Process_Promoted)
+            {
+                Caption = 'Process';
+
+                actionref(WorkflowTableRelation_Promoted; WorkflowTableRelation) { }
             }
         }
     }
+
+    views
+    {
+        view(Events)
+        {
+            Caption = 'Events';
+            Filters = where(Type = filter(Event));
+            SharedLayout = true;
+        }
+        view(Response)
+        {
+            Caption = 'Response';
+            Filters = where(Type = filter(Response));
+            SharedLayout = true;
+        }
+        view(Active)
+        {
+            Caption = 'Active';
+            Filters = where(Status = filter(Active));
+            SharedLayout = true;
+        }
+    }
+
+    local procedure ArgumentOnDrillDown()
+    // var
+    //     WorkflowStepArgument: Record "Workflow Step Argument";
+    begin
+        // WorkflowStepArgument.Get(Rec.Argument);
+        // WorkflowStepArgument.CalcFields("Event Conditions");
+        // Page.RunModal(Page::"Workflow Step Argument WFE", WorkflowStepArgument);
+        OpenEventConditions();
+    end;
+
+    procedure OpenEventConditions()
+    var
+        WorkflowEvent: Record "Workflow Event";
+        WorkflowStepArgument: Record "Workflow Step Argument";
+        UserClickedOK: Boolean;
+        CurrentEventFilters: Text;
+        ReturnFilters: Text;
+    begin
+        // TestField(Type, Type::"Event");
+        // TestField("Function Name");
+
+        if not WorkflowEvent.Get(Rec."Function Name") then
+            exit;
+
+        if WorkflowStepArgument.Get(Rec.Argument) then
+            CurrentEventFilters := WorkflowStepArgument.GetEventFilters()
+        else
+            CurrentEventFilters := CreateDefaultRequestPageFilters(WorkflowEvent);
+
+        UserClickedOK := RunRequestPage(WorkflowEvent, ReturnFilters, CurrentEventFilters);
+        // if UserClickedOK and (ReturnFilters <> CurrentEventFilters) then begin
+        //     CheckEditingIsAllowed();
+        //     if ReturnFilters = WorkflowEvent.CreateDefaultRequestPageFilters() then
+        //         DeleteEventConditions()
+        //     else begin
+        //         if IsNullGuid(Argument) then
+        //             CreateEventArgument(WorkflowStepArgument, Rec);
+        //         WorkflowStepArgument.SetEventFilters(ReturnFilters);
+        //     end;
+        // end;
+    end;
+
+    procedure CreateDefaultRequestPageFilters(WorkflowEvent: Record "Workflow Event"): Text
+    var
+        TableMetadata: Record "Table Metadata";
+        RequestPageParametersHelper: Codeunit "Request Page Parameters Helper";
+        FilterPageBuilder: FilterPageBuilder;
+    begin
+        if not TableMetadata.Get(WorkflowEvent."Table ID") then
+            exit('');
+
+        if not RequestPageParametersHelper.BuildDynamicRequestPage(FilterPageBuilder, WorkflowEvent."Dynamic Req. Page Entity Name", WorkflowEvent."Table ID") then
+            exit('');
+
+        exit(RequestPageParametersHelper.GetViewFromDynamicRequestPage(FilterPageBuilder, WorkflowEvent."Dynamic Req. Page Entity Name", WorkflowEvent."Table ID"));
+    end;
+
+    procedure RunRequestPage(WorkflowEvent: Record "Workflow Event"; var ReturnFilters: Text; Filters: Text): Boolean
+    begin
+        if WorkflowEvent."Request Page ID" > 0 then
+            exit(RunCustomRequestPage(WorkflowEvent, ReturnFilters, Filters));
+
+        exit(RunDynamicRequestPage(WorkflowEvent, ReturnFilters, Filters));
+    end;
+
+    local procedure RunCustomRequestPage(WorkflowEvent: Record "Workflow Event"; var ReturnFilters: Text; Filters: Text): Boolean
+    begin
+        ReturnFilters := Report.RunRequestPage(WorkflowEvent."Request Page ID", Filters);
+
+        if ReturnFilters = '' then
+            exit(false);
+
+        exit(true);
+    end;
+
+    local procedure RunDynamicRequestPage(WorkflowEvent: Record "Workflow Event"; var ReturnFilters: Text; Filters: Text): Boolean
+    var
+        TableMetadata: Record "Table Metadata";
+        RequestPageParametersHelper: Codeunit "Request Page Parameters Helper";
+        FilterPageBuilder: FilterPageBuilder;
+        EventConditionsCaptionTxt: Label 'Event Conditions - %1', Comment = '%1 = Event description';
+    begin
+        if not TableMetadata.Get(WorkflowEvent."Table ID") then
+            exit(false);
+
+        if not RequestPageParametersHelper.BuildDynamicRequestPage(FilterPageBuilder, WorkflowEvent."Dynamic Req. Page Entity Name", WorkflowEvent."Table ID") then
+            exit(false);
+
+        if Filters <> '' then
+            if not RequestPageParametersHelper.SetViewOnDynamicRequestPage(FilterPageBuilder, Filters, WorkflowEvent."Dynamic Req. Page Entity Name", WorkflowEvent."Table ID") then
+                exit(false);
+
+        FilterPageBuilder.PageCaption := StrSubstNo(EventConditionsCaptionTxt, WorkflowEvent.Description);
+        if not FilterPageBuilder.RunModal() then
+            exit(false);
+
+        ReturnFilters :=
+          RequestPageParametersHelper.GetViewFromDynamicRequestPage(FilterPageBuilder, WorkflowEvent."Dynamic Req. Page Entity Name", WorkflowEvent."Table ID");
+
+        exit(true);
+    end;
+
+    local procedure FunctionNameOnDrillDown()
+    var
+        WorkflowEvent: Record "Workflow Event";
+        WorkflowResponse: Record "Workflow Response";
+    begin
+        if Rec.Type = Rec.Type::"Event" then
+            if WorkflowEvent.Get(Rec."Function Name") then begin
+                WorkflowEvent.SetRecFilter();
+                Page.RunModal(Page::"Workflow Events WFE", WorkflowEvent);
+            end;
+
+        if Rec.Type = Rec.Type::Response then
+            if WorkflowResponse.Get(Rec."Function Name") then begin
+                WorkflowResponse.SetRecFilter();
+                Page.RunModal(Page::"Workflow Response WFE", WorkflowResponse);
+            end;
+    end;
 }
