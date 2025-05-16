@@ -9,7 +9,7 @@ codeunit 83817 "Restriction Mgt. WFE"
         RecRef: RecordRef;
     begin
         RecRef.GetTable(RecVar);
-        if RecRef.IsTemporary then
+        if RecRef.IsTemporary() then
             exit;
 
         if RestrictedRecord.IsEmpty() then
@@ -21,6 +21,6 @@ codeunit 83817 "Restriction Mgt. WFE"
 
     local procedure SetRestrictedRecordFiltersForRecRef(var RestrictedRecord: Record "Restricted Record"; RecordRef: RecordRef)
     begin
-        RestrictedRecord.SetRange("Record ID", RecordRef.RecordId);
+        RestrictedRecord.SetRange("Record ID", RecordRef.RecordId());
     end;
 }

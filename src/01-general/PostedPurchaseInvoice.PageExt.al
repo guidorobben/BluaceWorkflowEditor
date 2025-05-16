@@ -19,7 +19,7 @@ pageextension 83801 "Posted Purchase Invoice WFE" extends "Posted Purchase Invoi
                     var
                         WorkflowEditor: Codeunit "Workflow Editor WFE";
                     begin
-                        WorkflowEditor.OpenActiveWorkflow(Rec.RecordId);
+                        WorkflowEditor.OpenActiveWorkflow(Rec.RecordId());
                     end;
                 }
                 action(RemoveRecordRestrictionWFE)
@@ -55,7 +55,7 @@ pageextension 83801 "Posted Purchase Invoice WFE" extends "Posted Purchase Invoi
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

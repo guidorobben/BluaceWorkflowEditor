@@ -91,7 +91,7 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

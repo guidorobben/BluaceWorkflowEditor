@@ -157,7 +157,7 @@ page 83804 "Workflow Step Instance WFE"
                     if not RecRef.Get(Rec."Record ID") then
                         exit;
 
-                    WorkflowTableRelation.SetRange("Table ID", RecRef.Number);
+                    WorkflowTableRelation.SetRange("Table ID", RecRef.Number());
                     Page.Run(Page::"Workflow - Table Relations", WorkflowTableRelation);
                 end;
             }

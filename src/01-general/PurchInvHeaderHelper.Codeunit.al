@@ -36,7 +36,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchInvHeader.RecordId()));
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchInvHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchInvHeader.RecordId()));
-        WorkflowHelper.GetWorkflowInfo(PurchInvHeader.RecordId, InfoDialog);
+        WorkflowHelper.GetWorkflowInfo(PurchInvHeader.RecordId(), InfoDialog);
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchInvHeader));
         InfoDialog.OpenInfoDialog();
     end;

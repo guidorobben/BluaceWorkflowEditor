@@ -30,7 +30,7 @@ codeunit 83816 "Vendor Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(Vendor.RecordId()));
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Vendor.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(Vendor.RecordId()));
-        WorkflowHelper.GetWorkflowInfo(Vendor.RecordId, InfoDialog);
+        WorkflowHelper.GetWorkflowInfo(Vendor.RecordId(), InfoDialog);
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Vendor));
         InfoDialog.OpenInfoDialog();
     end;

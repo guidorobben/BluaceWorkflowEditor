@@ -176,7 +176,7 @@ report 83800 "Resend Purch. Appr. Req. WFE"
         ApprovalEntry: Record "Approval Entry";
     begin
         ApprovalEntry.SetCurrentKey("Table ID", "Document Type", "Document No.", "Date-Time Sent for Approval");
-        ApprovalEntry.SetRange("Table ID", PurchaseHeader.RecordId.TableNo);
+        ApprovalEntry.SetRange("Table ID", PurchaseHeader.RecordId().TableNo());
         ApprovalEntry.SetRange("Document Type", ApprovalEntry."Document Type"::Invoice);
         ApprovalEntry.SetRange("Document No.", PurchaseHeader."No.");
         ApprovalEntry.SetRange(Status, ApprovalEntry.Status::Open);

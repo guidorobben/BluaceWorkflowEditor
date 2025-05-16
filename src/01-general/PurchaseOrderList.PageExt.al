@@ -91,7 +91,7 @@ pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

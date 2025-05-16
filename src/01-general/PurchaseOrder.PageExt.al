@@ -91,7 +91,7 @@ pageextension 83805 "Purchase Order WFE" extends "Purchase Order"
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

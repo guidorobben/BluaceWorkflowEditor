@@ -63,7 +63,7 @@ codeunit 83807 "Purchase Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchaseHeader.RecordId()));
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchaseHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchaseHeader.RecordId()));
-        WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId, InfoDialog);
+        WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId(), InfoDialog);
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchaseHeader));
         InfoDialog.OpenInfoDialog();
     end;
