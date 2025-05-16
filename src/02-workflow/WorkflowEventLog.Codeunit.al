@@ -13,6 +13,9 @@ codeunit 83811 "Workflow Event Log WFE"
         if not IsLoggingEnabled() then
             exit;
 
+        if not WorkflowEventLog.WritePermission() then
+            exit;
+
         WorkflowEventLog.Init();
         WorkflowEventLog."Entry No." := GetNextEntryNo();
         WorkflowEventLog.ID := ResponseWorkflowStepInstance.ID;
@@ -30,6 +33,9 @@ codeunit 83811 "Workflow Event Log WFE"
         WorkflowEventLog: Record "Workflow Event Log WFE";
     begin
         if not IsLoggingEnabled() then
+            exit;
+
+        if not WorkflowEventLog.WritePermission() then
             exit;
 
         WorkflowEventLog.Init();
@@ -55,6 +61,9 @@ codeunit 83811 "Workflow Event Log WFE"
         WorkflowEventLog: Record "Workflow Event Log WFE";
     begin
         if not IsLoggingEnabled() then
+            exit;
+
+        if not WorkflowEventLog.WritePermission() then
             exit;
 
         WorkflowEventLog.Init();
