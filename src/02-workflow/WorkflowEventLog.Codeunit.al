@@ -93,6 +93,9 @@ codeunit 83811 "Workflow Event Log WFE"
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
+        if not WorkflowEditorSetup.ReadPermission() then
+            exit;
+
         if not WorkflowEditorSetup.Get() then
             exit;
 

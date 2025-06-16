@@ -83,7 +83,6 @@ page 83811 "Workflow Event Log WFE"
 
                 actionref(ShowRecord_Promoted; ShowRecord) { }
                 actionref(ClearLog_Promoted; ClearLog) { }
-
             }
         }
     }
