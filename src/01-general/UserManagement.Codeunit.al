@@ -1,6 +1,8 @@
 codeunit 83808 "User Management WFE"
 {
+    Access = Internal;
     Permissions =
+        tabledata "Notification Setup" = R,
         tabledata "User Setup" = RIMD;
 
     internal procedure IsApprovalAdministrator(): Boolean
@@ -30,9 +32,19 @@ codeunit 83808 "User Management WFE"
         InfoDialog.Add('User ID', UserId(), "Info Dialog Event Code WFE"::USERSETUP);
         InfoDialog.Add('User Setup', UserSetup.Get(UserId()));
         InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
+        InfoDialog.Add('Sales Person', UserSetup."Salespers./Purch. Code");
         InfoDialog.Add('Approver ID', UserSetup."Approver ID");
         InfoDialog.Add('Unlimited Purchase', UserSetup."Unlimited Purchase Approval");
         InfoDialog.Add('Unlimited Sales', UserSetup."Unlimited Sales Approval");
+        InfoDialog.Add('Notification Setup', HasNotifictionSetup(UserSetup."User ID"));
+    end;
+
+    local procedure HasNotifictionSetup(CurrUserID: Code[50]): Boolean
+    var
+        NotificationSetup: Record "Notification Setup";
+    begin
+        NotificationSetup.SetRange("User ID", CurrUserID);
+        exit(not NotificationSetup.IsEmpty());
     end;
 
     internal procedure AddCurrentUserAsApprovalAdmin()
@@ -61,11 +73,22 @@ codeunit 83808 "User Management WFE"
         UserSetup.Modify(true);
     end;
 
-    internal procedure DeleteCurrentUserAsApprovalAdmin()
+    internal procedure DeleteMyApprovalSetup()
     var
         UserSetup: Record "User Setup";
     begin
         if UserSetup.Get(UserId()) then
             UserSetup.Delete(true);
+    end;
+
+    internal procedure RemoveCurrentUserAsApprovalAdmin()
+    var
+        UserSetup: Record "User Setup";
+    begin
+        if not UserSetup.Get(UserId()) then
+            exit;
+
+        UserSetup.Validate("Approval Administrator", false);
+        UserSetup.Modify(true);
     end;
 }

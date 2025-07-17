@@ -32,14 +32,27 @@ pageextension 83811 "Approval User Setup WFE" extends "Approval User Setup"
             action(DeleteUserAsApprovalAdminWFE)
             {
                 ApplicationArea = All;
-                Caption = 'Delete ME';
+                Caption = 'Remove ME as Approval Admin';
                 Image = UserSetup;
 
                 trigger OnAction()
                 var
                     UserManagement: Codeunit "User Management WFE";
                 begin
-                    UserManagement.DeleteCurrentUserAsApprovalAdmin();
+                    UserManagement.RemoveCurrentUserAsApprovalAdmin();
+                end;
+            }
+            action(DeleteApprovalUserSetupWFE)
+            {
+                ApplicationArea = All;
+                Caption = 'Delete My Approval Setup';
+                Image = UserSetup;
+
+                trigger OnAction()
+                var
+                    UserManagement: Codeunit "User Management WFE";
+                begin
+                    UserManagement.DeleteMyApprovalSetup();
                 end;
             }
         }
@@ -52,6 +65,7 @@ pageextension 83811 "Approval User Setup WFE" extends "Approval User Setup"
 
                 actionref(AddUserAsApprovalAdminWPEWFE_Promoted; AddUserAsApprovalAdminWFE) { }
                 actionref(DeleteUserAsApprovalAdminWFE_Promoted; DeleteUserAsApprovalAdminWFE) { }
+                actionref(DeleteApprovalUserSetupWFE_Promoted; DeleteApprovalUserSetupWFE) { }
             }
         }
     }
