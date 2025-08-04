@@ -140,6 +140,28 @@ page 83804 "Workflow Step Instance WFE"
 
     actions
     {
+        area(Processing)
+        {
+            action(DeleteRecords)
+            {
+                ApplicationArea = All;
+                Caption = 'Delete Records';
+                Image = Delete;
+
+                trigger OnAction()
+                var
+                    ConfirmManagement: Codeunit "Confirm Management";
+                    UserManagement: Codeunit "User Management WFE";
+                begin
+                    if not ConfirmManagement.GetResponseOrDefault('Delete all records?', false) then
+                        exit;
+
+                    UserManagement.TestIsApprovalAdministrator();
+                    Rec.DeleteAll(true); //Om linked records te verwijderen 
+                end;
+            }
+        }
+
         area(Navigation)
         {
             action(WorkflowTableRelation)
@@ -162,12 +184,14 @@ page 83804 "Workflow Step Instance WFE"
                 end;
             }
         }
+
         area(Promoted)
         {
             group(Process_Promoted)
             {
                 Caption = 'Process';
 
+                actionref(DeleteRecords_Promoted; DeleteRecords) { }
                 actionref(WorkflowTableRelation_Promoted; WorkflowTableRelation) { }
             }
         }
