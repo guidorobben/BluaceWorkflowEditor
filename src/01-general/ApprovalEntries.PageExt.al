@@ -10,6 +10,17 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
+                action(MeAsApproverWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Set Me as Approver';
+                    Image = User;
+
+                    trigger OnAction()
+                    begin
+                        ApprovalEntryHelperWFE.SetMeAsApprover(Rec);
+                    end;
+                }
                 group(DeleteEntryGroupWFE)
                 {
                     Caption = 'Delete';
@@ -107,6 +118,7 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
+                actionref(MeAsApproverWFE_Promoted; MeAsApproverWFE) { }
                 actionref(DeleteEntryWFE_Promoted; DeleteEntryWFE) { }
 
                 group(EntryStatus_Promoted)

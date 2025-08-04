@@ -18,6 +18,13 @@ codeunit 83806 "Approval Entry Helper WFE"
 
     // end;
 
+    internal procedure SetMeAsApprover(var ApprovalEntry: Record "Approval Entry")
+    begin
+        TestIsApprovalAdministrator();
+        ApprovalEntry."Approver ID" := UserId();
+        ApprovalEntry.Modify(false);
+    end;
+
     internal procedure SetApprovalEntryToStatusApproved(var ApprovalEntry: Record "Approval Entry")
     begin
         SetApprovalEntryToStatus(ApprovalEntry, "Approval Status"::Approved);
