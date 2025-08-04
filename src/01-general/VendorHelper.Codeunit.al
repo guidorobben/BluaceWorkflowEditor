@@ -1,6 +1,6 @@
 codeunit 83816 "Vendor Helper WFE"
 {
-    internal procedure AllowRecordUsage(var Vendor: Record "Vendor")
+    internal procedure AllowRecordUsage(var Vendor: Record Vendor)
     var
         RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
     begin
@@ -15,13 +15,13 @@ codeunit 83816 "Vendor Helper WFE"
         UserManagement.TestIsApprovalAdministrator();
     end;
 
-    internal procedure ShowApprovalInfo(Vendor: Record "Vendor")
+    internal procedure ShowApprovalInfo(Vendor: Record Vendor)
     var
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
+        RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
-        RestrictionMgt: Codeunit "Restriction Mgt. WFE";
     begin
         InfoDialog.Initialize();
         InfoDialog.SetCaption('Approval');

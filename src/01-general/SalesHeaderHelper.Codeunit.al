@@ -7,9 +7,9 @@ codeunit 83819 "Sales Header Helper WFE"
     var
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
+        RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
-        RestrictionMgt: Codeunit "Restriction Mgt. WFE";
     begin
         InfoDialog.Initialize();
         InfoDialog.SetCaption('Approval');

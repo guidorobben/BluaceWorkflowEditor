@@ -33,7 +33,7 @@ codeunit 83814 "Info Dialog Subscr. WFE"
     begin
         WorkFlowCode := CopyStr(InfoDialog.Value, 1, 20);
         if Workflow.Get(WorkFlowCode) then
-            Page.Run(Page::"Workflow", Workflow);
+            Page.Run(Page::Workflow, Workflow);
     end;
 
     local procedure OpenUserSetup(InfoDialog: Record "Info Dialog WFE")
