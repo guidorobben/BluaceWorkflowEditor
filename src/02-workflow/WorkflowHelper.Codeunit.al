@@ -74,11 +74,7 @@ codeunit 83803 "Workflow Helper WFE"
 
     internal procedure ShowApprovalInfo(var Workflow: Record Workflow)
     var
-        // ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
-    // UserManagement: Codeunit "User Management WFE";
-    // WorkflowHelper: Codeunit "Workflow Helper WFE";
-    // RestrictionMgt: Codeunit "Restriction Mgt. WFE";
     begin
         InfoDialog.Initialize();
         InfoDialog.AddHeader('Workflow');
@@ -86,13 +82,6 @@ codeunit 83803 "Workflow Helper WFE"
         InfoDialog.Add('Description', Workflow.Description);
         InfoDialog.AddHeader('Validation');
         InfoDialog.Add('Next Work flow Step Count', GetNextWorkflowStepIDCount(Workflow));
-        // UserManagement.GetUserInfo(InfoDialog);
-        // InfoDialog.AddHeader('Purchase Info');
-        // InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchaseHeader.RecordId()));
-        // InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchaseHeader.RecordId()));
-        // InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchaseHeader.RecordId()));
-        // WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId, InfoDialog);
-        // InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchaseHeader));
         InfoDialog.OpenInfoDialog();
     end;
 

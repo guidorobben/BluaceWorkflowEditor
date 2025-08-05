@@ -4,6 +4,7 @@ page 83804 "Workflow Step Instance WFE"
     Caption = 'Workflow Step Instance';
     DeleteAllowed = false;
     // Editable = false;
+    InsertAllowed = false;
     PageType = List;
     Permissions =
         tabledata "Table Metadata" = R,

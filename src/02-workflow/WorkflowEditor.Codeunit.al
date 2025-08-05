@@ -9,15 +9,16 @@ codeunit 83801 "Workflow Editor WFE"
         WorkflowStepInstance: Record "Workflow Step Instance";
         WorkflowInstanceId: Guid;
     begin
-        // WorkflowStepInstance.FilterGroup(10);
+        WorkflowStepInstance.FilterGroup(10);
         WorkflowStepInstance.SetRange("Record ID", WorkflowStepRecordID);
+        WorkflowStepInstance.FilterGroup(0);
+
         WorkflowStepInstance.SetRange("Entry Point", true);
         if WorkflowStepInstance.FindFirst() then begin
             WorkflowInstanceId := WorkflowStepInstance.ID;
             WorkflowStepInstance.Reset();
-            WorkflowStepInstance.SetRange(ID, WorkflowInstanceId);
+            // WorkflowStepInstance.SetRange(ID, WorkflowInstanceId);
         end;
-        // WorkflowStepInstance.FilterGroup(0);
 
         Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
     end;

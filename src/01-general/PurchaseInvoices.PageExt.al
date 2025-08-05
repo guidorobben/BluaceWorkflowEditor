@@ -58,6 +58,19 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                         end;
                     }
                 }
+                action(OpenActiveWorkflowWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Open active workflow';
+                    Image = Open;
+
+                    trigger OnAction()
+                    var
+                        WorkflowEditor: Codeunit "Workflow Editor WFE";
+                    begin
+                        WorkflowEditor.OpenActiveWorkflow(Rec.RecordId());
+                    end;
+                }
                 action(RemoveRecordRestrictionWFE)
                 {
                     ApplicationArea = All;
@@ -105,6 +118,7 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                 Image = Workflow;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
+                actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
 
                 group(StatusWFE_Promoted)
