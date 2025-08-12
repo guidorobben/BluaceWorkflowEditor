@@ -29,7 +29,7 @@ codeunit 83808 "User Management WFE"
         UserSetup: Record "User Setup";
     begin
         InfoDialog.AddHeader('User Info');
-        InfoDialog.Add('User ID', UserId(), "Info Dialog Event Code WFE"::USERSETUP);
+        InfoDialog.Add('User ID', UserId(), "Info Dialog Event Code WFE"::"User Setup");
         InfoDialog.Add('User Setup', UserSetup.Get(UserId()));
         InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
         InfoDialog.Add('Sales Person', UserSetup."Salespers./Purch. Code");

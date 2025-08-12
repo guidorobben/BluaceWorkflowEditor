@@ -43,11 +43,24 @@ table 83803 "Info Dialog WFE"
         }
     }
 
+    var
+        CurrentWorkflowCode: Code[20];
+
+    procedure SetWorkFlowCode(WorkflowCode: Code[20])
+    begin
+        CurrentWorkflowCode := WorkflowCode;
+    end;
+
+    procedure GetWorkFlowCode(): Code[20]
+    begin
+        exit(CurrentWorkflowCode);
+    end;
+
     procedure ActivateEventCode()
     var
         InfoDialogHelper: Codeunit "Info Dialog Helper WFE";
     begin
-        InfoDialogHelper.ActivateEventCode(Rec);
+        InfoDialogHelper.ActivateEventCode(Rec, CurrentWorkflowCode);
     end;
 
     procedure GetValueAsGuid() Result: Guid

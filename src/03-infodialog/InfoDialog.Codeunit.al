@@ -1,14 +1,21 @@
 codeunit 83809 "Info Dialog WFE"
 {
     var
-        InfoDialog: Record "Info Dialog WFE";
+        BufferInfoDialog: Record "Info Dialog WFE";
         LastEntryNo: Integer;
         PageCaption: Text;
+        CurrentWorkFlowCode: Code[20];
 
     procedure Initialize()
     begin
         LastEntryNo := 0;
-        InfoDialog.DeleteAll(false);
+        BufferInfoDialog.DeleteAll(false);
+    end;
+
+    procedure SetWorkFlowCode(WorkflowCode: Code[20])
+    begin
+        CurrentWorkFlowCode := WorkflowCode;
+        // BufferInfoDialog.SetWorkFlowCode(CurrentWorkFlowCode);
     end;
 
     procedure Add(Name: Text[100])
@@ -24,6 +31,11 @@ codeunit 83809 "Info Dialog WFE"
     procedure Add(Name: Text[100]; Value: Integer)
     begin
         Add(Name, Format(Value), false, "Info Dialog Event Code WFE"::" ");
+    end;
+
+    procedure Add(Name: Text[100]; Value: Integer; EventCode: Enum "Info Dialog Event Code WFE")
+    begin
+        Add(Name, Format(Value), false, EventCode);
     end;
 
     procedure Add(Name: Text[100]; Value: Boolean)
@@ -52,16 +64,14 @@ codeunit 83809 "Info Dialog WFE"
     end;
 
     procedure OpenInfoDialog()
-    // var
-    //     InfoBufferWFE: Page "Info Buffer WFE";
+    var
+        InfoDialog: Page "Info Dialog WFE";
     begin
-        InfoDialog.Reset();
-        if InfoDialog.FindFirst() then; //Set pointer to first
-        Page.Run(Page::"Info Dialog WFE", InfoDialog);
-        // InfoBufferWFE.GetRecord(InfoBuffer); //FIXME
-        // InfoBufferWFE.SetRecord(InfoBuffer);
-        // InfoBufferWFE.SetTableView(InfoBuffer);
-        // InfoBufferWFE.Run();
+        BufferInfoDialog.Reset();
+        if BufferInfoDialog.FindFirst() then; //Set pointer to first
+        InfoDialog.TransferInfoDialog(BufferInfoDialog);
+        InfoDialog.SetWorkFlowCode(CurrentWorkFlowCode);
+        InfoDialog.Run();
     end;
 
     local procedure CreateInfoBufferLine(Name: Text[100]; Value: Text[100]; Header: Boolean; EventCode: Enum "Info Dialog Event Code WFE")
@@ -70,13 +80,13 @@ codeunit 83809 "Info Dialog WFE"
     begin
         EntryNo := GetNewEntryNo();
 
-        InfoDialog.Init();
-        InfoDialog.Validate("Entry No.", EntryNo);
-        InfoDialog.Validate(Name, Name);
-        InfoDialog.Validate("Value", Value);
-        InfoDialog.Validate(Header, Header);
-        InfoDialog.Validate("Event Code", EventCode);
-        InfoDialog.Insert(true);
+        BufferInfoDialog.Init();
+        BufferInfoDialog.Validate("Entry No.", EntryNo);
+        BufferInfoDialog.Validate(Name, Name);
+        BufferInfoDialog.Validate("Value", Value);
+        BufferInfoDialog.Validate(Header, Header);
+        BufferInfoDialog.Validate("Event Code", EventCode);
+        BufferInfoDialog.Insert(true);
     end;
 
     procedure SetCaption(CaptionText: Text)
@@ -90,13 +100,13 @@ codeunit 83809 "Info Dialog WFE"
         exit(LastEntryNo);
     end;
 
-    procedure TransferInfoDialog(var ToInfoDialog: Record "Info Dialog WFE")
-    begin
-        if InfoDialog.FindSet() then
-            repeat
-                ToInfoDialog.Init();
-                ToInfoDialog := InfoDialog;
-                ToInfoDialog.Insert(false);
-            until InfoDialog.Next() = 0;
-    end;
+    // procedure TransferInfoDialog(var ToInfoDialog: Record "Info Dialog WFE")
+    // begin
+    //     if BufferInfoDialog.FindSet() then
+    //         repeat
+    //             ToInfoDialog.Init();
+    //             ToInfoDialog := BufferInfoDialog;
+    //             ToInfoDialog.Insert(false);
+    //         until BufferInfoDialog.Next() = 0;
+    // end;
 }

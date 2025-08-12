@@ -6,16 +6,20 @@ enum 83801 "Info Dialog Event Code WFE"
     {
         Caption = ' ', Locked = true;
     }
-    value(1; INSTANCEID)
+    value(1; "Instance ID")
     {
-        Caption = 'INSTANCEID';
+        Caption = 'Instance ID';
     }
-    value(2; WORKFLOWCODE)
+    value(2; "Workflow Code")
     {
-        Caption = 'WORKFLOWCODE';
+        Caption = 'Workflow Code';
     }
-    value(3; USERSETUP)
+    value(3; "User Setup")
     {
-        Caption = 'USERSETUP';
+        Caption = 'User Setup';
+    }
+    value(4; "Workflow Step Instance")
+    {
+        Caption = 'Workflow Step Instance';
     }
 }

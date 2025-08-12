@@ -67,8 +67,8 @@ codeunit 83803 "Workflow Helper WFE"
         end;
 
         InfoDialog.AddHeader('Workflow');
-        InfoDialog.Add('ID', InstanceID, "Info Dialog Event Code WFE"::INSTANCEID);
-        InfoDialog.Add('Code', WorkFlowCode, "Info Dialog Event Code WFE"::WORKFLOWCODE);
+        InfoDialog.Add('ID', InstanceID, "Info Dialog Event Code WFE"::"Instance ID");
+        InfoDialog.Add('Code', WorkFlowCode, "Info Dialog Event Code WFE"::"Workflow Code");
         InfoDialog.Add('Description', WorkflowDescription);
     end;
 
@@ -77,9 +77,12 @@ codeunit 83803 "Workflow Helper WFE"
         InfoDialog: Codeunit "Info Dialog WFE";
     begin
         InfoDialog.Initialize();
+        InfoDialog.SetWorkFlowCode(Workflow.Code);
         InfoDialog.AddHeader('Workflow');
-        InfoDialog.Add('Code', Workflow.Code, "Info Dialog Event Code WFE"::WORKFLOWCODE);
+        InfoDialog.Add('Code', Workflow.Code, "Info Dialog Event Code WFE"::"Workflow Code");
         InfoDialog.Add('Description', Workflow.Description);
+        InfoDialog.AddHeader('Instance');
+        InfoDialog.Add('Instance record count', GetWorkflowStepInstanceCount(Workflow.Code), "Info Dialog Event Code WFE"::"Workflow Step Instance");
         InfoDialog.AddHeader('Validation');
         InfoDialog.Add('Next Work flow Step Count', GetNextWorkflowStepIDCount(Workflow));
         InfoDialog.OpenInfoDialog();
@@ -95,5 +98,16 @@ codeunit 83803 "Workflow Helper WFE"
         WorkflowStep.SetRange("Workflow Code", Workflow.Code);
         WorkflowStep.SetFilter("Next Workflow Step ID", '<>0');
         exit(WorkflowStep.Count());
+    end;
+
+    local procedure GetWorkflowStepInstanceCount(WorkflowCode: Code[20]): Integer
+    var
+        WorkflowStepInstance: Record "Workflow Step Instance";
+    begin
+        if WorkflowCode = '' then
+            exit;
+
+        WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
+        exit(WorkflowStepInstance.Count());
     end;
 }

@@ -6,6 +6,7 @@ page 83804 "Workflow Step Instance WFE"
     // Editable = false;
     InsertAllowed = false;
     PageType = List;
+    ShowFilter = true;
     Permissions =
         tabledata "Table Metadata" = R,
         tabledata "Workflow - Table Relation" = R,
@@ -25,6 +26,10 @@ page 83804 "Workflow Step Instance WFE"
                 field(ID; Rec.ID)
                 {
                     ToolTip = 'Specifies the ID of the workflow step instance.';
+                }
+                field("Workflow Code"; Rec."Workflow Code")
+                {
+                    ToolTip = 'Specifies the workflow that the workflow step instance belongs to.';
                 }
                 field("Function Name"; Rec."Function Name")
                 {
@@ -118,11 +123,6 @@ page 83804 "Workflow Step Instance WFE"
                 field(SystemCreatedAt; Rec.SystemCreatedAt)
                 {
                     ToolTip = 'Specifies the value of the SystemCreatedAt field.', Comment = '%';
-                    Visible = false;
-                }
-                field("Workflow Code"; Rec."Workflow Code")
-                {
-                    ToolTip = 'Specifies the workflow that the workflow step instance belongs to.';
                     Visible = false;
                 }
             }

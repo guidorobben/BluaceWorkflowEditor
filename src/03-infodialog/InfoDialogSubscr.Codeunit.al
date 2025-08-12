@@ -7,15 +7,17 @@ codeunit 83814 "Info Dialog Subscr. WFE"
         tabledata Workflow = R;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Info Dialog Helper WFE", OnActivateEventCode, '', false, false)]
-    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE")
+    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE"; WorkflowCode: Code[20])
     begin
         case EventCode of
-            EventCode::INSTANCEID:
+            EventCode::"Instance ID":
                 OpenActiveWorkflow(InfoDialog);
-            EventCode::WORKFLOWCODE:
+            EventCode::"Workflow Code":
                 OpenWorkFlow(InfoDialog);
-            EventCode::USERSETUP:
+            EventCode::"User Setup":
                 OpenUserSetup(InfoDialog);
+            EventCode::"Workflow Step Instance":
+                OpenWorkflowStepInstance(WorkflowCode);
         end;
     end;
 
@@ -46,5 +48,16 @@ codeunit 83814 "Info Dialog Subscr. WFE"
 #pragma warning disable LC0027
             Page.Run(Page::"Approval User Setup", UserSetup);
 #pragma warning restore LC0027
+    end;
+
+    local procedure OpenWorkflowStepInstance(WorkflowCode: Code[20])
+    var
+        WorkflowStepInstance: Record "Workflow Step Instance";
+    begin
+        if WorkflowCode = '' then
+            exit;
+
+        WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
+        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
     end;
 }

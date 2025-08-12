@@ -59,6 +59,39 @@ pageextension 83802 "Workflow WFE" extends Workflow
                         WorkflowEditor.EditWorkflowSteps(Rec.Code);
                     end;
                 }
+                action(WorkflowStepInstancesWPTE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Workflow Step Instances';
+                    Image = List;
+                    ToolTip = 'Show all instances of workflow steps in current workflows.';
+
+                    trigger OnAction()
+                    var
+                        WorkflowStepInstance: Record "Workflow Step Instance";
+                    begin
+                        if Rec.Code = '' then
+                            exit;
+
+                        WorkflowStepInstance.SetRange("Workflow Code", Rec.Code);
+                        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
+                    end;
+                }
+                action(ArchivedWorkflowStepInstancesWPTE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Archived Workflow Step Instances';
+                    Image = ListPage;
+                    ToolTip = 'View all instances of workflow steps that are no longer used, either because they are completed or because they were manually archived.';
+
+                    trigger OnAction()
+                    var
+                        ArchivedWFStepInstances: Page "Archived WF Step Instances";
+                    begin
+                        ArchivedWFStepInstances.SetWorkflowCode(Rec.Code);
+                        ArchivedWFStepInstances.RunModal();
+                    end;
+                }
             }
         }
 
@@ -71,7 +104,10 @@ pageextension 83802 "Workflow WFE" extends Workflow
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(ShowWorkflowStepsWFE_Promoted; ShowWorkflowStepsWFE) { }
-
+                actionref(WorkflowStepInstancesWPTE_Promoted; WorkflowStepInstancesWPTE) { }
+                actionref(ArchivedWorkflowStepInstancesWPTE_Promoted; ArchivedWorkflowStepInstancesWPTE) { }
+                actionref(SetToWorkflowTemplateWFE_Promoted; SetToWorkflowTemplateWFE) { }
+                actionref(SetToWorkflowWFE_Promoted; SetToWorkflowWFE) { }
             }
         }
     }

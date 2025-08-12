@@ -44,4 +44,25 @@ page 83812 "Info Dialog WFE"
             }
         }
     }
+
+    var
+        CurrentWorkFlowCode: Code[20];
+
+    procedure TransferInfoDialog(var InfoDialog: Record "Info Dialog WFE")
+    begin
+        if InfoDialog.FindSet() then
+            repeat
+                Rec.Init();
+                Rec := InfoDialog;
+                Rec.Insert(false);
+            until InfoDialog.Next() = 0;
+
+        if Rec.FindFirst() then; //Set pointer to first
+    end;
+
+    procedure SetWorkFlowCode(WorkflowCode: Code[20])
+    begin
+        CurrentWorkFlowCode := WorkflowCode;
+        Rec.SetWorkFlowCode(CurrentWorkFlowCode);
+    end;
 }
