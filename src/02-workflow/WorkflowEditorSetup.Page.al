@@ -17,6 +17,12 @@ page 83807 "Workflow Editor Setup WFE"
                 field("Disable Mail Notifications"; Rec."Disable Mail Notifications") { }
                 field("Log Workflow Events"; Rec."Log Workflow Events") { }
             }
+            group(Extensions)
+            {
+                Caption = 'Extensions';
+
+                field("Posted Purch. Inv. Status ID"; Rec."Posted Purch. Inv. Status ID") { }
+            }
         }
     }
 

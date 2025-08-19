@@ -24,6 +24,13 @@ table 83801 "Workflow Editor Setup WFE"
             Caption = 'Log Workflow Events';
             ToolTip = 'Specifies the value of the Log Workflow Events field.', Comment = '%';
         }
+        field(30; "Posted Purch. Inv. Status ID"; Integer)
+        {
+            Caption = 'Posted Purch. Inv. Status ID';
+            ToolTip = 'Specifies the status field id for the posted purchase invoice.';
+
+            //TODO Lookup voor field
+        }
     }
 
     keys
