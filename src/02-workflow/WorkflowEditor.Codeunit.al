@@ -16,8 +16,9 @@ codeunit 83801 "Workflow Editor WFE"
         WorkflowStepInstance.SetRange("Entry Point", true);
         if WorkflowStepInstance.FindFirst() then begin
             WorkflowInstanceId := WorkflowStepInstance.ID;
+
             WorkflowStepInstance.Reset();
-            // WorkflowStepInstance.SetRange(ID, WorkflowInstanceId);
+            WorkflowStepInstance.SetRange(ID, WorkflowInstanceId);
         end;
 
         Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);

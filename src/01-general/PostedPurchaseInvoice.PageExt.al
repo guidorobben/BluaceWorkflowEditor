@@ -121,17 +121,17 @@ pageextension 83801 "Posted Purchase Invoice WFE" extends "Posted Purchase Invoi
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
                 actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
-            }
 
-            group(StatusWFE_Promoted)
-            {
-                Caption = 'Status';
-                Image = Status;
+                group(StatusWFE_Promoted)
+                {
+                    Caption = 'Status';
+                    Image = Status;
 
-                actionref(StatusToOpenWFE_Promoted; StatusToOpenWFE) { }
-                actionref(StatusToReleasedWFE_Promoted; StatusToReleasedWFE) { }
-                actionref(StatusToPendingApprovalWFE_Promoted; StatusToPendingApprovalWFE) { }
-                actionref(StatusToPendingPrepaymentWFE_Promoted; StatusToPendingPrepaymentWFE) { }
+                    actionref(StatusToOpenWFE_Promoted; StatusToOpenWFE) { }
+                    actionref(StatusToReleasedWFE_Promoted; StatusToReleasedWFE) { }
+                    actionref(StatusToPendingApprovalWFE_Promoted; StatusToPendingApprovalWFE) { }
+                    actionref(StatusToPendingPrepaymentWFE_Promoted; StatusToPendingPrepaymentWFE) { }
+                }
             }
         }
     }
