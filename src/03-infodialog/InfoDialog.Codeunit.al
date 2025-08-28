@@ -70,7 +70,7 @@ codeunit 83809 "Info Dialog WFE"
         BufferInfoDialog.Reset();
         if BufferInfoDialog.FindFirst() then; //Set pointer to first
         InfoDialog.TransferInfoDialog(BufferInfoDialog);
-        InfoDialog.SetWorkFlowCode(CurrentWorkFlowCode);
+        InfoDialog.SetCurrentWorkFlowCode(CurrentWorkFlowCode);
         InfoDialog.Run();
     end;
 

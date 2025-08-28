@@ -60,7 +60,7 @@ page 83812 "Info Dialog WFE"
         if Rec.FindFirst() then; //Set pointer to first
     end;
 
-    procedure SetWorkFlowCode(WorkflowCode: Code[20])
+    procedure SetCurrentWorkFlowCode(WorkflowCode: Code[20])
     begin
         CurrentWorkFlowCode := WorkflowCode;
         Rec.SetWorkFlowCode(CurrentWorkFlowCode);
