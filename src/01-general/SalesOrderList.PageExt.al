@@ -82,6 +82,17 @@ pageextension 83818 "Sales Order List WFE" extends "Sales Order List"
                         SalesHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
                 }
+                action(RestrictRecordUsageWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Add Record Restriction';
+                    Image = Lock;
+
+                    trigger OnAction()
+                    begin
+                        SalesHeaderHelperWFE.RestrictRecordUsage(Rec);
+                    end;
+                }
                 action(ApprovalInfoWFE)
                 {
                     ApplicationArea = All;
@@ -121,6 +132,7 @@ pageextension 83818 "Sales Order List WFE" extends "Sales Order List"
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
                 actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                actionref(RestrictRecordUsageWFE_Promoted; RestrictRecordUsageWFE) { }
 
                 group(StatusWFE_PromotedWFE)
                 {

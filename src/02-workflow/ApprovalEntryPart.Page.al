@@ -56,7 +56,6 @@ page 83806 "Approval Entry Part WFE"
         SendNotificationEntries := SendNotificationCount();
     end;
 
-
     local procedure GetRecipientEmailAddress(): Text
     var
         UserSetup: Record "User Setup";

@@ -69,6 +69,17 @@ pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
                         PurchaseHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
                 }
+                action(RestrictRecordUsageWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Add Record Restriction';
+                    Image = Lock;
+
+                    trigger OnAction()
+                    begin
+                        PurchaseHeaderHelperWFE.RestrictRecordUsage(Rec);
+                    end;
+                }
                 action(ApprovalInfoWFE)
                 {
                     ApplicationArea = All;
@@ -106,6 +117,8 @@ pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
+                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                actionref(RestrictRecordUsageWFE_Promoted; RestrictRecordUsageWFE) { }
 
                 group(StatusWFE_Promoted)
                 {
@@ -117,8 +130,6 @@ pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
                     actionref(StatusToPendingApprovalWFE_Promoted; StatusToPendingApprovalWFE) { }
                     actionref(StatusToPendingPrepaymentWFE_Promoted; StatusToPendingPrepaymentWFE) { }
                 }
-
-                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
             }
         }
     }

@@ -82,6 +82,17 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                         PurchaseHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
                 }
+                action(RestrictRecordUsageWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Add Record Restriction';
+                    Image = Lock;
+
+                    trigger OnAction()
+                    begin
+                        PurchaseHeaderHelperWFE.RestrictRecordUsage(Rec);
+                    end;
+                }
                 action(ApprovalInfoWFE)
                 {
                     ApplicationArea = All;
@@ -120,6 +131,8 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
+                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                actionref(RestrictRecordUsageWFE_Promoted; RestrictRecordUsageWFE) { }
 
                 group(StatusWFE_Promoted)
                 {
@@ -131,8 +144,6 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                     actionref(StatusToPendingApprovalWFE_Promoted; StatusToPendingApprovalWFE) { }
                     actionref(StatusToPendingPrepaymentWFE_Promoted; StatusToPendingPrepaymentWFE) { }
                 }
-
-                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
             }
         }
     }

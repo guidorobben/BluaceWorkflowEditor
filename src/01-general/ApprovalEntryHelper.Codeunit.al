@@ -13,11 +13,6 @@ codeunit 83806 "Approval Entry Helper WFE"
         end;
     end;
 
-    // internal procedure DeleteAllEntries(var ApprovalEntry: Record "Approval Entry")
-    // begin
-
-    // end;
-
     internal procedure SetMeAsApprover(var ApprovalEntry: Record "Approval Entry")
     begin
         TestIsApprovalAdministrator();

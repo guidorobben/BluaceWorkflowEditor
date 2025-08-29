@@ -64,4 +64,12 @@ codeunit 83819 "Sales Header Helper WFE"
         TestIsApprovalAdministrator();
         RecordRestrictionMgt.AllowRecordUsage(SalesHeader);
     end;
+
+    internal procedure RestrictRecordUsage(var SalesHeader: Record "Sales Header")
+    var
+        RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
+    begin
+        TestIsApprovalAdministrator();
+        RecordRestrictionMgt.RestrictRecordUsage(SalesHeader, 'Manual restriction by user');
+    end;
 }
