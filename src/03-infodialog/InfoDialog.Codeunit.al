@@ -2,20 +2,25 @@ codeunit 83809 "Info Dialog WFE"
 {
     var
         BufferInfoDialog: Record "Info Dialog WFE";
+        CurrentRecordInfo: Codeunit "Record Info WFE";
         LastEntryNo: Integer;
         PageCaption: Text;
-        CurrentWorkFlowCode: Code[20];
 
     procedure Initialize()
     begin
         LastEntryNo := 0;
+        Clear(CurrentRecordInfo);
         BufferInfoDialog.DeleteAll(false);
     end;
 
-    procedure SetWorkFlowCode(WorkflowCode: Code[20])
+    procedure RecordInfo(): Codeunit "Record Info WFE"
     begin
-        CurrentWorkFlowCode := WorkflowCode;
-        // BufferInfoDialog.SetWorkFlowCode(CurrentWorkFlowCode);
+        exit(CurrentRecordInfo);
+    end;
+
+    procedure RecordInfo(NewRecordInfo: Codeunit "Record Info WFE"): Codeunit "Record Info WFE"
+    begin
+        CurrentRecordInfo := NewRecordInfo;
     end;
 
     procedure Add(Name: Text[100])
@@ -34,6 +39,11 @@ codeunit 83809 "Info Dialog WFE"
     end;
 
     procedure Add(Name: Text[100]; Value: Integer; EventCode: Enum "Info Dialog Event Code WFE")
+    begin
+        Add(Name, Format(Value), false, EventCode);
+    end;
+
+    procedure Add(Name: Text[100]; Value: Boolean; EventCode: Enum "Info Dialog Event Code WFE")
     begin
         Add(Name, Format(Value), false, EventCode);
     end;
@@ -70,7 +80,7 @@ codeunit 83809 "Info Dialog WFE"
         BufferInfoDialog.Reset();
         if BufferInfoDialog.FindFirst() then; //Set pointer to first
         InfoDialog.TransferInfoDialog(BufferInfoDialog);
-        InfoDialog.SetCurrentWorkFlowCode(CurrentWorkFlowCode);
+        InfoDialog.RecordInfo(CurrentRecordInfo);
         InfoDialog.Run();
     end;
 

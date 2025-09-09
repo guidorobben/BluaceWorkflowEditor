@@ -75,9 +75,12 @@ codeunit 83803 "Workflow Helper WFE"
     internal procedure ShowApprovalInfo(var Workflow: Record Workflow)
     var
         InfoDialog: Codeunit "Info Dialog WFE";
+        RecordInfo: Codeunit "Record Info WFE";
     begin
+        RecordInfo.Initialize();
+        RecordInfo.WorkFlowCode(Workflow.Code);
+
         InfoDialog.Initialize();
-        InfoDialog.SetWorkFlowCode(Workflow.Code);
         InfoDialog.AddHeader('Workflow');
         InfoDialog.Add('Code', Workflow.Code, "Info Dialog Event Code WFE"::"Workflow Code");
         InfoDialog.Add('Description', Workflow.Description);

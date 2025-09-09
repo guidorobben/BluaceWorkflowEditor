@@ -1,12 +1,12 @@
 codeunit 83813 "Info Dialog Helper WFE"
 {
-    internal procedure ActivateEventCode(InfoDialog: Record "Info Dialog WFE"; WorkflowCode: Code[20])
+    internal procedure ActivateEventCode(InfoDialog: Record "Info Dialog WFE"; RecordInfo: Codeunit "Record Info WFE")
     begin
-        OnActivateEventCode(InfoDialog, InfoDialog."Event Code", WorkflowCode);
+        OnActivateEventCode(InfoDialog, InfoDialog."Event Code", RecordInfo);
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE"; WorkflowCode: Code[20])
+    local procedure OnActivateEventCode(var InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE"; RecordInfo: Codeunit "Record Info WFE")
     begin
     end;
 }

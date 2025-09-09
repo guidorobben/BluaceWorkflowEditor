@@ -26,7 +26,7 @@ table 83803 "Info Dialog WFE"
         field(30; "Event Code"; Enum "Info Dialog Event Code WFE")
         {
             Caption = 'Event Code';
-            ToolTip = 'Event Code.'; //FIXME
+            ToolTip = 'Specifies the event code related to the value.';
         }
         field(100; Header; Boolean)
         {
@@ -42,26 +42,6 @@ table 83803 "Info Dialog WFE"
             Clustered = true;
         }
     }
-
-    var
-        CurrentWorkflowCode: Code[20];
-
-    procedure SetWorkFlowCode(WorkflowCode: Code[20])
-    begin
-        CurrentWorkflowCode := WorkflowCode;
-    end;
-
-    procedure GetWorkFlowCode(): Code[20]
-    begin
-        exit(CurrentWorkflowCode);
-    end;
-
-    procedure ActivateEventCode()
-    var
-        InfoDialogHelper: Codeunit "Info Dialog Helper WFE";
-    begin
-        InfoDialogHelper.ActivateEventCode(Rec, CurrentWorkflowCode);
-    end;
 
     procedure GetValueAsGuid() Result: Guid
     begin

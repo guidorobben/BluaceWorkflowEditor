@@ -27,14 +27,14 @@ page 83812 "Info Dialog WFE"
                 {
                     trigger OnAssistEdit()
                     begin
-                        Rec.ActivateEventCode();
+                        ActivateEventCode();
                     end;
                 }
                 field("Event Code"; Rec."Event Code")
                 {
                     trigger OnDrillDown()
                     begin
-                        Rec.ActivateEventCode();
+                        ActivateEventCode();
                     end;
                 }
                 field(Header; Rec.Header)
@@ -46,7 +46,7 @@ page 83812 "Info Dialog WFE"
     }
 
     var
-        CurrentWorkFlowCode: Code[20];
+        CurrentRecordInfo: Codeunit "Record Info WFE";
 
     procedure TransferInfoDialog(var InfoDialog: Record "Info Dialog WFE")
     begin
@@ -60,9 +60,20 @@ page 83812 "Info Dialog WFE"
         if Rec.FindFirst() then; //Set pointer to first
     end;
 
-    procedure SetCurrentWorkFlowCode(WorkflowCode: Code[20])
+    procedure RecordInfo(): Codeunit "Record Info WFE"
     begin
-        CurrentWorkFlowCode := WorkflowCode;
-        Rec.SetWorkFlowCode(CurrentWorkFlowCode);
+        exit(CurrentRecordInfo);
+    end;
+
+    procedure RecordInfo(NewRecordInfo: Codeunit "Record Info WFE"): Codeunit "Record Info WFE"
+    begin
+        CurrentRecordInfo := NewRecordInfo;
+    end;
+
+    procedure ActivateEventCode()
+    var
+        InfoDialogHelper: Codeunit "Info Dialog Helper WFE";
+    begin
+        InfoDialogHelper.ActivateEventCode(Rec, CurrentRecordInfo);
     end;
 }
