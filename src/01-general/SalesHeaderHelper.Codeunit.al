@@ -1,5 +1,6 @@
 codeunit 83819 "Sales Header Helper WFE"
 {
+    Access = Internal;
     Permissions =
         tabledata "Sales Header" = RM;
 
@@ -10,8 +11,13 @@ codeunit 83819 "Sales Header Helper WFE"
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
+        RecordInfo: Codeunit "Record Info WFE";
     begin
+        RecordInfo.Initialize();
+        RecordInfo.SourceRecord(SalesHeader);
+
         InfoDialog.Initialize();
+        InfoDialog.RecordInfo(RecordInfo);
         InfoDialog.SetCaption('Approval');
         UserManagement.GetUserInfo(InfoDialog);
         InfoDialog.AddHeader('Purchase Info');
@@ -71,5 +77,13 @@ codeunit 83819 "Sales Header Helper WFE"
     begin
         TestIsApprovalAdministrator();
         RecordRestrictionMgt.RestrictRecordUsage(SalesHeader, 'Manual restriction by user');
+    end;
+
+    internal procedure OpenRestrictedRecord(var SalesHeader: Record "Sales Header")
+    var
+        RestrictedRecord: Record "Restricted Record";
+    begin
+        RestrictedRecord.SetRange("Record ID", SalesHeader.RecordId());
+        Page.Run(Page::"Restricted Records", RestrictedRecord);
     end;
 }

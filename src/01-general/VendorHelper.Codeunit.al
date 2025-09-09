@@ -22,8 +22,13 @@ codeunit 83816 "Vendor Helper WFE"
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
+        RecordInfo: Codeunit "Record Info WFE";
     begin
+        RecordInfo.Initialize();
+        RecordInfo.SourceRecord(Vendor);
+
         InfoDialog.Initialize();
+        InfoDialog.RecordInfo(RecordInfo);
         InfoDialog.SetCaption('Approval');
         UserManagement.GetUserInfo(InfoDialog);
         InfoDialog.AddHeader('Purchase Info');

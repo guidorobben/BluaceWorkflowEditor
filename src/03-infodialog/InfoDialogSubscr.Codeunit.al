@@ -7,7 +7,7 @@ codeunit 83814 "Info Dialog Subscr. WFE"
         tabledata Workflow = R;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Info Dialog Helper WFE", OnActivateEventCode, '', false, false)]
-    local procedure OnActivateEventCode(InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE"; WorkflowCode: Code[20])
+    local procedure OnActivateEventCode(var InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE"; RecordInfo: Codeunit "Record Info WFE")
     begin
         case EventCode of
             EventCode::"Instance ID":
@@ -17,7 +17,9 @@ codeunit 83814 "Info Dialog Subscr. WFE"
             EventCode::"User Setup":
                 OpenUserSetup(InfoDialog);
             EventCode::"Workflow Step Instance":
-                OpenWorkflowStepInstance(WorkflowCode);
+                OpenWorkflowStepInstance(RecordInfo.WorkFlowCode());
+            EventCode::"Record Restriction":
+                OpenRecordRestriction(RecordInfo);
         end;
     end;
 
@@ -59,5 +61,34 @@ codeunit 83814 "Info Dialog Subscr. WFE"
 
         WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
         Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
+    end;
+
+    local procedure OpenRecordRestriction(var RecordInfo: Codeunit "Record Info WFE")
+    var
+        PurchInvHeader: Record "Purch. Inv. Header";
+        PurchaseHeader: Record "Purchase Header";
+        SalesHeader: Record "Sales Header";
+        SourceRecordRef: RecordRef;
+        SourceVariant: Variant;
+    begin
+        SourceVariant := RecordInfo.SourceRecord();
+        SourceRecordRef.GetTable(SourceVariant);
+        case SourceRecordRef.Number() of
+            Database::"Sales Header":
+                begin
+                    SourceRecordRef.SetTable(SalesHeader);
+                    SalesHeader.OpenRestrictedRecord();
+                end;
+            Database::"Purchase Header":
+                begin
+                    SourceRecordRef.SetTable(PurchaseHeader);
+                    PurchaseHeader.OpenRestrictedRecord();
+                end;
+            Database::"Purch. Inv. Header":
+                begin
+                    SourceRecordRef.SetTable(PurchInvHeader);
+                    PurchInvHeader.OpenRestrictedRecord();
+                end;
+        end;
     end;
 }

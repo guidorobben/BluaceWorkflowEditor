@@ -3,6 +3,7 @@ codeunit 83807 "Purchase Header Helper WFE"
     Permissions =
         tabledata "Purchase Header" = RM,
         tabledata "User Setup" = R,
+        tabledata "Vendor Ledger Entry" = R,
         tabledata Workflow = R,
         tabledata "Workflow Step Instance" = R;
 
@@ -63,8 +64,13 @@ codeunit 83807 "Purchase Header Helper WFE"
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
+        RecordInfo: Codeunit "Record Info WFE";
     begin
+        RecordInfo.Initialize();
+        RecordInfo.SourceRecord(PurchaseHeader);
+
         InfoDialog.Initialize();
+        InfoDialog.RecordInfo(RecordInfo);
         InfoDialog.SetCaption('Approval');
         UserManagement.GetUserInfo(InfoDialog);
         InfoDialog.AddHeader('Purchase Info');
@@ -72,8 +78,61 @@ codeunit 83807 "Purchase Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchaseHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchaseHeader.RecordId()));
         WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId(), InfoDialog);
-        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchaseHeader));
+        InfoDialog.AddHeader('Posting');
+        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchaseHeader), "Info Dialog Event Code WFE"::"Record Restriction");
+        InfoDialog.Add('On Hold (Header)', PurchaseHeader."On Hold");
+        InfoDialog.Add('On Hold (Vendor)', HasOnHoldVendorLedgerEntry(PurchaseHeader));
         InfoDialog.OpenInfoDialog();
+    end;
+
+    local procedure HasOnHoldVendorLedgerEntry(var PurchaseHeader: Record "Purchase Header"): Boolean
+    begin
+        if PurchaseHeader."No." = '' then
+            exit;
+
+        case PurchaseHeader."Document Type" of
+            PurchaseHeader."Document Type"::Invoice:
+                exit(HasOnHoldVendorLedgerEntry("Gen. Journal Document Type"::Invoice, PurchaseHeader."No."));
+            PurchaseHeader."Document Type"::"Credit Memo":
+                exit(HasOnHoldVendorLedgerEntry("Gen. Journal Document Type"::"Credit Memo", PurchaseHeader."No."));
+        end;
+    end;
+
+    local procedure HasOnHoldVendorLedgerEntry(DocumentType: Enum "Gen. Journal Document Type"; DocumentNo: Code[20]): Boolean
+    var
+        VendorLedgerEntry: Record "Vendor Ledger Entry";
+    begin
+        VendorLedgerEntry.SetRange("Document Type", DocumentType);
+        VendorLedgerEntry.SetRange("Document No.", DocumentNo);
+        VendorLedgerEntry.SetFilter("On Hold", '<>%1', '');
+        exit(not VendorLedgerEntry.IsEmpty());
+    end;
+
+    internal procedure ClearOnHoldVendorLedgerEntries(var PurchaseHeader: Record "Purchase Header")
+    begin
+        if PurchaseHeader."No." = '' then
+            exit;
+
+        case PurchaseHeader."Document Type" of
+            PurchaseHeader."Document Type"::Invoice:
+                ClearOnHoldVendorLedgerEntries("Gen. Journal Document Type"::Invoice, PurchaseHeader."No.");
+            PurchaseHeader."Document Type"::"Credit Memo":
+                ClearOnHoldVendorLedgerEntries("Gen. Journal Document Type"::"Credit Memo", PurchaseHeader."No.");
+        end;
+    end;
+
+    internal procedure ClearOnHoldVendorLedgerEntries(DocumentType: Enum "Gen. Journal Document Type"; DocumentNo: Code[20])
+    var
+        VendorLedgerEntry: Record "Vendor Ledger Entry";
+        VendEntryEdit: Codeunit "Vend. Entry-Edit";
+    begin
+        VendorLedgerEntry.SetRange("Document Type", DocumentType);
+        VendorLedgerEntry.SetRange("Document No.", DocumentNo);
+        VendorLedgerEntry.SetRange("On Hold", '');
+        if VendorLedgerEntry.FindSet() then
+            repeat
+                VendEntryEdit.SetOnHold(VendorLedgerEntry, '');
+            until VendorLedgerEntry.Next() = 0;
     end;
 
     // local procedure GetWorkflowInfo(var PurchaseHeader: Record "Purchase Header"; var InfoDialog: Codeunit "Info Dialog WFE")
@@ -98,4 +157,12 @@ codeunit 83807 "Purchase Header Helper WFE"
     //     InfoDialog.Add('Code', WorkFlowCode, InfoDialogEventCode::WORKFLOWCODE);
     //     InfoDialog.Add('Description', WorkflowDescription);
     // end;
+
+    internal procedure OpenRestrictedRecord(var PurchaseHeader: Record "Purchase Header")
+    var
+        RestrictedRecord: Record "Restricted Record";
+    begin
+        RestrictedRecord.SetRange("Record ID", PurchaseHeader.RecordId());
+        Page.Run(Page::"Restricted Records", RestrictedRecord);
+    end;
 }

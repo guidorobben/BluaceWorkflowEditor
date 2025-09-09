@@ -29,8 +29,13 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
+        RecordInfo: Codeunit "Record Info WFE";
     begin
+        RecordInfo.Initialize();
+        RecordInfo.SourceRecord(PurchInvHeader);
+
         InfoDialog.Initialize();
+        InfoDialog.RecordInfo(RecordInfo);
         InfoDialog.SetCaption('Approval');
         UserManagement.GetUserInfo(InfoDialog);
         InfoDialog.AddHeader('Purchase Info');
@@ -97,5 +102,13 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         end;
 
         PurchInvHeaderRecordRef.Modify(false);
+    end;
+
+    internal procedure OpenRestrictedRecord(var PurchInvHeader: Record "Purch. Inv. Header")
+    var
+        RestrictedRecord: Record "Restricted Record";
+    begin
+        RestrictedRecord.SetRange("Record ID", PurchInvHeader.RecordId());
+        Page.Run(Page::"Restricted Records", RestrictedRecord);
     end;
 }
