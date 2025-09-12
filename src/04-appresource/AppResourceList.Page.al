@@ -32,6 +32,8 @@ page 83821 "App Resource List WFE"
             {
                 Caption = 'Download';
                 Image = Download;
+                Enabled = ActionsEnabled;
+                Visible = ActionsVisible;
 
                 trigger OnAction()
                 begin
@@ -41,7 +43,9 @@ page 83821 "App Resource List WFE"
             action(LoadResources)
             {
                 Caption = 'Load Resources';
-                Image = Download;
+                Image = Resource;
+                Enabled = ActionsEnabled;
+                Visible = ActionsVisible;
 
                 trigger OnAction()
                 begin
@@ -49,5 +53,24 @@ page 83821 "App Resource List WFE"
                 end;
             }
         }
+        area(Promoted)
+        {
+            group(Category_Process)
+            {
+                Caption = 'Home';
+
+                actionref(DownloadResource_Promoted; DownloadResource) { }
+                actionref(LoadResources_Promoted; LoadResources) { }
+            }
+        }
     }
+
+    var
+        ActionsEnabled, ActionsVisible : Boolean;
+
+    trigger OnOpenPage()
+    begin
+        ActionsVisible := true;
+        ActionsEnabled := true;
+    end;
 }
