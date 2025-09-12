@@ -2,7 +2,7 @@
   "id": "5c83d613-42be-4be9-8aa0-1aff7da68c46",
   "name": "Workflow Editor",
   "publisher": "Bluace",
-  "version": "1.0.1.8",
+  "version": "1.0.1.10",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -25,8 +25,11 @@
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "15.1",
+  "runtime": "15.2",
   "features": [
     "NoImplicitWith"
+  ],
+    "resourceFolders": [
+    "resources"
   ]
 }
