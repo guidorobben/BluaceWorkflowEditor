@@ -1,5 +1,7 @@
 codeunit 83822 "App Resource Handler WFE"
 {
+    Permissions =;
+
     procedure GetResource(ResourceName: Text; var ResourceInstream: InStream)
     begin
         GetResource(ResourceName, ResourceInstream, TextEncoding::UTF8);
@@ -20,6 +22,9 @@ codeunit 83822 "App Resource Handler WFE"
         ResourceList: List of [Text];
         ResourceName: Text;
     begin
+        if TempAppResource.Count() <> 0 then
+            exit;
+
         ResourceList := NavApp.ListResources(Filter);
 
         foreach ResourceName in ResourceList do
