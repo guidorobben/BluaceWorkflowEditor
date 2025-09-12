@@ -3,12 +3,15 @@ permissionset 83800 "Workflow Editor WFE"
     Assignable = true;
     Caption = 'WORKFLOWEDITOR', MaxLength = 30;
     Permissions =
+        table "App Resource WFE" = X,
+        tabledata "App Resource WFE" = RIMD,
         table "Info Dialog WFE" = X,
         tabledata "Info Dialog WFE" = RIMD,
         table "Workflow Editor Setup WFE" = X,
         tabledata "Workflow Editor Setup WFE" = RIMD,
         table "Workflow Event Log WFE" = X,
         tabledata "Workflow Event Log WFE" = RIMD,
+        codeunit "App Resource Handler WFE" = X,
         codeunit "Approval Entry Helper WFE" = X,
         codeunit "Approvals Mgmt Subscr. WFE" = X,
         codeunit "Info Dialog Helper WFE" = X,
@@ -31,6 +34,7 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Workflow Event Log Hlp. WFE" = X,
         codeunit "Workflow Event Log WFE" = X,
         codeunit "Workflow Helper WFE" = X,
+        page "App Resource List WFE" = X,
         page "Approval Entry Part WFE" = X,
         page "Info Dialog WFE" = X,
         page "Job Planning Line Invoice WFE" = X,
