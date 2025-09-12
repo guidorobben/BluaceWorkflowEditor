@@ -76,17 +76,17 @@ codeunit 83814 "Info Dialog Subscr. WFE"
         case SourceRecordRef.Number() of
             Database::"Sales Header":
                 begin
-                    SourceRecordRef.SetTable(SalesHeader);
+                    SalesHeader := SourceRecordRef;
                     SalesHeader.OpenRestrictedRecord();
                 end;
             Database::"Purchase Header":
                 begin
-                    SourceRecordRef.SetTable(PurchaseHeader);
+                    PurchaseHeader := SourceRecordRef;
                     PurchaseHeader.OpenRestrictedRecord();
                 end;
             Database::"Purch. Inv. Header":
                 begin
-                    SourceRecordRef.SetTable(PurchInvHeader);
+                    PurchInvHeader := SourceRecordRef;
                     PurchInvHeader.OpenRestrictedRecord();
                 end;
         end;
