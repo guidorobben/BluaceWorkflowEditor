@@ -45,13 +45,14 @@ codeunit 83822 "App Resource Handler WFE"
             AddResource(TempResourceName, ResourceName);
 
         if Page.RunModal(Page::"App Resource List WFE", TempResourceName) = Action::LookupOK then begin
-            Name := TempResourceName."Name";
+            Name := TempResourceName.Name;
             GetResource(Name, ResourceInstream);
         end;
     end;
 
     internal procedure DownloadResource(var TempAppResource: Record "App Resource WFE" temporary)
     var
+        FileManagement: Codeunit "File Management";
         ResourceInStream: InStream;
         FileName: Text;
     begin
@@ -59,7 +60,7 @@ codeunit 83822 "App Resource Handler WFE"
             exit;
 
         GetResource(TempAppResource.Name, ResourceInStream);
-        FileName := 'Guido.xml';
+        FileName := FileManagement.GetFileName(TempAppResource.Name);
         File.DownloadFromStream(ResourceInStream, '', '', '', FileName);
     end;
 
@@ -67,7 +68,7 @@ codeunit 83822 "App Resource Handler WFE"
     begin
         TempResourceName.Init();
         TempResourceName."Entry No." := 1;
-        TempResourceName."Name" := ResourceName;
+        TempResourceName.Name := ResourceName;
         TempResourceName.Insert(false);
     end;
 
