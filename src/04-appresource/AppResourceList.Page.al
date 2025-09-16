@@ -2,10 +2,10 @@ page 83821 "App Resource List WFE"
 {
     ApplicationArea = All;
     Caption = 'App Resources';
-    PageType = List;
-    InsertAllowed = false;
     DeleteAllowed = false;
     Editable = false;
+    InsertAllowed = false;
+    PageType = List;
     SourceTable = "App Resource WFE";
     UsageCategory = Administration;
 
@@ -17,9 +17,14 @@ page 83821 "App Resource List WFE"
             {
                 field("Entry No."; Rec."Entry No.")
                 {
+                    StyleExpr = LineStyle;
                     Visible = false;
                 }
-                field("Resource Name"; Rec."Name") { }
+                field("Resource Name"; Rec.Name)
+                {
+                    StyleExpr = LineStyle;
+                }
+                field(Folder; Rec.Folder) { }
             }
         }
     }
@@ -31,8 +36,8 @@ page 83821 "App Resource List WFE"
             action(DownloadResource)
             {
                 Caption = 'Download';
+                Enabled = not Rec.Folder;
                 Image = Download;
-                Enabled = ActionsEnabled;
                 Visible = ActionsVisible;
 
                 trigger OnAction()
@@ -43,8 +48,8 @@ page 83821 "App Resource List WFE"
             action(LoadResources)
             {
                 Caption = 'Load Resources';
-                Image = Resource;
                 Enabled = ActionsEnabled;
+                Image = Resource;
                 Visible = ActionsVisible;
 
                 trigger OnAction()
@@ -67,10 +72,29 @@ page 83821 "App Resource List WFE"
 
     var
         ActionsEnabled, ActionsVisible : Boolean;
+        LineStyle: Text;
 
     trigger OnOpenPage()
     begin
         ActionsVisible := true;
         ActionsEnabled := true;
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        SetLineStyle();
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        SetLineStyle();
+    end;
+
+    local procedure SetLineStyle()
+    begin
+        LineStyle := Format(PageStyle::Standard);
+        if Rec.Folder then
+            LineStyle := Format(PageStyle::Strong);
+
     end;
 }

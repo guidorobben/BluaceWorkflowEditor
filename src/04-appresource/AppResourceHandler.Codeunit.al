@@ -65,10 +65,25 @@ codeunit 83822 "App Resource Handler WFE"
     end;
 
     local procedure AddResource(var TempResourceName: Record "App Resource WFE" temporary; ResourceName: Text)
+    var
+        FileManagement: Codeunit "File Management";
+        FolderName: Text;
+    begin
+        FolderName := FileManagement.GetDirectoryName(ResourceName);
+        AddFolder(TempResourceName, FolderName);
+
+        TempResourceName.Init();
+        TempResourceName.SetNewEntryNo();
+        TempResourceName.Name := ResourceName;
+        TempResourceName.Insert(false);
+    end;
+
+    local procedure AddFolder(var TempResourceName: Record "App Resource WFE" temporary; FolderName: Text)
     begin
         TempResourceName.Init();
-        TempResourceName."Entry No." := 1;
-        TempResourceName.Name := ResourceName;
+        TempResourceName.SetNewEntryNo();
+        TempResourceName.Name := FolderName;
+        TempResourceName.Folder := true;
         TempResourceName.Insert(false);
     end;
 

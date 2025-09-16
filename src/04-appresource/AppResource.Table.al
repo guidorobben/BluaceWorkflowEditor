@@ -18,6 +18,12 @@ table 83800 "App Resource WFE"
             Caption = 'Name';
             ToolTip = 'Specifies the name of the resource.';
         }
+        field(20; Folder; Boolean)
+        {
+            AllowInCustomizations = Always;
+            Caption = 'Folder';
+            ToolTip = 'Specifies if the entry is a folder.';
+        }
     }
 
     keys
@@ -30,6 +36,13 @@ table 83800 "App Resource WFE"
 
     var
         AppResourceHandler: Codeunit "App Resource Handler WFE";
+        LastEntryNo: Integer;
+
+    procedure SetNewEntryNo()
+    begin
+        LastEntryNo += 1;
+        "Entry No." := LastEntryNo;
+    end;
 
     procedure Download()
     begin
