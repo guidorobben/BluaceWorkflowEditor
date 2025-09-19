@@ -31,11 +31,11 @@ report 83800 "Resend Purch. Appr. Req. WFE"
     }
 
     trigger OnPreReport()
-    var
-        FilterErr: Label 'Enter filter for Amount including VAT.';
+    // var
+    //     FilterErr: Label 'Enter filter for Amount including VAT.';
     begin
-        if PurchHeader.GetFilter("Amount Including VAT") = '' then
-            Error(FilterErr);
+        // if PurchHeader.GetFilter("Amount Including VAT") = '' then
+        //     Error(FilterErr);
 
         TestIsApprovalAdministrator();
     end;
