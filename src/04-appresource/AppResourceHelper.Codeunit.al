@@ -1,4 +1,4 @@
-codeunit 83822 "App Resource Handler WFE"
+codeunit 83822 "App Resource Helper WFE"
 {
     Permissions =;
 

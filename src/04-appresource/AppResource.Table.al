@@ -35,7 +35,7 @@ table 83800 "App Resource WFE"
     }
 
     var
-        AppResourceHandler: Codeunit "App Resource Handler WFE";
+        AppResourceHelper: Codeunit "App Resource Helper WFE";
         LastEntryNo: Integer;
 
     procedure SetNewEntryNo()
@@ -46,11 +46,11 @@ table 83800 "App Resource WFE"
 
     procedure Download()
     begin
-        AppResourceHandler.DownloadResource(Rec);
+        AppResourceHelper.DownloadResource(Rec);
     end;
 
     procedure LoadResources()
     begin
-        AppResourceHandler.GetResources(Rec, '');
+        AppResourceHelper.GetResources(Rec, '');
     end;
 }

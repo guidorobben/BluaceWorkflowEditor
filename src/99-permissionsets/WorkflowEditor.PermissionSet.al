@@ -11,7 +11,7 @@ permissionset 83800 "Workflow Editor WFE"
         tabledata "Workflow Editor Setup WFE" = RIMD,
         table "Workflow Event Log WFE" = X,
         tabledata "Workflow Event Log WFE" = RIMD,
-        codeunit "App Resource Handler WFE" = X,
+        codeunit "App Resource Helper WFE" = X,
         codeunit "Approval Entry Helper WFE" = X,
         codeunit "Approvals Mgmt Subscr. WFE" = X,
         codeunit "Info Dialog Helper WFE" = X,
