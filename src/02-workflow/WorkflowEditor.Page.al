@@ -195,6 +195,12 @@ page 83805 "Workflow Editor WFE"
                         Image = UserSetup;
                         RunObject = page "Approval User Setup";
                     }
+                    action(AppResources)
+                    {
+                        Caption = 'App Resources';
+                        Image = ResourceGroup;
+                        RunObject = page "App Resource List WFE";
+                    }
                 }
             }
         }
@@ -243,6 +249,7 @@ page 83805 "Workflow Editor WFE"
 
                 actionref("Workflow Editor Setup_Promoted"; "Workflow Editor Setup") { }
                 actionref(ApprovalUserSetup_Promoted; ApprovalUserSetup) { }
+                actionref(AppResources_Promoted; AppResources) { }
             }
         }
     }

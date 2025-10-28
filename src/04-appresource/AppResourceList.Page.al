@@ -1,7 +1,7 @@
 page 83821 "App Resource List WFE"
 {
     ApplicationArea = All;
-    Caption = 'App Resources';
+    Caption = 'Workflow Editor - App Resources';
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;
@@ -95,6 +95,5 @@ page 83821 "App Resource List WFE"
         LineStyle := Format(PageStyle::Standard);
         if Rec.Folder then
             LineStyle := Format(PageStyle::Strong);
-
     end;
 }
