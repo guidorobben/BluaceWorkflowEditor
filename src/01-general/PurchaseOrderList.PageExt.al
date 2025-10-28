@@ -1,5 +1,16 @@
 pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
 {
+    layout
+    {
+        addafter("Document Date")
+        {
+            field("Order Date TPTE"; Rec."Order Date")
+            {
+                ApplicationArea = All;
+            }
+        }
+    }
+
     actions
     {
         addlast(processing)
