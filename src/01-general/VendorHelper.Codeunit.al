@@ -19,10 +19,10 @@ codeunit 83816 "Vendor Helper WFE"
     var
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
+        RecordInfo: Codeunit "Record Info WFE";
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
-        RecordInfo: Codeunit "Record Info WFE";
     begin
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(Vendor);
@@ -38,5 +38,14 @@ codeunit 83816 "Vendor Helper WFE"
         WorkflowHelper.GetWorkflowInfo(Vendor.RecordId(), InfoDialog);
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Vendor));
         InfoDialog.OpenInfoDialog();
+    end;
+
+    internal procedure OpenApprovalEntries(var Vendor: Record Vendor)
+    var
+        ApprovalEntry: Record "Approval Entry";
+    begin
+        ApprovalEntry.SetRange("Table ID", Vendor.RecordId().TableNo());
+        ApprovalEntry.SetRange("Record ID to Approve", Vendor.RecordId());
+        Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
     end;
 }

@@ -31,6 +31,18 @@ pageextension 83813 "Vendor List WFE" extends "Vendor List"
                         Rec.ShowApprovalInfoWFE();
                     end;
                 }
+                action(ApprovalsWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Approvals';
+                    Image = Approvals;
+                    ToolTip = 'View a list of the records that are waiting to be approved. For example, you can see who requested the record to be approved, when it was sent, and when it is due to be approved.';
+
+                    trigger OnAction()
+                    begin
+                        Rec.OpenApprovalEntriesWFE();
+                    end;
+                }
             }
         }
 
@@ -43,6 +55,7 @@ pageextension 83813 "Vendor List WFE" extends "Vendor List"
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
             }
         }
     }
