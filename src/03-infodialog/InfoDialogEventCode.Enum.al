@@ -26,4 +26,8 @@ enum 83801 "Info Dialog Event Code WFE"
     {
         Caption = 'Record Restriction';
     }
+    value(60; "Approval Entries")
+    {
+        Caption = 'Approval Entries';
+    }
 }

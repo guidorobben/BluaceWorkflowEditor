@@ -59,12 +59,14 @@ codeunit 83807 "Purchase Header Helper WFE"
 
     internal procedure ShowApprovalInfo(var PurchaseHeader: Record "Purchase Header")
     var
+        ApprovalEntry: Record "Approval Entry";
+        ApprovalMgt: Codeunit "Approval Mgt. WFE";
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
+        RecordInfo: Codeunit "Record Info WFE";
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
-        RecordInfo: Codeunit "Record Info WFE";
     begin
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(PurchaseHeader);
@@ -78,6 +80,9 @@ codeunit 83807 "Purchase Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchaseHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchaseHeader.RecordId()));
         WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId(), InfoDialog);
+        InfoDialog.AddHeader('Approval Entries');
+        InfoDialog.Add('All', ApprovalMgt.ApprovalEntriesCount(PurchaseHeader.RecordId().TableNo(), PurchaseHeader.RecordId()), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(PurchaseHeader.RecordId().TableNo(), PurchaseHeader.RecordId(), ApprovalEntry.Status::Open), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.AddHeader('Posting');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchaseHeader), "Info Dialog Event Code WFE"::"Record Restriction");
         InfoDialog.Add('On Hold (Header)', PurchaseHeader."On Hold");

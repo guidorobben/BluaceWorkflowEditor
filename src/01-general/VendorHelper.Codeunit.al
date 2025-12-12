@@ -17,6 +17,8 @@ codeunit 83816 "Vendor Helper WFE"
 
     internal procedure ShowApprovalInfo(Vendor: Record Vendor)
     var
+        ApprovalEntry: Record "Approval Entry";
+        ApprovalMgt: Codeunit "Approval Mgt. WFE";
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
         RecordInfo: Codeunit "Record Info WFE";
@@ -36,6 +38,10 @@ codeunit 83816 "Vendor Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Vendor.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(Vendor.RecordId()));
         WorkflowHelper.GetWorkflowInfo(Vendor.RecordId(), InfoDialog);
+        InfoDialog.AddHeader('Approval Entries');
+        InfoDialog.Add('All', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId()), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId(), ApprovalEntry.Status::Open), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.AddHeader('Posting');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Vendor));
         InfoDialog.OpenInfoDialog();
     end;

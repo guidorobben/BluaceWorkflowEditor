@@ -20,6 +20,8 @@ codeunit 83814 "Info Dialog Subscr. WFE"
                 OpenWorkflowStepInstance(RecordInfo.WorkFlowCode());
             EventCode::"Record Restriction":
                 OpenRecordRestriction(RecordInfo);
+            EventCode::"Approval Entries":
+                OpenApprovalEntries(RecordInfo);
         end;
     end;
 
@@ -90,5 +92,16 @@ codeunit 83814 "Info Dialog Subscr. WFE"
                     PurchInvHeader.OpenRestrictedRecord();
                 end;
         end;
+    end;
+
+    local procedure OpenApprovalEntries(var RecordInfo: Codeunit "Record Info WFE")
+    var
+        ApprovalMgt: Codeunit "Approval Mgt. WFE";
+        SourceRecordRef: RecordRef;
+        SourceVariant: Variant;
+    begin
+        SourceVariant := RecordInfo.SourceRecord();
+        SourceRecordRef.GetTable(SourceVariant);
+        ApprovalMgt.OpenApprovalEntries(SourceRecordRef.RecordId().TableNo(), SourceRecordRef.RecordId);
     end;
 }
