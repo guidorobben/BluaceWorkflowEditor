@@ -51,6 +51,11 @@ page 83806 "Approval Entry Part WFE"
 
     trigger OnAfterGetCurrRecord()
     begin
+        GetData();
+    end;
+
+    procedure GetData()
+    begin
         GetRecipientEmailAddress();
         JobQueueEntryNotificationCount := NotificationJobQueueEntriesCount();
         SendNotificationEntries := SendNotificationCount();
@@ -69,6 +74,12 @@ page 83806 "Approval Entry Part WFE"
     procedure SetNotificationEntry(NotificationEntry: Record "Notification Entry")
     begin
         CurrNotificationEntry := NotificationEntry;
+        if not Rec.Get(CurrNotificationEntry."Triggered By Record") then begin
+            ClearData();
+            exit;
+        end;
+        GetData();
+        CurrPage.Update(false);
     end;
 
     local procedure NotificationJobQueueEntriesCount(): Integer
@@ -87,5 +98,12 @@ page 83806 "Approval Entry Part WFE"
     begin
         SentNotificationEntry.SetRange("Recipient User ID", CurrNotificationEntry."Recipient User ID");
         exit(SentNotificationEntry.Count());
+    end;
+
+    local procedure ClearData()
+    begin
+        RecipientEmailAddress := '';
+        JobQueueEntryNotificationCount := 0;
+        SendNotificationEntries := 0;
     end;
 }

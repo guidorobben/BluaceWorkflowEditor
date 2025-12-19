@@ -28,15 +28,15 @@ page 83822 "Approval Entries WFE"
                 }
                 field("Limit Type"; Rec."Limit Type")
                 {
-                    ToolTip = 'Specifies the type of limit that applies to the approval template:';
+                    ToolTip = 'Specifies the type of limit that applies to the approval template.';
                 }
                 field("Approval Type"; Rec."Approval Type")
                 {
-                    ToolTip = 'Specifies which approvers apply to this approval template:';
+                    ToolTip = 'Specifies which approvers apply to this approval template.';
                 }
                 field("Document Type"; Rec."Document Type")
                 {
-                    ToolTip = 'Specifies the type of document that an approval entry has been created for. Approval entries can be created for six different types of sales or purchase documents:';
+                    ToolTip = 'Specifies the type of document that an approval entry has been created for. Approval entries can be created for six different types of sales or purchase documents.';
                     Visible = false;
                 }
                 field("Document No."; Rec."Document No.")
@@ -60,7 +60,7 @@ page 83822 "Approval Entries WFE"
                 }
                 field(Status; Rec.Status)
                 {
-                    ToolTip = 'Specifies the approval status for the entry:';
+                    ToolTip = 'Specifies the approval status for the entry.';
                 }
                 field("Sender ID"; Rec."Sender ID")
                 {
@@ -75,7 +75,9 @@ page 83822 "Approval Entries WFE"
                 }
                 field("Salespers./Purch. Code"; Rec."Salespers./Purch. Code")
                 {
+#pragma warning disable LC0038
                     ToolTip = 'Specifies the code for the salesperson or purchaser that was in the document to be approved. It is not a mandatory field, but is useful if a salesperson or a purchaser responsible for the customer/vendor needs to approve the document before it is processed.';
+#pragma warning restore LC0038
                 }
                 field("Approver ID"; Rec."Approver ID")
                 {
@@ -188,7 +190,7 @@ page 83822 "Approval Entries WFE"
                     trigger OnAction()
                     begin
                         Rec.SetFilter(Status, '%1|%2', Rec.Status::Created, Rec.Status::Open);
-                        Rec.SetFilter("Due Date", '<%1', Today);
+                        Rec.SetFilter("Due Date", '<%1', Today());
                     end;
                 }
                 action("All Entries")
@@ -374,7 +376,9 @@ page 83822 "Approval Entries WFE"
         DelegateEnable: Boolean;
         ShowChangeFactBox: Boolean;
         ShowRecCommentsEnabled: Boolean;
+#pragma warning disable LC0088
         Overdue: Option Yes," ";
+#pragma warning restore LC0088
         RecordIDText: Text;
 
     trigger OnAfterGetRecord()
