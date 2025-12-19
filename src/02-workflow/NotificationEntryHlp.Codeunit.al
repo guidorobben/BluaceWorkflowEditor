@@ -4,9 +4,10 @@ codeunit 83812 "Notification Entry Hlp. WFE"
         tabledata "Approval Entry" = R,
         tabledata "Notification Entry" = RD;
 
-    internal procedure DeleteNotifications(var NotificationEntry: Record "Notification Entry")
     var
         UserManagement: Codeunit "User Management WFE";
+
+    internal procedure DeleteNotifications(var NotificationEntry: Record "Notification Entry")
     begin
         UserManagement.TestIsApprovalAdministrator();
         NotificationEntry.DeleteAll(true);
@@ -32,5 +33,11 @@ codeunit 83812 "Notification Entry Hlp. WFE"
     begin
         if ApprovalEntry.Get(NotificationEntry."Triggered By Record") then
             exit(ApprovalEntry."Record ID to Approve");
+    end;
+
+    internal procedure RunAllNotificationDispatcher()
+    begin
+        UserManagement.TestIsApprovalAdministrator();
+        Codeunit.Run(Codeunit::"Notification Dispatcher WFE");
     end;
 }

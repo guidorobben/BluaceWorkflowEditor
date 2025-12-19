@@ -7,7 +7,8 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
             part("Approval Entry Part"; "Approval Entry Part WFE")
             {
                 ApplicationArea = All;
-                SubPageLink = "Record ID to Approve" = field("Triggered By Record");
+                Visible = false;
+                // SubPageLink = "Record ID to Approve" = field("Triggered By Record");
             }
         }
     }
@@ -44,6 +45,18 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
                         NotificationEntry.DeleteNotificationsWFE();
                     end;
                 }
+                action(DispatchAllWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Dispatch All (Preview)';
+                    Image = SendApprovalRequest;
+                    ToolTip = 'Dispatches all notifications immediately.';
+
+                    trigger OnAction()
+                    begin
+                        Rec.RunAllNotificationDispatcherWFE();
+                    end;
+                }
             }
         }
 
@@ -56,12 +69,13 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
 
                 actionref(SendNotificationsWFE_Promoted; SendNotificationsWFE) { }
                 actionref(DeleteWFE_Promoted; DeleteWFE) { }
+                actionref(DispatchAllWFE_Promoted; DispatchAllWFE) { }
             }
         }
     }
 
     trigger OnAfterGetCurrRecord()
     begin
-        CurrPage."Approval Entry Part".Page.SetNotificationEntry(Rec);
+        // CurrPage."Approval Entry Part".Page.SetNotificationEntry(Rec);
     end;
 }

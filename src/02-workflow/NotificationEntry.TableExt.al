@@ -22,4 +22,9 @@ tableextension 83804 "Notification Entry WFE" extends "Notification Entry"
     begin
         exit(NotificationEntryHlpWFE.GetRecordToApprove(Rec));
     end;
+
+    procedure RunAllNotificationDispatcherWFE()
+    begin
+        NotificationEntryHlpWFE.RunAllNotificationDispatcher();
+    end;
 }
