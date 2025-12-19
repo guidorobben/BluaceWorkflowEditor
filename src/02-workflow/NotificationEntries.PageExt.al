@@ -2,6 +2,11 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
 {
     layout
     {
+        modify(ID)
+        {
+            Visible = true;
+        }
+
         addlast(FactBoxes)
         {
             part("Approval Entry Part"; "Approval Entry Part WFE")
@@ -57,6 +62,18 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
                         Rec.RunAllNotificationDispatcherWFE();
                     end;
                 }
+                action(ShowRecordToApproveWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Show Record to Approve';
+                    Image = View;
+                    ToolTip = 'Opens the record that needs to be approved.';
+
+                    trigger OnAction()
+                    begin
+                        Rec.ShowRecordToApproveWFE();
+                    end;
+                }
             }
         }
 
@@ -67,6 +84,7 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
+                actionref(ShowRecordToApproveWFE_Promoted; ShowRecordToApproveWFE) { }
                 actionref(SendNotificationsWFE_Promoted; SendNotificationsWFE) { }
                 actionref(DeleteWFE_Promoted; DeleteWFE) { }
                 actionref(DispatchAllWFE_Promoted; DispatchAllWFE) { }
