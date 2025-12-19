@@ -102,6 +102,6 @@ codeunit 83814 "Info Dialog Subscr. WFE"
     begin
         SourceVariant := RecordInfo.SourceRecord();
         SourceRecordRef.GetTable(SourceVariant);
-        ApprovalMgt.OpenApprovalEntries(SourceRecordRef.RecordId().TableNo(), SourceRecordRef.RecordId);
+        ApprovalMgt.OpenApprovalEntries(SourceRecordRef.RecordId().TableNo(), SourceRecordRef.RecordId());
     end;
 }
