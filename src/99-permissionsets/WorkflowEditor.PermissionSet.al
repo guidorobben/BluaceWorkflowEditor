@@ -19,6 +19,7 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Info Dialog Subscr. WFE" = X,
         codeunit "Info Dialog WFE" = X,
         codeunit "Job Planning Line Helper WFE" = X,
+        codeunit "Notification Dispatcher WFE" = X,
         codeunit "Notification Entry Hlp. WFE" = X,
         codeunit "Notification Entry Subscr. WFE" = X,
         codeunit "Purch. Inv. Header Helper WFE" = X,
