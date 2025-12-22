@@ -6,13 +6,20 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
         {
             Visible = true;
         }
+        modify("Error Message")
+        {
+            trigger OnDrillDown()
+            begin
+                Message(Rec."Error Message");
+            end;
+        }
 
         addlast(FactBoxes)
         {
             part("Approval Entry Part"; "Approval Entry Part WFE")
             {
                 ApplicationArea = All;
-                Visible = false;
+                Visible = true;
                 // SubPageLink = "Record ID to Approve" = field("Triggered By Record");
             }
         }
@@ -50,6 +57,19 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
                         NotificationEntry.DeleteNotificationsWFE();
                     end;
                 }
+                action(DispatchCurrentWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Dispatch Current (Preview)';
+                    Image = SendApprovalRequest;
+                    ToolTip = 'Dispatches current notification immediately.';
+
+                    trigger OnAction()
+                    begin
+                        Rec.RunCurrentNotificationViaDispatcherWFE();
+                    end;
+                }
+
                 action(DispatchAllWFE)
                 {
                     ApplicationArea = All;
@@ -86,14 +106,40 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
 
                 actionref(ShowRecordToApproveWFE_Promoted; ShowRecordToApproveWFE) { }
                 actionref(SendNotificationsWFE_Promoted; SendNotificationsWFE) { }
-                actionref(DeleteWFE_Promoted; DeleteWFE) { }
+                actionref(DispatchCurrentWFE_Promoted; DispatchCurrentWFE) { }
                 actionref(DispatchAllWFE_Promoted; DispatchAllWFE) { }
+                actionref(DeleteWFE_Promoted; DeleteWFE) { }
+            }
+        }
+    }
+
+    views
+    {
+        addlast
+        {
+            view(TypeApprovalWFE)
+            {
+                Caption = 'Approval';
+                Filters = where(Type = filter(Approval));
+                SharedLayout = true;
+            }
+            view(TypeNewRecordWFE)
+            {
+                Caption = 'New Record';
+                Filters = where(Type = filter("New Record"));
+                SharedLayout = true;
+            }
+            view(TypeOverdueWFE)
+            {
+                Caption = 'Overdue';
+                Filters = where(Type = filter(Overdue));
+                SharedLayout = true;
             }
         }
     }
 
     trigger OnAfterGetCurrRecord()
     begin
-        // CurrPage."Approval Entry Part".Page.SetNotificationEntry(Rec);
+        CurrPage."Approval Entry Part".Page.SetNotificationEntry(Rec);
     end;
 }

@@ -36,16 +36,28 @@ codeunit 83812 "Notification Entry Hlp. WFE"
     end;
 
     internal procedure RunAllNotificationDispatcher()
+    var
+        NotificationEntry: Record "Notification Entry";
     begin
         UserManagement.TestIsApprovalAdministrator();
-        Codeunit.Run(Codeunit::"Notification Dispatcher WFE");
+        Codeunit.Run(Codeunit::"Notification Dispatcher WFE", NotificationEntry);
+    end;
+
+    internal procedure RunCurrentNotificationViaDispatcher(var NotificationEntry: Record "Notification Entry")
+    var
+        DispatchNotificationEntry: Record "Notification Entry";
+    begin
+        UserManagement.TestIsApprovalAdministrator();
+        DispatchNotificationEntry := NotificationEntry;
+        DispatchNotificationEntry.SetRecFilter();
+        Codeunit.Run(Codeunit::"Notification Dispatcher WFE", DispatchNotificationEntry);
     end;
 
     internal procedure ShowRecordToApprovevar(Rec: Record "Notification Entry")
     var
-        RecordID: Variant;
-        RecordRef: RecordRef;
         PageManagement: Codeunit "Page Management";
+        RecordRef: RecordRef;
+        RecordID: Variant;
     begin
         if not RecordRef.Get(RecordID) then
             exit;

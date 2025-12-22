@@ -5,9 +5,11 @@ page 83806 "Approval Entry Part WFE"
     PageType = CardPart;
     Permissions =
         tabledata "Approval Entry" = RIMD,
+        tabledata "Job Queue Entry" = R,
         tabledata "Notification Entry" = R,
+        tabledata "Overdue Approval Entry" = R,
+        tabledata "Sent Notification Entry" = R,
         tabledata "User Setup" = R;
-    SourceTable = "Approval Entry";
     UsageCategory = None;
 
     layout
@@ -18,35 +20,55 @@ page 83806 "Approval Entry Part WFE"
             {
                 Caption = 'General';
 
-                field(Status; Rec.Status)
+                field(ApprovalStatus; ApprovalStatus)
                 {
+                    Caption = 'Approval Status';
                     ToolTip = 'Specifies the approval status for the entry.';
+
+                    trigger OnDrillDown()
+                    var
+                        ApprovalEntry: Record "Approval Entry";
+                        PageManagement: Codeunit "Page Management";
+                    begin
+                        if GetApprovalEntry(CurrNotificationEntry, ApprovalEntry) then
+                            PageManagement.PageRun(ApprovalEntry);
+                    end;
                 }
-                field("Record ID to Approve"; Format(Rec."Record ID to Approve"))
+                field(RecordToApprove; Format(RecordToApprove))
                 {
                     Caption = 'Record to Approve';
-                    ToolTip = 'Specifies the value of the Record ID to Approve field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Record ID to Approve field.';
+
+                    trigger OnDrillDown()
+                    var
+                        PageManagement: Codeunit "Page Management";
+                    begin
+                        PageManagement.PageRun(RecordToApprove);
+                    end;
+
                 }
                 field(RecepientEmailAddressControl; RecipientEmailAddress)
                 {
                     Caption = 'Recepient Email Address';
                 }
-                field(JobQueueEntryNotificationCountControl; JobQueueEntryNotificationCount)
-                {
-                    Caption = 'Job Queue Entries';
-                }
-                field(PostedNotificationEntries; SendNotificationEntries)
-                {
-                    Caption = 'Posted Notification Entries';
-                }
+                // field(JobQueueEntryNotificationCountControl; JobQueueEntryNotificationCount)
+                // {
+                //     Caption = 'Job Queue Entries';
+                // }
+                // field(PostedNotificationEntries; SendNotificationEntries)
+                // {
+                //     Caption = 'Posted Notification Entries';
+                // }
             }
         }
     }
 
     var
         CurrNotificationEntry: Record "Notification Entry";
+        RecordToApprove: RecordId;
+        ApprovalStatus: Enum "Approval Status";
         JobQueueEntryNotificationCount: Integer;
-        SendNotificationEntries: Integer;
+        // SendNotificationEntries: Integer;
         RecipientEmailAddress: Text;
 
     trigger OnAfterGetCurrRecord()
@@ -58,7 +80,7 @@ page 83806 "Approval Entry Part WFE"
     begin
         GetRecipientEmailAddress();
         JobQueueEntryNotificationCount := NotificationJobQueueEntriesCount();
-        SendNotificationEntries := SendNotificationCount();
+        // SendNotificationEntries := SendNotificationCount();
     end;
 
     local procedure GetRecipientEmailAddress(): Text
@@ -72,15 +94,54 @@ page 83806 "Approval Entry Part WFE"
     end;
 
     procedure SetNotificationEntry(NotificationEntry: Record "Notification Entry")
+    var
+        ApprovalEntry: Record "Approval Entry";
+        OverdueApprovalEntry: Record "Overdue Approval Entry";
+        UserManagement: Codeunit "User Management WFE";
+        FoundRecord: Boolean;
     begin
-        CurrNotificationEntry := NotificationEntry;
-        if not Rec.Get(CurrNotificationEntry."Triggered By Record") then begin
-            ClearData();
+        if not UserManagement.IsApprovalAdministrator() then
             exit;
+
+        CurrNotificationEntry := NotificationEntry;
+        case NotificationEntry.Type of
+            NotificationEntry.Type::Approval:
+                if GetApprovalEntry(NotificationEntry, ApprovalEntry) then begin
+                    FoundRecord := true;
+                    ApprovalStatus := ApprovalEntry.Status;
+                    RecordToApprove := ApprovalEntry."Record ID to Approve";
+                end;
+            NotificationEntry.Type::"New Record":
+                begin
+                    RecordToApprove := NotificationEntry."Triggered By Record";
+                    FoundRecord := true;
+                end;
+            NotificationEntry.Type::Overdue:
+                if GetOverdueApprovalEntry(NotificationEntry, OverdueApprovalEntry) then begin
+                    FoundRecord := true;
+                    ApprovalStatus := ApprovalStatus::" ";
+                    RecordToApprove := OverdueApprovalEntry."Record ID to Approve";
+                end;
         end;
-        GetData();
+
+        if not FoundRecord then
+            ClearData();
         CurrPage.Update(false);
     end;
+
+    local procedure GetApprovalEntry(var NotificationEntry: Record "Notification Entry"; var ApprovalEntry: Record "Approval Entry"): Boolean
+    begin
+        if ApprovalEntry.Get(NotificationEntry."Triggered By Record") then
+            exit(true);
+    end;
+
+
+    local procedure GetOverdueApprovalEntry(var NotificationEntry: Record "Notification Entry"; var OverdueApprovalEntry: Record "Overdue Approval Entry"): Boolean
+    begin
+        if OverdueApprovalEntry.Get(NotificationEntry."Triggered By Record") then
+            exit(true);
+    end;
+
 
     local procedure NotificationJobQueueEntriesCount(): Integer
     var
@@ -92,18 +153,20 @@ page 83806 "Approval Entry Part WFE"
         exit(JobQueueEntry.Count());
     end;
 
-    local procedure SendNotificationCount(): Integer
-    var
-        SentNotificationEntry: Record "Sent Notification Entry";
-    begin
-        SentNotificationEntry.SetRange("Recipient User ID", CurrNotificationEntry."Recipient User ID");
-        exit(SentNotificationEntry.Count());
-    end;
+    // local procedure SendNotificationCount(): Integer
+    // var
+    //     SentNotificationEntry: Record "Sent Notification Entry";
+    // begin
+    //     SentNotificationEntry.SetRange("Recipient User ID", CurrNotificationEntry."Recipient User ID");
+    //     exit(SentNotificationEntry.Count());
+    // end;
 
     local procedure ClearData()
     begin
+        ApprovalStatus := ApprovalStatus::" ";
         RecipientEmailAddress := '';
         JobQueueEntryNotificationCount := 0;
-        SendNotificationEntries := 0;
+        // SendNotificationEntries := 0;
+        Clear(RecordToApprove);
     end;
 }

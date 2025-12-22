@@ -10,6 +10,8 @@ codeunit 83824 "Notification Dispatcher WFE"
         tabledata "Report Layout Selection" = R,
         tabledata "User Setup" = R;
 
+    TableNo = "Notification Entry";
+
     trigger OnRun()
     begin
         //        if Rec."Parameter String" = '' then
