@@ -79,7 +79,7 @@ page 83806 "Approval Entry Part WFE"
     procedure GetData()
     begin
         GetRecipientEmailAddress();
-        JobQueueEntryNotificationCount := NotificationJobQueueEntriesCount();
+        // JobQueueEntryNotificationCount := NotificationJobQueueEntriesCount();
         // SendNotificationEntries := SendNotificationCount();
     end;
 
@@ -143,15 +143,15 @@ page 83806 "Approval Entry Part WFE"
     end;
 
 
-    local procedure NotificationJobQueueEntriesCount(): Integer
-    var
-        JobQueueEntry: Record "Job Queue Entry";
-    begin
-        JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Codeunit);
-        JobQueueEntry.SetRange("Object ID to Run", Codeunit::"Notification Entry Dispatcher");
-        JobQueueEntry.SetRange("User ID", CurrNotificationEntry."Created By");
-        exit(JobQueueEntry.Count());
-    end;
+    // local procedure NotificationJobQueueEntriesCount(): Integer
+    // var
+    //     JobQueueEntry: Record "Job Queue Entry";
+    // begin
+    //     JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Codeunit);
+    //     JobQueueEntry.SetRange("Object ID to Run", Codeunit::"Notification Entry Dispatcher");
+    //     JobQueueEntry.SetRange("User ID", CurrNotificationEntry."Created By");
+    //     exit(JobQueueEntry.Count());
+    // end;
 
     // local procedure SendNotificationCount(): Integer
     // var
@@ -165,7 +165,7 @@ page 83806 "Approval Entry Part WFE"
     begin
         ApprovalStatus := ApprovalStatus::" ";
         RecipientEmailAddress := '';
-        JobQueueEntryNotificationCount := 0;
+        // JobQueueEntryNotificationCount := 0;
         // SendNotificationEntries := 0;
         Clear(RecordToApprove);
     end;
