@@ -104,7 +104,7 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
                 Caption = 'Workflow Editor';
                 Image = Workflow;
 
-                actionref(ShowRecordToApproveWFE_Promoted; ShowRecordToApproveWFE) { }
+                // actionref(ShowRecordToApproveWFE_Promoted; ShowRecordToApproveWFE) { }
                 actionref(SendNotificationsWFE_Promoted; SendNotificationsWFE) { }
                 actionref(DispatchCurrentWFE_Promoted; DispatchCurrentWFE) { }
                 actionref(DispatchAllWFE_Promoted; DispatchAllWFE) { }
