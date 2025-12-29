@@ -59,5 +59,6 @@ permissionset 83800 "Workflow Editor WFE"
         page "Workflow Step Buffer WFE" = X,
         page "Workflow Step Editor WFE" = X,
         page "Workflow Step Instance WFE" = X,
-        report "Resend Purch. Appr. Req. WFE" = X;
+        report "Resend Purch. Appr. Req. WFE" = X,
+        codeunit "Modify Subscr. WFE" = X;
 }

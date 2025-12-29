@@ -31,6 +31,16 @@ table 83801 "Workflow Editor Setup WFE"
 
             //TODO Lookup voor field
         }
+        field(40; "Debug Modify Purchase Header"; Boolean)
+        {
+            Caption = 'Debug Modify Purchase Header';
+            ToolTip = 'Enables debug logging for modifications to Purchase Header records.';
+        }
+        field(50; "Debug Modify Sales Header"; Boolean)
+        {
+            Caption = 'Debug Modify Sales Header';
+            ToolTip = 'Enables debug logging for modifications to Sales Header records.';
+        }
     }
 
     keys
