@@ -4,11 +4,15 @@ codeunit 83825 "Modify Subscr. WFE"
     Permissions = tabledata "Workflow Editor Setup WFE" = R;
 
     var
+        UserManagement: Codeunit "User Management WFE";
         CallStackMsg: Label '%1:\\%2', Locked = true;
 
     [EventSubscriber(ObjectType::Table, Database::"Purchase Header", OnBeforeModifyEvent, '', true, true)]
     local procedure OnBeforeModifyPurchaseHeader(var Rec: Record "Purchase Header")
     begin
+        if not UserManagement.IsApprovalAdministrator() then
+            exit;
+
         if not DebugModifyPurchaseHeader() then
             exit;
 
@@ -18,6 +22,9 @@ codeunit 83825 "Modify Subscr. WFE"
     [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnBeforeModifyEvent, '', true, true)]
     local procedure OnBeforeModifySalesHeader(var Rec: Record "Sales Header")
     begin
+        if not UserManagement.IsApprovalAdministrator() then
+            exit;
+
         if not DebugModifySalesHeader() then
             exit;
 
