@@ -19,6 +19,18 @@ codeunit 83825 "Modify Subscr. WFE"
         Message(StrSubstNo(CallStackMsg, Format(Rec.RecordId()), SessionInformation.Callstack()));
     end;
 
+    [EventSubscriber(ObjectType::Table, Database::"Purch. Inv. Header", OnBeforeModifyEvent, '', true, true)]
+    local procedure OnBeforeModifyPurchInvHeader(var Rec: Record "Purch. Inv. Header")
+    begin
+        if not UserManagement.IsApprovalAdministrator() then
+            exit;
+
+        if not DebugModifyPurchInvHeader() then
+            exit;
+
+        Message(StrSubstNo(CallStackMsg, Format(Rec.RecordId()), SessionInformation.Callstack()));
+    end;
+
     [EventSubscriber(ObjectType::Table, Database::"Sales Header", OnBeforeModifyEvent, '', true, true)]
     local procedure OnBeforeModifySalesHeader(var Rec: Record "Sales Header")
     begin
@@ -35,18 +47,33 @@ codeunit 83825 "Modify Subscr. WFE"
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
-        if not WorkflowEditorSetup.ReadPermission() then
-            exit;
-
-        if not WorkflowEditorSetup.Get() then
+        if not GetWorkflowEditorSetup(WorkflowEditorSetup) then
             exit;
 
         exit(WorkflowEditorSetup."Debug Modify Purchase Header");
     end;
 
+    local procedure DebugModifyPurchInvHeader(): Boolean
+    var
+        WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
+    begin
+        if not GetWorkflowEditorSetup(WorkflowEditorSetup) then
+            exit;
+
+        exit(WorkflowEditorSetup."Debug Modify Purch. Inv Header");
+    end;
+
     local procedure DebugModifySalesHeader(): Boolean
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
+    begin
+        if not GetWorkflowEditorSetup(WorkflowEditorSetup) then
+            exit;
+
+        exit(WorkflowEditorSetup."Debug Modify Sales Header");
+    end;
+
+    local procedure GetWorkflowEditorSetup(var WorkflowEditorSetup: Record "Workflow Editor Setup WFE"): Boolean
     begin
         if not WorkflowEditorSetup.ReadPermission() then
             exit;
@@ -54,6 +81,6 @@ codeunit 83825 "Modify Subscr. WFE"
         if not WorkflowEditorSetup.Get() then
             exit;
 
-        exit(WorkflowEditorSetup."Debug Modify Sales Header");
+        exit(true);
     end;
 }

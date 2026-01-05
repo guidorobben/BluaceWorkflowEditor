@@ -17,6 +17,7 @@ page 83807 "Workflow Editor Setup WFE"
                 field("Disable Mail Notifications"; Rec."Disable Mail Notifications") { }
                 field("Log Workflow Events"; Rec."Log Workflow Events") { }
                 field("Debug Modify Purchase Header"; Rec."Debug Modify Purchase Header") { }
+                field("Debug Modify Purch. Inv Header"; Rec."Debug Modify Purch. Inv Header") { }
                 field("Debug Modify Sales Header"; Rec."Debug Modify Sales Header") { }
 
             }

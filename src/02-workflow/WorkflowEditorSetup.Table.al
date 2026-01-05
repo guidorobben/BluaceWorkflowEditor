@@ -41,6 +41,12 @@ table 83801 "Workflow Editor Setup WFE"
             Caption = 'Debug Modify Sales Header';
             ToolTip = 'Enables debug logging for modifications to Sales Header records.';
         }
+        field(60; "Debug Modify Purch. Inv Header"; Boolean)
+        {
+            Caption = 'Debug Modify Purchase Invoice Header';
+            ToolTip = 'Enables debug logging for modifications to Purchase Invoice Header records.';
+        }
+
     }
 
     keys
