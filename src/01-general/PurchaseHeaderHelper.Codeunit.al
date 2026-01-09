@@ -82,7 +82,8 @@ codeunit 83807 "Purchase Header Helper WFE"
         WorkflowHelper.GetWorkflowInfo(PurchaseHeader.RecordId(), InfoDialog);
         InfoDialog.AddHeader('Approval Entries');
         InfoDialog.Add('All', ApprovalMgt.ApprovalEntriesCount(PurchaseHeader.RecordId().TableNo(), PurchaseHeader.RecordId()), "Info Dialog Event Code WFE"::"Approval Entries");
-        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(PurchaseHeader.RecordId().TableNo(), PurchaseHeader.RecordId(), ApprovalEntry.Status::Open), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(PurchaseHeader.RecordId().TableNo(), PurchaseHeader.RecordId(), ApprovalEntry.Status::Open, false), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Overdue', ApprovalMgt.ApprovalEntriesCount(PurchaseHeader.RecordId().TableNo(), PurchaseHeader.RecordId(), ApprovalEntry.Status::Open, true), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.AddHeader('Posting');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchaseHeader), "Info Dialog Event Code WFE"::"Record Restriction");
         InfoDialog.Add('On Hold (Header)', PurchaseHeader."On Hold");

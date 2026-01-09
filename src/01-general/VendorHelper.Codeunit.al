@@ -40,7 +40,8 @@ codeunit 83816 "Vendor Helper WFE"
         WorkflowHelper.GetWorkflowInfo(Vendor.RecordId(), InfoDialog);
         InfoDialog.AddHeader('Approval Entries');
         InfoDialog.Add('All', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId()), "Info Dialog Event Code WFE"::"Approval Entries");
-        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId(), ApprovalEntry.Status::Open), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId(), ApprovalEntry.Status::Open, false), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Overdue', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId(), ApprovalEntry.Status::Open, true), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.AddHeader('Posting');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Vendor));
         InfoDialog.OpenInfoDialog();

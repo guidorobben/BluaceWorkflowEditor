@@ -18,6 +18,7 @@ page 83822 "Approval Entries WFE"
                 field(Overdue; Overdue)
                 {
                     Caption = 'Overdue';
+                    // OptionCaption = 'Yes,""';
                     Editable = false;
                     ToolTip = 'Specifies that the approval is overdue.';
                 }
@@ -185,7 +186,7 @@ page 83822 "Approval Entries WFE"
                 {
                     Caption = 'O&verdue Entries';
                     Image = OverdueEntries;
-                    ToolTip = 'View approval requests that are overdue.';
+                    ToolTip = 'View approval requests that are overdue (<Today).';
 
                     trigger OnAction()
                     begin

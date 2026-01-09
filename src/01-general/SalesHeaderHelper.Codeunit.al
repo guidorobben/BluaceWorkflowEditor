@@ -29,7 +29,8 @@ codeunit 83819 "Sales Header Helper WFE"
         WorkflowHelper.GetWorkflowInfo(SalesHeader.RecordId(), InfoDialog);
         InfoDialog.AddHeader('Approval Entries');
         InfoDialog.Add('All', ApprovalMgt.ApprovalEntriesCount(SalesHeader.RecordId().TableNo(), SalesHeader.RecordId()), "Info Dialog Event Code WFE"::"Approval Entries");
-        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(SalesHeader.RecordId().TableNo(), SalesHeader.RecordId(), ApprovalEntry.Status::Open), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(SalesHeader.RecordId().TableNo(), SalesHeader.RecordId(), ApprovalEntry.Status::Open, false), "Info Dialog Event Code WFE"::"Approval Entries");
+        InfoDialog.Add('Overdue', ApprovalMgt.ApprovalEntriesCount(SalesHeader.RecordId().TableNo(), SalesHeader.RecordId(), ApprovalEntry.Status::Open, true), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.AddHeader('Posting');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(SalesHeader));
         InfoDialog.OpenInfoDialog();

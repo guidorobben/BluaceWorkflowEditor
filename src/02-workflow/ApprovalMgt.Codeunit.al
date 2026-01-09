@@ -24,7 +24,7 @@ codeunit 83823 "Approval Mgt. WFE"
         exit(ApprovalEntry.Count())
     end;
 
-    procedure ApprovalEntriesCount(TableID: Integer; SourceRecordID: RecordId; Status: Enum "Approval Status"): Integer
+    procedure ApprovalEntriesCount(TableID: Integer; SourceRecordID: RecordId; Status: Enum "Approval Status"; Overdue: Boolean): Integer
     var
         ApprovalEntry: Record "Approval Entry";
     begin
@@ -34,6 +34,8 @@ codeunit 83823 "Approval Mgt. WFE"
         ApprovalEntry.SetRange("Table ID", TableID);
         ApprovalEntry.SetRange("Record ID to Approve", SourceRecordID);
         ApprovalEntry.SetRange(Status, Status);
+        if Overdue then
+            ApprovalEntry.SetFilter("Due Date", '<%1', Today());
         exit(ApprovalEntry.Count())
     end;
 }
