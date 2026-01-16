@@ -137,12 +137,6 @@ page 83805 "Workflow Editor WFE"
                     Image = Log;
                     RunObject = page "Workflow Event Log WFE";
                 }
-                action(NotificationEntries)
-                {
-                    Caption = 'Notification Entries';
-                    Image = OverdueMail;
-                    RunObject = page "Notification Entries";
-                }
                 action(RestrictedRecords)
                 {
                     Caption = 'Restricted Records';
@@ -177,6 +171,34 @@ page 83805 "Workflow Editor WFE"
                         Image = CreditMemo;
                         RunObject = page "Purchase Credit Memos";
                     }
+                }
+
+                group(Notifications)
+                {
+                    Caption = 'Notifications';
+
+                    action(NotificationEntries)
+                    {
+                        Caption = 'Notification Entries';
+                        Image = OverdueMail;
+                        RunObject = page "Notification Entries";
+                    }
+                    action(SendNotifications)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Send Notifications';
+                        Image = SendApprovalRequest;
+                        RunObject = page "Sent Notification Entries";
+                        ToolTip = 'Opens the send notification entries page.';
+                    }
+                    action(SendEmails)
+                    {
+                        Caption = 'Send Emails';
+                        Image = SendMail;
+                        RunObject = page "Sent Emails";
+                        ToolTip = 'Opens the sent emails page.';
+                    }
+
                 }
                 group(Setup)
                 {
@@ -227,7 +249,6 @@ page 83805 "Workflow Editor WFE"
                 actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
                 actionref(WorkflowStepInstancesArchive_Promoted; WorkflowStepInstancesArchives) { }
                 actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
-                actionref(NotificationEntries_Promoted; NotificationEntries) { }
                 actionref(RestrictedRecords_Promoted; RestrictedRecords) { }
             }
 
@@ -240,6 +261,16 @@ page 83805 "Workflow Editor WFE"
                 actionref(PurchaseOrders_Promoted; PurchaseOrders) { }
                 actionref(PurchaseInvoicesTPTE_Promoted; PurchaseInvoices) { }
                 actionref(PurchaseCreditMemosTPTE_Promoted; PurchaseCreditMemos) { }
+            }
+
+            group(NotificationPromoted)
+            {
+                Caption = 'Notifications';
+                Image = SendMail;
+
+                actionref(NotificationEntries_Promoted; NotificationEntries) { }
+                actionref(SendNotifications_Promoted; SendNotifications) { }
+                actionref(SendEmails_Promoted; SendEmails) { }
             }
 
             group(SetupPromoted)
