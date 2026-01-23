@@ -2,8 +2,7 @@ permissionset 83800 "Workflow Editor WFE"
 {
     Assignable = true;
     Caption = 'WORKFLOWEDITOR', MaxLength = 30;
-    Permissions =
-        table "App Resource WFE" = X,
+    Permissions = table "App Resource WFE" = X,
         tabledata "App Resource WFE" = RIMD,
         table "Info Dialog WFE" = X,
         tabledata "Info Dialog WFE" = RIMD,
@@ -15,10 +14,12 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Approval Entry Helper WFE" = X,
         codeunit "Approval Mgt. WFE" = X,
         codeunit "Approvals Mgmt Subscr. WFE" = X,
+        codeunit "Customer Helper WFE" = X,
         codeunit "Info Dialog Helper WFE" = X,
         codeunit "Info Dialog Subscr. WFE" = X,
         codeunit "Info Dialog WFE" = X,
         codeunit "Job Planning Line Helper WFE" = X,
+        codeunit "Modify Subscr. WFE" = X,
         codeunit "Notification Dispatcher WFE" = X,
         codeunit "Notification Entry Hlp. WFE" = X,
         codeunit "Notification Entry Subscr. WFE" = X,
@@ -59,6 +60,5 @@ permissionset 83800 "Workflow Editor WFE"
         page "Workflow Step Buffer WFE" = X,
         page "Workflow Step Editor WFE" = X,
         page "Workflow Step Instance WFE" = X,
-        report "Resend Purch. Appr. Req. WFE" = X,
-        codeunit "Modify Subscr. WFE" = X;
+        report "Resend Purch. Appr. Req. WFE" = X;
 }

@@ -67,7 +67,7 @@ page 83806 "Approval Entry Part WFE"
         CurrNotificationEntry: Record "Notification Entry";
         RecordToApprove: RecordId;
         ApprovalStatus: Enum "Approval Status";
-        JobQueueEntryNotificationCount: Integer;
+        // JobQueueEntryNotificationCount: Integer;
         // SendNotificationEntries: Integer;
         RecipientEmailAddress: Text;
 
