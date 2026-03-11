@@ -8,6 +8,7 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 action(OpenActiveWorkflowWFE)
                 {
@@ -67,6 +68,7 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
@@ -77,4 +79,17 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
     }
     var
         PurchInvHeaderHelperWFE: Codeunit "Purch. Inv. Header Helper WFE";
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
+    end;
 }

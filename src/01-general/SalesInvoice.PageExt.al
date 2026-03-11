@@ -8,6 +8,7 @@ pageextension 83815 "Sales Invoice WFE" extends "Sales Invoice"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 group(StatusWFE)
                 {
@@ -127,6 +128,7 @@ pageextension 83815 "Sales Invoice WFE" extends "Sales Invoice"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
@@ -150,4 +152,17 @@ pageextension 83815 "Sales Invoice WFE" extends "Sales Invoice"
 
     var
         SalesHeaderHelperWFE: Codeunit "Sales Header Helper WFE";
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
+    end;
 }

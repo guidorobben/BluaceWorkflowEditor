@@ -6,7 +6,6 @@ page 83804 "Workflow Step Instance WFE"
     // Editable = false;
     InsertAllowed = false;
     PageType = List;
-    ShowFilter = true;
     Permissions =
         tabledata "Table Metadata" = R,
         tabledata "Workflow - Table Relation" = R,
@@ -14,6 +13,7 @@ page 83804 "Workflow Step Instance WFE"
         tabledata "Workflow Response" = R,
         tabledata "Workflow Step Argument" = R,
         tabledata "Workflow Step Instance" = RIMD;
+    ShowFilter = true;
     SourceTable = "Workflow Step Instance";
     UsageCategory = Lists;
 

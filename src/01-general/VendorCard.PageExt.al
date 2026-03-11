@@ -8,6 +8,7 @@ pageextension 83812 "Vendor Card WFE" extends "Vendor Card"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 action(RemoveRecordRestrictionWFE)
                 {
@@ -52,6 +53,7 @@ pageextension 83812 "Vendor Card WFE" extends "Vendor Card"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
@@ -62,4 +64,17 @@ pageextension 83812 "Vendor Card WFE" extends "Vendor Card"
 
     var
         VendorHelperWFE: Codeunit "Vendor Helper WFE";
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
+    end;
 }

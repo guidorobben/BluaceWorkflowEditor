@@ -26,10 +26,10 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
     var
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
+        RecordInfo: Codeunit "Record Info WFE";
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
         WorkflowHelper: Codeunit "Workflow Helper WFE";
-        RecordInfo: Codeunit "Record Info WFE";
     begin
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(PurchInvHeader);

@@ -382,6 +382,13 @@ page 83822 "Approval Entries WFE"
 #pragma warning restore LC0088
         RecordIDText: Text;
 
+    trigger OnOpenPage()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        UserManagement.TestIsApprovalAdministrator();
+    end;
+
     trigger OnAfterGetRecord()
     begin
         Overdue := Overdue::" ";

@@ -2,8 +2,8 @@ table 83800 "App Resource WFE"
 {
     Caption = 'App Resource';
     DataClassification = CustomerContent;
-    LookupPageId = "App Resource List WFE";
     DrillDownPageId = "App Resource List WFE";
+    LookupPageId = "App Resource List WFE";
     TableType = Temporary;
 
     fields

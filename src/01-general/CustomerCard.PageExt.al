@@ -8,6 +8,7 @@ pageextension 83822 "Customer Card WFE" extends "Customer Card"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 action(RemoveRecordRestrictionWFE)
                 {
@@ -51,6 +52,7 @@ pageextension 83822 "Customer Card WFE" extends "Customer Card"
             group(WorkflowEditorWFE_PromotedWFE)
             {
                 Caption = 'Workflow Editor';
+                Visible = EnableWFE;
                 Image = Workflow;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
@@ -62,4 +64,17 @@ pageextension 83822 "Customer Card WFE" extends "Customer Card"
 
     var
         CustomerHelperWFE: Codeunit "Customer Helper WFE";
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
+    end;
 }

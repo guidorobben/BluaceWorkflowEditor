@@ -19,6 +19,7 @@ pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 group(StatusWFE)
                 {
@@ -125,6 +126,7 @@ pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
@@ -147,4 +149,17 @@ pageextension 83807 "Purchase Order List WFE" extends "Purchase Order List"
 
     var
         PurchaseHeaderHelperWFE: Codeunit "Purchase Header Helper WFE";
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
+    end;
 }
