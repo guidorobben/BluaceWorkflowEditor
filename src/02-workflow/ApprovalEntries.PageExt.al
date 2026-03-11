@@ -9,6 +9,7 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 action(MeAsApproverWFE)
                 {
@@ -117,6 +118,7 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(MeAsApproverWFE_Promoted; MeAsApproverWFE) { }
                 actionref(DeleteEntryWFE_Promoted; DeleteEntryWFE) { }
@@ -138,4 +140,17 @@ pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
 
     var
         ApprovalEntryHelperWFE: Codeunit "Approval Entry Helper WFE";
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
+    end;
 }

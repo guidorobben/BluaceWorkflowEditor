@@ -7,6 +7,8 @@ pageextension 83804 "Workflow Step Responses WFE" extends "Workflow Step Respons
             group(WorkflowEditorWFE)
             {
                 Caption = 'Workflow Editor';
+                // Image = Workflow;
+                Visible = EnableWFE;
 
                 field("Response Step ID WFE"; Rec."Response Step ID")
                 {
@@ -29,11 +31,24 @@ pageextension 83804 "Workflow Step Responses WFE" extends "Workflow Step Respons
 
     var
         FunctionNameWFE: Text[100];
+        EnableWFE: Boolean;
 
     trigger OnAfterGetRecord()
     var
         WorkflowHelper: Codeunit "Workflow Helper WFE";
     begin
         FunctionNameWFE := WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Response Step ID");
+    end;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
     end;
 }

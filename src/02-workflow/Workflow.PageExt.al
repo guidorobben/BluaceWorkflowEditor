@@ -8,6 +8,7 @@ pageextension 83802 "Workflow WFE" extends Workflow
             {
                 Caption = 'WorkFlow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 action(ApprovalInfoWFE)
                 {
@@ -101,6 +102,7 @@ pageextension 83802 "Workflow WFE" extends Workflow
             {
                 Caption = 'WorkFlow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(ShowWorkflowStepsWFE_Promoted; ShowWorkflowStepsWFE) { }
@@ -114,6 +116,19 @@ pageextension 83802 "Workflow WFE" extends Workflow
 
     var
         WorkflowHelperWFE: Codeunit "Workflow Helper WFE";
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
+    end;
 
     procedure SetToWorkflow()
     begin

@@ -33,6 +33,7 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 action(SendNotificationsWFE)
                 {
@@ -103,6 +104,7 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 // actionref(ShowRecordToApproveWFE_Promoted; ShowRecordToApproveWFE) { }
                 actionref(SendNotificationsWFE_Promoted; SendNotificationsWFE) { }
@@ -138,8 +140,23 @@ pageextension 83809 "Notification Entries WFE" extends "Notification Entries"
         }
     }
 
+    var
+        EnableWFE: Boolean;
+
     trigger OnAfterGetCurrRecord()
     begin
         CurrPage."Approval Entry Part".Page.SetNotificationEntry(Rec);
+    end;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
     end;
 }
