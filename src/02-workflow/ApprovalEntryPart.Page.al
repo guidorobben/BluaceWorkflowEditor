@@ -1,7 +1,7 @@
 page 83806 "Approval Entry Part WFE"
 {
     ApplicationArea = All;
-    Caption = 'Approval Entry Part';
+    Caption = 'Approval Entry';
     PageType = CardPart;
     Permissions =
         tabledata "Approval Entry" = RIMD,
@@ -47,9 +47,9 @@ page 83806 "Approval Entry Part WFE"
                     end;
 
                 }
-                field(RecepientEmailAddressControl; RecipientEmailAddress)
+                field(RecipientEmailAddressControl; RecipientEmailAddress)
                 {
-                    Caption = 'Recepient Email Address';
+                    Caption = 'Recipient Email Address';
                 }
                 // field(JobQueueEntryNotificationCountControl; JobQueueEntryNotificationCount)
                 // {
