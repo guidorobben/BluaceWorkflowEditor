@@ -56,9 +56,9 @@ codeunit 83824 "Notification Dispatcher WFE"
         end;
 
         if UserIdWithError <> '' then
-#pragma warning disable LC0084
+#pragma warning disable AC0030
             UserSetup.Get(UserIdWithError);
-#pragma warning restore LC0084
+#pragma warning restore AC0030
     end;
 
     // local procedure DispatchNotificationTypeForUser(Parameter: Text)

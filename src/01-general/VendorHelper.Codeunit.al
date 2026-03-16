@@ -53,6 +53,8 @@ codeunit 83816 "Vendor Helper WFE"
     begin
         ApprovalEntry.SetRange("Table ID", Vendor.RecordId().TableNo());
         ApprovalEntry.SetRange("Record ID to Approve", Vendor.RecordId());
+#pragma warning disable AC0006
         Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
+#pragma warning restore AC0006
     end;
 }

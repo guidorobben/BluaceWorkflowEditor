@@ -1,5 +1,6 @@
 codeunit 83801 "Workflow Editor WFE"
 {
+    Access = Internal;
     Permissions =
         tabledata "Workflow Step" = R,
         tabledata "Workflow Step Instance" = R;

@@ -76,9 +76,9 @@ page 83822 "Approval Entries WFE"
                 }
                 field("Salespers./Purch. Code"; Rec."Salespers./Purch. Code")
                 {
-#pragma warning disable LC0038
+#pragma warning disable AC0017
                     ToolTip = 'Specifies the code for the salesperson or purchaser that was in the document to be approved. It is not a mandatory field, but is useful if a salesperson or a purchaser responsible for the customer/vendor needs to approve the document before it is processed.';
-#pragma warning restore LC0038
+#pragma warning restore AC0017
                 }
                 field("Approver ID"; Rec."Approver ID")
                 {

@@ -34,17 +34,23 @@ table 83801 "Workflow Editor Setup WFE"
         field(40; "Debug Modify Purchase Header"; Boolean)
         {
             Caption = 'Debug Modify Purchase Header';
+#pragma warning disable AC0015
             ToolTip = 'Enables debug logging for modifications to Purchase Header records.';
+#pragma warning restore AC0015
         }
         field(50; "Debug Modify Sales Header"; Boolean)
         {
             Caption = 'Debug Modify Sales Header';
+#pragma warning disable AC0015
             ToolTip = 'Enables debug logging for modifications to Sales Header records.';
+#pragma warning restore AC0015
         }
         field(60; "Debug Modify Purch. Inv Header"; Boolean)
         {
             Caption = 'Debug Modify Purchase Invoice Header';
+#pragma warning disable AC0015
             ToolTip = 'Enables debug logging for modifications to Purchase Invoice Header records.';
+#pragma warning restore AC0015
         }
 
     }

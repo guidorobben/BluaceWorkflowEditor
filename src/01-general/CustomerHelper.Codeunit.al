@@ -53,6 +53,8 @@ codeunit 83826 "Customer Helper WFE"
     begin
         ApprovalEntry.SetRange("Table ID", Customer.RecordId().TableNo());
         ApprovalEntry.SetRange("Record ID to Approve", Customer.RecordId());
+#pragma warning disable AC0006
         Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
+#pragma warning restore AC0006
     end;
 }

@@ -49,9 +49,9 @@ codeunit 83814 "Info Dialog Subscr. WFE"
     begin
         IDUser := CopyStr(InfoDialog.Value, 1, 50);
         if UserSetup.Get(IDUser) then
-#pragma warning disable LC0027
+#pragma warning disable AC0006
             Page.Run(Page::"Approval User Setup", UserSetup);
-#pragma warning restore LC0027
+#pragma warning restore AC0006
     end;
 
     local procedure OpenWorkflowStepInstance(WorkflowCode: Code[20])

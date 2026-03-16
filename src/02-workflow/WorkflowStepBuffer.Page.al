@@ -22,9 +22,9 @@ page 83803 "Workflow Step Buffer WFE"
                 }
                 field(Condition; Rec.Condition)
                 {
-#pragma warning disable LC0038
+#pragma warning disable AC0017
                     ToolTip = 'Specifies the condition that moderates the workflow event that you specified in the Event Description field. When you choose the field, the Event Conditions window opens in which you can specify condition values for predefined lists of relevant fields.';
-#pragma warning restore LC0038
+#pragma warning restore AC0017
                 }
                 field("Entry Point"; Rec."Entry Point")
                 {

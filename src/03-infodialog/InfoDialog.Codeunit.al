@@ -1,5 +1,9 @@
 codeunit 83809 "Info Dialog WFE"
 {
+    Access = Internal;
+    Permissions =
+        tabledata "Info Dialog WFE" = rid;
+
     var
         BufferInfoDialog: Record "Info Dialog WFE";
         CurrentRecordInfo: Codeunit "Record Info WFE";

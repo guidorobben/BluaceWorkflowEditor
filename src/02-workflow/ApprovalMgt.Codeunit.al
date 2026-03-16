@@ -1,5 +1,7 @@
 codeunit 83823 "Approval Mgt. WFE"
 {
+    Access = Internal;
+
     procedure OpenApprovalEntries(TableID: Integer; SourceRecordID: RecordId)
     var
         ApprovalEntry: Record "Approval Entry";
@@ -9,7 +11,9 @@ codeunit 83823 "Approval Mgt. WFE"
 
         ApprovalEntry.SetRange("Table ID", TableID);
         ApprovalEntry.SetRange("Record ID to Approve", SourceRecordID);
+#pragma warning disable AC0006
         Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
+#pragma warning restore AC0006
     end;
 
     procedure ApprovalEntriesCount(TableID: Integer; SourceRecordID: RecordId): Integer
