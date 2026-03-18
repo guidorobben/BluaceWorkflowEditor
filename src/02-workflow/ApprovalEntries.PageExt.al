@@ -1,6 +1,15 @@
 pageextension 83800 "Approval Entries WFE" extends "Approval Entries"
 {
-
+    layout
+    {
+        addlast(Control1)
+        {
+            field("Pending Approvals WFE"; Rec."Pending Approvals")
+            {
+                ApplicationArea = All;
+            }
+        }
+    }
     actions
     {
         addlast(processing)

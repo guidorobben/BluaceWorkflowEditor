@@ -130,6 +130,7 @@ page 83822 "Approval Entries WFE"
                 {
                     ToolTip = 'Specifies when the record must be approved, by one or more approvers.';
                 }
+                field("Pending Approvals"; Rec."Pending Approvals") { }
             }
         }
         area(FactBoxes)
