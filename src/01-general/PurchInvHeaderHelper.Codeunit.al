@@ -2,7 +2,9 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
 {
     Permissions =
         tabledata "Purch. Inv. Header" = R,
+        tabledata "Restricted Record" = R,
         tabledata "User Setup" = R,
+        tabledata "Vendor Ledger Entry" = R,
         tabledata Workflow = R,
         tabledata "Workflow Editor Setup WFE" = R,
         tabledata "Workflow Step Instance" = R;
@@ -43,7 +45,12 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchInvHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchInvHeader.RecordId()));
         WorkflowHelper.GetWorkflowInfo(PurchInvHeader.RecordId(), InfoDialog);
+
+        InfoDialog.AddHeader('Purchase Invoice');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchInvHeader));
+        InfoDialog.Add('Vendor Ledger Entries', VendorLedgerEntryCount(PurchInvHeader));
+        InfoDialog.Add('Vendor Ledger Entries On Hold', VendorLedgerEntryOnHold(PurchInvHeader));
+
         InfoDialog.OpenInfoDialog();
     end;
 
@@ -111,4 +118,27 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         RestrictedRecord.SetRange("Record ID", PurchInvHeader.RecordId());
         Page.Run(Page::"Restricted Records", RestrictedRecord);
     end;
+
+    local procedure VendorLedgerEntryCount(var PurchInvHeader: Record "Purch. Inv. Header"): Integer
+    var
+        VendorLedgerEntry: Record "Vendor Ledger Entry";
+    begin
+        VendorLedgerEntry.SetCurrentKey("Vendor No.", "Posting Date", "Currency Code");
+        VendorLedgerEntry.SetRange("Document No.", PurchInvHeader."No.");
+        VendorLedgerEntry.SetRange("Posting Date", PurchInvHeader."Posting Date");
+        exit(VendorLedgerEntry.Count());
+    end;
+
+    local procedure VendorLedgerEntryOnHold(var PurchInvHeader: Record "Purch. Inv. Header"): Code[3]
+    var
+        VendorLedgerEntry: Record "Vendor Ledger Entry";
+    begin
+        VendorLedgerEntry.SetCurrentKey("Vendor No.", "Posting Date", "Currency Code");
+        VendorLedgerEntry.SetRange("Document No.", PurchInvHeader."No.");
+        VendorLedgerEntry.SetRange("Posting Date", PurchInvHeader."Posting Date");
+        VendorLedgerEntry.SetFilter("On Hold", '<>%1', '');
+        if VendorLedgerEntry.FindFirst() then
+            exit(VendorLedgerEntry."On Hold");
+    end;
+
 }
