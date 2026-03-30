@@ -77,6 +77,12 @@ page 83805 "Workflow Editor WFE"
                     RunObject = page "Workflow Step Editor WFE";
                     RunPageLink = "Workflow Code" = field(Code);
                 }
+                action(WorkflowSteps)
+                {
+                    Caption = 'Workflow Steps';
+                    Image = Table;
+                    RunObject = page "Workflow Steps WFE";
+                }
                 action(WorkflowEvents)
                 {
                     Caption = 'Workflow Events';
@@ -242,6 +248,7 @@ page 83805 "Workflow Editor WFE"
                 actionref(WorkflowList_Promoted; WorkflowList) { }
                 actionref(ApprovalEntries_Promoted; ApprovalEntries) { }
                 actionref(WorkflowEvents_Promoted; WorkflowEvents) { }
+                actionref(WorkflowSteps_Promoted; WorkflowSteps) { }
                 actionref(WorkflowTableRelations_Promoted; WorkflowTableRelations) { }
                 actionref(WFEventResponseCombi_Promoted; WFEventResponseCombi) { }
                 actionref(WFEventResponseCombiList_Promoted; WFEventResponseCombiList) { }
