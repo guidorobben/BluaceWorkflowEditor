@@ -1,7 +1,7 @@
 codeunit 83815 "Purch. Inv. Header Helper WFE"
 {
     Permissions =
-        tabledata "Purch. Inv. Header" = R,
+        tabledata "Purch. Inv. Header" = RM,
         tabledata "Restricted Record" = R,
         tabledata "User Setup" = R,
         tabledata "Vendor Ledger Entry" = R,
