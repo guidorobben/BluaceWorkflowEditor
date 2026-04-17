@@ -5,7 +5,7 @@ codeunit 83808 "User Management WFE"
         tabledata "Notification Setup" = R,
         tabledata "User Setup" = RIMD;
 
-    internal procedure IsApprovalAdministrator(): Boolean
+    procedure IsApprovalAdministrator(): Boolean
     var
         UserSetup: Record "User Setup";
     begin
@@ -15,7 +15,7 @@ codeunit 83808 "User Management WFE"
         exit(UserSetup."Approval Administrator");
     end;
 
-    internal procedure TestIsApprovalAdministrator(): Boolean
+    procedure TestIsApprovalAdministrator(): Boolean
     var
         UserManagement: Codeunit "User Management WFE";
         OnlyApproverAdminErr: Label 'Only a Approval Administrator can run this.';
@@ -24,7 +24,7 @@ codeunit 83808 "User Management WFE"
             Error(OnlyApproverAdminErr);
     end;
 
-    internal procedure GetUserInfo(var InfoDialog: Codeunit "Info Dialog WFE")
+    procedure GetUserInfo(var InfoDialog: Codeunit "Info Dialog WFE")
     var
         UserSetup: Record "User Setup";
     begin
@@ -47,7 +47,7 @@ codeunit 83808 "User Management WFE"
         exit(not NotificationSetup.IsEmpty());
     end;
 
-    internal procedure AddCurrentUserAsApprovalAdmin()
+    procedure AddCurrentUserAsApprovalAdmin()
     var
         UserSetup: Record "User Setup";
     begin
@@ -60,7 +60,7 @@ codeunit 83808 "User Management WFE"
         MakeUserApprovalAdmin(UserSetup."User ID");
     end;
 
-    internal procedure MakeUserApprovalAdmin(CurrUserID: Code[50])
+    procedure MakeUserApprovalAdmin(CurrUserID: Code[50])
     var
         UserSetup: Record "User Setup";
     begin
@@ -73,7 +73,7 @@ codeunit 83808 "User Management WFE"
         UserSetup.Modify(true);
     end;
 
-    internal procedure DeleteMyApprovalSetup()
+    procedure DeleteMyApprovalSetup()
     var
         UserSetup: Record "User Setup";
     begin
@@ -81,7 +81,7 @@ codeunit 83808 "User Management WFE"
             UserSetup.Delete(true);
     end;
 
-    internal procedure RemoveCurrentUserAsApprovalAdmin()
+    procedure RemoveCurrentUserAsApprovalAdmin()
     var
         UserSetup: Record "User Setup";
     begin
