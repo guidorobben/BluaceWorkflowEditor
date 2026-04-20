@@ -30,7 +30,8 @@ codeunit 83822 "App Resource Helper WFE"
         foreach ResourceName in ResourceList do
             AddResource(TempAppResource, ResourceName);
 
-        if TempAppResource.FindFirst() then; //Pointer to first
+        // Pointer to first
+        if TempAppResource.FindFirst() then;
     end;
 
     procedure SelectResource(Filter: Text; var ResourceInstream: InStream) Name: Text

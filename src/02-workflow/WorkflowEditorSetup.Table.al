@@ -6,6 +6,7 @@ table 83801 "Workflow Editor Setup WFE"
     LookupPageId = "Workflow Editor Setup WFE";
     Permissions =
         tabledata "Workflow Editor Setup WFE" = RI;
+
     fields
     {
         field(1; "Primary Key"; Code[10])
@@ -28,8 +29,6 @@ table 83801 "Workflow Editor Setup WFE"
         {
             Caption = 'Posted Purch. Inv. Status ID';
             ToolTip = 'Specifies the status field id for the posted purchase invoice.';
-
-            //TODO Lookup voor field
         }
         field(40; "Debug Modify Purchase Header"; Boolean)
         {

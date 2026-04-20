@@ -25,7 +25,13 @@ page 83807 "Workflow Editor Setup WFE"
             {
                 Caption = 'Extensions';
 
-                field("Posted Purch. Inv. Status ID"; Rec."Posted Purch. Inv. Status ID") { }
+                field("Posted Purch. Inv. Status ID"; Rec."Posted Purch. Inv. Status ID")
+                {
+                    trigger OnLookup(var Text: Text): Boolean
+                    begin
+                        OnLookupStatusFieldId();
+                    end;
+                }
             }
         }
     }
@@ -33,5 +39,14 @@ page 83807 "Workflow Editor Setup WFE"
     trigger OnOpenPage()
     begin
         Rec.InsertIfNotExists();
+    end;
+
+    local procedure OnLookupStatusFieldId()
+    var
+        AllField: Record Field;
+    begin
+        AllField.SetRange(TableNo, Database::"Purch. Inv. Header");
+        if Page.RunModal(Page::"Fields Lookup", AllField) = Action::LookupOK then
+            Rec."Posted Purch. Inv. Status ID" := AllField."No.";
     end;
 }
