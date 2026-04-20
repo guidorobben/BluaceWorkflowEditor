@@ -13,7 +13,7 @@ tableextension 83805 "Purch. Inv. Header WFE" extends "Purch. Inv. Header"
         PurchInvHeaderHelperWFE.OpenApprovals(Rec)
     end;
 
-    procedure OpenRestrictedRecord()
+    procedure OpenRestrictedRecordWFE()
     begin
         PurchInvHeaderHelperWFE.OpenRestrictedRecord(Rec);
     end;

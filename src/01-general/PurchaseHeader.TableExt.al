@@ -13,7 +13,7 @@ tableextension 83803 "Purchase Header WFE" extends "Purchase Header"
         PurchaseHeaderHelperWFE.ClearOnHoldVendorLedgerEntries(Rec);
     end;
 
-    procedure OpenRestrictedRecord()
+    procedure OpenRestrictedRecordWFE()
     begin
         PurchaseHeaderHelperWFE.OpenRestrictedRecord(Rec);
     end;

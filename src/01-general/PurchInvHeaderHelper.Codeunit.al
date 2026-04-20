@@ -1,5 +1,6 @@
 codeunit 83815 "Purch. Inv. Header Helper WFE"
 {
+    Access = Internal;
     Permissions =
         tabledata "Purch. Inv. Header" = RM,
         tabledata "Restricted Record" = R,
@@ -140,5 +141,4 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         if VendorLedgerEntry.FindFirst() then
             exit(VendorLedgerEntry."On Hold");
     end;
-
 }

@@ -8,7 +8,7 @@ tableextension 83807 "Sales Header WFE" extends "Sales Header"
         SalesHeaderHelperWFE.ShowApprovalInfo(Rec);
     end;
 
-    procedure OpenRestrictedRecord()
+    procedure OpenRestrictedRecordWFE()
     begin
         SalesHeaderHelperWFE.OpenRestrictedRecord(Rec);
     end;

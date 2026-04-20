@@ -1,6 +1,5 @@
 codeunit 83809 "Info Dialog WFE"
 {
-    Access = Internal;
     Permissions =
         tabledata "Info Dialog WFE" = rid;
 

@@ -12,4 +12,9 @@ tableextension 83806 "Vendor WFE" extends Vendor
     begin
         VendorHelperWFE.OpenApprovalEntries(Rec);
     end;
+
+    procedure OpenRestrictedRecordWFE()
+    begin
+        VendorHelperWFE.OpenRestrictedRecord(Rec);
+    end;
 }

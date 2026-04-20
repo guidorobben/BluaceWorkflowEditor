@@ -2,7 +2,8 @@ permissionset 83800 "Workflow Editor WFE"
 {
     Assignable = true;
     Caption = 'WORKFLOWEDITOR', MaxLength = 30;
-    Permissions = table "App Resource WFE" = X,
+    Permissions =
+        table "App Resource WFE" = X,
         tabledata "App Resource WFE" = RIMD,
         table "Info Dialog WFE" = X,
         tabledata "Info Dialog WFE" = RIMD,
@@ -23,6 +24,7 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Notification Dispatcher WFE" = X,
         codeunit "Notification Entry Hlp. WFE" = X,
         codeunit "Notification Entry Subscr. WFE" = X,
+        codeunit "Purch. Cr. Memo Hdr. Hlp. WFE" = X,
         codeunit "Purch. Inv. Header Helper WFE" = X,
         codeunit "Purch. Inv. Header Subscr WFE" = X,
         codeunit "Purchase Header Helper WFE" = X,

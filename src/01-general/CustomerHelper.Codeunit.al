@@ -1,5 +1,7 @@
 codeunit 83826 "Customer Helper WFE"
 {
+    Access = Internal;
+
     internal procedure AllowRecordUsage(var Customer: Record Customer)
     var
         RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
@@ -15,7 +17,7 @@ codeunit 83826 "Customer Helper WFE"
         UserManagement.TestIsApprovalAdministrator();
     end;
 
-    internal procedure ShowApprovalInfo(Customer: Record Customer)
+    procedure ShowApprovalInfo(Customer: Record Customer)
     var
         ApprovalEntry: Record "Approval Entry";
         ApprovalMgt: Codeunit "Approval Mgt. WFE";
@@ -43,11 +45,11 @@ codeunit 83826 "Customer Helper WFE"
         InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(Customer.RecordId().TableNo(), Customer.RecordId(), ApprovalEntry.Status::Open, false), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.Add('Overdue', ApprovalMgt.ApprovalEntriesCount(Customer.RecordId().TableNo(), Customer.RecordId(), ApprovalEntry.Status::Open, true), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.AddHeader('Posting');
-        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Customer));
+        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Customer), "Info Dialog Event Code WFE"::"Record Restriction");
         InfoDialog.OpenInfoDialog();
     end;
 
-    internal procedure OpenApprovalEntries(var Customer: Record Customer)
+    procedure OpenApprovalEntries(var Customer: Record Customer)
     var
         ApprovalEntry: Record "Approval Entry";
     begin
@@ -56,5 +58,13 @@ codeunit 83826 "Customer Helper WFE"
 #pragma warning disable AC0006
         Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
 #pragma warning restore AC0006
+    end;
+
+    procedure OpenRestrictedRecord(var Customer: Record Customer)
+    var
+        RestrictedRecord: Record "Restricted Record";
+    begin
+        RestrictedRecord.SetRange("Record ID", Customer.RecordId());
+        Page.Run(Page::"Restricted Records", RestrictedRecord);
     end;
 }

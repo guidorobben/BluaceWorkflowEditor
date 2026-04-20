@@ -67,29 +67,47 @@ codeunit 83814 "Info Dialog Subscr. WFE"
 
     local procedure OpenRecordRestriction(var RecordInfo: Codeunit "Record Info WFE")
     var
+        Customer: Record Customer;
+        PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.";
         PurchInvHeader: Record "Purch. Inv. Header";
         PurchaseHeader: Record "Purchase Header";
         SalesHeader: Record "Sales Header";
+        Vendor: Record Vendor;
         SourceRecordRef: RecordRef;
         SourceVariant: Variant;
     begin
         SourceVariant := RecordInfo.SourceRecord();
         SourceRecordRef.GetTable(SourceVariant);
         case SourceRecordRef.Number() of
+            Database::Customer:
+                begin
+                    Customer := SourceRecordRef;
+                    Customer.OpenRestrictedRecordWFE();
+                end;
+            Database::Vendor:
+                begin
+                    Vendor := SourceRecordRef;
+                    Vendor.OpenRestrictedRecordWFE();
+                end;
             Database::"Sales Header":
                 begin
                     SalesHeader := SourceRecordRef;
-                    SalesHeader.OpenRestrictedRecord();
+                    SalesHeader.OpenRestrictedRecordWFE();
                 end;
             Database::"Purchase Header":
                 begin
                     PurchaseHeader := SourceRecordRef;
-                    PurchaseHeader.OpenRestrictedRecord();
+                    PurchaseHeader.OpenRestrictedRecordWFE();
                 end;
             Database::"Purch. Inv. Header":
                 begin
                     PurchInvHeader := SourceRecordRef;
-                    PurchInvHeader.OpenRestrictedRecord();
+                    PurchInvHeader.OpenRestrictedRecordWFE();
+                end;
+            Database::"Purch. Cr. Memo Hdr.":
+                begin
+                    PurchCrMemoHdr := SourceRecordRef;
+                    PurchCrMemoHdr.OpenRestrictedRecordWFE();
                 end;
         end;
     end;

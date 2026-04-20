@@ -54,6 +54,10 @@
             "action": "warning"
         },
         {
+            "id": "AA0247",
+            "action": "None"
+        },
+        {
             "id": "AA0470",
             "action": "warning"
         },

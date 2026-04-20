@@ -12,4 +12,9 @@ tableextension 83808 "Customer WFE" extends Customer
     begin
         CustomerHelperWFE.OpenApprovalEntries(Rec);
     end;
+
+    procedure OpenRestrictedRecordWFE()
+    begin
+        CustomerHelperWFE.OpenRestrictedRecord(Rec);
+    end;
 }

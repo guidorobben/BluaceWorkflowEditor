@@ -1,6 +1,8 @@
 codeunit 83816 "Vendor Helper WFE"
 {
-    internal procedure AllowRecordUsage(var Vendor: Record Vendor)
+    Access = Internal;
+
+    procedure AllowRecordUsage(var Vendor: Record Vendor)
     var
         RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
     begin
@@ -15,7 +17,7 @@ codeunit 83816 "Vendor Helper WFE"
         UserManagement.TestIsApprovalAdministrator();
     end;
 
-    internal procedure ShowApprovalInfo(Vendor: Record Vendor)
+    procedure ShowApprovalInfo(Vendor: Record Vendor)
     var
         ApprovalEntry: Record "Approval Entry";
         ApprovalMgt: Codeunit "Approval Mgt. WFE";
@@ -43,11 +45,11 @@ codeunit 83816 "Vendor Helper WFE"
         InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId(), ApprovalEntry.Status::Open, false), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.Add('Overdue', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId(), ApprovalEntry.Status::Open, true), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.AddHeader('Posting');
-        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Vendor));
+        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(Vendor), "Info Dialog Event Code WFE"::"Record Restriction");
         InfoDialog.OpenInfoDialog();
     end;
 
-    internal procedure OpenApprovalEntries(var Vendor: Record Vendor)
+    procedure OpenApprovalEntries(var Vendor: Record Vendor)
     var
         ApprovalEntry: Record "Approval Entry";
     begin
@@ -56,5 +58,13 @@ codeunit 83816 "Vendor Helper WFE"
 #pragma warning disable AC0006
         Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
 #pragma warning restore AC0006
+    end;
+
+    procedure OpenRestrictedRecord(var Vendor: Record Vendor)
+    var
+        RestrictedRecord: Record "Restricted Record";
+    begin
+        RestrictedRecord.SetRange("Record ID", Vendor.RecordId());
+        Page.Run(Page::"Restricted Records", RestrictedRecord);
     end;
 }
