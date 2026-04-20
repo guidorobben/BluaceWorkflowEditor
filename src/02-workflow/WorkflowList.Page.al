@@ -36,4 +36,42 @@ page 83802 "Workflow List WFE"
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(Enable)
+            {
+                Caption = 'Enable';
+                Image = Approval;
+                ToolTip = 'Enables the selected workflow(s).';
+
+                trigger OnAction()
+                begin
+                    Rec.ToggleEnableWorkflowWFE();
+                end;
+            }
+        }
+        area(Promoted)
+        {
+            actionref(Enable_Promoted; Enable) { }
+        }
+    }
+
+    views
+    {
+        view(Workflows)
+        {
+            Caption = 'Workflows';
+            Filters = where(Template = const(false));
+            SharedLayout = true;
+        }
+        view(Templates)
+        {
+            Caption = 'Templates';
+            Filters = where(Template = const(true));
+            SharedLayout = true;
+        }
+    }
 }
