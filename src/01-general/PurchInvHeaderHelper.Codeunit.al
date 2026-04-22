@@ -27,12 +27,12 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
 
     internal procedure ShowApprovalInfo(PurchInvHeader: Record "Purch. Inv. Header")
     var
+        Workflow: Record Workflow;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
         RecordInfo: Codeunit "Record Info WFE";
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
-        WorkflowHelper: Codeunit "Workflow Helper WFE";
     begin
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(PurchInvHeader);
@@ -45,7 +45,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchInvHeader.RecordId()));
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchInvHeader.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchInvHeader.RecordId()));
-        WorkflowHelper.GetWorkflowInfo(PurchInvHeader.RecordId(), InfoDialog);
+        Workflow.GetWorkflowInfoWFE(PurchInvHeader.RecordId(), InfoDialog);
 
         InfoDialog.AddHeader('Purchase Invoice');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchInvHeader));

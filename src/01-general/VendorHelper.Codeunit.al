@@ -20,13 +20,13 @@ codeunit 83816 "Vendor Helper WFE"
     procedure ShowApprovalInfo(Vendor: Record Vendor)
     var
         ApprovalEntry: Record "Approval Entry";
+        Workflow: Record Workflow;
         ApprovalMgt: Codeunit "Approval Mgt. WFE";
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
         RecordInfo: Codeunit "Record Info WFE";
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
-        WorkflowHelper: Codeunit "Workflow Helper WFE";
     begin
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(Vendor);
@@ -39,7 +39,7 @@ codeunit 83816 "Vendor Helper WFE"
         InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(Vendor.RecordId()));
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Vendor.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(Vendor.RecordId()));
-        WorkflowHelper.GetWorkflowInfo(Vendor.RecordId(), InfoDialog);
+        Workflow.GetWorkflowInfoWFE(Vendor.RecordId(), InfoDialog);
         InfoDialog.AddHeader('Approval Entries');
         InfoDialog.Add('All', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId()), "Info Dialog Event Code WFE"::"Approval Entries");
         InfoDialog.Add('Open', ApprovalMgt.ApprovalEntriesCount(Vendor.RecordId().TableNo(), Vendor.RecordId(), ApprovalEntry.Status::Open, false), "Info Dialog Event Code WFE"::"Approval Entries");

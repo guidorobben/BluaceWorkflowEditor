@@ -17,4 +17,9 @@ tableextension 83802 "Workflow WFE" extends Workflow
     begin
         WorkflowHelperWFE.ShowApprovalInfo(Rec);
     end;
+
+    internal procedure GetWorkflowInfoWFE(SourceRecordId: RecordId; var InfoDialog: Codeunit "Info Dialog WFE")
+    begin
+        WorkflowHelperWFE.GetWorkflowInfo(SourceRecordId, InfoDialog);
+    end;
 }

@@ -16,12 +16,12 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
 
     internal procedure ShowApprovalInfo(PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.")
     var
+        Workflow: Record Workflow;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         InfoDialog: Codeunit "Info Dialog WFE";
         RecordInfo: Codeunit "Record Info WFE";
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
-        WorkflowHelper: Codeunit "Workflow Helper WFE";
     begin
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(PurchCrMemoHdr);
@@ -34,7 +34,7 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
         InfoDialog.Add('OpenApprovalEntriesExist', ApprovalsMgmt.HasOpenApprovalEntries(PurchCrMemoHdr.RecordId()));
         InfoDialog.Add('OpenApprovalEntriesExistForCurrUser', ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(PurchCrMemoHdr.RecordId()));
         InfoDialog.Add('CanCancelApprovalForRecord', ApprovalsMgmt.CanCancelApprovalForRecord(PurchCrMemoHdr.RecordId()));
-        WorkflowHelper.GetWorkflowInfo(PurchCrMemoHdr.RecordId(), InfoDialog);
+        Workflow.GetWorkflowInfoWFE(PurchCrMemoHdr.RecordId(), InfoDialog);
 
         InfoDialog.AddHeader('Purchase Credit Memo');
         InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchCrMemoHdr));
