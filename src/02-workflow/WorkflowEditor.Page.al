@@ -83,6 +83,12 @@ page 83805 "Workflow Editor WFE"
                     Image = Table;
                     RunObject = page "Workflow Steps WFE";
                 }
+                action(WorkflowStepArguments)
+                {
+                    Caption = 'Workflow Step Arguments';
+                    Image = Table;
+                    RunObject = page "Workflow Step Arguments WFE";
+                }
                 action(WorkflowEvents)
                 {
                     Caption = 'Workflow Events';
@@ -249,6 +255,7 @@ page 83805 "Workflow Editor WFE"
                 actionref(ApprovalEntries_Promoted; ApprovalEntries) { }
                 actionref(WorkflowEvents_Promoted; WorkflowEvents) { }
                 actionref(WorkflowSteps_Promoted; WorkflowSteps) { }
+                actionref(WorkflowStepArguments_Promoted; WorkflowStepArguments) { }
                 actionref(WorkflowTableRelations_Promoted; WorkflowTableRelations) { }
                 actionref(WFEventResponseCombi_Promoted; WFEventResponseCombi) { }
                 actionref(WFEventResponseCombiList_Promoted; WFEventResponseCombiList) { }
