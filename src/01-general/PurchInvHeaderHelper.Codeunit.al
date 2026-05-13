@@ -90,6 +90,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
     begin
         TestIsApprovalAdministrator();
 
+        WorkflowEditorSetup.SetLoadFields("Posted Purch. Inv. Status ID");
         if not WorkflowEditorSetup.Get() then
             Clear(WorkflowEditorSetup);
 
@@ -138,6 +139,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         VendorLedgerEntry.SetRange("Document No.", PurchInvHeader."No.");
         VendorLedgerEntry.SetRange("Posting Date", PurchInvHeader."Posting Date");
         VendorLedgerEntry.SetFilter("On Hold", '<>%1', '');
+        VendorLedgerEntry.SetLoadFields("On Hold");
         if VendorLedgerEntry.FindFirst() then
             exit(VendorLedgerEntry."On Hold");
     end;

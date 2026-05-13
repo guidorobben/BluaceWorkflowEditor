@@ -96,6 +96,7 @@ codeunit 83811 "Workflow Event Log WFE"
         if not WorkflowEditorSetup.ReadPermission() then
             exit;
 
+        WorkflowEditorSetup.SetLoadFields("Log Workflow Events");
         if not WorkflowEditorSetup.Get() then
             exit;
 

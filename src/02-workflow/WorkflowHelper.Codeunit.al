@@ -11,6 +11,7 @@ codeunit 83803 "Workflow Helper WFE"
     begin
         WorkflowStep.SetRange("Workflow Code", WorkflowCode);
         WorkflowStep.SetRange(ID, StepId);
+        WorkflowStep.SetLoadFields("Function Name");
         if WorkflowStep.FindFirst() then
             exit(WorkflowStep."Function Name");
     end;
@@ -59,9 +60,11 @@ codeunit 83803 "Workflow Helper WFE"
         WorkflowDescription: Text[100];
     begin
         WorkflowStepInstance.SetRange("Record ID", SourceRecordId);
+        WorkflowStepInstance.SetLoadFields(ID, "Workflow Code");
         if WorkflowStepInstance.FindFirst() then begin
             InstanceID := WorkflowStepInstance.ID;
             WorkFlowCode := WorkflowStepInstance."Workflow Code";
+            Workflow.SetLoadFields(Description);
             if Workflow.Get(WorkFlowCode) then
                 WorkflowDescription := Workflow.Description;
         end;

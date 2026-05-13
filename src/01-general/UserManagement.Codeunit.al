@@ -9,6 +9,7 @@ codeunit 83808 "User Management WFE"
     var
         UserSetup: Record "User Setup";
     begin
+        UserSetup.SetLoadFields("Approval Administrator");
         if not UserSetup.Get(UserId()) then
             exit(false);
 

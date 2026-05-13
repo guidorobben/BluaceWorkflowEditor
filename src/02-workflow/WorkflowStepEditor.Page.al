@@ -58,7 +58,7 @@ page 83808 "Workflow Step Editor WFE"
             {
                 SubPageLink = "Function Name" = field("Function Name");
             }
-            part(workflowstepargument; "Workflow Step Arg. Part WFE")
+            part(WorkflowStepArgument; "Workflow Step Arg. Part WFE")
             {
                 SubPageLink = ID = field(Argument);
             }

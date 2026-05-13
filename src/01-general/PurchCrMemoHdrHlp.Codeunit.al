@@ -70,6 +70,7 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
         VendorLedgerEntry.SetRange("Document No.", PurchCrMemoHdr."No.");
         VendorLedgerEntry.SetRange("Posting Date", PurchCrMemoHdr."Posting Date");
         VendorLedgerEntry.SetFilter("On Hold", '<>%1', '');
+        VendorLedgerEntry.SetLoadFields("On Hold");
         if VendorLedgerEntry.FindFirst() then
             exit(VendorLedgerEntry."On Hold");
     end;

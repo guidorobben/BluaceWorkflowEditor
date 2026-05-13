@@ -31,6 +31,7 @@ codeunit 83812 "Notification Entry Hlp. WFE"
     var
         ApprovalEntry: Record "Approval Entry";
     begin
+        ApprovalEntry.SetLoadFields("Record ID to Approve");
         if ApprovalEntry.Get(NotificationEntry."Triggered By Record") then
             exit(ApprovalEntry."Record ID to Approve");
     end;

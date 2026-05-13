@@ -141,7 +141,7 @@ page 83805 "Workflow Editor WFE"
                 {
                     Caption = 'Approval Entries';
                     Image = List;
-                    RunObject = page "Approval Entries";
+                    RunObject = page "Approval Entries WFE";
                 }
                 action(WorkflowEventLog)
                 {
