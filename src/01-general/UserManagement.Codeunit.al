@@ -9,9 +9,12 @@ codeunit 83808 "User Management WFE"
     var
         UserSetup: Record "User Setup";
     begin
+        if not UserSetup.ReadPermission() then
+            exit;
+
         UserSetup.SetLoadFields("Approval Administrator");
         if not UserSetup.Get(UserId()) then
-            exit(false);
+            exit;
 
         exit(UserSetup."Approval Administrator");
     end;
@@ -31,7 +34,7 @@ codeunit 83808 "User Management WFE"
     begin
         InfoDialog.AddHeader('User Info');
         InfoDialog.Add('User ID', UserId(), "Info Dialog Event Code WFE"::"User Setup");
-        InfoDialog.Add('User Setup', UserSetup.Get(UserId()));
+        InfoDialog.Add('User Setup', UserSetup.Get(UserId())); //FIXME No pragma
         InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
         InfoDialog.Add('Sales Person', UserSetup."Salespers./Purch. Code");
         InfoDialog.Add('Approver ID', UserSetup."Approver ID");
