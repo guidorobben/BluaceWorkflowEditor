@@ -90,6 +90,9 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
     begin
         TestIsApprovalAdministrator();
 
+        if not WorkflowEditorSetup.ReadPermission() then
+            exit;
+
         WorkflowEditorSetup.SetLoadFields("Posted Purch. Inv. Status ID");
         if not WorkflowEditorSetup.Get() then
             Clear(WorkflowEditorSetup);

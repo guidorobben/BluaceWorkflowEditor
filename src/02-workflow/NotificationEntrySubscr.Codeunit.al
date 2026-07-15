@@ -9,6 +9,9 @@ codeunit 83820 "Notification Entry Subscr. WFE"
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
+        if not WorkflowEditorSetup.ReadPermission() then
+            exit;
+
         if not WorkflowEditorSetup.Get() then
             exit;
 
