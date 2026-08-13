@@ -7,6 +7,7 @@ pageextension 83803 "Workflow Subpage WFE" extends "Workflow Subpage"
             group(WorkFlowEditorWFE)
             {
                 Caption = 'Workflow Editor';
+                Visible = EnableWFE;
 
                 field(FunctionNameWFE; FuntionNameWFE)
                 {
@@ -21,6 +22,12 @@ pageextension 83803 "Workflow Subpage WFE" extends "Workflow Subpage"
 
     var
         FuntionNameWFE: Text;
+        EnableWFE: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        EnableForApprovalAdmin();
+    end;
 
     trigger OnAfterGetCurrRecord()
     begin
@@ -32,5 +39,12 @@ pageextension 83803 "Workflow Subpage WFE" extends "Workflow Subpage"
         WorkflowHelper: Codeunit "Workflow Helper WFE";
     begin
         FuntionNameWFE := WorkflowHelper.GetFunctionName(Rec."Workflow Code", Rec."Event Step ID");
+    end;
+
+    local procedure EnableForApprovalAdmin()
+    var
+        UserManagement: Codeunit "User Management WFE";
+    begin
+        EnableWFE := UserManagement.IsApprovalAdministrator();
     end;
 }
