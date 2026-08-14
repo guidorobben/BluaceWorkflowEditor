@@ -16,44 +16,50 @@ pageextension 83811 "Approval User Setup WFE" extends "Approval User Setup"
     {
         addlast(processing)
         {
-            action(AddUserAsApprovalAdminWFE)
+            group(WorkFlowEditorWFE)
             {
-                ApplicationArea = All;
-                Caption = 'Add ME as Approval Admin';
-                Image = UserSetup;
+                Caption = 'WorkFlow Editor';
+                Image = Workflow;
 
-                trigger OnAction()
-                var
-                    UserManagement: Codeunit "User Management WFE";
-                begin
-                    UserManagement.AddCurrentUserAsApprovalAdmin();
-                end;
-            }
-            action(DeleteUserAsApprovalAdminWFE)
-            {
-                ApplicationArea = All;
-                Caption = 'Remove ME as Approval Admin';
-                Image = UserSetup;
+                action(AddUserAsApprovalAdminWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Add ME as Approval Admin';
+                    Image = UserSetup;
 
-                trigger OnAction()
-                var
-                    UserManagement: Codeunit "User Management WFE";
-                begin
-                    UserManagement.RemoveCurrentUserAsApprovalAdmin();
-                end;
-            }
-            action(DeleteApprovalUserSetupWFE)
-            {
-                ApplicationArea = All;
-                Caption = 'Delete My Approval Setup';
-                Image = UserSetup;
+                    trigger OnAction()
+                    var
+                        UserManagement: Codeunit "User Management WFE";
+                    begin
+                        UserManagement.AddCurrentUserAsApprovalAdmin();
+                    end;
+                }
+                action(DeleteUserAsApprovalAdminWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Remove ME as Approval Admin';
+                    Image = UserSetup;
 
-                trigger OnAction()
-                var
-                    UserManagement: Codeunit "User Management WFE";
-                begin
-                    UserManagement.DeleteMyApprovalSetup();
-                end;
+                    trigger OnAction()
+                    var
+                        UserManagement: Codeunit "User Management WFE";
+                    begin
+                        UserManagement.RemoveCurrentUserAsApprovalAdmin();
+                    end;
+                }
+                action(DeleteApprovalUserSetupWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Delete My Approval Setup';
+                    Image = UserSetup;
+
+                    trigger OnAction()
+                    var
+                        UserManagement: Codeunit "User Management WFE";
+                    begin
+                        UserManagement.DeleteMyApprovalSetup();
+                    end;
+                }
             }
         }
 
