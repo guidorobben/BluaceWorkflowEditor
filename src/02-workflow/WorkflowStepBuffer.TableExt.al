@@ -4,7 +4,7 @@ tableextension 83801 "Workflow Step Buffer WFE" extends "Workflow Step Buffer"
     {
         field(83800; "Function Name"; Text[100])
         {
-            AllowInCustomizations = Always;
+            AllowInCustomizations = AsReadOnly;
             Caption = 'Function Name';
             DataClassification = CustomerContent;
         }

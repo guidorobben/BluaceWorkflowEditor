@@ -91,7 +91,7 @@ table 83802 "Workflow Event Log WFE"
         }
         field(83850; "Record Trigger Type"; Enum "Record Trigger Type WFE")
         {
-            AllowInCustomizations = Always;
+            AllowInCustomizations = AsReadOnly;
             Caption = 'Record Trigger Type';
         }
         field(83860; "Notification ID"; Integer)

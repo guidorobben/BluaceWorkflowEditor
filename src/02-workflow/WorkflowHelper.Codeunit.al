@@ -1,9 +1,9 @@
 codeunit 83803 "Workflow Helper WFE"
 {
     Permissions =
-        tabledata Workflow = RM,
-        tabledata "Workflow Step" = R,
-        tabledata "Workflow Step Instance" = R;
+        tabledata Workflow = rm,
+        tabledata "Workflow Step" = r,
+        tabledata "Workflow Step Instance" = r;
 
     internal procedure GetFunctionName(WorkflowCode: Code[20]; StepId: Integer): Text[100]
     var

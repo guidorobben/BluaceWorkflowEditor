@@ -20,7 +20,7 @@ table 83800 "App Resource WFE"
         }
         field(20; Folder; Boolean)
         {
-            AllowInCustomizations = Always;
+            AllowInCustomizations = AsReadOnly;
             Caption = 'Folder';
             ToolTip = 'Specifies if the entry is a folder.';
         }
