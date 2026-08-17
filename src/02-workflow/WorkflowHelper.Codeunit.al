@@ -16,11 +16,11 @@ codeunit 83803 "Workflow Helper WFE"
             exit(WorkflowStep."Function Name");
     end;
 
-    internal procedure EnableWorkflow(var Workflow: Record Workflow)
-    begin
-        Workflow.Validate(Enabled, true);
-        Workflow.Modify(true);
-    end;
+    // internal procedure EnableWorkflow(var Workflow: Record Workflow)
+    // begin
+    //     Workflow.Validate(Enabled, true);
+    //     Workflow.Modify(true);
+    // end;
 
     internal procedure ToggleEnableWorkflow(var Workflow: Record Workflow)
     begin
@@ -86,6 +86,7 @@ codeunit 83803 "Workflow Helper WFE"
         RecordInfo.WorkFlowCode(Workflow.Code);
 
         InfoDialog.Initialize();
+        InfoDialog.RecordInfo(RecordInfo);
         InfoDialog.AddHeader('Workflow');
         InfoDialog.Add('Code', Workflow.Code, "Info Dialog Event Code WFE"::"Workflow Code");
         InfoDialog.Add('Description', Workflow.Description);
