@@ -53,7 +53,7 @@ codeunit 83806 "Approval Entry Helper WFE"
         ApprovalEntry.Modify(false);
     end;
 
-    local procedure TestIsApprovalAdministrator(): Boolean
+    local procedure TestIsApprovalAdministrator()
     var
         UserManagement: Codeunit "User Management WFE";
     begin

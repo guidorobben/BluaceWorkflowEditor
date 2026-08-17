@@ -1,10 +1,10 @@
 page 83825 "Workflow Step Arguments WFE"
 {
     ApplicationArea = All;
-    Caption = 'Workflow Step Argument';
+    Caption = 'Workflow Step Arguments';
     PageType = List;
     SourceTable = "Workflow Step Argument";
-    UsageCategory = None;
+    UsageCategory = Administration;
 
     layout
     {

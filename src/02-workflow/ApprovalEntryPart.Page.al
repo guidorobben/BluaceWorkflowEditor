@@ -83,10 +83,11 @@ page 83806 "Approval Entry Part WFE"
         // SendNotificationEntries := SendNotificationCount();
     end;
 
-    local procedure GetRecipientEmailAddress(): Text
+    local procedure GetRecipientEmailAddress()
     var
         UserSetup: Record "User Setup";
     begin
+        UserSetup.SetLoadFields("E-Mail");
         if not UserSetup.Get(CurrNotificationEntry."Recipient User ID") then
             Clear(UserSetup);
 
@@ -138,8 +139,7 @@ page 83806 "Approval Entry Part WFE"
 
     local procedure GetOverdueApprovalEntry(var NotificationEntry: Record "Notification Entry"; var OverdueApprovalEntry: Record "Overdue Approval Entry"): Boolean
     begin
-        if OverdueApprovalEntry.Get(NotificationEntry."Triggered By Record") then
-            exit(true);
+        exit(OverdueApprovalEntry.Get(NotificationEntry."Triggered By Record"));
     end;
 
 

@@ -104,13 +104,13 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
 
         case PurchaseDocumentStatus of
             PurchaseDocumentStatus::Open: //0
-                StatusFieldRef.Value := 0;
+                StatusFieldRef.Value(0);
             PurchaseDocumentStatus::Released: //1
-                StatusFieldRef.Value := 1;
+                StatusFieldRef.Value(1);
             PurchaseDocumentStatus::"Pending Approval": //2
-                StatusFieldRef.Value := 2;
+                StatusFieldRef.Value(2);
             PurchaseDocumentStatus::"Pending Prepayment": //3
-                StatusFieldRef.Value := 3;
+                StatusFieldRef.Value(3);
         end;
 
         PurchInvHeaderRecordRef.Modify(false);

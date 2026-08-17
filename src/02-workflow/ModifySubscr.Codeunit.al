@@ -48,7 +48,7 @@ codeunit 83825 "Modify Subscr. WFE"
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
         if not GetWorkflowEditorSetup(WorkflowEditorSetup) then
-            exit;
+            exit(false);
 
         exit(WorkflowEditorSetup."Debug Modify Purchase Header");
     end;
@@ -58,7 +58,7 @@ codeunit 83825 "Modify Subscr. WFE"
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
         if not GetWorkflowEditorSetup(WorkflowEditorSetup) then
-            exit;
+            exit(false);
 
         exit(WorkflowEditorSetup."Debug Modify Purch. Inv Header");
     end;
@@ -68,7 +68,7 @@ codeunit 83825 "Modify Subscr. WFE"
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
         if not GetWorkflowEditorSetup(WorkflowEditorSetup) then
-            exit;
+            exit(false);
 
         exit(WorkflowEditorSetup."Debug Modify Sales Header");
     end;
@@ -76,10 +76,10 @@ codeunit 83825 "Modify Subscr. WFE"
     local procedure GetWorkflowEditorSetup(var WorkflowEditorSetup: Record "Workflow Editor Setup WFE"): Boolean
     begin
         if not WorkflowEditorSetup.ReadPermission() then
-            exit;
+            exit(false);
 
         if not WorkflowEditorSetup.Get() then
-            exit;
+            exit(false);
 
         exit(true);
     end;

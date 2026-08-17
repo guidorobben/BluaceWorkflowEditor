@@ -10,16 +10,16 @@ codeunit 83808 "User Management WFE"
         UserSetup: Record "User Setup";
     begin
         if not UserSetup.ReadPermission() then
-            exit;
+            exit(false);
 
         UserSetup.SetLoadFields("Approval Administrator");
         if not UserSetup.Get(UserId()) then
-            exit;
+            exit(false);
 
         exit(UserSetup."Approval Administrator");
     end;
 
-    procedure TestIsApprovalAdministrator(): Boolean
+    procedure TestIsApprovalAdministrator()
     var
         UserManagement: Codeunit "User Management WFE";
         OnlyApproverAdminErr: Label 'Only a Approval Administrator can run this.';

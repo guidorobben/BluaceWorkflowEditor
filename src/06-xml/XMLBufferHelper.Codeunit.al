@@ -10,7 +10,7 @@ codeunit 83832 "XML Buffer Helper WFE"
     begin
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
-            exit;
+            exit(0);
 
         if Fatal then begin
             if not Evaluate(Result, NodeValue, 9) then
@@ -26,7 +26,7 @@ codeunit 83832 "XML Buffer Helper WFE"
     begin
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
-            exit;
+            exit(0);
 
         if Fatal then begin
             if not Evaluate(Result, NodeValue, 9) then
@@ -42,7 +42,7 @@ codeunit 83832 "XML Buffer Helper WFE"
     begin
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
-            exit;
+            exit(0D);
 
         if Fatal then begin
             if not Evaluate(Result, NodeValue, 9) then
@@ -58,7 +58,7 @@ codeunit 83832 "XML Buffer Helper WFE"
     begin
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
-            exit;
+            exit(false);
 
         if Fatal then begin
             if not Evaluate(Result, NodeValue, 9) then

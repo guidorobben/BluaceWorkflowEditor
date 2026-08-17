@@ -218,14 +218,18 @@ codeunit 83831 "Open Workflow Tree WFE"
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Event";
                     WorkflowEvent.SetLoadFields(Description);
                     if WorkflowEvent.Get(FunctionName) then
-                        TempBufferWorkflowTree.Description := WorkflowEvent.Description;
+                        TempBufferWorkflowTree.Description := WorkflowEvent.Description
+                    else
+                        TempBufferWorkflowTree.Description := 'EVENT NOT FOUND';
                 end;
             1:
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Response;
                     WorkflowResponse.SetLoadFields(Description);
                     if WorkflowResponse.Get(FunctionName) then
-                        TempBufferWorkflowTree.Description := WorkflowResponse.Description;
+                        TempBufferWorkflowTree.Description := WorkflowResponse.Description
+                    else
+                        TempBufferWorkflowTree.Description := 'RESPONSE NOT FOUND';
                 end;
             2:
                 TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Sub-Workflow";

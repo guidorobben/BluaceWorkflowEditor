@@ -10,7 +10,7 @@ codeunit 83816 "Vendor Helper WFE"
         RecordRestrictionMgt.AllowRecordUsage(Vendor);
     end;
 
-    local procedure TestIsApprovalAdministrator(): Boolean
+    local procedure TestIsApprovalAdministrator()
     var
         UserManagement: Codeunit "User Management WFE";
     begin

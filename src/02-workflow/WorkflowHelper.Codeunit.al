@@ -102,7 +102,7 @@ codeunit 83803 "Workflow Helper WFE"
         WorkflowStep: Record "Workflow Step";
     begin
         if Workflow.Code = '' then
-            exit;
+            exit(0);
 
         WorkflowStep.SetRange("Workflow Code", Workflow.Code);
         WorkflowStep.SetFilter("Next Workflow Step ID", '<>0');
@@ -114,7 +114,7 @@ codeunit 83803 "Workflow Helper WFE"
         WorkflowStepInstance: Record "Workflow Step Instance";
     begin
         if IsNullGuid(InstanceID) then
-            exit;
+            exit(0);
 
         WorkflowStepInstance.SetRange(ID, InstanceID);
         WorkflowStepInstance.SetFilter("Next Workflow Step ID", '<>0');
@@ -126,7 +126,7 @@ codeunit 83803 "Workflow Helper WFE"
         WorkflowStepInstance: Record "Workflow Step Instance";
     begin
         if WorkflowCode = '' then
-            exit;
+            exit(0);
 
         WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
         exit(WorkflowStepInstance.Count());

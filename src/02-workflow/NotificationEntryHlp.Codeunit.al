@@ -1,8 +1,8 @@
 codeunit 83812 "Notification Entry Hlp. WFE"
 {
     Permissions =
-        tabledata "Approval Entry" = R,
-        tabledata "Notification Entry" = RD;
+        tabledata "Approval Entry" = r,
+        tabledata "Notification Entry" = rd;
 
     var
         UserManagement: Codeunit "User Management WFE";

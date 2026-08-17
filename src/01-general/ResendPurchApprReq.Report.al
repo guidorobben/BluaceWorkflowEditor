@@ -183,7 +183,7 @@ report 83800 "Resend Purch. Appr. Req. WFE"
         exit(not ApprovalEntry.IsEmpty());
     end;
 
-    local procedure TestIsApprovalAdministrator(): Boolean
+    local procedure TestIsApprovalAdministrator()
     var
         UserManagement: Codeunit "User Management WFE";
     begin

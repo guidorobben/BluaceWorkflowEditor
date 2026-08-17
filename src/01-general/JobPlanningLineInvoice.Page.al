@@ -27,7 +27,7 @@ page 83820 "Job Planning Line Invoice WFE"
                 }
                 field("Line No."; Rec."Line No.")
                 {
-                    ToolTip = 'Specifies the line number that is linked to the document. Numbers are created sequentially.';
+                    // ToolTip = 'Specifies the line number that is linked to the document. Numbers are created sequentially.';
                 }
                 field("Document Type"; Rec."Document Type")
                 {
@@ -35,11 +35,11 @@ page 83820 "Job Planning Line Invoice WFE"
                 }
                 field("Document No."; Rec."Document No.")
                 {
-                    ToolTip = 'Specifies the number associated with the document. For example, if you have created an invoice, the field Specifies the invoice number.';
+                    // ToolTip = 'Specifies the number associated with the document. For example, if you have created an invoice, the field Specifies the invoice number.';
                 }
                 field("Invoiced Date"; Rec."Invoiced Date")
                 {
-                    ToolTip = 'Specifies the date on which the invoice or credit memo was posted.';
+                    // ToolTip = 'Specifies the date on which the invoice or credit memo was posted.';
                 }
                 field("Invoiced Amount (LCY)"; Rec."Invoiced Amount (LCY)")
                 {
@@ -51,15 +51,15 @@ page 83820 "Job Planning Line Invoice WFE"
                 }
                 field("Quantity Transferred"; Rec."Quantity Transferred")
                 {
-                    ToolTip = 'Specifies the quantity transferred from the project planning line to the invoice or credit memo.';
+                    // ToolTip = 'Specifies the quantity transferred from the project planning line to the invoice or credit memo.';
                 }
                 field("Job Ledger Entry No."; Rec."Job Ledger Entry No.")
                 {
-                    ToolTip = 'Specifies a link to the project ledger entry that was created when the document was posted.';
+                    // ToolTip = 'Specifies a link to the project ledger entry that was created when the document was posted.';
                 }
                 field("Transferred Date"; Rec."Transferred Date")
                 {
-                    ToolTip = 'Specifies the date on which the invoice or credit document was created. The date is set to the posting date you specified when you created the invoice or credit memo.';
+                    // ToolTip = 'Specifies the date on which the invoice or credit document was created. The date is set to the posting date you specified when you created the invoice or credit memo.';
                 }
             }
         }

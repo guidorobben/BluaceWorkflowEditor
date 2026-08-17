@@ -1,6 +1,8 @@
 codeunit 83823 "Approval Mgt. WFE"
 {
     Access = Internal;
+    Permissions =
+        tabledata "Approval Entry" = r;
 
     procedure OpenApprovalEntries(TableID: Integer; SourceRecordID: RecordId)
     var
@@ -21,7 +23,7 @@ codeunit 83823 "Approval Mgt. WFE"
         ApprovalEntry: Record "Approval Entry";
     begin
         if TableID = 0 then
-            exit;
+            exit(0);
 
         ApprovalEntry.SetRange("Table ID", TableID);
         ApprovalEntry.SetRange("Record ID to Approve", SourceRecordID);
@@ -33,7 +35,7 @@ codeunit 83823 "Approval Mgt. WFE"
         ApprovalEntry: Record "Approval Entry";
     begin
         if TableID = 0 then
-            exit;
+            exit(0);
 
         ApprovalEntry.SetRange("Table ID", TableID);
         ApprovalEntry.SetRange("Record ID to Approve", SourceRecordID);
