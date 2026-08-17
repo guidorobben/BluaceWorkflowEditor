@@ -5,7 +5,7 @@ page 83826 "Workflow Tree WFE"
     Editable = false;
     PageType = List;
     SourceTable = "Workflow Tree WFE";
-    UsageCategory = Tasks;
+    UsageCategory = None;
 
     layout
     {
@@ -25,7 +25,7 @@ page 83826 "Workflow Tree WFE"
                 {
                     StyleExpr = LineStyleExpr;
                 }
-                field("Description"; Rec.Description)
+                field(Description; Rec.Description)
                 {
                     StyleExpr = LineStyleExpr;
                 }
@@ -35,6 +35,7 @@ page 83826 "Workflow Tree WFE"
                 }
                 field("Value"; Rec."Value")
                 {
+                    StyleExpr = LineStyleExpr;
                 }
                 field("Step ID"; Rec."Step ID")
                 {
@@ -57,26 +58,28 @@ page 83826 "Workflow Tree WFE"
         }
     }
 
-    // actions
-    // {
-    //     area(Processing)
-    //     {
-    //         action(OpenWorkflow)
-    //         {
-    //             ApplicationArea = All;
-    //             Caption = 'Refresh';
-    //             Image = Refresh;
+    actions
+    {
+        area(Processing)
+        {
+            action(GotoNextStepID)
+            {
+                ApplicationArea = All;
+                Caption = 'Goto Next Step ID';
+                Image = Refresh;
 
-    //             // trigger OnAction()
-    //             // var
-    //             //     WorkflowTreeHelper: Codeunit "Workflow Tree Helper WFE";
-    //             // begin
-    //             //     WorkflowTreeHelper.OpenWorkflow();
-    //             //     CurrPage.Update();
-    //             // end;
-    //         }
-    //     }
-    // }
+                trigger OnAction()
+                begin
+                    Rec.GotoNextStepID();
+                end;
+            }
+        }
+
+        area(Promoted)
+        {
+            actionref(GotoNextStepID_Promoted; GotoNextStepID) { }
+        }
+    }
 
     var
         LineStyleExpr: Text;
@@ -98,7 +101,11 @@ page 83826 "Workflow Tree WFE"
         if Rec.Type = Rec.Type::Argument then
             LineStyleExpr := Format(PageStyle::Ambiguous);
 
-        if Rec."Function Name".EndsWith('PTE') then
+        if Rec."Function Name".EndsWith('PTE') then //Custom
             LineStyleExpr := Format(PageStyle::Attention);
+
+        if Rec."Function Name" = 'ApproverLimitType' then
+            if Rec.Value in ['90000' .. '99999'] then //Custom
+                LineStyleExpr := Format(PageStyle::Attention);
     end;
 }

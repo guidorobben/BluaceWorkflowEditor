@@ -109,6 +109,74 @@ codeunit 83831 "Open Workflow Tree WFE"
         TempBufferWorkflowTree."Step ID" := PreviouStepID;
         TempBufferWorkflowTree."Previous Step ID" := PreviouStepID;
         TempBufferWorkflowTree.Insert(false);
+
+        UpdateWorkflowStepArgument(TempBufferWorkflowTree);
+    end;
+
+    local procedure UpdateWorkflowStepArgument(var CurrTempBufferWorkflowTree: Record "Workflow Tree WFE" temporary)
+    var
+        WorkflowStepArgument: Record "Workflow Step Argument";
+        TableCaption: Text[249];
+    begin
+        case CurrTempBufferWorkflowTree."Function Name" of
+            'ApproverType':
+                begin
+                    CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Approver Type");
+
+                    case CurrTempBufferWorkflowTree.Value of
+                        '0':
+                            CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Salesperson/Purchaser)';
+                        '1':
+                            CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Approver)';
+                        '2':
+                            CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Workflow User Group)';
+                    end;
+                end;
+            'ApproverLimitType':
+                begin
+                    CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Approver Limit Type");
+
+                    case CurrTempBufferWorkflowTree.Value of
+                        '0':
+                            CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Approver Chain)';
+                        '1':
+                            CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Direct Approver)';
+                        '2':
+                            CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (First Qualified Approver)';
+                        '3':
+                            CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Specific Approver)';
+                    end;
+                end;
+            'DueDateFormula':
+                CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Due Date Formula");
+            'TableNumber':
+                begin
+                    CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Table No.");
+                    TableCaption := GetTableCaption(CurrTempBufferWorkflowTree.Value);
+                    CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (' + TableCaption + ')';
+                end;
+            'ApproverUserID':
+                CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Approver User ID");
+            'EventConditions':
+                CurrTempBufferWorkflowTree.Description := 'Table Filter';
+            'NotificationEntryType':
+                CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Notification Entry Type");
+            'NotifySender':
+                CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Notify Sender");
+            'Message':
+                CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption(Message);
+        end;
+        CurrTempBufferWorkflowTree.Modify(false);
+    end;
+
+    local procedure GetTableCaption(TableNo: Text): Text[249]
+    var
+        AllObjWithCaption: Record AllObjWithCaption;
+    begin
+        AllObjWithCaption.Setrange("Object Type", AllObjWithCaption."Object Type"::Table);
+        AllObjWithCaption.SetFilter("Object ID", TableNo);
+        if AllObjWithCaption.FindFirst() then
+            exit(AllObjWithCaption."Object Caption");
     end;
 
     local procedure ProcessWorkflowStepAttributes(var CurrTempXMLBuffer: array[5] of Record "XML Buffer" temporary)

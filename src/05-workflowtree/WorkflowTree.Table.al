@@ -2,6 +2,8 @@ table 83805 "Workflow Tree WFE"
 {
     Caption = 'Workflow Tree';
     DataClassification = SystemMetadata;
+    Permissions =
+        tabledata "Workflow Tree WFE" = r;
 
     fields
     {
@@ -53,5 +55,17 @@ table 83805 "Workflow Tree WFE"
         {
             Clustered = true;
         }
+        key(StepID; "Step ID") { }
     }
+
+    procedure GotoNextStepID()
+    begin
+        if Rec."Next Step ID" = 0 then
+            exit;
+
+        Rec.Reset();
+        Rec.SetRange("Step ID", Rec."Next Step ID");
+        if Rec.FindFirst() then; // Pointer
+        Rec.Reset();
+    end;
 }
