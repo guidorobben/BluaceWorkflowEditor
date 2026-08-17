@@ -1,8 +1,8 @@
 codeunit 83818 "Job Planning Line Helper WFE"
 {
     Permissions =
-        tabledata "Job Planning Line" = R,
-        tabledata "Purch. Inv. Header" = R;
+        tabledata "Job Planning Line" = r,
+        tabledata "Purch. Inv. Header" = r;
 
     internal procedure OpenPostedPurchaseInvoice(var JobPlanningLine: Record "Job Planning Line")
     var

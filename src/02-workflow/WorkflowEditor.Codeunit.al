@@ -2,8 +2,8 @@ codeunit 83801 "Workflow Editor WFE"
 {
     Access = Internal;
     Permissions =
-        tabledata "Workflow Step" = R,
-        tabledata "Workflow Step Instance" = R;
+        tabledata "Workflow Step" = r,
+        tabledata "Workflow Step Instance" = r;
 
     procedure OpenActiveWorkflow(WorkflowStepRecordID: RecordId)
     var

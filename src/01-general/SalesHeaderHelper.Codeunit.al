@@ -2,7 +2,7 @@ codeunit 83819 "Sales Header Helper WFE"
 {
     Access = Internal;
     Permissions =
-        tabledata "Sales Header" = RM;
+        tabledata "Sales Header" = rm;
 
     internal procedure ShowApprovalInfo(SalesHeader: Record "Sales Header")
     var

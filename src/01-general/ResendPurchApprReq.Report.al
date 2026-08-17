@@ -3,9 +3,9 @@ report 83800 "Resend Purch. Appr. Req. WFE"
     ApplicationArea = All;
     Caption = 'Resend Purchase Header Approval Request';
     Permissions =
-        tabledata "Approval Entry" = R,
-        tabledata "Purchase Header" = RM,
-        tabledata "Vendor Ledger Entry" = RM;
+        tabledata "Approval Entry" = r,
+        tabledata "Purchase Header" = rm,
+        tabledata "Vendor Ledger Entry" = rm;
     ProcessingOnly = true;
     UsageCategory = Tasks;
 

@@ -1,11 +1,11 @@
 codeunit 83807 "Purchase Header Helper WFE"
 {
     Permissions =
-        tabledata "Approval Entry" = R,
-        tabledata "Purchase Header" = RM,
-        tabledata "Restricted Record" = R,
-        tabledata "Vendor Ledger Entry" = R,
-        tabledata Workflow = R;
+        tabledata "Approval Entry" = r,
+        tabledata "Purchase Header" = rm,
+        tabledata "Restricted Record" = r,
+        tabledata "Vendor Ledger Entry" = r,
+        tabledata Workflow = r;
 
     internal procedure SetStatusToOpen(var PurchaseHeader: Record "Purchase Header")
     begin

@@ -1,7 +1,7 @@
 codeunit 83825 "Modify Subscr. WFE"
 {
     Access = Internal;
-    Permissions = tabledata "Workflow Editor Setup WFE" = R;
+    Permissions = tabledata "Workflow Editor Setup WFE" = r;
 
     var
         UserManagement: Codeunit "User Management WFE";

@@ -1,6 +1,6 @@
 codeunit 83800 "Approvals Mgmt Subscr. WFE"
 {
-    Permissions = tabledata "Workflow Editor Setup WFE" = R;
+    Permissions = tabledata "Workflow Editor Setup WFE" = r;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", OnBeforeCreateApprovalEntryNotification, '', false, false)]
     local procedure OnBeforeCreateApprovalEntryNotification(ApprovalEntry: Record "Approval Entry"; var IsHandled: Boolean; WorkflowStepInstance: Record "Workflow Step Instance")

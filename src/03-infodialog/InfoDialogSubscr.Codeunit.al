@@ -2,9 +2,9 @@ codeunit 83814 "Info Dialog Subscr. WFE"
 {
     Access = Internal;
     Permissions =
-        tabledata "Info Dialog WFE" = R,
-        tabledata "User Setup" = R,
-        tabledata Workflow = R;
+        tabledata "Info Dialog WFE" = r,
+        tabledata "User Setup" = r,
+        tabledata Workflow = r;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Info Dialog Helper WFE", OnActivateEventCode, '', false, false)]
     local procedure OnActivateEventCode(var InfoDialog: Record "Info Dialog WFE"; EventCode: Enum "Info Dialog Event Code WFE"; RecordInfo: Codeunit "Record Info WFE")

@@ -2,8 +2,8 @@ codeunit 83808 "User Management WFE"
 {
     Access = Internal;
     Permissions =
-        tabledata "Notification Setup" = R,
-        tabledata "User Setup" = RIMD;
+        tabledata "Notification Setup" = r,
+        tabledata "User Setup" = rimd;
 
     procedure IsApprovalAdministrator(): Boolean
     var

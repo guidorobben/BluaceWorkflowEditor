@@ -1,10 +1,10 @@
 codeunit 83811 "Workflow Event Log WFE"
 {
     Permissions =
-        tabledata "Approval Entry" = R,
-        tabledata "Workflow Editor Setup WFE" = R,
-        tabledata "Workflow Event Log WFE" = RI,
-        tabledata "Workflow Step Instance" = R;
+        tabledata "Approval Entry" = r,
+        tabledata "Workflow Editor Setup WFE" = r,
+        tabledata "Workflow Event Log WFE" = ri,
+        tabledata "Workflow Step Instance" = r;
 
     procedure AddEvent(var Variant: Variant; ResponseWorkflowStepInstance: Record "Workflow Step Instance")
     var

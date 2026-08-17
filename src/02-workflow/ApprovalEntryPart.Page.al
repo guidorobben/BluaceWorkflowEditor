@@ -4,12 +4,12 @@ page 83806 "Approval Entry Part WFE"
     Caption = 'Approval Entry';
     PageType = CardPart;
     Permissions =
-        tabledata "Approval Entry" = RIMD,
-        tabledata "Job Queue Entry" = R,
-        tabledata "Notification Entry" = R,
-        tabledata "Overdue Approval Entry" = R,
-        tabledata "Sent Notification Entry" = R,
-        tabledata "User Setup" = R;
+        tabledata "Approval Entry" = rimd,
+        tabledata "Job Queue Entry" = r,
+        tabledata "Notification Entry" = r,
+        tabledata "Overdue Approval Entry" = r,
+        tabledata "Sent Notification Entry" = r,
+        tabledata "User Setup" = r;
     UsageCategory = None;
 
     layout

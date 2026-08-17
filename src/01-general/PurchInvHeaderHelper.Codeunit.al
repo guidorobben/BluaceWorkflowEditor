@@ -2,13 +2,13 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
 {
     Access = Internal;
     Permissions =
-        tabledata "Purch. Inv. Header" = RM,
-        tabledata "Restricted Record" = R,
-        tabledata "User Setup" = R,
-        tabledata "Vendor Ledger Entry" = R,
-        tabledata Workflow = R,
-        tabledata "Workflow Editor Setup WFE" = R,
-        tabledata "Workflow Step Instance" = R;
+        tabledata "Purch. Inv. Header" = rm,
+        tabledata "Restricted Record" = r,
+        tabledata "User Setup" = r,
+        tabledata "Vendor Ledger Entry" = r,
+        tabledata Workflow = r,
+        tabledata "Workflow Editor Setup WFE" = r,
+        tabledata "Workflow Step Instance" = r;
 
     internal procedure AllowRecordUsage(var PurchInvHeader: Record "Purch. Inv. Header")
     var

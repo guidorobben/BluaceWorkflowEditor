@@ -1,14 +1,14 @@
 codeunit 83824 "Notification Dispatcher WFE"
 {
     Permissions =
-        tabledata "Approval Entry" = R,
-        tabledata "Notification Entry" = RMD,
-        tabledata "Notification Schedule" = R,
-        tabledata "Notification Setup" = R,
-        tabledata "Overdue Approval Entry" = R,
-        tabledata "Record Link" = RI,
-        tabledata "Report Layout Selection" = R,
-        tabledata "User Setup" = R;
+        tabledata "Approval Entry" = r,
+        tabledata "Notification Entry" = rmd,
+        tabledata "Notification Schedule" = r,
+        tabledata "Notification Setup" = r,
+        tabledata "Overdue Approval Entry" = r,
+        tabledata "Record Link" = ri,
+        tabledata "Report Layout Selection" = r,
+        tabledata "User Setup" = r;
 
     TableNo = "Notification Entry";
 

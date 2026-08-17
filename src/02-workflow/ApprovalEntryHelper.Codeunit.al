@@ -1,6 +1,6 @@
 codeunit 83806 "Approval Entry Helper WFE"
 {
-    Permissions = tabledata "Approval Entry" = RMD;
+    Permissions = tabledata "Approval Entry" = rmd;
 
     internal procedure DeleteEntry(var ApprovalEntry: Record "Approval Entry")
     var

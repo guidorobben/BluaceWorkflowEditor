@@ -1,7 +1,7 @@
 codeunit 83817 "Restriction Mgt. WFE"
 {
     Permissions =
-        tabledata "Restricted Record" = R;
+        tabledata "Restricted Record" = r;
 
     internal procedure RecordHasUsageRestrictions(RecVar: Variant): Boolean
     var

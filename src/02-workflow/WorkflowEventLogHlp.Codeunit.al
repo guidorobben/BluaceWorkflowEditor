@@ -1,7 +1,7 @@
 codeunit 83810 "Workflow Event Log Hlp. WFE"
 {
     Permissions =
-        tabledata "Workflow Event Log WFE" = RD;
+        tabledata "Workflow Event Log WFE" = rd;
 
     internal procedure ClearLog()
     var

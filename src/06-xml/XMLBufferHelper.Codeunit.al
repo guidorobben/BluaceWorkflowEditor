@@ -1,7 +1,7 @@
 codeunit 83832 "XML Buffer Helper WFE"
 {
     Permissions =
-        tabledata "XML Buffer" = R;
+        tabledata "XML Buffer" = r;
 
     internal procedure GetValueAsInteger(var XMLBuffer: Record "XML Buffer"; Fatal: Boolean) Result: Integer
     var

@@ -2,10 +2,10 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
 {
     Access = Internal;
     Permissions =
-        tabledata "Purch. Cr. Memo Hdr." = R,
-        tabledata "Purch. Inv. Header" = R,
-        tabledata "Restricted Record" = R,
-        tabledata "Vendor Ledger Entry" = R;
+        tabledata "Purch. Cr. Memo Hdr." = r,
+        tabledata "Purch. Inv. Header" = r,
+        tabledata "Restricted Record" = r,
+        tabledata "Vendor Ledger Entry" = r;
 
     internal procedure OpenApprovals(var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.")
     var

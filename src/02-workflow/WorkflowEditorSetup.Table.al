@@ -5,7 +5,7 @@ table 83801 "Workflow Editor Setup WFE"
     DrillDownPageId = "Workflow Editor Setup WFE";
     LookupPageId = "Workflow Editor Setup WFE";
     Permissions =
-        tabledata "Workflow Editor Setup WFE" = RI;
+        tabledata "Workflow Editor Setup WFE" = ri;
 
     fields
     {
