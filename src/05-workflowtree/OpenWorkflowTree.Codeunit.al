@@ -123,7 +123,7 @@ codeunit 83831 "Open Workflow Tree WFE"
                 begin
                     CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Approver Type");
 
-                    case CurrTempBufferWorkflowTree.Value of
+                    case CurrTempBufferWorkflowTree.Value of //FIXME
                         '0':
                             CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Salesperson/Purchaser)';
                         '1':
@@ -136,7 +136,7 @@ codeunit 83831 "Open Workflow Tree WFE"
                 begin
                     CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Approver Limit Type");
 
-                    case CurrTempBufferWorkflowTree.Value of
+                    case CurrTempBufferWorkflowTree.Value of //FIXME
                         '0':
                             CurrTempBufferWorkflowTree.Value := CurrTempBufferWorkflowTree.Value + ' (Approver Chain)';
                         '1':
@@ -173,8 +173,9 @@ codeunit 83831 "Open Workflow Tree WFE"
     var
         AllObjWithCaption: Record AllObjWithCaption;
     begin
-        AllObjWithCaption.Setrange("Object Type", AllObjWithCaption."Object Type"::Table);
+        AllObjWithCaption.SetRange("Object Type", AllObjWithCaption."Object Type"::Table);
         AllObjWithCaption.SetFilter("Object ID", TableNo);
+        AllObjWithCaption.SetLoadFields("Object Caption", "Object Type");
         if AllObjWithCaption.FindFirst() then
             exit(AllObjWithCaption."Object Caption");
     end;
@@ -215,12 +216,14 @@ codeunit 83831 "Open Workflow Tree WFE"
             0:
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Event";
+                    WorkflowEvent.SetLoadFields(Description);
                     if WorkflowEvent.Get(FunctionName) then
                         TempBufferWorkflowTree.Description := WorkflowEvent.Description;
                 end;
             1:
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Response;
+                    WorkflowResponse.SetLoadFields(Description);
                     if WorkflowResponse.Get(FunctionName) then
                         TempBufferWorkflowTree.Description := WorkflowResponse.Description;
                 end;
@@ -280,12 +283,12 @@ codeunit 83831 "Open Workflow Tree WFE"
         TempWorkflowTree.Insert(false);
     end;
 
-    procedure OpenBufferWorkflowTree()
-    begin
-        TempBufferWorkflowTree.Reset();
-        if TempBufferWorkflowTree.FindFirst() then; // Pointer
-        Page.Run(Page::"Workflow Tree WFE", TempBufferWorkflowTree);
-    end;
+    // procedure OpenBufferWorkflowTree()
+    // begin
+    //     TempBufferWorkflowTree.Reset();
+    //     if TempBufferWorkflowTree.FindFirst() then; // Pointer
+    //     Page.Run(Page::"Workflow Tree WFE", TempBufferWorkflowTree);
+    // end;
 
     procedure OpenWorkflowTree()
     begin

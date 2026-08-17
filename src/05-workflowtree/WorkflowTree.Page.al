@@ -24,6 +24,11 @@ page 83826 "Workflow Tree WFE"
                 field("Function Name"; Rec."Function Name")
                 {
                     StyleExpr = LineStyleExpr;
+
+                    trigger OnDrillDown()
+                    begin
+                        FunctionNameOnDrillDown();
+                    end;
                 }
                 field(Description; Rec.Description)
                 {
@@ -66,6 +71,7 @@ page 83826 "Workflow Tree WFE"
             {
                 ApplicationArea = All;
                 Caption = 'Goto Next Step ID';
+                Enabled = Rec."Next Step ID" <> 0;
                 Image = Refresh;
 
                 trigger OnAction()
@@ -89,7 +95,7 @@ page 83826 "Workflow Tree WFE"
         SetStyleExpression();
     end;
 
-    procedure SetStyleExpression()
+    local procedure SetStyleExpression()
     begin
         LineStyleExpr := Format(PageStyle::Standard);
         if Rec.Type = Rec.Type::"Event" then
@@ -107,5 +113,31 @@ page 83826 "Workflow Tree WFE"
         if Rec."Function Name" = 'ApproverLimitType' then
             if Rec.Value in ['90000' .. '99999'] then //Custom
                 LineStyleExpr := Format(PageStyle::Attention);
+    end;
+
+    local procedure FunctionNameOnDrillDown()
+    var
+        WorkflowResponse: Record "Workflow Response";
+        WorkflowEvent: Record "Workflow Event";
+    // WorkflowStepArgument: Record "Workflow Step Argument";
+    // PageManagement: Codeunit "Page Management";
+    begin
+        case Rec.Type of
+            Rec.type::"Event":
+                begin
+                    WorkflowEvent.SetRange("Function Name", Rec."Function Name");
+                    Page.Run(Page::"Workflow Events WFE", WorkflowEvent);
+                end;
+            Rec.Type::Response:
+                begin
+                    WorkflowResponse.SetRange("Function Name", Rec."Function Name");
+                    Page.Run(Page::"Workflow Response WFE", WorkflowResponse);
+                end;
+        // rec.type::Argument:
+        //     begin
+        //         // WorkflowStepArgument.SetRange("Function Name", Rec."Function Name");
+        //         Page.Run(Page::"Workflow Step Arguments WFE", WorkflowStepArgument);
+        //     end;
+        end;
     end;
 }

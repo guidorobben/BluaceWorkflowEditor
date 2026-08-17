@@ -23,7 +23,7 @@ table 83805 "Workflow Tree WFE"
         {
             Caption = 'Next Step ID';
         }
-        field(40; "Function Name"; Text[250])
+        field(40; "Function Name"; Text[128])
         {
             Caption = 'Function Name';
         }
