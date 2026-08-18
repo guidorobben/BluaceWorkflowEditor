@@ -41,6 +41,11 @@ page 83826 "Workflow Tree WFE"
                 field("Value"; Rec."Value")
                 {
                     StyleExpr = LineStyleExpr;
+
+                    trigger OnDrillDown()
+                    begin
+                        Message(Rec.Value);
+                    end;
                 }
                 field("Step ID"; Rec."Step ID")
                 {

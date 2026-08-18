@@ -6,7 +6,7 @@ page 83827 "Open XML WFE"
     PageType = Worksheet;
     ShowFilter = true;
     SourceTable = "XML Buffer";
-    UsageCategory = Tasks;
+    UsageCategory = None;
 
     layout
     {
@@ -109,7 +109,7 @@ page 83827 "Open XML WFE"
             action(ConvertBase64)
             {
                 Caption = 'Convert Value (Base64)';
-                // Image = Base
+                // Image = con
 
                 trigger OnAction()
                 var

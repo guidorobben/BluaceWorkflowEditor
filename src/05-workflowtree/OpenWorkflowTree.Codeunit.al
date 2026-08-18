@@ -116,6 +116,7 @@ codeunit 83831 "Open Workflow Tree WFE"
     local procedure UpdateWorkflowStepArgument(var CurrTempBufferWorkflowTree: Record "Workflow Tree WFE" temporary)
     var
         WorkflowStepArgument: Record "Workflow Step Argument";
+        Base64Convert: Codeunit "Base64 Convert";
         TableCaption: Text[249];
     begin
         case CurrTempBufferWorkflowTree."Function Name" of
@@ -158,7 +159,11 @@ codeunit 83831 "Open Workflow Tree WFE"
             'ApproverUserID':
                 CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Approver User ID");
             'EventConditions':
-                CurrTempBufferWorkflowTree.Description := 'Table Filter';
+                begin
+                    CurrTempBufferWorkflowTree.Description := 'Table Filter';
+                    if CurrTempBufferWorkflowTree.Value <> '' then
+                        CurrTempBufferWorkflowTree.Value := Base64Convert.FromBase64(CurrTempBufferWorkflowTree.Value, TextEncoding::UTF16);
+                end;
             'NotificationEntryType':
                 CurrTempBufferWorkflowTree.Description := WorkflowStepArgument.FieldCaption("Notification Entry Type");
             'NotifySender':
@@ -213,7 +218,7 @@ codeunit 83831 "Open Workflow Tree WFE"
         TempBufferWorkflowTree."Next Step ID" := NextStepID;
         TempBufferWorkflowTree."Sequence No." := SequenceNo;
         case Type of
-            0:
+            0: // Event
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Event";
                     WorkflowEvent.SetLoadFields(Description);
@@ -222,7 +227,7 @@ codeunit 83831 "Open Workflow Tree WFE"
                     else
                         TempBufferWorkflowTree.Description := 'EVENT NOT FOUND';
                 end;
-            1:
+            1: // Response
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Response;
                     WorkflowResponse.SetLoadFields(Description);
