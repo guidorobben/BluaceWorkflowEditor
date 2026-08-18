@@ -16,4 +16,8 @@ enum 83805 "Workflow Step Type WFE"
     {
         Caption = 'Argument';
     }
+    value(20; Workflow)
+    {
+        Caption = 'Workflow';
+    }
 }

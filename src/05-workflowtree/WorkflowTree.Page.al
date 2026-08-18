@@ -103,6 +103,9 @@ page 83826 "Workflow Tree WFE"
     local procedure SetStyleExpression()
     begin
         LineStyleExpr := Format(PageStyle::Standard);
+        if Rec.Type = Rec.Type::"Workflow" then
+            LineStyleExpr := Format(PageStyle::Strong);
+
         if Rec.Type = Rec.Type::"Event" then
             LineStyleExpr := Format(PageStyle::Strong);
 

@@ -37,7 +37,7 @@ report 83801 "Open Workflow WFE"
     }
 
     var
-        OpenWorkflowTree: Codeunit "Open Workflow Tree WFE";
+        CreateWorkflowFileTree: Codeunit "Create Workflow File Tree WFE";
         FileInStream: InStream;
         EnterFileNameErr: Label 'Please enter a filename.';
         FileName: Text;
@@ -55,14 +55,14 @@ report 83801 "Open Workflow WFE"
 
     local procedure SelectFile(): Text
     begin
-        exit(OpenWorkflowTree.SelectFile(FileInStream));
+        exit(CreateWorkflowFileTree.SelectFile(FileInStream));
     end;
 
     local procedure LoadWorkflowFile()
     begin
-        OpenWorkflowTree.Initialize();
-        OpenWorkflowTree.LoadFromStream();
-        OpenWorkflowTree.ReaddWorkflow();
-        OpenWorkflowTree.OpenWorkflowTree();
+        CreateWorkflowFileTree.Initialize();
+        CreateWorkflowFileTree.LoadFromStream();
+        CreateWorkflowFileTree.ReadWorkflow();
+        CreateWorkflowFileTree.OpenWorkflowTree();
     end;
 }

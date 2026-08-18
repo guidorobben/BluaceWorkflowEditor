@@ -30,7 +30,7 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Notification Dispatcher WFE" = X,
         codeunit "Notification Entry Hlp. WFE" = X,
         codeunit "Notification Entry Subscr. WFE" = X,
-        codeunit "Open Workflow Tree WFE" = X,
+        codeunit "Create Workflow File Tree WFE" = X,
         codeunit "Purch. Cr. Memo Hdr. Hlp. WFE" = X,
         codeunit "Purch. Inv. Header Helper WFE" = X,
         codeunit "Purch. Inv. Header Subscr WFE" = X,
