@@ -52,8 +52,8 @@ pageextension 83822 "Customer Card WFE" extends "Customer Card"
             group(WorkflowEditorWFE_PromotedWFE)
             {
                 Caption = 'Workflow Editor';
-                Visible = EnableWFE;
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }

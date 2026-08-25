@@ -9,7 +9,7 @@ codeunit 83800 "Approvals Mgmt Subscr. WFE"
     begin
         if not WorkflowEditorSetup.ReadPermission() then
             exit;
-            
+
         if not WorkflowEditorSetup.Get() then
             exit;
 

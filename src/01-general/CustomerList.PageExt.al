@@ -52,8 +52,8 @@ pageextension 83821 "Customer List WFE" extends "Customer List"
             group(WorkflowEditorWFE_PromotedWFE)
             {
                 Caption = 'Workflow Editor';
-                Visible = EnableWFE;
                 Image = Workflow;
+                Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }

@@ -21,8 +21,8 @@ pageextension 83803 "Workflow Subpage WFE" extends "Workflow Subpage"
     }
 
     var
-        FuntionNameWFE: Text;
         EnableWFE: Boolean;
+        FuntionNameWFE: Text;
 
     trigger OnOpenPage()
     begin

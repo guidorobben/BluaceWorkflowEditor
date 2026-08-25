@@ -2,9 +2,9 @@ page 83801 "Workflow Events WFE"
 {
     ApplicationArea = All;
     Caption = 'Workflow Events';
+    DeleteAllowed = true;
     InsertAllowed = false;
     ModifyAllowed = false;
-    DeleteAllowed = true;
     PageType = List;
     SourceTable = "Workflow Event";
     UsageCategory = Lists;
