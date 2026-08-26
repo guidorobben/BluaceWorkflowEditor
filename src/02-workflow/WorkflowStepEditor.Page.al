@@ -65,6 +65,25 @@ page 83808 "Workflow Step Editor WFE"
         }
     }
 
+    actions
+    {
+        area(Navigation)
+        {
+            action(ShowArgument)
+            {
+                ApplicationArea = All;
+                Caption = 'Arguments';
+                Image = GetLines;
+                RunObject = page "Workflow Step Arguments WFE";
+                RunPageLink = ID = field(Argument);
+            }
+        }
+        area(Promoted)
+        {
+            actionref(ShowArgument_Promoted; ShowArgument) { }
+        }
+    }
+
     views
     {
         view(Events)

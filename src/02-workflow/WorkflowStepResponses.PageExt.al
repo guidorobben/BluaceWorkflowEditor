@@ -30,8 +30,8 @@ pageextension 83804 "Workflow Step Responses WFE" extends "Workflow Step Respons
     }
 
     var
-        FunctionNameWFE: Text[100];
         EnableWFE: Boolean;
+        FunctionNameWFE: Text[100];
 
     trigger OnAfterGetRecord()
     var

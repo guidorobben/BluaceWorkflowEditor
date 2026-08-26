@@ -20,14 +20,17 @@ page 83825 "Workflow Step Arguments WFE"
                 field("Custom Link"; Rec."Custom Link") { }
                 field("Delegate After"; Rec."Delegate After") { }
                 field("Due Date Formula"; Rec."Due Date Formula") { }
-                // field("Event Conditions"; Rec."Event Conditions") { }
+                field("Event Conditions"; Rec."Event Conditions".HasValue())
+                {
+                    Caption = 'Event Conditions';
+                }
                 field("Field Caption"; Rec."Field Caption") { }
                 field("Field No."; Rec."Field No.") { }
                 field("Function Name Description WFE"; Rec."Function Name Description WFE") { }
                 field("General Journal Batch Name"; Rec."General Journal Batch Name") { }
                 field("General Journal Template Name"; Rec."General Journal Template Name") { }
                 field("Link Target Page"; Rec."Link Target Page") { }
-                field("Message"; Rec.Message) { }
+                field(Message; Rec.Message) { }
                 field("Notification Entry Type"; Rec."Notification Entry Type") { }
                 field("Notification User ID"; Rec."Notification User ID") { }
                 field("Notification User License Type"; Rec."Notification User License Type") { }
