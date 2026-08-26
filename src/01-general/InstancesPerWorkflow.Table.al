@@ -112,7 +112,10 @@ table 83806 "Instances Per Workflow WFE"
         {
             Caption = 'Document Status';
         }
-
+        field(83810; Category; Code[20])
+        {
+            Caption = 'Category';
+        }
     }
     keys
     {
@@ -120,6 +123,8 @@ table 83806 "Instances Per Workflow WFE"
         {
             Clustered = true;
         }
+        key(Category; Category) { }
+        key(CreatedDateTime; "Created Date-Time") { }
     }
 
     var
@@ -133,5 +138,10 @@ table 83806 "Instances Per Workflow WFE"
     internal procedure OpenDocument()
     begin
         InstancesPerWorkflowHlp.OpenDocument(Rec);
+    end;
+
+    internal procedure OpenWorkflowStepInstances()
+    begin
+        InstancesPerWorkflowHlp.OpenWorkflowStepInstances(Rec);
     end;
 }

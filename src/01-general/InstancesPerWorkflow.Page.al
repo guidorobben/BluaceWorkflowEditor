@@ -8,6 +8,7 @@ page 83828 "Instances Per Workflow WFE"
         tabledata "Instances Per Workflow WFE" = ri,
         tabledata "Workflow Step Instance" = r;
     SourceTable = "Instances Per Workflow WFE";
+    SourceTableView = sorting(Category);
     UsageCategory = Lists;
 
     layout
@@ -28,7 +29,14 @@ page 83828 "Instances Per Workflow WFE"
                     end;
                 }
                 field(Description; Rec.Description) { }
-                field(ID; Rec."Instance ID") { }
+                field(Category; Rec.Category) { }
+                field("Instance ID"; Rec."Instance ID")
+                {
+                    trigger OnDrillDown()
+                    begin
+                        Rec.OpenWorkflowStepInstances();
+                    end;
+                }
                 field("Record ID"; Format(Rec."Record ID"))
                 {
                     Caption = 'Record-ID';
@@ -86,28 +94,9 @@ page 83828 "Instances Per Workflow WFE"
     end;
 
     local procedure BuildBuffer()
-    // var
-    //     WorkflowStepInstance: Record "Workflow Step Instance";
-    //     EntryNo: Integer;
     begin
         InstancesPerWorkflowHlp.BuildBuffer(Rec);
-
-        // WorkflowStepInstance.SetRange("Entry Point", true);
-        // if WorkflowStepInstance.FindSet() then
-        //     repeat
-        //         EntryNo += 1;
-
-        //         Rec.Init();
-        //         Rec."Entry No." := EntryNo;
-        //         Rec.ID := WorkflowStepInstance.ID;
-        //         Rec."Workflow Code" := WorkflowStepInstance."Workflow Code";
-        //         Rec."Record ID" := WorkflowStepInstance."Record ID";
-        //         Rec."Document Status" := InstancesPerWorkflowHlp.GetDocumentStatus(WorkflowStepInstance."Record ID");
-        //         Rec."Created By User ID" := WorkflowStepInstance."Created By User ID";
-        //         Rec."Created Date-Time" := WorkflowStepInstance."Created Date-Time";
-        //         Rec.Insert(false);
-        //     until WorkflowStepInstance.Next() = 0;
-
-        // if Rec.FindFirst() then; // Pointer
     end;
+
+
 }

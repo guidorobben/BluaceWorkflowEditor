@@ -8,18 +8,23 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
 
     procedure BuildBuffer(var TempInstancesPerWorkflow: Record "Instances Per Workflow WFE" temporary)
     var
+        Workflow: Record Workflow;
         WorkflowStepInstance: Record "Workflow Step Instance";
         EntryNo: Integer;
     begin
         WorkflowStepInstance.SetRange("Entry Point", true);
         if WorkflowStepInstance.FindSet() then
             repeat
+                if not Workflow.Get(WorkflowStepInstance."Workflow Code") then
+                    Clear(Workflow);
+
                 EntryNo += 1;
 
                 TempInstancesPerWorkflow.Init();
                 TempInstancesPerWorkflow."Entry No." := EntryNo;
                 TempInstancesPerWorkflow."Instance ID" := WorkflowStepInstance.ID;
                 TempInstancesPerWorkflow."Workflow Code" := WorkflowStepInstance."Workflow Code";
+                TempInstancesPerWorkflow.Category := Workflow.Category;
                 TempInstancesPerWorkflow."Record ID" := WorkflowStepInstance."Record ID";
                 TempInstancesPerWorkflow."Document Status" := GetDocumentStatus(WorkflowStepInstance."Record ID");
                 TempInstancesPerWorkflow."Created By User ID" := WorkflowStepInstance."Created By User ID";
@@ -52,16 +57,35 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
 
     procedure GetDocumentStatus(DocumentRecordID: RecordId): Enum "Purchase Document Status"
     var
+        WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
         DocumentRecordRef: RecordRef;
     begin
         DocumentRecordRef := DocumentRecordID.GetRecord();
-        DocumentRecordRef.Find('=');
+        if not DocumentRecordRef.Find('=') then
+            exit;
+
         case DocumentRecordRef.Number() of
             Database::"Purchase Header":
                 begin
                     // message(format(DocumentRecordRef.Field('Status').Value()));
                     exit(DocumentRecordRef.Field('Status').Value());
                 end;
+
+            Database::"Purch. Inv. Header":
+                begin
+                    if not WorkflowEditorSetup.Get() then
+                        exit;
+
+                    exit(DocumentRecordRef.Field(90010).Value());
+                end;
         end;
+    end;
+
+    procedure OpenWorkflowStepInstances(var InstancesPerWorkflow: Record "Instances Per Workflow WFE")
+    var
+        WorkflowStepInstance: Record "Workflow Step Instance";
+    begin
+        WorkflowStepInstance.SetRange(ID, InstancesPerWorkflow."Instance ID");
+        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
     end;
 }
