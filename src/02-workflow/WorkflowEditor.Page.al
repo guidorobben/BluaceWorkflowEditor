@@ -253,17 +253,24 @@ page 83805 "Workflow Editor WFE"
                 actionref(OpenWorkflows_Promoted; OpenWorkflows) { }
                 actionref(WorkflowList_Promoted; WorkflowList) { }
                 actionref(ApprovalEntries_Promoted; ApprovalEntries) { }
-                actionref(WorkflowEvents_Promoted; WorkflowEvents) { }
-                actionref(WorkflowSteps_Promoted; WorkflowSteps) { }
-                actionref(WorkflowStepArguments_Promoted; WorkflowStepArguments) { }
                 actionref(WorkflowTableRelations_Promoted; WorkflowTableRelations) { }
                 actionref(WFEventResponseCombi_Promoted; WFEventResponseCombi) { }
                 actionref(WFEventResponseCombiList_Promoted; WFEventResponseCombiList) { }
                 actionref(WorkflowDefinitionsRef_Promted; WorkflowDefinitions) { }
-                actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
-                actionref(WorkflowStepInstancesArchive_Promoted; WorkflowStepInstancesArchives) { }
                 actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
                 actionref(RestrictedRecords_Promoted; RestrictedRecords) { }
+
+                group(WorkflowInstances_Promoted)
+                {
+                    Caption = 'Workflow Instances';
+                    Image = Workflow;
+
+                    actionref(WorkflowSteps_Promoted; WorkflowSteps) { }
+                    actionref(WorkflowEvents_Promoted; WorkflowEvents) { }
+                    actionref(WorkflowStepArguments_Promoted; WorkflowStepArguments) { }
+                    actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
+                    actionref(WorkflowStepInstancesArchive_Promoted; WorkflowStepInstancesArchives) { }
+                }
             }
 
             group(PurchasePromoted)
