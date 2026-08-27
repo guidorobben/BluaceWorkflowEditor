@@ -5,7 +5,7 @@ codeunit 83820 "Notification Entry Subscr. WFE"
         tabledata "Workflow Editor Setup WFE" = r;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Notification Entry Dispatcher", OnBeforeCreateMailAndDispatch, '', false, false)]
-    local procedure OnBeforeCreateMailAndDispatch(var NotificationEntry: Record "Notification Entry"; var MailSubject: Text; var Email: Text; var IsHandled: Boolean)
+    local procedure OnBeforeCreateMailAndDispatch(var IsHandled: Boolean)
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
