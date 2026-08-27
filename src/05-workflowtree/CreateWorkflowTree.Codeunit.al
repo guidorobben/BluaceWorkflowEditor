@@ -201,14 +201,14 @@ codeunit 83830 "Create Workflow Tree WFE"
             exit;
 
         // WorkflowStepArgument: Record "Workflow Step Argument";
-        InsertWorkflowStepArgument('ApproverType', StepID, Format(WorkflowStepArgument."Approver Type"));
-        InsertWorkflowStepArgument('ApproverLimitType', StepID, Format(WorkflowStepArgument."Approver Limit Type"));
-        InsertWorkflowStepArgument('DueDateFormula', StepID, Format(WorkflowStepArgument."Due Date Formula"));
-        InsertWorkflowStepArgument('TableNumber', StepID, Format(WorkflowStepArgument."Table No."));
-        InsertWorkflowStepArgument('ApproverUserID', StepID, WorkflowStepArgument."Approver User ID");
+        InsertWorkflowStepArgument('ApproverType', WorkflowStepArgument.FieldCaption("Approver Type"), StepID, Format(WorkflowStepArgument."Approver Type") + ' (' + Format(WorkflowStepArgument."Approver Type".AsInteger()) + ')');
+        InsertWorkflowStepArgument('ApproverLimitType', WorkflowStepArgument.FieldCaption("Approver Limit Type"), StepID, Format(WorkflowStepArgument."Approver Limit Type") + ' (' + Format(WorkflowStepArgument."Approver Limit Type".AsInteger()) + ')');
+        InsertWorkflowStepArgument('DueDateFormula', WorkflowStepArgument.FieldCaption("Due Date Formula"), StepID, Format(WorkflowStepArgument."Due Date Formula"));
+        InsertWorkflowStepArgument('TableNumber', WorkflowStepArgument.FieldCaption("Table No."), StepID, Format(WorkflowStepArgument."Table No."));
+        InsertWorkflowStepArgument('ApproverUserID', WorkflowStepArgument.FieldCaption("Approver User ID"), StepID, WorkflowStepArgument."Approver User ID");
     end;
 
-    local procedure InsertWorkflowStepArgument(FunctionName: Text; PreviousStepID: Integer; Value: Text[2048])
+    local procedure InsertWorkflowStepArgument(FunctionName: Text; Description: Text; PreviousStepID: Integer; Value: Text)
     begin
         EntryNo += 1;
 
@@ -216,12 +216,11 @@ codeunit 83830 "Create Workflow Tree WFE"
         TempBufferWorkflowTree."Entry No." := EntryNo;
         TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Argument;
         TempBufferWorkflowTree."Function Name" := FunctionName;
-        TempBufferWorkflowTree.Value := Value;
+        TempBufferWorkflowTree.Description := CopyStr(Description, 1, MaxStrLen(TempBufferWorkflowTree.Description));
+        TempBufferWorkflowTree.Value := CopyStr(Value, 1, MaxStrLen(TempBufferWorkflowTree.Value));
         TempBufferWorkflowTree."Step ID" := PreviousStepID;
         TempBufferWorkflowTree."Previous Step ID" := PreviousStepID;
         TempBufferWorkflowTree.Insert(false);
-
-        // UpdateWorkflowStepArgument(TempBufferWorkflowTree);
     end;
 
     local procedure BuildWorkflowTree()

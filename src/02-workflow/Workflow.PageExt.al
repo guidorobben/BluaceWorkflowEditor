@@ -116,6 +116,7 @@ pageextension 83802 "Workflow WFE" extends Workflow
                 Visible = EnableWFE;
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
+                actionref(WorkflowTreeWFE_Promoted; WorkflowTreeWFE) { }
                 actionref(ShowWorkflowStepsWFE_Promoted; ShowWorkflowStepsWFE) { }
                 actionref(WorkflowStepInstancesWPTE_Promoted; WorkflowStepInstancesWPTE) { }
                 actionref(ArchivedWorkflowStepInstancesWPTE_Promoted; ArchivedWorkflowStepInstancesWPTE) { }

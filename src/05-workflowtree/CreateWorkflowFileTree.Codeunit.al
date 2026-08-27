@@ -33,10 +33,10 @@ codeunit 83831 "Create Workflow File Tree WFE"
         LoadFromStream(SelectedInstream);
     end;
 
-    procedure LoadFromStream(var TempCurrentXMLBuffer: Record "XML Buffer" temporary)
-    begin
-        TempCurrentXMLBuffer.LoadFromStream(SelectedInstream);
-    end;
+    // procedure LoadFromStream(var TempCurrentXMLBuffer: Record "XML Buffer" temporary)
+    // begin
+    //     TempCurrentXMLBuffer.LoadFromStream(SelectedInstream);
+    // end;
 
     procedure LoadFromStream(FileInStream: InStream)
     begin
