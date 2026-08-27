@@ -3,7 +3,9 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
     Access = Internal;
     Permissions =
         tabledata "Instances Per Workflow WFE" = r,
-        tabledata Workflow = r;
+        tabledata Workflow = r,
+        tabledata "Workflow Editor Setup WFE" = r,
+        tabledata "Workflow Step Instance" = r;
 
 
     procedure BuildBuffer(var TempInstancesPerWorkflow: Record "Instances Per Workflow WFE" temporary)
@@ -15,6 +17,7 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
         WorkflowStepInstance.SetRange("Entry Point", true);
         if WorkflowStepInstance.FindSet() then
             repeat
+                Workflow.SetLoadFields(Category, Enabled);
                 if not Workflow.Get(WorkflowStepInstance."Workflow Code") then
                     Clear(Workflow);
 
@@ -25,6 +28,7 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
                 TempInstancesPerWorkflow."Instance ID" := WorkflowStepInstance.ID;
                 TempInstancesPerWorkflow."Workflow Code" := WorkflowStepInstance."Workflow Code";
                 TempInstancesPerWorkflow.Category := Workflow.Category;
+                TempInstancesPerWorkflow."Workflow Enabled" := Workflow.Enabled;
                 TempInstancesPerWorkflow."Record ID" := WorkflowStepInstance."Record ID";
                 TempInstancesPerWorkflow."Document Status" := GetDocumentStatus(WorkflowStepInstance."Record ID");
                 TempInstancesPerWorkflow."Created By User ID" := WorkflowStepInstance."Created By User ID";
@@ -49,34 +53,40 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
     var
         PageManagement: Codeunit "Page Management";
         DocumentRecordRef: RecordRef;
+        DocumentDoesNotExistErr: Label 'Document does not exist.';
     begin
         DocumentRecordRef := InstancesPerWorkflow."Record ID".GetRecord();
-        DocumentRecordRef.Find('=');
+        if not DocumentRecordRef.FindFirst() then
+            Error(ErrorInfo.Create(DocumentDoesNotExistErr));
+
         PageManagement.PageRun(DocumentRecordRef);
     end;
 
-    procedure GetDocumentStatus(DocumentRecordID: RecordId): Enum "Purchase Document Status"
+    procedure GetDocumentStatus(DocumentRecordID: RecordId) DocumentStatus: Enum "Purchase Document Status"
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
         DocumentRecordRef: RecordRef;
     begin
+        DocumentStatus := DocumentStatus::Open;
+
         DocumentRecordRef := DocumentRecordID.GetRecord();
-        if not DocumentRecordRef.Find('=') then
+#pragma warning disable PC0030
+        if not DocumentRecordRef.FindFirst() then
+#pragma warning restore PC0030
             exit;
 
         case DocumentRecordRef.Number() of
             Database::"Purchase Header":
-                begin
-                    // message(format(DocumentRecordRef.Field('Status').Value()));
-                    exit(DocumentRecordRef.Field('Status').Value());
-                end;
-
+                exit(DocumentRecordRef.Field('Status').Value());
             Database::"Purch. Inv. Header":
                 begin
                     if not WorkflowEditorSetup.Get() then
                         exit;
 
-                    exit(DocumentRecordRef.Field(90010).Value());
+                    if WorkflowEditorSetup."Posted Purch. Inv. Status ID" = 0 then
+                        exit;
+
+                    exit(DocumentRecordRef.Field(WorkflowEditorSetup."Posted Purch. Inv. Status ID").Value());
                 end;
         end;
     end;

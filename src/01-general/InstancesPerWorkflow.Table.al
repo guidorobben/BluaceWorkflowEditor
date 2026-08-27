@@ -116,6 +116,10 @@ table 83806 "Instances Per Workflow WFE"
         {
             Caption = 'Category';
         }
+        field(83820; "Workflow Enabled"; Boolean)
+        {
+            Caption = 'Workflow Enabled';
+        }
     }
     keys
     {

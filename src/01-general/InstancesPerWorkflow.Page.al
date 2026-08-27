@@ -1,7 +1,7 @@
 page 83828 "Instances Per Workflow WFE"
 {
     ApplicationArea = All;
-    Caption = 'Instances Per Workflow';
+    Caption = 'Instances per Workflow';
     Editable = false;
     PageType = List;
     Permissions =
@@ -30,6 +30,7 @@ page 83828 "Instances Per Workflow WFE"
                 }
                 field(Description; Rec.Description) { }
                 field(Category; Rec.Category) { }
+                field("Workflow Enabled"; Rec."Workflow Enabled") { }
                 field("Instance ID"; Rec."Instance ID")
                 {
                     trigger OnDrillDown()
@@ -82,6 +83,12 @@ page 83828 "Instances Per Workflow WFE"
                     Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
                 end;
             }
+        }
+
+        area(Promoted)
+        {
+            actionref(OpenDocument_Promoted; OpenDocument) { }
+            actionref(WorkflowStepInstances_Promoted; WorkflowStepInstances) { }
         }
     }
 
