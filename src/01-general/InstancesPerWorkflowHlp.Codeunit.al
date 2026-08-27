@@ -15,6 +15,7 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
         EntryNo: Integer;
     begin
         WorkflowStepInstance.SetRange("Entry Point", true);
+        WorkflowStepInstance.SetLoadFields("Created By User ID", "Created Date-Time", ID, "Record ID", "Workflow Code");
         if WorkflowStepInstance.FindSet() then
             repeat
                 Workflow.SetLoadFields(Category, Enabled);

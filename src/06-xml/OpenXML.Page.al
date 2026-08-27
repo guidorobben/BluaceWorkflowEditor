@@ -76,16 +76,16 @@ page 83827 "Open XML WFE"
     {
         area(Processing)
         {
-            action(OpenXML)
-            {
-                Caption = 'Open XML';
-                Image = Open;
+            // action(OpenXML)
+            // {
+            //     Caption = 'Open XML';
+            //     Image = Open;
 
-                trigger OnAction()
-                begin
-                    SelectAndOpenXMLFile();
-                end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         SelectAndOpenXMLFile();
+            //     end;
+            // }
             // action(ExtractXmlAttachments)
             // {
             //     Caption = 'Extract Attachments';
@@ -164,7 +164,7 @@ page 83827 "Open XML WFE"
         {
             group(Category_Process)
             {
-                actionref(OpenXML_Promoted; OpenXML) { }
+                // actionref(OpenXML_Promoted; OpenXML) { }
                 // actionref(ExtractXmlAttachments_Promoted; ExtractXmlAttachments) { }
                 actionref(ConvertBase64_Promoted; ConvertBase64) { }
                 actionref(ShowValue_Promoted; ShowValue) { }
@@ -175,8 +175,8 @@ page 83827 "Open XML WFE"
     }
 
     var
-        OpenXMLFile: Codeunit "Open Workflow Tree WFE";
-        OpenXmlDoc: XmlDocument;
+    // OpenXMLFile: Codeunit "Create Workflow File Tree WFE";
+    // OpenXmlDoc: XmlDocument;
 
     // local procedure ExtractAttachments()
     // var
@@ -221,10 +221,10 @@ page 83827 "Open XML WFE"
     //     CurrPage.XMLBufferAttachments.Page.AddAttachment(TempXMLBufferAttachment);
     // end;
 
-    procedure SetXmlDocument(XmlDoc: XmlDocument)
-    begin
-        OpenXmlDoc := XmlDoc;
-    end;
+    // procedure SetXmlDocument(XmlDoc: XmlDocument)
+    // begin
+    //     OpenXmlDoc := XmlDoc;
+    // end;
 
     local procedure ShowValues()
     var
@@ -246,13 +246,13 @@ page 83827 "Open XML WFE"
                );
     end;
 
-    local procedure SelectAndOpenXMLFile()
-    var
-        FileInStream: InStream;
-    begin
-        OpenXMLFile.Initialize();
-        OpenXMLFile.SelectFile(FileInStream);
-        OpenXMLFile.LoadFromStream(Rec);
-        // OpenXMLFile.AddFileStream();
-    end;
+    // local procedure SelectAndOpenXMLFile()
+    // var
+    //     FileInStream: InStream;
+    // begin
+    //     OpenXMLFile.Initialize();
+    //     OpenXMLFile.SelectFile(FileInStream);
+    //     OpenXMLFile.LoadFromStream(Rec);
+    //     // OpenXMLFile.AddFileStream();
+    // end;
 }

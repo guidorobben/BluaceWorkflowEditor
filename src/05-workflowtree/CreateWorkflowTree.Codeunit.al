@@ -193,6 +193,7 @@ codeunit 83830 "Create Workflow Tree WFE"
     var
         WorkflowStepArgument: Record "Workflow Step Argument";
     begin
+        WorkflowStepArgument.SetLoadFields("Approver Limit Type", "Approver Type", "Approver User ID", "Due Date Formula", "Table No.");
         if not WorkflowStepArgument.Get(WorkflowStep.Argument) then
             exit;
 
@@ -208,8 +209,6 @@ codeunit 83830 "Create Workflow Tree WFE"
     end;
 
     local procedure InsertWorkflowStepArgument(FunctionName: Text; PreviousStepID: Integer; Value: Text[2048])
-    // var
-    //     XmlValue: Text;
     begin
         EntryNo += 1;
 

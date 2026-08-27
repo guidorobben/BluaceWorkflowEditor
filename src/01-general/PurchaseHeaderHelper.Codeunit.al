@@ -50,7 +50,7 @@ codeunit 83807 "Purchase Header Helper WFE"
         RecordRestrictionMgt.RestrictRecordUsage(PurchaseHeader, 'Manual restriction by user');
     end;
 
-    local procedure TestIsApprovalAdministrator(): Boolean
+    local procedure TestIsApprovalAdministrator()
     var
         UserManagement: Codeunit "User Management WFE";
     begin

@@ -63,7 +63,7 @@ codeunit 83819 "Sales Header Helper WFE"
         SalesHeader.Modify(false);
     end;
 
-    local procedure TestIsApprovalAdministrator(): Boolean
+    local procedure TestIsApprovalAdministrator()
     var
         UserManagement: Codeunit "User Management WFE";
     begin

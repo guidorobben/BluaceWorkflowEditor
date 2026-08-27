@@ -8,6 +8,8 @@ codeunit 83832 "XML Buffer Helper WFE"
         EvaluateToIntegerErr: Label 'The value ''%1'' from path ''%2'' could not be converted to integer.', Comment = '%1=Value, %2=Xml Path';
         NodeValue: Text;
     begin
+        Result := 0;
+
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
             exit(0);
@@ -24,6 +26,8 @@ codeunit 83832 "XML Buffer Helper WFE"
         EvaluateToDecimalErr: Label 'The value ''%1'' from path ''%2'' could not be converted to decimal.', Comment = '%1=Value, %2=Xml Path';
         NodeValue: Text;
     begin
+        Result := 0;
+
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
             exit(0);
@@ -40,6 +44,8 @@ codeunit 83832 "XML Buffer Helper WFE"
         EvaluateToDateErr: Label 'The value ''%1'' from path ''%2'' could not be converted to date.', Comment = '%1=Value, %2=Xml Path';
         NodeValue: Text;
     begin
+        Result := 0D;
+
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
             exit(0D);
@@ -53,16 +59,18 @@ codeunit 83832 "XML Buffer Helper WFE"
 
     internal procedure GetValueAsBoolean(var XMLBuffer: Record "XML Buffer"; Fatal: Boolean) Result: Boolean
     var
-        EvaluateToDateErr: Label 'The value ''%1'' from path ''%2'' could not be converted to boolean.', Comment = '%1=Value, %2=Xml Path';
+        EvaluateToBooleanErr: Label 'The value ''%1'' from path ''%2'' could not be converted to boolean.', Comment = '%1=Value, %2=Xml Path';
         NodeValue: Text;
     begin
+        Result := false;
+
         NodeValue := XMLBuffer.GetValue();
         if NodeValue = '' then
             exit(false);
 
         if Fatal then begin
             if not Evaluate(Result, NodeValue, 9) then
-                Error(EvaluateToDateErr, NodeValue, XMLBuffer.Path);
+                Error(EvaluateToBooleanErr, NodeValue, XMLBuffer.Path);
         end else
             Evaluate(Result, NodeValue, 9);
     end;
@@ -75,16 +83,20 @@ codeunit 83832 "XML Buffer Helper WFE"
         XMLBuffer.LoadFromText(XMLText);
     end;
 
-    procedure SelectSingleNode(XPath: Text; var XMLBuffer: Record "XML Buffer"): Text
+    procedure SelectSingleNode(XPath: Text; var XMLBuffer: Record "XML Buffer") Result: Text
     begin
+        Result := '';
+
         XMLBuffer.Reset();
         XMLBuffer.SetFilter(Path, XPath);
         if XMLBuffer.FindFirst() then
             exit(XMLBuffer.Value);
     end;
 
-    internal procedure SelectSingleNodeByName(Name: Text; var XMLBuffer: array[3] of Record "XML Buffer"; Index: Integer; XMLType: Enum "XML Type WFE"): Text
+    internal procedure SelectSingleNodeByName(Name: Text; var XMLBuffer: array[3] of Record "XML Buffer"; Index: Integer; XMLType: Enum "XML Type WFE") Result: Text
     begin
+        Result := '';
+
         // XMLBuffer[Index].Reset();
         XMLBuffer[Index].SetFilter(Name, Name);
         XMLBuffer[Index].SetRange(Type, XMLType);
@@ -92,8 +104,10 @@ codeunit 83832 "XML Buffer Helper WFE"
             exit(XMLBuffer[Index].GetValue());
     end;
 
-    procedure GetAttribute(var CurrentXMLBuffer: Record "XML Buffer"; Name: Text; var XMLBuffer: Record "XML Buffer"): Text
+    procedure GetAttribute(var CurrentXMLBuffer: Record "XML Buffer"; Name: Text; var XMLBuffer: Record "XML Buffer") Result: Text
     begin
+        Result := '';
+
         XMLBuffer.Reset();
         XMLBuffer.SetLoadFields(Value);
         XMLBuffer.SetCurrentKey("Parent Entry No.", Type, Name);

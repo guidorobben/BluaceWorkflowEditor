@@ -44,7 +44,10 @@ table 83803 "Info Dialog WFE"
     }
 
     procedure GetValueAsGuid() Result: Guid
+    var
+        EmptyGuid: Guid;
     begin
+        Result := EmptyGuid;
         if Evaluate(Result, Value) then; //No Error
     end;
 }

@@ -94,11 +94,11 @@ codeunit 83811 "Workflow Event Log WFE"
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
     begin
         if not WorkflowEditorSetup.ReadPermission() then
-            exit;
+            exit(false);
 
         WorkflowEditorSetup.SetLoadFields("Log Workflow Events");
         if not WorkflowEditorSetup.Get() then
-            exit;
+            exit(false);
 
         exit(WorkflowEditorSetup."Log Workflow Events");
     end;
