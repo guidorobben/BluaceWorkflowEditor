@@ -93,6 +93,17 @@ pageextension 83802 "Workflow WFE" extends Workflow
                         ArchivedWFStepInstances.RunModal();
                     end;
                 }
+                action(WorkflowTreeWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Workflow Tree';
+                    Image = BOM;
+
+                    trigger OnAction()
+                    begin
+                        Rec.CreateWorkflowTreeWFE();
+                    end;
+                }
             }
         }
 

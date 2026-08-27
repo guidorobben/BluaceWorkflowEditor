@@ -22,4 +22,9 @@ tableextension 83802 "Workflow WFE" extends Workflow
     begin
         WorkflowHelperWFE.GetWorkflowInfo(SourceRecordId, InfoDialog);
     end;
+
+    internal procedure CreateWorkflowTreeWFE()
+    begin
+        WorkflowHelperWFE.CreateWorkflowTree(Rec);
+    end;
 }

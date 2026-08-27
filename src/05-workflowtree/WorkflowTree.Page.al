@@ -103,7 +103,7 @@ page 83826 "Workflow Tree WFE"
     local procedure SetStyleExpression()
     begin
         LineStyleExpr := Format(PageStyle::Standard);
-        if Rec.Type = Rec.Type::"Workflow" then
+        if Rec.Type = Rec.Type::Workflow then
             LineStyleExpr := Format(PageStyle::Strong);
 
         if Rec.Type = Rec.Type::"Event" then
@@ -125,13 +125,13 @@ page 83826 "Workflow Tree WFE"
 
     local procedure FunctionNameOnDrillDown()
     var
-        WorkflowResponse: Record "Workflow Response";
         WorkflowEvent: Record "Workflow Event";
+        WorkflowResponse: Record "Workflow Response";
     // WorkflowStepArgument: Record "Workflow Step Argument";
     // PageManagement: Codeunit "Page Management";
     begin
         case Rec.Type of
-            Rec.type::"Event":
+            Rec.Type::"Event":
                 begin
                     WorkflowEvent.SetRange("Function Name", Rec."Function Name");
                     Page.Run(Page::"Workflow Events WFE", WorkflowEvent);

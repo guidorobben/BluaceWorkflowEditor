@@ -131,4 +131,16 @@ codeunit 83803 "Workflow Helper WFE"
         WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
         exit(WorkflowStepInstance.Count());
     end;
+
+    internal procedure CreateWorkflowTree(var Workflow: Record Workflow)
+    var
+        CreateWorkflowTreeWFE: Codeunit "Create Workflow Tree WFE";
+    begin
+        if Workflow.Code = '' then
+            exit;
+
+        CreateWorkflowTreeWFE.Initialize();
+        CreateWorkflowTreeWFE.ReadWorkflow(Workflow);
+        CreateWorkflowTreeWFE.OpenWorkflowTree();
+    end;
 }

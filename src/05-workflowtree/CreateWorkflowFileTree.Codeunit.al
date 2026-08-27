@@ -63,11 +63,12 @@ codeunit 83831 "Create Workflow File Tree WFE"
     begin
         ReadWorkflowHeader();
         ReadWorkflowSteps();
+        BuildWorkflowTree();
     end;
 
     procedure ReadWorkflowHeader()
     var
-        Code, Description, Category : Text;
+        Category, Code, Description : Text;
     begin
         TempXMLBuffer[1].Reset();
         TempXMLBuffer[1].SetRange(Name, 'Workflow');
@@ -126,8 +127,6 @@ codeunit 83831 "Create Workflow File Tree WFE"
             repeat
                 ProcessWorkflowStep(TempXMLBuffer);
             until TempXMLBuffer[1].Next() = 0;
-
-        BuildWorkflowTree();
     end;
 
     local procedure ProcessWorkflowStep(var CurrTempXMLBuffer: array[5] of Record "XML Buffer" temporary)
