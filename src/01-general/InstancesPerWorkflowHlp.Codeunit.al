@@ -79,7 +79,8 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
         case DocumentRecordRef.Number() of
             Database::"Purchase Header":
                 exit(DocumentRecordRef.Field('Status').Value());
-            Database::"Purch. Inv. Header":
+            Database::"Purch. Inv. Header",
+            Database::"Purch. Cr. Memo Hdr.":
                 begin
                     if not WorkflowEditorSetup.Get() then
                         exit;

@@ -33,6 +33,7 @@ page 83804 "Workflow Step Instance WFE"
                 }
                 field("Function Name"; Rec."Function Name")
                 {
+                    StyleExpr = LineStyleExpr;
                     ToolTip = 'Specifies the name of the function that is used by the workflow step instance.';
 
                     trigger OnDrillDown()
@@ -47,6 +48,7 @@ page 83804 "Workflow Step Instance WFE"
                 }
                 field(Type; Rec."Type")
                 {
+                    StyleExpr = LineStyleExpr;
                     ToolTip = 'Specifies if the workflow step instance is an event, a response, or a sub-workflow.';
                 }
                 field("Sequence No."; Rec."Sequence No.")
@@ -158,7 +160,7 @@ page 83804 "Workflow Step Instance WFE"
                         exit;
 
                     UserManagement.TestIsApprovalAdministrator();
-                    Rec.DeleteAll(true); //Om linked records te verwijderen 
+                    Rec.DeleteAll(true); // To Delete linked record
                 end;
             }
         }
@@ -175,12 +177,11 @@ page 83804 "Workflow Step Instance WFE"
                 trigger OnAction()
                 var
                     WorkflowTableRelation: Record "Workflow - Table Relation";
-                    RecRef: RecordRef;
                 begin
-                    if not RecRef.Get(Rec."Record ID") then
+                    if Rec."Record ID".TableNo() = 0 then
                         exit;
 
-                    WorkflowTableRelation.SetRange("Table ID", RecRef.Number());
+                    WorkflowTableRelation.SetRange("Table ID", Rec."Record ID".TableNo());
                     Page.Run(Page::"Workflow - Table Relations", WorkflowTableRelation);
                 end;
             }
@@ -219,6 +220,37 @@ page 83804 "Workflow Step Instance WFE"
             SharedLayout = true;
         }
     }
+
+    var
+        LineStyleExpr: Text;
+
+    trigger OnAfterGetRecord()
+    begin
+        SetStyleExpression();
+    end;
+
+    local procedure SetStyleExpression()
+    begin
+        LineStyleExpr := Format(PageStyle::Standard);
+        // if Rec.Type = Rec.Type::Workflow then
+        //     LineStyleExpr := Format(PageStyle::Strong);
+
+        if Rec.Type = Rec.Type::"Event" then
+            LineStyleExpr := Format(PageStyle::Strong);
+
+        if Rec.Type = Rec.Type::Response then
+            LineStyleExpr := Format(PageStyle::StandardAccent);
+
+        // if Rec.Type = Rec.Type::Argument then
+        //     LineStyleExpr := Format(PageStyle::Ambiguous);
+
+        // if Rec."Function Name".EndsWith('PTE') then //Custom
+        //     LineStyleExpr := Format(PageStyle::Attention);
+
+        // if Rec."Function Name" = 'ApproverLimitType' then
+        //     if Rec.Value in ['90000' .. '99999'] then //Custom
+        //         LineStyleExpr := Format(PageStyle::Attention);
+    end;
 
     local procedure ArgumentOnDrillDown()
     // var
@@ -268,6 +300,7 @@ page 83804 "Workflow Step Instance WFE"
         RequestPageParametersHelper: Codeunit "Request Page Parameters Helper";
         FilterPageBuilder: FilterPageBuilder;
     begin
+        TableMetadata.SetLoadFields(ID);
         if not TableMetadata.Get(WorkflowEvent."Table ID") then
             exit('');
 
@@ -302,6 +335,7 @@ page 83804 "Workflow Step Instance WFE"
         FilterPageBuilder: FilterPageBuilder;
         EventConditionsCaptionTxt: Label 'Event Conditions - %1', Comment = '%1 = Event description';
     begin
+        TableMetadata.SetLoadFields(ID);
         if not TableMetadata.Get(WorkflowEvent."Table ID") then
             exit(false);
 
@@ -312,7 +346,7 @@ page 83804 "Workflow Step Instance WFE"
             if not RequestPageParametersHelper.SetViewOnDynamicRequestPage(FilterPageBuilder, Filters, WorkflowEvent."Dynamic Req. Page Entity Name", WorkflowEvent."Table ID") then
                 exit(false);
 
-        FilterPageBuilder.PageCaption := StrSubstNo(EventConditionsCaptionTxt, WorkflowEvent.Description);
+        FilterPageBuilder.PageCaption(StrSubstNo(EventConditionsCaptionTxt, WorkflowEvent.Description));
         if not FilterPageBuilder.RunModal() then
             exit(false);
 
