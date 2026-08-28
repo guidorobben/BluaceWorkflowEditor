@@ -80,7 +80,6 @@ permissionset 83800 "Workflow Editor WFE"
         page "Workflow Step Instances WFE" = X,
         page "Workflow Steps WFE" = X,
         page "Workflow Tree WFE" = X,
-    // query "Instances Per Workflow WFE" = X,
         report "Open Workflow WFE" = X,
         report "Resend Purch. Appr. Req. WFE" = X;
 }

@@ -93,6 +93,7 @@ page 83826 "Workflow Tree WFE"
     }
 
     var
+        WorkflowTreeHlp: Codeunit "Workflow Tree Hlp WFE";
         LineStyleExpr: Text;
 
     trigger OnAfterGetRecord()
@@ -102,50 +103,53 @@ page 83826 "Workflow Tree WFE"
 
     local procedure SetStyleExpression()
     begin
-        LineStyleExpr := Format(PageStyle::Standard);
-        if Rec.Type = Rec.Type::Workflow then
-            LineStyleExpr := Format(PageStyle::Strong);
+        LineStyleExpr := WorkflowTreeHlp.SetStyleExpression(Rec);
 
-        if Rec.Type = Rec.Type::"Event" then
-            LineStyleExpr := Format(PageStyle::Strong);
+        // LineStyleExpr := Format(PageStyle::Standard);
+        // if Rec.Type = Rec.Type::Workflow then
+        //     LineStyleExpr := Format(PageStyle::Strong);
 
-        if Rec.Type = Rec.Type::Response then
-            LineStyleExpr := Format(PageStyle::StandardAccent);
+        // if Rec.Type = Rec.Type::"Event" then
+        //     LineStyleExpr := Format(PageStyle::Strong);
 
-        if Rec.Type = Rec.Type::Argument then
-            LineStyleExpr := Format(PageStyle::Ambiguous);
+        // if Rec.Type = Rec.Type::Response then
+        //     LineStyleExpr := Format(PageStyle::StandardAccent);
 
-        if Rec."Function Name".EndsWith('PTE') then //Custom
-            LineStyleExpr := Format(PageStyle::Attention);
+        // if Rec.Type = Rec.Type::Argument then
+        //     LineStyleExpr := Format(PageStyle::Ambiguous);
 
-        if Rec."Function Name" = 'ApproverLimitType' then
-            if Rec.Value in ['90000' .. '99999'] then //Custom
-                LineStyleExpr := Format(PageStyle::Attention);
+        // if Rec."Function Name".EndsWith('PTE') then //Custom
+        //     LineStyleExpr := Format(PageStyle::Attention);
+
+        // if Rec."Function Name" = 'ApproverLimitType' then
+        //     if Rec.Value in ['90000' .. '99999'] then //Custom
+        //         LineStyleExpr := Format(PageStyle::Attention);
     end;
 
     local procedure FunctionNameOnDrillDown()
-    var
-        WorkflowEvent: Record "Workflow Event";
-        WorkflowResponse: Record "Workflow Response";
+    // var
+    //     WorkflowEvent: Record "Workflow Event";
+    //     WorkflowResponse: Record "Workflow Response";
     // WorkflowStepArgument: Record "Workflow Step Argument";
     // PageManagement: Codeunit "Page Management";
     begin
-        case Rec.Type of
-            Rec.Type::"Event":
-                begin
-                    WorkflowEvent.SetRange("Function Name", Rec."Function Name");
-                    Page.Run(Page::"Workflow Events WFE", WorkflowEvent);
-                end;
-            Rec.Type::Response:
-                begin
-                    WorkflowResponse.SetRange("Function Name", Rec."Function Name");
-                    Page.Run(Page::"Workflow Response WFE", WorkflowResponse);
-                end;
-        // rec.type::Argument:
-        //     begin
-        //         // WorkflowStepArgument.SetRange("Function Name", Rec."Function Name");
-        //         Page.Run(Page::"Workflow Step Arguments WFE", WorkflowStepArgument);
-        //     end;
-        end;
+        WorkflowTreeHlp.FunctionNameOnDrillDown(Rec);
+        // case Rec.Type of
+        //     Rec.Type::"Event":
+        //         begin
+        //             WorkflowEvent.SetRange("Function Name", Rec."Function Name");
+        //             Page.Run(Page::"Workflow Events WFE", WorkflowEvent);
+        //         end;
+        //     Rec.Type::Response:
+        //         begin
+        //             WorkflowResponse.SetRange("Function Name", Rec."Function Name");
+        //             Page.Run(Page::"Workflow Response WFE", WorkflowResponse);
+        //         end;
+        // // rec.type::Argument:
+        // //     begin
+        // //         // WorkflowStepArgument.SetRange("Function Name", Rec."Function Name");
+        // //         Page.Run(Page::"Workflow Step Arguments WFE", WorkflowStepArgument);
+        // //     end;
+        // end;
     end;
 }

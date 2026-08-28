@@ -18,7 +18,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         RecordRestrictionMgt.AllowRecordUsage(PurchInvHeader);
     end;
 
-    local procedure TestIsApprovalAdministrator(): Boolean
+    local procedure TestIsApprovalAdministrator()
     var
         UserManagement: Codeunit "User Management WFE";
     begin
@@ -134,10 +134,12 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         exit(VendorLedgerEntry.Count());
     end;
 
-    local procedure VendorLedgerEntryOnHold(var PurchInvHeader: Record "Purch. Inv. Header"): Code[3]
+    local procedure VendorLedgerEntryOnHold(var PurchInvHeader: Record "Purch. Inv. Header") OnHold: Code[3]
     var
         VendorLedgerEntry: Record "Vendor Ledger Entry";
     begin
+        OnHold := '';
+
         VendorLedgerEntry.SetCurrentKey("Vendor No.", "Posting Date", "Currency Code");
         VendorLedgerEntry.SetRange("Document No.", PurchInvHeader."No.");
         VendorLedgerEntry.SetRange("Posting Date", PurchInvHeader."Posting Date");

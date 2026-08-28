@@ -33,31 +33,10 @@ codeunit 83831 "Create Workflow File Tree WFE"
         LoadFromStream(SelectedInstream);
     end;
 
-    // procedure LoadFromStream(var TempCurrentXMLBuffer: Record "XML Buffer" temporary)
-    // begin
-    //     TempCurrentXMLBuffer.LoadFromStream(SelectedInstream);
-    // end;
-
     procedure LoadFromStream(FileInStream: InStream)
     begin
         TempXMLBuffer[1].LoadFromStream(FileInStream);
     end;
-
-    // procedure OpenXMLPage()
-    // begin
-    //     TempXMLBuffer[1].Reset();
-    //     Page.Run(Page::"Open XML WFE", TempXMLBuffer[1]);
-    // end;
-
-    // procedure GetSelectedFilePath(): Text[250]
-    // begin
-    //     exit(SelectedFilePath);
-    // end;
-
-    // procedure GetSelectFileInStream(): InStream
-    // begin
-    //     exit(SelectedInstream);
-    // end;
 
     procedure ReadWorkflow()
     begin
@@ -83,33 +62,6 @@ codeunit 83831 "Create Workflow File Tree WFE"
                 TempBufferWorkflowTree.Init();
                 TempBufferWorkflowTree."Entry No." := EntryNo;
                 TempBufferWorkflowTree."Step ID" := -1;
-                // CurrentStepID := TempBufferWorkflowTree."Step ID";
-                // TempBufferWorkflowTree."Previous Step ID" := PreviousStepID;
-                // TempBufferWorkflowTree."Next Step ID" := NextStepID;
-                // TempBufferWorkflowTree."Sequence No." := SequenceNo;
-                // case Type of
-                //     0: // Event
-                //         begin
-                //             TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Event";
-                //             WorkflowEvent.SetLoadFields(Description);
-                //             if WorkflowEvent.Get(FunctionName) then
-                //                 TempBufferWorkflowTree.Description := WorkflowEvent.Description
-                //             else
-                //                 TempBufferWorkflowTree.Description := 'EVENT NOT FOUND';
-                //         end;
-                //     1: // Response
-                //         begin
-                //             TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Response;
-                //             WorkflowResponse.SetLoadFields(Description);
-                //             if WorkflowResponse.Get(FunctionName) then
-                //                 TempBufferWorkflowTree.Description := WorkflowResponse.Description
-                //             else
-                //                 TempBufferWorkflowTree.Description := 'RESPONSE NOT FOUND';
-                //         end;
-                //     2:
-                //         TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Sub-Workflow";
-                // end;
-
                 TempBufferWorkflowTree."Function Name" := Code;
                 TempBufferWorkflowTree.Description := Description;
                 TempBufferWorkflowTree.Value := Category;
@@ -232,10 +184,12 @@ codeunit 83831 "Create Workflow File Tree WFE"
         CurrTempBufferWorkflowTree.Modify(false);
     end;
 
-    local procedure GetTableCaption(TableNo: Text): Text[249]
+    local procedure GetTableCaption(TableNo: Text) Caption: Text[249]
     var
         AllObjWithCaption: Record AllObjWithCaption;
     begin
+        Caption := '';
+
         AllObjWithCaption.SetRange("Object Type", AllObjWithCaption."Object Type"::Table);
         AllObjWithCaption.SetFilter("Object ID", TableNo);
         AllObjWithCaption.SetLoadFields("Object Caption", "Object Type");

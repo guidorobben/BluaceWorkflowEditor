@@ -52,20 +52,24 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
         Page.Run(Page::"Restricted Records", RestrictedRecord);
     end;
 
-    local procedure VendorLedgerEntryCount(var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr."): Integer
+    local procedure VendorLedgerEntryCount(var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.") Records: Integer
     var
         VendorLedgerEntry: Record "Vendor Ledger Entry";
     begin
+        Records := 0;
+
         VendorLedgerEntry.SetCurrentKey("Vendor No.", "Posting Date", "Currency Code");
         VendorLedgerEntry.SetRange("Document No.", PurchCrMemoHdr."No.");
         VendorLedgerEntry.SetRange("Posting Date", PurchCrMemoHdr."Posting Date");
         exit(VendorLedgerEntry.Count());
     end;
 
-    local procedure VendorLedgerEntryOnHold(var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr."): Code[3]
+    local procedure VendorLedgerEntryOnHold(var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.") OnHold: Code[3]
     var
         VendorLedgerEntry: Record "Vendor Ledger Entry";
     begin
+        OnHold := '';
+
         VendorLedgerEntry.SetCurrentKey("Vendor No.", "Posting Date", "Currency Code");
         VendorLedgerEntry.SetRange("Document No.", PurchCrMemoHdr."No.");
         VendorLedgerEntry.SetRange("Posting Date", PurchCrMemoHdr."Posting Date");

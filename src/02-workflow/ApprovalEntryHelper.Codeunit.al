@@ -59,4 +59,12 @@ codeunit 83806 "Approval Entry Helper WFE"
     begin
         UserManagement.TestIsApprovalAdministrator();
     end;
+
+    procedure IsOverdue(var ApprovalEntry: Record "Approval Entry") Overdue: Boolean
+    begin
+        Overdue := false;
+
+        if ApprovalEntry.Status in [ApprovalEntry.Status::Created, ApprovalEntry.Status::Open] then
+            exit(ApprovalEntry."Due Date" < Today());
+    end;
 }

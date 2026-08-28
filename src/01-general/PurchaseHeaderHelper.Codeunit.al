@@ -91,8 +91,10 @@ codeunit 83807 "Purchase Header Helper WFE"
         InfoDialog.OpenInfoDialog();
     end;
 
-    local procedure HasOnHoldVendorLedgerEntry(var PurchaseHeader: Record "Purchase Header"): Boolean
+    local procedure HasOnHoldVendorLedgerEntry(var PurchaseHeader: Record "Purchase Header") OnHold: Boolean
     begin
+        OnHold := false;
+
         if PurchaseHeader."No." = '' then
             exit;
 

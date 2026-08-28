@@ -393,7 +393,7 @@ page 83822 "Approval Entries WFE"
     trigger OnAfterGetRecord()
     begin
         Overdue := Overdue::" ";
-        if FormatField(Rec) then
+        if ApprovalEntryHelper.IsOverdue(Rec) then
             Overdue := Overdue::Yes;
 
         RecordIDText := Format(Rec."Record ID to Approve", 0, 1);
@@ -417,15 +417,16 @@ page 83822 "Approval Entries WFE"
     //     end;
     // end;
 
-    local procedure FormatField(ApprovalEntry: Record "Approval Entry"): Boolean
-    begin
-        if Rec.Status in [Rec.Status::Created, Rec.Status::Open] then begin
-            if ApprovalEntry."Due Date" < Today() then
-                exit(true);
+    // local procedure FormatField(var ApprovalEntry: Record "Approval Entry") IsOverdue: Boolean
+    // begin
+    //     IsOverdue := false;
 
-            exit(false);
-        end;
-    end;
+    //     if Rec.Status in [Rec.Status::Created, Rec.Status::Open] then
+    //         exit(ApprovalEntry."Due Date" < Today());
+    //     // exit(true);
+    //     // exit(false);
+    //     // end;
+    // end;
 
     // procedure CalledFrom()
     // begin

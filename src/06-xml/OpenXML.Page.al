@@ -66,46 +66,12 @@ page 83827 "Open XML WFE"
                 }
             }
         }
-        // area(FactBoxes)
-        // {
-        //     part(XMLBufferAttachments; "XML Buffer Attach. Part TPTE") { }
-        // }
     }
 
     actions
     {
         area(Processing)
         {
-            // action(OpenXML)
-            // {
-            //     Caption = 'Open XML';
-            //     Image = Open;
-
-            //     trigger OnAction()
-            //     begin
-            //         SelectAndOpenXMLFile();
-            //     end;
-            // }
-            // action(ExtractXmlAttachments)
-            // {
-            //     Caption = 'Extract Attachments';
-            //     Image = Attachments;
-
-            //     trigger OnAction()
-            //     begin
-            //         ExtractAttachments();
-            //     end;
-            // }
-            // action(ExtractBase64XmlAttachment)
-            // {
-            //     Caption = 'Extract Base64 Attachment';
-            //     Image = Attachments;
-
-            //     trigger OnAction()
-            //     begin
-            //         ExtractBase64Attachment();
-            //     end;
-            // }
             action(ConvertBase64)
             {
                 Caption = 'Convert Value (Base64)';
@@ -164,67 +130,12 @@ page 83827 "Open XML WFE"
         {
             group(Category_Process)
             {
-                // actionref(OpenXML_Promoted; OpenXML) { }
-                // actionref(ExtractXmlAttachments_Promoted; ExtractXmlAttachments) { }
                 actionref(ConvertBase64_Promoted; ConvertBase64) { }
                 actionref(ShowValue_Promoted; ShowValue) { }
                 actionref(OpenStream_Promoted; OpenStream) { }
-                // actionref(ExtractBase64XmlAttachment_Promoted; ExtractBase64XmlAttachment) { }
             }
         }
     }
-
-    var
-    // OpenXMLFile: Codeunit "Create Workflow File Tree WFE";
-    // OpenXmlDoc: XmlDocument;
-
-    // local procedure ExtractAttachments()
-    // var
-    //     TempXMLBufferAttachment: Record "XML Buffer Attachment TPTE" temporary;
-    // begin
-    //     TempXMLBufferAttachment.Init();
-    //     TempXMLBufferAttachment.Filename := 'File.pdf';
-    //     TempXMLBufferAttachment."File Type" := 'pdf';
-
-    //     AddAttachment(TempXMLBufferAttachment);
-    // end;
-
-    // local procedure ExtractBase64Attachment()
-    // var
-    //     TempXMLBufferAttachment: Record "XML Buffer Attachment TPTE" temporary;
-    // begin
-    //     TempXMLBufferAttachment.Init();
-    //     TempXMLBufferAttachment.Filename := 'Base64.xml';
-    //     TempXMLBufferAttachment."File Type" := 'xml';
-
-    //     AddBase64Attachment(TempXMLBufferAttachment);
-    // end;
-
-    // procedure AddBase64Attachment(TempXMLBufferAttachment: Record "XML Buffer Attachment TPTE" temporary)
-    // var
-    //     Base64Convert: Codeunit "Base64 Convert";
-    //     DataOutStream: OutStream;
-    //     RecValue: Text;
-    //     xmldoc: XmlDocument;
-    // begin
-    //     RecValue := Rec.GetValue();
-    //     RecValue := Base64Convert.FromBase64(RecValue);
-    //     XmlDocument.ReadFrom(RecValue, xmldoc);
-
-    //     TempXMLBufferAttachment."Attached Data".CreateOutStream(DataOutStream, TextEncoding::Windows);
-    //     xmldoc.WriteTo(DataOutStream);
-    //     // AddAttachment(TempXMLBufferAttachment);
-    // end;
-
-    // procedure AddAttachment(TempXMLBufferAttachment: Record "XML Buffer Attachment TPTE" temporary)
-    // begin
-    //     CurrPage.XMLBufferAttachments.Page.AddAttachment(TempXMLBufferAttachment);
-    // end;
-
-    // procedure SetXmlDocument(XmlDoc: XmlDocument)
-    // begin
-    //     OpenXmlDoc := XmlDoc;
-    // end;
 
     local procedure ShowValues()
     var
@@ -245,14 +156,4 @@ page 83827 "Open XML WFE"
                 'Length: ' + Format(StrLen(XMLValue))
                );
     end;
-
-    // local procedure SelectAndOpenXMLFile()
-    // var
-    //     FileInStream: InStream;
-    // begin
-    //     OpenXMLFile.Initialize();
-    //     OpenXMLFile.SelectFile(FileInStream);
-    //     OpenXMLFile.LoadFromStream(Rec);
-    //     // OpenXMLFile.AddFileStream();
-    // end;
 }

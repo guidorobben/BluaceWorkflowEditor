@@ -30,10 +30,14 @@ codeunit 83808 "User Management WFE"
     procedure GetUserInfo(var InfoDialog: Codeunit "Info Dialog WFE")
     var
         UserSetup: Record "User Setup";
+        HasUserSetupRecord: Boolean;
     begin
+        UserSetup.SetLoadFields("Approval Administrator", "Approver ID", "Salespers./Purch. Code", "Unlimited Purchase Approval", "Unlimited Sales Approval", "User ID");
+        HasUserSetupRecord := UserSetup.Get(UserId());
+
         InfoDialog.AddHeader('User Info');
         InfoDialog.Add('User ID', UserId(), "Info Dialog Event Code WFE"::"User Setup");
-        InfoDialog.Add('User Setup', UserSetup.Get(UserId())); //FIXME No pragma
+        InfoDialog.Add('User Setup', HasUserSetupRecord);
         InfoDialog.Add('Approval Administrator', UserSetup."Approval Administrator");
         InfoDialog.Add('Sales Person', UserSetup."Salespers./Purch. Code");
         InfoDialog.Add('Approver ID', UserSetup."Approver ID");

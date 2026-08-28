@@ -10,12 +10,10 @@ codeunit 83830 "Create Workflow Tree WFE"
 
     var
         TempBufferWorkflowTree, TempWorkflowTree : Record "Workflow Tree WFE" temporary;
-        // CurrentStepID, 
         EntryNo: Integer;
 
     procedure Initialize()
     begin
-        // TempXMLBuffer[1].DeleteAll(false);
     end;
 
     procedure ReadWorkflow(Workflow: Record Workflow)
@@ -27,48 +25,11 @@ codeunit 83830 "Create Workflow Tree WFE"
 
     procedure ReadWorkflowHeader(var Workflow: Record Workflow)
     var
-    // Code, Description, Category : Text;
     begin
-        // TempXMLBuffer[1].Reset();
-        // TempXMLBuffer[1].SetRange(Name, 'Workflow');
-        // if TempXMLBuffer[1].FindSet() then begin
-        //     TempXMLBuffer[2].SetRange("Parent Entry No.", TempXMLBuffer[1]."Entry No.");
-        //     repeat
-        //         TempXMLBuffer[1].SelectSingleNodeByNameWFE('Code', TempXMLBuffer, 2, "XML Type WFE"::Attribute, Code);
-        //         TempXMLBuffer[1].SelectSingleNodeByNameWFE('Description', TempXMLBuffer, 2, "XML Type WFE"::Attribute, Description);
-        //         TempXMLBuffer[1].SelectSingleNodeByNameWFE('Category', TempXMLBuffer, 2, "XML Type WFE"::Attribute, Category);
-
         EntryNo += 1;
         TempBufferWorkflowTree.Init();
         TempBufferWorkflowTree."Entry No." := EntryNo;
         TempBufferWorkflowTree."Step ID" := -1;
-        // CurrentStepID := TempBufferWorkflowTree."Step ID";
-        // TempBufferWorkflowTree."Previous Step ID" := PreviousStepID;
-        // TempBufferWorkflowTree."Next Step ID" := NextStepID;
-        // TempBufferWorkflowTree."Sequence No." := SequenceNo;
-        // case Type of
-        //     0: // Event
-        //         begin
-        //             TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Event";
-        //             WorkflowEvent.SetLoadFields(Description);
-        //             if WorkflowEvent.Get(FunctionName) then
-        //                 TempBufferWorkflowTree.Description := WorkflowEvent.Description
-        //             else
-        //                 TempBufferWorkflowTree.Description := 'EVENT NOT FOUND';
-        //         end;
-        //     1: // Response
-        //         begin
-        //             TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Response;
-        //             WorkflowResponse.SetLoadFields(Description);
-        //             if WorkflowResponse.Get(FunctionName) then
-        //                 TempBufferWorkflowTree.Description := WorkflowResponse.Description
-        //             else
-        //                 TempBufferWorkflowTree.Description := 'RESPONSE NOT FOUND';
-        //         end;
-        //     2:
-        //         TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Sub-Workflow";
-        // end;
-
         TempBufferWorkflowTree."Function Name" := Workflow.Code;
         TempBufferWorkflowTree.Description := Workflow.Description;
         TempBufferWorkflowTree.Value := Workflow.Category;
@@ -85,14 +46,6 @@ codeunit 83830 "Create Workflow Tree WFE"
             repeat
                 ProcessWorkflowStep(WorkflowStep);
             until WorkflowStep.Next() = 0;
-        // TempXMLBuffer[1].Reset();
-        // TempXMLBuffer[1].SetRange(Name, 'WorkflowStep');
-        // if TempXMLBuffer[1].FindSet() then
-        //     repeat
-        //         ProcessWorkflowStep(TempXMLBuffer);
-        //     until TempXMLBuffer[1].Next() = 0;
-
-        // BuildWorkflowTree();
     end;
 
     local procedure ProcessWorkflowStep(var WorkflowStep: Record "Workflow Step")
@@ -114,7 +67,6 @@ codeunit 83830 "Create Workflow Tree WFE"
             WorkflowStep.Type::"Event":
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Event";
-                    // TempWorkflowTree.Description := WorkflowStep.Description;
                     TempBufferWorkflowTree.Depth := 0;
 
                     WorkflowEvent.SetLoadFields(Description);
@@ -129,7 +81,6 @@ codeunit 83830 "Create Workflow Tree WFE"
             WorkflowStep.Type::Response:
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Response;
-                    // TempWorkflowTree.Description := WorkflowStep.Description;
                     TempBufferWorkflowTree.Depth := 1;
 
                     WorkflowResponse.SetLoadFields(Description);
