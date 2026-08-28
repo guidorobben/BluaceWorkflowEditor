@@ -1,7 +1,7 @@
-page 83804 "Workflow Step Instance WFE"
+page 83804 "Workflow Step Instances WFE"
 {
     ApplicationArea = All;
-    Caption = 'Workflow Step Instance';
+    Caption = 'Workflow Step Instances';
     DeleteAllowed = false;
     // Editable = false;
     InsertAllowed = false;

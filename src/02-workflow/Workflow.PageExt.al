@@ -75,7 +75,7 @@ pageextension 83802 "Workflow WFE" extends Workflow
                             exit;
 
                         WorkflowStepInstance.SetRange("Workflow Code", Rec.Code);
-                        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
+                        Page.Run(Page::"Workflow Step Instances WFE", WorkflowStepInstance);
                     end;
                 }
                 action(ArchivedWorkflowStepInstancesWPTE)

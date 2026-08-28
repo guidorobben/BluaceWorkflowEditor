@@ -62,7 +62,7 @@ codeunit 83814 "Info Dialog Subscr. WFE"
             exit;
 
         WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
-        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
+        Page.Run(Page::"Workflow Step Instances WFE", WorkflowStepInstance);
     end;
 
     local procedure OpenRecordRestriction(var RecordInfo: Codeunit "Record Info WFE")

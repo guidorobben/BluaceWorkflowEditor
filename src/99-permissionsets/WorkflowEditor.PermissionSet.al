@@ -77,7 +77,7 @@ permissionset 83800 "Workflow Editor WFE"
         page "Workflow Step Argument WFE" = X,
         page "Workflow Step Buffer WFE" = X,
         page "Workflow Step Editor WFE" = X,
-        page "Workflow Step Instance WFE" = X,
+        page "Workflow Step Instances WFE" = X,
         page "Workflow Steps WFE" = X,
         page "Workflow Tree WFE" = X,
     // query "Instances Per Workflow WFE" = X,

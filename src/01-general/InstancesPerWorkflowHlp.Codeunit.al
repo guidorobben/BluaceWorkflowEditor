@@ -98,6 +98,6 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
         WorkflowStepInstance: Record "Workflow Step Instance";
     begin
         WorkflowStepInstance.SetRange(ID, InstancesPerWorkflow."Instance ID");
-        Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
+        Page.Run(Page::"Workflow Step Instances WFE", WorkflowStepInstance);
     end;
 }

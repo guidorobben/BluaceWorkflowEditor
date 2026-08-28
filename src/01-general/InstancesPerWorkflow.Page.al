@@ -80,7 +80,7 @@ page 83828 "Instances Per Workflow WFE"
                     WorkflowStepInstance: Record "Workflow Step Instance";
                 begin
                     WorkflowStepInstance.SetRange(ID, Rec."Instance ID");
-                    Page.Run(Page::"Workflow Step Instance WFE", WorkflowStepInstance);
+                    Page.Run(Page::"Workflow Step Instances WFE", WorkflowStepInstance);
                 end;
             }
         }
