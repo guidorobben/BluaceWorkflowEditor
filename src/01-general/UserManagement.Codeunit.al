@@ -21,10 +21,9 @@ codeunit 83808 "User Management WFE"
 
     procedure TestIsApprovalAdministrator()
     var
-        UserManagement: Codeunit "User Management WFE";
         OnlyApproverAdminErr: Label 'Only a Approval Administrator can run this.';
     begin
-        if not UserManagement.IsApprovalAdministrator() then
+        if not IsApprovalAdministrator() then
             Error(OnlyApproverAdminErr);
     end;
 
