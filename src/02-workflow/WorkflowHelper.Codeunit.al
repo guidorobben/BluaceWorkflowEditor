@@ -129,6 +129,7 @@ codeunit 83803 "Workflow Helper WFE"
             exit(0);
 
         WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
+        WorkflowStepInstance.SetRange("Entry Point", true);
         exit(WorkflowStepInstance.Count());
     end;
 
