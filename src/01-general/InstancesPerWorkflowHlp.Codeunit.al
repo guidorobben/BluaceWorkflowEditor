@@ -67,18 +67,14 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
         DocumentRecordRef: RecordRef;
+        StatusFieldNo: Integer;
     begin
         DocumentStatus := DocumentStatus::Open;
 
         DocumentRecordRef := DocumentRecordID.GetRecord();
-#pragma warning disable PC0030
-        if not DocumentRecordRef.FindFirst() then
-#pragma warning restore PC0030
-            exit;
-
         case DocumentRecordRef.Number() of
             Database::"Purchase Header":
-                exit(DocumentRecordRef.Field('Status').Value());
+                StatusFieldNo := DocumentRecordRef.Field('Status').Number();
             Database::"Purch. Inv. Header",
             Database::"Purch. Cr. Memo Hdr.":
                 begin
@@ -88,9 +84,19 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
                     if WorkflowEditorSetup."Posted Purch. Inv. Status ID" = 0 then
                         exit;
 
-                    exit(DocumentRecordRef.Field(WorkflowEditorSetup."Posted Purch. Inv. Status ID").Value());
+                    StatusFieldNo := WorkflowEditorSetup."Posted Purch. Inv. Status ID";
                 end;
         end;
+
+        DocumentRecordRef.SetLoadFields(StatusFieldNo);
+        if not DocumentRecordRef.FindFirst() then
+            exit;
+
+        DocumentRecordRef.SetLoadFields(StatusFieldNo);
+        if not DocumentRecordRef.FindFirst() then
+            exit;
+
+        DocumentStatus := DocumentRecordRef.Field(StatusFieldNo).Value();
     end;
 
     procedure OpenWorkflowStepInstances(var InstancesPerWorkflow: Record "Instances Per Workflow WFE")

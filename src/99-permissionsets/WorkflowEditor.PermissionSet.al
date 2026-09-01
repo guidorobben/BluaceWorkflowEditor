@@ -50,6 +50,7 @@ permissionset 83800 "Workflow Editor WFE"
         codeunit "Workflow Event Log Hlp. WFE" = X,
         codeunit "Workflow Event Log WFE" = X,
         codeunit "Workflow Helper WFE" = X,
+        codeunit "Workflow Tree Hlp WFE" = X,
         codeunit "XML Buffer Helper WFE" = X,
         page "App Resource List WFE" = X,
         page "Approval Entries WFE" = X,
