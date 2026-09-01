@@ -56,13 +56,13 @@ codeunit 83814 "Info Dialog Subscr. WFE"
 
     local procedure OpenWorkflowStepInstance(WorkflowCode: Code[20])
     var
-        WorkflowStepInstance: Record "Workflow Step Instance";
+        InstancesPerWorkflow: Page "Instances Per Workflow WFE";
     begin
         if WorkflowCode = '' then
             exit;
 
-        WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
-        Page.Run(Page::"Workflow Step Instances WFE", WorkflowStepInstance);
+        InstancesPerWorkflow.SetWorkflowCode(WorkflowCode);
+        InstancesPerWorkflow.Run();
     end;
 
     local procedure OpenRecordRestriction(var RecordInfo: Codeunit "Record Info WFE")

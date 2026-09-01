@@ -7,14 +7,15 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
         tabledata "Workflow Editor Setup WFE" = r,
         tabledata "Workflow Step Instance" = r;
 
-
-    procedure BuildBuffer(var TempInstancesPerWorkflow: Record "Instances Per Workflow WFE" temporary)
+    procedure BuildBuffer(var TempInstancesPerWorkflow: Record "Instances Per Workflow WFE" temporary; WorkflowCode: Code[20])
     var
         Workflow: Record Workflow;
         WorkflowStepInstance: Record "Workflow Step Instance";
         EntryNo: Integer;
     begin
         WorkflowStepInstance.SetRange("Entry Point", true);
+        if WorkflowCode <> '' then
+            WorkflowStepInstance.SetRange("Workflow Code", WorkflowCode);
         WorkflowStepInstance.SetLoadFields("Created By User ID", "Created Date-Time", ID, "Record ID", "Workflow Code");
         if WorkflowStepInstance.FindSet() then
             repeat

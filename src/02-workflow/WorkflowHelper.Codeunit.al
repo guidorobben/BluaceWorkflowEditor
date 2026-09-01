@@ -90,6 +90,9 @@ codeunit 83803 "Workflow Helper WFE"
         InfoDialog.AddHeader('Workflow');
         InfoDialog.Add('Code', Workflow.Code, "Info Dialog Event Code WFE"::"Workflow Code");
         InfoDialog.Add('Description', Workflow.Description);
+        InfoDialog.Add('Category', Workflow.Category);
+        InfoDialog.Add('Enabled', Workflow.Enabled);
+        InfoDialog.Add('Template', Workflow.Template);
         InfoDialog.AddHeader('Instance');
         InfoDialog.Add('Instance record count', GetWorkflowStepInstanceCount(Workflow.Code), "Info Dialog Event Code WFE"::"Workflow Step Instance");
         InfoDialog.AddHeader('Validation');

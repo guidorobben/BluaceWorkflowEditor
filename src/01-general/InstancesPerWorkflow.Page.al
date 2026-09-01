@@ -94,6 +94,7 @@ page 83828 "Instances Per Workflow WFE"
 
     var
         InstancesPerWorkflowHlp: Codeunit "Instances Per Workflow Hlp WFE";
+        CurrentWorkflowCode: Code[20];
 
     trigger OnOpenPage()
     begin
@@ -102,8 +103,11 @@ page 83828 "Instances Per Workflow WFE"
 
     local procedure BuildBuffer()
     begin
-        InstancesPerWorkflowHlp.BuildBuffer(Rec);
+        InstancesPerWorkflowHlp.BuildBuffer(Rec, CurrentWorkflowCode);
     end;
 
-
+    procedure SetWorkflowCode(WorkflowCode: Code[20])
+    begin
+        CurrentWorkflowCode := WorkflowCode;
+    end;
 }

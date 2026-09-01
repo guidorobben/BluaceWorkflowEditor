@@ -3,8 +3,7 @@ page 83804 "Workflow Step Instances WFE"
     ApplicationArea = All;
     Caption = 'Workflow Step Instances';
     DeleteAllowed = false;
-    // Editable = false;
-    InsertAllowed = false;
+    Editable = false;
     PageType = List;
     Permissions =
         tabledata "Table Metadata" = r,
