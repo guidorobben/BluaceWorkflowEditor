@@ -58,7 +58,7 @@ codeunit 83833 "Instances Per Workflow Hlp WFE"
         DocumentDoesNotExistErr: Label 'Document does not exist.';
     begin
         DocumentRecordRef := InstancesPerWorkflow."Record ID".GetRecord();
-        if not DocumentRecordRef.FindFirst() then
+        if not DocumentRecordRef.Find() then
             Error(ErrorInfo.Create(DocumentDoesNotExistErr));
 
         PageManagement.PageRun(DocumentRecordRef);
