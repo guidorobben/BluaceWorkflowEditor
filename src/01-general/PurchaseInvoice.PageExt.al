@@ -114,9 +114,9 @@ pageextension 83806 "Purchase Invoice WFE" extends "Purchase Invoice"
 
                     trigger OnAction()
                     var
-                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        WorkflowEditor: Codeunit "Workflow Editor WFE";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
+                        WorkflowEditor.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

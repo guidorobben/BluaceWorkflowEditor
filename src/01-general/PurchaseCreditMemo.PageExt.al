@@ -114,9 +114,9 @@ pageextension 83820 "Purchase Credit Memo WFE" extends "Purchase Credit Memo"
 
                     trigger OnAction()
                     var
-                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        WorkflowEditor: Codeunit "Workflow Editor WFE";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
+                        WorkflowEditor.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

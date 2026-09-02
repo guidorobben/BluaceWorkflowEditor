@@ -114,9 +114,9 @@ pageextension 83817 "Sales Order WFE" extends "Sales Order"
 
                     trigger OnAction()
                     var
-                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        WorkflowEditor: Codeunit "Workflow Editor WFE";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
+                        WorkflowEditor.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

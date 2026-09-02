@@ -114,9 +114,9 @@ pageextension 83816 "Sales Invoice List WFE" extends "Sales Invoice List"
 
                     trigger OnAction()
                     var
-                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        WorkflowEditor: Codeunit "Workflow Editor WFE";
                     begin
-                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId());
+                        WorkflowEditor.OpenApprovalEntriesPage(Rec.RecordId());
                     end;
                 }
             }

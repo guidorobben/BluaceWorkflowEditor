@@ -42,4 +42,13 @@ codeunit 83801 "Workflow Editor WFE"
         WorkflowStep.FilterGroup(0);
         Page.Run(Page::"Workflow Step Editor WFE", WorkflowStep);
     end;
+
+    procedure OpenApprovalEntriesPage(SourceRecordId: RecordId)
+    var
+        ApprovalEntry: Record "Approval Entry";
+    begin
+        ApprovalEntry.SetRange("Table ID", SourceRecordId.TableNo());
+        ApprovalEntry.SetRange("Record ID to Approve", SourceRecordId);
+        Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
+    end;
 }
