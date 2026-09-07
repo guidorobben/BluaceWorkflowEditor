@@ -10,10 +10,10 @@ codeunit 83817 "Restriction Mgt. WFE"
     begin
         RecRef.GetTable(RecVar);
         if RecRef.IsTemporary() then
-            exit;
+            exit(false);
 
         if RestrictedRecord.IsEmpty() then
-            exit;
+            exit(false);
 
         SetRestrictedRecordFiltersForRecRef(RestrictedRecord, RecRef);
         exit(not RestrictedRecord.IsEmpty());

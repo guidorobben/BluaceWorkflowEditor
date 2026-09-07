@@ -49,6 +49,8 @@ codeunit 83801 "Workflow Editor WFE"
     begin
         ApprovalEntry.SetRange("Table ID", SourceRecordId.TableNo());
         ApprovalEntry.SetRange("Record ID to Approve", SourceRecordId);
+#pragma warning disable AC0006
         Page.RunModal(Page::"Approval Entries WFE", ApprovalEntry);
+#pragma warning restore AC0006
     end;
 }

@@ -234,7 +234,7 @@ codeunit 83831 "Create Workflow File Tree WFE"
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Event";
                     WorkflowEvent.SetLoadFields(Description);
-                    if WorkflowEvent.Get(FunctionName) then
+                    if WorkflowEvent.Get(GetFunctionName(FunctionName)) then
                         TempBufferWorkflowTree.Description := WorkflowEvent.Description
                     else
                         TempBufferWorkflowTree.Description := 'EVENT NOT FOUND';
@@ -243,7 +243,7 @@ codeunit 83831 "Create Workflow File Tree WFE"
                 begin
                     TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::Response;
                     WorkflowResponse.SetLoadFields(Description);
-                    if WorkflowResponse.Get(FunctionName) then
+                    if WorkflowResponse.Get(GetFunctionName(FunctionName)) then
                         TempBufferWorkflowTree.Description := WorkflowResponse.Description
                     else
                         TempBufferWorkflowTree.Description := 'RESPONSE NOT FOUND';
@@ -316,5 +316,10 @@ codeunit 83831 "Create Workflow File Tree WFE"
         TempWorkflowTree.Reset();
         if TempWorkflowTree.FindFirst() then; // Pointer
         Page.Run(Page::"Workflow Tree WFE", TempWorkflowTree);
+    end;
+
+    local procedure GetFunctionName(FunctionName: Text): Text[128]
+    begin
+        exit(CopyStr(FunctionName, 1, 128));
     end;
 }

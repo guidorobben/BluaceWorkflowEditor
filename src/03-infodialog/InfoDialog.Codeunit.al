@@ -21,7 +21,7 @@ codeunit 83809 "Info Dialog WFE"
         exit(CurrentRecordInfo);
     end;
 
-    procedure RecordInfo(NewRecordInfo: Codeunit "Record Info WFE"): Codeunit "Record Info WFE"
+    procedure RecordInfo(NewRecordInfo: Codeunit "Record Info WFE")
     begin
         CurrentRecordInfo := NewRecordInfo;
     end;

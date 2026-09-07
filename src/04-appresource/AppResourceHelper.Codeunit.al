@@ -40,6 +40,7 @@ codeunit 83822 "App Resource Helper WFE"
         ResourceList: List of [Text];
         ResourceName: Text;
     begin
+        Name := '';
         ResourceList := NavApp.ListResources(Filter);
 
         foreach ResourceName in ResourceList do

@@ -132,8 +132,7 @@ page 83806 "Approval Entry Part WFE"
 
     local procedure GetApprovalEntry(var NotificationEntry: Record "Notification Entry"; var ApprovalEntry: Record "Approval Entry"): Boolean
     begin
-        if ApprovalEntry.Get(NotificationEntry."Triggered By Record") then
-            exit(true);
+        exit(ApprovalEntry.Get(NotificationEntry."Triggered By Record"));
     end;
 
 

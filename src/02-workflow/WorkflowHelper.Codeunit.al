@@ -5,10 +5,12 @@ codeunit 83803 "Workflow Helper WFE"
         tabledata "Workflow Step" = r,
         tabledata "Workflow Step Instance" = r;
 
-    internal procedure GetFunctionName(WorkflowCode: Code[20]; StepId: Integer): Text[100]
+    internal procedure GetFunctionName(WorkflowCode: Code[20]; StepId: Integer) FunctionName: Text[100]
     var
         WorkflowStep: Record "Workflow Step";
     begin
+        FunctionName := '';
+
         WorkflowStep.SetRange("Workflow Code", WorkflowCode);
         WorkflowStep.SetRange(ID, StepId);
         WorkflowStep.SetLoadFields("Function Name");

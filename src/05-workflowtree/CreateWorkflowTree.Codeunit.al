@@ -93,10 +93,8 @@ codeunit 83830 "Create Workflow Tree WFE"
                     AddStepArguments(WorkflowStep, TempBufferWorkflowTree."Step ID");
                 end;
             WorkflowStep.Type::"Sub-Workflow":
-                begin
-                    TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Sub-Workflow";
-                    // TempWorkflowTree.Description := 'Sub-Workflow';
-                end;
+                TempBufferWorkflowTree.Type := TempBufferWorkflowTree.Type::"Sub-Workflow";
+        // TempWorkflowTree.Description := 'Sub-Workflow';
         //  WorkflowStep.Type::":
         // begin
         //     TempWorkflowTree.Type := TempWorkflowTree.Type::"Sub-Workflow";
