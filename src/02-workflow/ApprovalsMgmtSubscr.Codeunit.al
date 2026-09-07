@@ -26,6 +26,22 @@ codeunit 83800 "Approvals Mgmt Subscr. WFE"
             ApprovalEntry.Reset(); //NOT complete. When table is empty, this wont work.
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", OnBeforeCheckUserAsApprovalAdministrator, '', false, false)]
+    local procedure OnBeforeCheckUserAsApprovalAdministrator(var IsHandled: Boolean)
+    var
+        WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
+    begin
+        //FIXME, make into function
+        if not WorkflowEditorSetup.ReadPermission() then
+            exit;
+
+        if not WorkflowEditorSetup.Get() then
+            exit;
+
+        if WorkflowEditorSetup."Allow approving Not Admin" then
+            IsHandled := true;
+    end;
+
     local procedure DisableMail(var WorkflowEditorSetup: Record "Workflow Editor Setup WFE"; var IsHandled: Boolean)
     begin
         if WorkflowEditorSetup."Disable Mail Notifications" then

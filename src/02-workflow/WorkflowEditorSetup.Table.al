@@ -51,7 +51,11 @@ table 83801 "Workflow Editor Setup WFE"
             ToolTip = 'Enables debug logging for modifications to Purchase Invoice Header records.';
 #pragma warning restore AC0015
         }
-
+        field(70; "Allow approving Not Admin"; Boolean)
+        {
+            Caption = 'Allow approving when not Admin';
+            ToolTip = 'Specifies whether users who are not administrators are allowed to approve.';
+        }
     }
 
     keys
