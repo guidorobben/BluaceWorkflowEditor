@@ -7,6 +7,7 @@ tableextension 83801 "Workflow Step Buffer WFE" extends "Workflow Step Buffer"
             AllowInCustomizations = AsReadOnly;
             Caption = 'Function Name';
             DataClassification = CustomerContent;
+            ToolTip = 'Specifies the function name.';
         }
     }
 }

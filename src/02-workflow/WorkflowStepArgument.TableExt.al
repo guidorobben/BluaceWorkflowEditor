@@ -8,7 +8,7 @@ tableextension 83800 "Workflow Step Argument WFE" extends "Workflow Step Argumen
             Caption = 'Function Name Description';
             Editable = false;
             FieldClass = FlowField;
-            ToolTip = 'Specifies the value of the hh field.', Comment = '%';
+            ToolTip = 'Specifies the function name.';
         }
     }
 }

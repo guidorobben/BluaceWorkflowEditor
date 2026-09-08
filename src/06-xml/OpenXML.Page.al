@@ -107,6 +107,7 @@ page 83827 "Open XML WFE"
             action(OpenStream)
             {
                 Caption = 'Open Stream';
+                Image = Open;
 
                 trigger OnAction()
                 var

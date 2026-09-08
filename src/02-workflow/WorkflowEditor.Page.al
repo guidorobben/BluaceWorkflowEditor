@@ -64,6 +64,12 @@ page 83805 "Workflow Editor WFE"
                     Image = Workflow;
                     RunObject = page Workflows;
                 }
+                action(OpenWorkflowTemplates)
+                {
+                    Caption = 'Workflow Templates';
+                    Image = Workflow;
+                    RunObject = page "Workflow Templates";
+                }
                 action(WorkflowList)
                 {
                     Caption = 'Workflow List';
@@ -251,14 +257,15 @@ page 83805 "Workflow Editor WFE"
                 Image = Workflow;
 
                 actionref(OpenWorkflows_Promoted; OpenWorkflows) { }
+                actionref(OpenWorkflowTemplates_Promoted; OpenWorkflowTemplates) { }
                 actionref(WorkflowList_Promoted; WorkflowList) { }
                 actionref(ApprovalEntries_Promoted; ApprovalEntries) { }
+                actionref(RestrictedRecords_Promoted; RestrictedRecords) { }
                 actionref(WorkflowTableRelations_Promoted; WorkflowTableRelations) { }
                 actionref(WFEventResponseCombi_Promoted; WFEventResponseCombi) { }
                 actionref(WFEventResponseCombiList_Promoted; WFEventResponseCombiList) { }
                 actionref(WorkflowDefinitionsRef_Promted; WorkflowDefinitions) { }
                 actionref(WorkflowWebhookEntries_Promoted; WorkflowWebhookEntries) { }
-                actionref(RestrictedRecords_Promoted; RestrictedRecords) { }
 
                 group(WorkflowInstances_Promoted)
                 {
