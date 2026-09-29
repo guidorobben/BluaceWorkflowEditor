@@ -104,6 +104,19 @@ pageextension 83802 "Workflow WFE" extends Workflow
                         Rec.CreateWorkflowTreeWFE();
                     end;
                 }
+                action(DeleteTemplateWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Delete Template';
+                    Enabled = Rec.Template;
+                    Image = Delete;
+                    ToolTip = 'Delete the current workflow template.';
+
+                    trigger OnAction()
+                    begin
+                        Rec.DeleteTemplateWFE();
+                    end;
+                }
             }
         }
 
@@ -122,6 +135,7 @@ pageextension 83802 "Workflow WFE" extends Workflow
                 actionref(ArchivedWorkflowStepInstancesWPTE_Promoted; ArchivedWorkflowStepInstancesWPTE) { }
                 actionref(SetToWorkflowTemplateWFE_Promoted; SetToWorkflowTemplateWFE) { }
                 actionref(SetToWorkflowWFE_Promoted; SetToWorkflowWFE) { }
+                actionref(DeleteTemplateWFE_Promoted; DeleteTemplateWFE) { }
             }
         }
     }
@@ -144,7 +158,7 @@ pageextension 83802 "Workflow WFE" extends Workflow
 
     procedure SetToWorkflow()
     begin
-        WorkflowHelperWFE.SetToWorkflow(Rec);
+        WorkflowHelperWFE.SetToWorkflow(Rec, true);
     end;
 
     procedure SetToWorkflowTemplate()

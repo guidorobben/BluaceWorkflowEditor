@@ -51,6 +51,16 @@ page 83805 "Workflow Editor WFE"
                     Rec.ToggleEnableWorkflowWFE();
                 end;
             }
+            action(DeleteWorkflow)
+            {
+                Caption = 'Delete Workflow';
+                Image = Delete;
+
+                trigger OnAction()
+                begin
+                    WorkFlowDelete();
+                end;
+            }
         }
         area(Navigation)
         {
@@ -338,5 +348,24 @@ page 83805 "Workflow Editor WFE"
     trigger OnOpenPage()
     begin
         Rec.SetRange(Template, false);
+    end;
+
+    local procedure WorkFlowDelete()
+    begin
+        if not Confirm('Are you sure you want to delete this workflow?', true) then
+            exit;
+
+        if Rec.Template then
+            DeleteWorkflowTemplate()
+        else
+            Rec.Delete(true);
+    end;
+
+    local procedure DeleteWorkflowTemplate()
+    begin
+        Rec.TestField(Enabled, false);
+        Rec.Validate(Template, false);
+        Rec.Modify(true);
+        Rec.Delete(true)
     end;
 }

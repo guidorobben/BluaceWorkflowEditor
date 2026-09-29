@@ -1,7 +1,8 @@
 codeunit 83803 "Workflow Helper WFE"
 {
+    Access = Internal;
     Permissions =
-        tabledata Workflow = rm,
+        tabledata Workflow = rmd,
         tabledata "Workflow Step" = r,
         tabledata "Workflow Step Instance" = r;
 
@@ -30,16 +31,18 @@ codeunit 83803 "Workflow Helper WFE"
         Workflow.Modify(true);
     end;
 
-    internal procedure SetToWorkflow(var Workflow: Record Workflow)
+    internal procedure SetToWorkflow(var Workflow: Record Workflow; Ask: Boolean)
     var
         ConfirmManagement: Codeunit "Confirm Management";
         ConvertToWorkflowQst: Label 'Do you want to convert the workflow template to a workflow?';
     begin
-        if ConfirmManagement.GetResponse(ConvertToWorkflowQst, false) then begin
-            Workflow.TestField(Enabled, false);
-            Workflow.Validate(Template, false);
-            Workflow.Modify(true);
-        end;
+        if Ask then
+            if not ConfirmManagement.GetResponse(ConvertToWorkflowQst, false) then
+                exit;
+
+        Workflow.TestField(Enabled, false);
+        Workflow.Validate(Template, false);
+        Workflow.Modify(true);
     end;
 
     internal procedure SetToWorkflowTemplate(var Workflow: Record Workflow)
@@ -138,7 +141,7 @@ codeunit 83803 "Workflow Helper WFE"
         exit(WorkflowStepInstance.Count());
     end;
 
-    internal procedure CreateWorkflowTree(var Workflow: Record Workflow)
+    procedure CreateWorkflowTree(var Workflow: Record Workflow)
     var
         CreateWorkflowTreeWFE: Codeunit "Create Workflow Tree WFE";
     begin
@@ -148,5 +151,21 @@ codeunit 83803 "Workflow Helper WFE"
         CreateWorkflowTreeWFE.Initialize();
         CreateWorkflowTreeWFE.ReadWorkflow(Workflow);
         CreateWorkflowTreeWFE.OpenWorkflowTree();
+    end;
+
+    procedure DeleteTemplate(var Workflow: Record Workflow)
+    var
+        ConfirmManagement: Codeunit "Confirm Management";
+    begin
+        if Workflow.Code = '' then
+            exit;
+
+        if not ConfirmManagement.GetResponse('Are you sure you want to delete this workflow template?', true) then
+            exit;
+
+        if Workflow.Template then begin
+            SetToWorkflow(Workflow, false);
+            Workflow.Delete(true);
+        end;
     end;
 }

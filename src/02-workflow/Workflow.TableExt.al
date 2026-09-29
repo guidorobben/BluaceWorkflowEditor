@@ -27,4 +27,9 @@ tableextension 83802 "Workflow WFE" extends Workflow
     begin
         WorkflowHelperWFE.CreateWorkflowTree(Rec);
     end;
+
+    internal procedure DeleteTemplateWFE()
+    begin
+        WorkflowHelperWFE.DeleteTemplate(Rec);
+    end;
 }
