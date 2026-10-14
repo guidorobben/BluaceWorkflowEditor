@@ -4,7 +4,7 @@ codeunit 83809 "Info Dialog WFE"
         tabledata "Info Dialog WFE" = rid;
 
     var
-        BufferInfoDialog: Record "Info Dialog WFE";
+        TempBufferInfoDialog: Record "Info Dialog WFE";
         CurrentRecordInfo: Codeunit "Record Info WFE";
         LastEntryNo: Integer;
         PageCaption: Text;
@@ -13,7 +13,7 @@ codeunit 83809 "Info Dialog WFE"
     begin
         LastEntryNo := 0;
         Clear(CurrentRecordInfo);
-        BufferInfoDialog.DeleteAll(false);
+        TempBufferInfoDialog.DeleteAll(false);
     end;
 
     procedure RecordInfo(): Codeunit "Record Info WFE"
@@ -80,9 +80,9 @@ codeunit 83809 "Info Dialog WFE"
     var
         InfoDialog: Page "Info Dialog WFE";
     begin
-        BufferInfoDialog.Reset();
-        if BufferInfoDialog.FindFirst() then; //Set pointer to first
-        InfoDialog.TransferInfoDialog(BufferInfoDialog);
+        TempBufferInfoDialog.Reset();
+        if TempBufferInfoDialog.FindFirst() then; //Set pointer to first
+        InfoDialog.TransferInfoDialog(TempBufferInfoDialog);
         InfoDialog.RecordInfo(CurrentRecordInfo);
         InfoDialog.Run();
     end;
@@ -93,13 +93,13 @@ codeunit 83809 "Info Dialog WFE"
     begin
         EntryNo := GetNewEntryNo();
 
-        BufferInfoDialog.Init();
-        BufferInfoDialog.Validate("Entry No.", EntryNo);
-        BufferInfoDialog.Validate(Name, Name);
-        BufferInfoDialog.Validate("Value", Value);
-        BufferInfoDialog.Validate(Header, Header);
-        BufferInfoDialog.Validate("Event Code", EventCode);
-        BufferInfoDialog.Insert(true);
+        TempBufferInfoDialog.Init();
+        TempBufferInfoDialog.Validate("Entry No.", EntryNo);
+        TempBufferInfoDialog.Validate(Name, Name);
+        TempBufferInfoDialog.Validate("Value", Value);
+        TempBufferInfoDialog.Validate(Header, Header);
+        TempBufferInfoDialog.Validate("Event Code", EventCode);
+        TempBufferInfoDialog.Insert(true);
     end;
 
     procedure SetCaption(CaptionText: Text)
