@@ -10,12 +10,25 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         tabledata "Workflow Editor Setup WFE" = r,
         tabledata "Workflow Step Instance" = r;
 
-    internal procedure AllowRecordUsage(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure AllowRecordUsage(var PurchInvHeader: Record "Purch. Inv. Header")
     var
         RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
     begin
         TestIsApprovalAdministrator();
         RecordRestrictionMgt.AllowRecordUsage(PurchInvHeader);
+    end;
+
+    procedure RestrictRecordUsage(var PurchInvHeader: Record "Purch. Inv. Header")
+    begin
+        RestrictRecordUsage(PurchInvHeader, '');
+    end;
+
+    procedure RestrictRecordUsage(var PurchInvHeader: Record "Purch. Inv. Header"; RestrictionDetails: Text)
+    var
+        RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
+    begin
+        TestIsApprovalAdministrator();
+        RecordRestrictionMgt.RestrictRecordUsage(PurchInvHeader, RestrictionDetails);
     end;
 
     local procedure TestIsApprovalAdministrator()
@@ -25,7 +38,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         UserManagement.TestIsApprovalAdministrator();
     end;
 
-    internal procedure ShowApprovalInfo(PurchInvHeader: Record "Purch. Inv. Header")
+    procedure ShowApprovalInfo(PurchInvHeader: Record "Purch. Inv. Header")
     var
         Workflow: Record Workflow;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
@@ -34,6 +47,9 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
     begin
+        if PurchInvHeader."No." = '' then
+            exit;
+
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(PurchInvHeader);
 
@@ -48,41 +64,41 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         Workflow.GetWorkflowInfoWFE(PurchInvHeader.RecordId(), InfoDialog);
 
         InfoDialog.AddHeader('Purchase Invoice');
-        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchInvHeader));
+        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchInvHeader), "Info Dialog Event Code WFE"::"Record Restriction");
         InfoDialog.Add('Vendor Ledger Entries', VendorLedgerEntryCount(PurchInvHeader));
         InfoDialog.Add('Vendor Ledger Entries On Hold', VendorLedgerEntryOnHold(PurchInvHeader));
 
         InfoDialog.OpenInfoDialog();
     end;
 
-    internal procedure OpenApprovals(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure OpenApprovals(var PurchInvHeader: Record "Purch. Inv. Header")
     var
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
     begin
         ApprovalsMgmt.RunWorkflowEntriesPage(PurchInvHeader.RecordId(), Database::"Purch. Inv. Header", Enum::"Approval Document Type"::Invoice, PurchInvHeader."No.");
     end;
 
-    internal procedure SetStatusToOpen(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure SetStatusToOpen(var PurchInvHeader: Record "Purch. Inv. Header")
     begin
         SetStatusTo(PurchInvHeader, "Purchase Document Status"::Open);
     end;
 
-    internal procedure SetStatusToPendingApproval(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure SetStatusToPendingApproval(var PurchInvHeader: Record "Purch. Inv. Header")
     begin
         SetStatusTo(PurchInvHeader, "Purchase Document Status"::"Pending Approval");
     end;
 
-    internal procedure SetStatusToPendingPrepayment(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure SetStatusToPendingPrepayment(var PurchInvHeader: Record "Purch. Inv. Header")
     begin
         SetStatusTo(PurchInvHeader, "Purchase Document Status"::"Pending Prepayment");
     end;
 
-    internal procedure SetStatusToReleased(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure SetStatusToReleased(var PurchInvHeader: Record "Purch. Inv. Header")
     begin
         SetStatusTo(PurchInvHeader, "Purchase Document Status"::Released);
     end;
 
-    internal procedure SetStatusTo(var PurchInvHeader: Record "Purch. Inv. Header"; PurchaseDocumentStatus: Enum "Purchase Document Status")
+    procedure SetStatusTo(var PurchInvHeader: Record "Purch. Inv. Header"; PurchaseDocumentStatus: Enum "Purchase Document Status")
     var
         WorkflowEditorSetup: Record "Workflow Editor Setup WFE";
         PurchInvHeaderRecordRef: RecordRef;
@@ -116,7 +132,7 @@ codeunit 83815 "Purch. Inv. Header Helper WFE"
         PurchInvHeaderRecordRef.Modify(false);
     end;
 
-    internal procedure OpenRestrictedRecord(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure OpenRestrictedRecord(var PurchInvHeader: Record "Purch. Inv. Header")
     var
         RestrictedRecord: Record "Restricted Record";
     begin

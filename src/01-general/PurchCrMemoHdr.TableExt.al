@@ -1,20 +1,25 @@
 tableextension 83809 "Purch. Cr. Memo Hdr. WFE" extends "Purch. Cr. Memo Hdr."
 {
     var
-        PurchCrMemoHdrHlp: Codeunit "Purch. Cr. Memo Hdr. Hlp. WFE";
+        PurchCrMemoHdrHlpWFE: Codeunit "Purch. Cr. Memo Hdr. Hlp. WFE";
 
     procedure ShowApprovalInfoWFE()
     begin
-        PurchCrMemoHdrHlp.ShowApprovalInfo(Rec);
+        PurchCrMemoHdrHlpWFE.ShowApprovalInfo(Rec);
     end;
 
     procedure OpenApprovalsWFE()
     begin
-        PurchCrMemoHdrHlp.OpenApprovals(Rec);
+        PurchCrMemoHdrHlpWFE.OpenApprovals(Rec);
     end;
 
     procedure OpenRestrictedRecordWFE()
     begin
-        PurchCrMemoHdrHlp.OpenRestrictedRecord(Rec);
+        PurchCrMemoHdrHlpWFE.OpenRestrictedRecord(Rec);
+    end;
+
+    procedure RestrictRecordUsageWFE()
+    begin
+        PurchCrMemoHdrHlpWFE.RestrictRecordUsage(xRec, 'Manual restriction by user');
     end;
 }

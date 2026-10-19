@@ -17,4 +17,9 @@ tableextension 83803 "Purchase Header WFE" extends "Purchase Header"
     begin
         PurchaseHeaderHelperWFE.OpenRestrictedRecord(Rec);
     end;
+
+    procedure RestrictRecordUsageWFE()
+    begin
+        PurchaseHeaderHelperWFE.RestrictRecordUsage(xRec, 'Manual restriction by user');
+    end;
 }

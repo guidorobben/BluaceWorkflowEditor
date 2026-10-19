@@ -8,6 +8,7 @@ pageextension 83819 "Purchase Credit Memos WFE" extends "Purchase Credit Memos"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Enabled = Rec."No." <> '';
                 Visible = EnableWFE;
 
                 group(StatusWFE)
@@ -83,6 +84,17 @@ pageextension 83819 "Purchase Credit Memos WFE" extends "Purchase Credit Memos"
                         PurchaseHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
                 }
+                action(SetRecordRestrictionWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Set Record Restriction';
+                    Image = Lock;
+
+                    trigger OnAction()
+                    begin
+                        Rec.RestrictRecordUsageWFE();
+                    end;
+                }
                 action(RestrictRecordUsageWFE)
                 {
                     ApplicationArea = All;
@@ -133,7 +145,13 @@ pageextension 83819 "Purchase Credit Memos WFE" extends "Purchase Credit Memos"
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
-                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                group(RecordUsageWFE_Promoted)
+                {
+                    ShowAs = SplitButton;
+
+                    actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                    actionref(SetRecordRestrictionWFE_Promoted; SetRecordRestrictionWFE) { }
+                }
                 actionref(RestrictRecordUsageWFE_Promoted; RestrictRecordUsageWFE) { }
 
                 group(StatusWFE_Promoted)

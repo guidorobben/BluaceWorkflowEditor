@@ -2,6 +2,8 @@ table 83805 "Workflow Tree WFE"
 {
     Caption = 'Workflow Tree';
     DataClassification = SystemMetadata;
+    DrillDownPageId = "Workflow Tree WFE";
+    LookupPageId = "Workflow Tree WFE";
     Permissions =
         tabledata "Workflow Tree WFE" = r;
 

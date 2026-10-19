@@ -1,5 +1,6 @@
 codeunit 83807 "Purchase Header Helper WFE"
 {
+    Access = Internal;
     Permissions =
         tabledata "Approval Entry" = r,
         tabledata "Purchase Header" = rm,
@@ -7,34 +8,34 @@ codeunit 83807 "Purchase Header Helper WFE"
         tabledata "Vendor Ledger Entry" = r,
         tabledata Workflow = r;
 
-    internal procedure SetStatusToOpen(var PurchaseHeader: Record "Purchase Header")
+    procedure SetStatusToOpen(var PurchaseHeader: Record "Purchase Header")
     begin
         SetStatusTo(PurchaseHeader, "Purchase Document Status"::Open);
     end;
 
-    internal procedure SetStatusToPendingApproval(var PurchaseHeader: Record "Purchase Header")
+    procedure SetStatusToPendingApproval(var PurchaseHeader: Record "Purchase Header")
     begin
         SetStatusTo(PurchaseHeader, "Purchase Document Status"::"Pending Approval");
     end;
 
-    internal procedure SetStatusToPendingPrepayment(var PurchaseHeader: Record "Purchase Header")
+    procedure SetStatusToPendingPrepayment(var PurchaseHeader: Record "Purchase Header")
     begin
         SetStatusTo(PurchaseHeader, "Purchase Document Status"::"Pending Prepayment");
     end;
 
-    internal procedure SetStatusToReleased(var PurchaseHeader: Record "Purchase Header")
+    procedure SetStatusToReleased(var PurchaseHeader: Record "Purchase Header")
     begin
         SetStatusTo(PurchaseHeader, "Purchase Document Status"::Released);
     end;
 
-    internal procedure SetStatusTo(var PurchaseHeader: Record "Purchase Header"; PurchaseDocumentStatus: Enum "Purchase Document Status")
+    procedure SetStatusTo(var PurchaseHeader: Record "Purchase Header"; PurchaseDocumentStatus: Enum "Purchase Document Status")
     begin
         TestIsApprovalAdministrator();
         PurchaseHeader.Status := PurchaseDocumentStatus;
         PurchaseHeader.Modify(false);
     end;
 
-    internal procedure AllowRecordUsage(var PurchaseHeader: Record "Purchase Header")
+    procedure AllowRecordUsage(var PurchaseHeader: Record "Purchase Header")
     var
         RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
     begin
@@ -42,12 +43,18 @@ codeunit 83807 "Purchase Header Helper WFE"
         RecordRestrictionMgt.AllowRecordUsage(PurchaseHeader);
     end;
 
-    internal procedure RestrictRecordUsage(var PurchaseHeader: Record "Purchase Header")
+
+    procedure RestrictRecordUsage(var PurchaseHeader: Record "Purchase Header")
+    begin
+        RestrictRecordUsage(PurchaseHeader, '');
+    end;
+
+    procedure RestrictRecordUsage(var PurchaseHeader: Record "Purchase Header"; RestrictionDetails: Text)
     var
         RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
     begin
         TestIsApprovalAdministrator();
-        RecordRestrictionMgt.RestrictRecordUsage(PurchaseHeader, 'Manual restriction by user');
+        RecordRestrictionMgt.RestrictRecordUsage(PurchaseHeader, RestrictionDetails);
     end;
 
     local procedure TestIsApprovalAdministrator()
@@ -57,7 +64,7 @@ codeunit 83807 "Purchase Header Helper WFE"
         UserManagement.TestIsApprovalAdministrator();
     end;
 
-    internal procedure ShowApprovalInfo(var PurchaseHeader: Record "Purchase Header")
+    procedure ShowApprovalInfo(var PurchaseHeader: Record "Purchase Header")
     var
         ApprovalEntry: Record "Approval Entry";
         Workflow: Record Workflow;
@@ -68,6 +75,9 @@ codeunit 83807 "Purchase Header Helper WFE"
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
     begin
+        if PurchaseHeader."No." = '' then
+            exit;
+
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(PurchaseHeader);
 
@@ -116,7 +126,7 @@ codeunit 83807 "Purchase Header Helper WFE"
         exit(not VendorLedgerEntry.IsEmpty());
     end;
 
-    internal procedure ClearOnHoldVendorLedgerEntries(var PurchaseHeader: Record "Purchase Header")
+    procedure ClearOnHoldVendorLedgerEntries(var PurchaseHeader: Record "Purchase Header")
     begin
         if PurchaseHeader."No." = '' then
             exit;
@@ -129,7 +139,7 @@ codeunit 83807 "Purchase Header Helper WFE"
         end;
     end;
 
-    internal procedure ClearOnHoldVendorLedgerEntries(DocumentType: Enum "Gen. Journal Document Type"; DocumentNo: Code[20])
+    procedure ClearOnHoldVendorLedgerEntries(DocumentType: Enum "Gen. Journal Document Type"; DocumentNo: Code[20])
     var
         VendorLedgerEntry: Record "Vendor Ledger Entry";
         VendEntryEdit: Codeunit "Vend. Entry-Edit";
@@ -166,7 +176,7 @@ codeunit 83807 "Purchase Header Helper WFE"
     //     InfoDialog.Add('Description', WorkflowDescription);
     // end;
 
-    internal procedure OpenRestrictedRecord(var PurchaseHeader: Record "Purchase Header")
+    procedure OpenRestrictedRecord(var PurchaseHeader: Record "Purchase Header")
     var
         RestrictedRecord: Record "Restricted Record";
     begin

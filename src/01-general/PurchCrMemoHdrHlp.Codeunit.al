@@ -24,6 +24,9 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
         RestrictionMgt: Codeunit "Restriction Mgt. WFE";
         UserManagement: Codeunit "User Management WFE";
     begin
+        if PurchCrMemoHdr."No." = '' then
+            exit;
+
         RecordInfo.Initialize();
         RecordInfo.SourceRecord(PurchCrMemoHdr);
 
@@ -38,7 +41,7 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
         Workflow.GetWorkflowInfoWFE(PurchCrMemoHdr.RecordId(), InfoDialog);
 
         InfoDialog.AddHeader('Purchase Credit Memo');
-        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchCrMemoHdr));
+        InfoDialog.Add('Record Restriction', RestrictionMgt.RecordHasUsageRestrictions(PurchCrMemoHdr), "Info Dialog Event Code WFE"::"Record Restriction");
         InfoDialog.Add('Vendor Ledger Entries', VendorLedgerEntryCount(PurchCrMemoHdr));
         InfoDialog.Add('Vendor Ledger Entries On Hold', VendorLedgerEntryOnHold(PurchCrMemoHdr));
 
@@ -147,5 +150,18 @@ codeunit 83827 "Purch. Cr. Memo Hdr. Hlp. WFE"
     begin
         TestIsApprovalAdministrator();
         RecordRestrictionMgt.AllowRecordUsage(PurchCrMemoHdr);
+    end;
+
+    procedure RestrictRecordUsage(var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.")
+    begin
+        RestrictRecordUsage(PurchCrMemoHdr, '');
+    end;
+
+    procedure RestrictRecordUsage(var PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr."; RestrictionDetails: Text)
+    var
+        RecordRestrictionMgt: Codeunit "Record Restriction Mgt.";
+    begin
+        TestIsApprovalAdministrator();
+        RecordRestrictionMgt.RestrictRecordUsage(PurchCrMemoHdr, RestrictionDetails);
     end;
 }

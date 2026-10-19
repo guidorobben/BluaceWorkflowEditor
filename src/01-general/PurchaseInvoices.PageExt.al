@@ -82,16 +82,16 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                     begin
                         PurchaseHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
-                }
-                action(RestrictRecordUsageWFE)
+                }                
+                action(SetRecordRestrictionWFE)
                 {
                     ApplicationArea = All;
-                    Caption = 'Add Record Restriction';
+                    Caption = 'Set Record Restriction';
                     Image = Lock;
 
                     trigger OnAction()
                     begin
-                        PurchaseHeaderHelperWFE.RestrictRecordUsage(Rec);
+                        Rec.RestrictRecordUsageWFE();
                     end;
                 }
                 action(ApprovalInfoWFE)
@@ -133,8 +133,13 @@ pageextension 83808 "Purchase Invoices WFE" extends "Purchase Invoices"
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
-                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
-                actionref(RestrictRecordUsageWFE_Promoted; RestrictRecordUsageWFE) { }
+                group(RecordUsageWFE_Promoted)
+                {
+                    ShowAs = SplitButton;
+
+                    actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                    actionref(SetRecordRestrictionWFE_Promoted; SetRecordRestrictionWFE) { }
+                }
 
                 group(StatusWFE_Promoted)
                 {

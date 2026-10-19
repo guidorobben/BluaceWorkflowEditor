@@ -17,4 +17,9 @@ tableextension 83805 "Purch. Inv. Header WFE" extends "Purch. Inv. Header"
     begin
         PurchInvHeaderHelperWFE.OpenRestrictedRecord(Rec);
     end;
+
+    procedure RestrictRecordUsageWFE()
+    begin
+        PurchInvHeaderHelperWFE.RestrictRecordUsage(xRec, 'Manual restriction by user');
+    end;
 }

@@ -8,6 +8,7 @@ pageextension 83820 "Purchase Credit Memo WFE" extends "Purchase Credit Memo"
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Enabled = Rec."No." <> '';
                 Visible = EnableWFE;
 
                 group(StatusWFE)
@@ -83,6 +84,17 @@ pageextension 83820 "Purchase Credit Memo WFE" extends "Purchase Credit Memo"
                         PurchaseHeaderHelperWFE.AllowRecordUsage(xRec);
                     end;
                 }
+                action(SetRecordRestrictionWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Set Record Restriction';
+                    Image = Lock;
+
+                    trigger OnAction()
+                    begin
+                        Rec.RestrictRecordUsageWFE();
+                    end;
+                }
                 action(RestrictRecordUsageWFE)
                 {
                     ApplicationArea = All;
@@ -91,7 +103,7 @@ pageextension 83820 "Purchase Credit Memo WFE" extends "Purchase Credit Memo"
 
                     trigger OnAction()
                     begin
-                        PurchaseHeaderHelperWFE.RestrictRecordUsage(Rec);
+                        Rec.RestrictRecordUsageWFE();
                     end;
                 }
                 action(ApprovalInfoWFE)
@@ -133,7 +145,13 @@ pageextension 83820 "Purchase Credit Memo WFE" extends "Purchase Credit Memo"
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
-                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                group(RecordUsageWFE_Promoted)
+                {
+                    ShowAs = SplitButton;
+
+                    actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                    actionref(SetRecordRestrictionWFE_Promoted; SetRecordRestrictionWFE) { }
+                }
                 actionref(RestrictRecordUsageWFE_Promoted; RestrictRecordUsageWFE) { }
 
                 group(StatusWFE_Promoted)

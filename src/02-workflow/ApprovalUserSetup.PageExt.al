@@ -65,7 +65,7 @@ pageextension 83811 "Approval User Setup WFE" extends "Approval User Setup"
 
         addlast(Category_Process)
         {
-            group(User_Promoted)
+            group(UserWFE_Promoted)
             {
                 ShowAs = SplitButton;
 

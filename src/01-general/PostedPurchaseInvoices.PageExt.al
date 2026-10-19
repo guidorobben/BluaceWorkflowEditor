@@ -8,6 +8,7 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
             {
                 Caption = 'Workflow Editor';
                 Image = Workflow;
+                Enabled = Rec."No." <> '';
                 Visible = EnableWFE;
 
                 action(OpenActiveWorkflowWFE)
@@ -32,6 +33,17 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
                     trigger OnAction()
                     begin
                         PurchInvHeaderHelperWFE.AllowRecordUsage(xRec);
+                    end;
+                }
+                action(SetRecordRestrictionWFE)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Set Record Restriction';
+                    Image = Lock;
+
+                    trigger OnAction()
+                    begin
+                        Rec.RestrictRecordUsageWFE();
                     end;
                 }
                 action(ApprovalInfoWFE)
@@ -72,7 +84,13 @@ pageextension 83810 "Posted Purchase Invoices WFE" extends "Posted Purchase Invo
 
                 actionref(ApprovalInfoWFE_Promoted; ApprovalInfoWFE) { }
                 actionref(OpenActiveWorkflowWFE_Promoted; OpenActiveWorkflowWFE) { }
-                actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                group(RecordUsageWFE_Promoted)
+                {
+                    ShowAs = SplitButton;
+
+                    actionref(AllowRecordUsageWFE_Promoted; RemoveRecordRestrictionWFE) { }
+                    actionref(SetRecordRestrictionWFE_Promoted; SetRecordRestrictionWFE) { }
+                }
                 actionref(ApprovalsWFE_Promoted; ApprovalsWFE) { }
             }
         }
